@@ -1,0 +1,11 @@
+import numpy as np
+
+scores = []
+for file in list`ls *.out`:
+    print("Parsing", file)
+    lines = list`grep "\[main\] Accuracy" {file}`.map(lambda x: float(x.split(":")[1]))
+    scores.append(max(lines))
+
+print("Scores:", scores)
+print()
+print("Median:", np.median(scores))
