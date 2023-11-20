@@ -1,0 +1,41 @@
+import subprocess
+import os
+import threading
+
+class list(list):
+    def map(self, f):
+        return list(map(f, self))
+
+import numpy as np
+
+scores = []
+__proc = subprocess.Popen(f'ls *.out', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+__proc.wait()
+EXIT_CODE = __proc.returncode
+__comm = __proc.communicate()
+_, STDERR = __comm[0].decode('utf-8').rstrip(), __comm[1].decode('utf-8').rstrip()
+_ = _.split('\n')
+try:
+    _ = list(_)
+except ValueError:
+    raise
+file = _[0]
+print("Parsing", file)
+__proc = subprocess.Popen(f'grep "\[Accuracy\]" {file}', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+__proc.wait()
+EXIT_CODE = __proc.returncode
+__comm = __proc.communicate()
+_, STDERR = __comm[0].decode('utf-8').rstrip(), __comm[1].decode('utf-8').rstrip()
+_ = _.split('\n')
+try:
+    _ = list(_)
+except ValueError:
+    raise
+lines = _.map(lambda x: float(x.split(" ")[1]))
+
+
+lines = np.array(lines[:600]).reshape(20, 30)
+maxes = list(map(lambda arr: max(arr), lines))
+
+print('Scores:', maxes)
+print('Median:', np.median(maxes))

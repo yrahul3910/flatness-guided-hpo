@@ -1,0 +1,13 @@
+import numpy as np
+
+scores = []
+file = list`ls *.out`[0]
+print("Parsing", file)
+lines = list`grep "\[Accuracy\]" {file}`.map(lambda x: float(x.split(" ")[1]))
+
+# Keep only the first 600 lines
+lines = np.array(lines[:600]).reshape(20, 30)
+maxes = list(map(lambda arr: max(arr), lines))
+
+print('Scores:', maxes)
+print('Median:', np.median(maxes))
