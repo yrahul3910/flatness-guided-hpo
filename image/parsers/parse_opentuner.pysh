@@ -1,0 +1,27 @@
+import sys
+import numpy as np
+
+
+def parse_opentuner(base_dir: str):
+    scores = []
+    file = list`ls {base_dir}/opentuner/*.txt`[0]
+    print("Parsing", file)
+    lines = list`grep "\\[Accuracy\\]" {file}`
+    lines = lines.map(lambda x: float(x.split(" ")[1]))
+
+    # Keep only the first 600 lines
+    lines = np.array(lines[:600]).reshape(20, 30)
+    maxes = list(map(lambda arr: max(arr), lines))
+    
+    return maxes
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print(f'Usage: {sys.argv[0]} BASE_DIR')
+        sys.exit(1)
+
+    dir = sys.argv[1]
+    maxes = parse_opentuner(dir)
+    print('Scores:', maxes)
+    print('Median:', np.median(maxes))

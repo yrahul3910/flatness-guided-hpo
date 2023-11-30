@@ -1,0 +1,28 @@
+import sys
+import numpy as np
+
+
+def general_parse(dir):
+    scores = []
+    for file in list`ls {dir}/*.out`:
+        print("Parsing", file)
+        lines = float`tail -n1 {file} | cut -f 2 -d ":"`
+
+        if 'bohb' in dir:
+            lines = -lines
+
+        scores.append(lines)
+
+    return scores
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print(f'Usage: {sys.argv[0]} DIR')
+        sys.exit(1)
+
+    dir = sys.argv[1]
+    scores = general_parse(dir)
+    print("Scores:", scores)
+    print()
+    print("Median:", np.median(scores))
