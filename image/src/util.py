@@ -2,17 +2,22 @@ import random
 from typing import List, Tuple
 
 import numpy as np
+import scipy
 from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import LabelBinarizer
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.models import Sequential
 from tensorflow.keras import backend as K
-from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
+from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout, BatchNormalization
 from tensorflow.keras.datasets.mnist import load_data
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 from src.data import Dataset
 from src.config import Config
 
+
 BATCH_SIZE=256
+
 
 def get_mnist():
     img_rows, img_cols = 28, 28
@@ -21,25 +26,29 @@ def get_mnist():
 
 def get_svhn():
     train_data = scipy.io.loadmat('train_32x32.mat')
-    X_train = train_data['X']
+    x_train = train_data['X']
     y_train = train_data['y']
     test_data = scipy.io.loadmat('test_32x32.mat')
     x_test = test_data['X']
     y_test = test_data['y']
+
+    x_train = np.moveaxis(x_train, -1, 0)
+    x_test = np.moveaxis(x_test, -1, 0)
 
     return (x_train, y_train), (x_test, y_test)
 
 
 def get_data(dataset: str='mnist'):
     data_loaders = {
-        'mnist': (get_mnist, (28, 28)),
+        'mnist': (get_mnist, (28, 28, 1)),
         'svhn': (get_svhn, (32, 32, 3))
     }
 
     if dataset not in data_loaders:
         raise ValueError('Invalid dataset name.')
 
-    ((x_train, y_train), (x_test, y_test)), (img_rows, img_cols, img_channels) = data_loaders[dataset]
+    data_loader, (img_rows, img_cols, img_channels) = data_loaders[dataset]
+    (x_train, y_train), (x_test, y_test) = data_loader()
 
     x_train = x_train.astype('float32')
     x_test = x_test.astype('float32')
@@ -55,8 +64,13 @@ def get_data(dataset: str='mnist'):
         x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, img_channels)
         input_shape = (img_rows, img_cols, img_channels)
 
+    """
     y_train = to_categorical(y_train, num_classes=10)
     y_test = to_categorical(y_test, num_classes=10)
+    """
+    lb = LabelBinarizer()
+    y_train = lb.fit_transform(y_train)
+    y_test = lb.transform(y_test)
     return Dataset(x_train, y_train, x_test, y_test)
 
 
@@ -76,8 +90,8 @@ def run_experiment(data: Dataset, config: Config, n_class: int = 10) -> float:
     return accuracy_score(data.y_test, y_pred)
 
 
-def get_convexity(data: Dataset, config: Config, n_class: int = 10) -> float:
-    model = get_model(data, config, n_class)
+def get_convexity(data: Dataset, config: Config, n_class: int = 10, dataset: str = 'mnist') -> float:
+    model = get_model(data, config, n_class, dataset)
 
     if n_class > 2 and len(data.y_train.shape) == 1:
         data.y_train = to_categorical(data.y_train, n_class)
@@ -125,7 +139,34 @@ def get_many_random_hyperparams(options: dict, n: int) -> list:
     return hyperparams
 
 
-def get_model(data: Dataset, config: Config, n_class: int = 10) -> Sequential:
+def get_model(data: Dataset, config: Config, n_classes: int = 10, dataset: str = 'mnist') -> Sequential:
+    if dataset == 'mnist':
+            return get_mnist_model(data, config, n_classes)
+    elif dataset == 'svhn':
+            return get_svhn_model(data, config, n_classes)
+
+
+def get_svhn_model(data: Dataset, config: Config, n_classes: int = 10) -> Sequential:
+    learner = Sequential()
+
+    for i in range(config.n_blocks):
+        n_block_filters = config.n_filters * (2 ** i)
+        learner.add(Conv2D(n_block_filters, (config.kernel_size, config.kernel_size), padding=config.padding, activation='relu'))
+        learner.add(BatchNormalization())
+        learner.add(Conv2D(n_block_filters, (config.kernel_size, config.kernel_size), padding=config.padding, activation='relu'))
+        learner.add(MaxPooling2D((2, 2)))
+        learner.add(Dropout(config.dropout_rate))
+
+    learner.add(Flatten())
+    learner.add(Dense(config.n_units, activation='relu'))
+    learner.add(Dropout(config.final_dropout_rate))
+    learner.add(Dense(n_classes, activation='softmax'))
+    learner.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    return learner
+
+
+def get_mnist_model(data: Dataset, config: Config, n_class: int = 10) -> Sequential:
     """
     Runs one experiment, given a Data instance.
 
