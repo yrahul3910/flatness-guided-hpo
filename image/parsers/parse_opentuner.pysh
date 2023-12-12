@@ -5,6 +5,10 @@ import numpy as np
 def parse_opentuner(base_dir: str):
     scores = []
     file = list`ls {base_dir}/opentuner/*.txt`[0]
+
+    if EXIT_CODE != 0:
+        return []
+
     print("Parsing", file)
     lines = list`grep "\\[Accuracy\\]" {file}`
     lines = lines.map(lambda x: float(x.split(" ")[1]))

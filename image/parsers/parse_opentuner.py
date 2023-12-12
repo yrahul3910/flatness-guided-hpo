@@ -23,8 +23,12 @@ def parse_opentuner(base_dir: str):
     except ValueError:
         raise
     file = _[0]
+
+    if EXIT_CODE != 0:
+        return []
+
     print("Parsing", file)
-    __proc = subprocess.Popen(f'grep "\\[Accuracy\\]" {file}', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    __proc = subprocess.Popen(f'grep "\[Accuracy\]" {file}', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     __proc.wait()
     EXIT_CODE = __proc.returncode
     __comm = __proc.communicate()

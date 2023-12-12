@@ -1,3 +1,4 @@
+import gc
 from src.config import Config
 from src.util import get_data, get_model
 
@@ -13,15 +14,16 @@ hpo_space = {
     'n_units': [32, 64, 128, 256, 512]
 }
 
-def eval(config, *args, **kwargs):
+def eval(config, dataset='mnist', *args, **kwargs):
     config = Config(**config)
-    data = get_data()
-    model = get_model(data, config, 10)
+    data = get_data(dataset)
+    model = get_model(data, config, 10, dataset=dataset)
 
     try:
-        model.fit(data.x_train, data.y_train, batch_size=128, epochs=50)
+        model.fit(data.x_train, data.y_train, batch_size=64, epochs=50)
         scores = model.evaluate(data.x_test, data.y_test, verbose=0)[-1]
         print(f'Score: {scores}')
+        gc.collect()
     except ValueError:
         return 100.
 

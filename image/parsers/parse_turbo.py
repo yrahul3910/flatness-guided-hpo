@@ -23,6 +23,9 @@ def parse_turbo(base_dir: str):
     except ValueError:
         raise
     for file in _:
+        if EXIT_CODE != 0:
+            continue
+
         print("Parsing", file)
         __proc = subprocess.Popen(f'tail -n1 {file}', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         __proc.wait()

@@ -23,6 +23,9 @@ def general_parse(dir):
     except ValueError:
         raise
     for file in _:
+        if EXIT_CODE != 0:
+            continue
+
         print("Parsing", file)
         __proc = subprocess.Popen(f'tail -n1 {file} | cut -f 2 -d ":"', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         __proc.wait()

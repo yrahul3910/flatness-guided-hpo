@@ -5,6 +5,9 @@ import numpy as np
 def general_parse(dir):
     scores = []
     for file in list`ls {dir}/*.out`:
+        if EXIT_CODE != 0:
+            continue
+
         print("Parsing", file)
         lines = float`tail -n1 {file} | cut -f 2 -d ":"`
 

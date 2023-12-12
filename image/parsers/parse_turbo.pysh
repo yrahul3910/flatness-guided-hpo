@@ -5,6 +5,9 @@ import numpy as np
 def parse_turbo(base_dir: str):
     scores = []
     for file in list`ls {base_dir}/turbo/*.out`:
+        if EXIT_CODE != 0:
+            continue
+
         print("Parsing", file)
         line = `tail -n1 {file}`
         line = eval(line.split(':')[1])[0]

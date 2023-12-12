@@ -16,7 +16,7 @@ from src.data import Dataset
 from src.config import Config
 
 
-BATCH_SIZE=256
+BATCH_SIZE=64
 
 
 def get_mnist():
@@ -74,9 +74,9 @@ def get_data(dataset: str='mnist'):
     return Dataset(x_train, y_train, x_test, y_test)
 
 
-def run_experiment(data: Dataset, config: Config, n_class: int = 10) -> float:
+def run_experiment(data: Dataset, config: Config, n_class: int = 10, dataset: str = 'mnist') -> float:
     print('[run_experiment] Getting model')
-    model = get_model(data, config, n_class)
+    model = get_model(data, config, n_class, dataset)
 
     print('[run_experiment] Got model')
     model.fit(data.x_train, data.y_train, epochs=50, verbose=1, batch_size=BATCH_SIZE)
@@ -125,7 +125,10 @@ def get_random_hyperparams(options: dict) -> Config:
         if isinstance(value, list):
             hyperparams[key] = random.choice(value)
         elif isinstance(value, tuple):
-            hyperparams[key] = random.randint(value[0], value[1])
+            if isinstance(value[0], int):
+                hyperparams[key] = random.randint(value[0], value[1])
+            else:
+                hyperparams[key] = random.uniform(value[0], value[1])
     return Config(**hyperparams)
 
 
