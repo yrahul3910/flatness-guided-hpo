@@ -12,6 +12,7 @@ from raise_utils.interpret import KruskalWallis
 from parsers.parse import general_parse
 from parsers.parse_opentuner import parse_opentuner
 from parsers.parse_turbo import parse_turbo
+from parsers.parse_random_svhn import general_parse as parse_random_svhn
 
 
 if __name__ == '__main__':
@@ -24,7 +25,7 @@ if __name__ == '__main__':
         'bohb': general_parse,
         'hyperopt': general_parse,
         'opentuner': parse_opentuner,
-        'random': general_parse,
+        'random': general_parse if dataset == 'mnist' else parse_random_svhn,
         'stcvx': general_parse,
         'turbo': parse_turbo
     }
@@ -32,10 +33,7 @@ if __name__ == '__main__':
     scores = {}
     for alg, parser in parsers.items():
         print(f'Parsing {alg}...')
-        dir = f'./results/{dataset}/'
-        
-        if parser == general_parse:
-            dir += f'{alg}/'
+        dir = f'./results/{dataset}/{alg}/'
 
         print(f'Using dir = {dir}')
         scores[alg] = parser(dir)
