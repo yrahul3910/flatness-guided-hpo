@@ -30,7 +30,7 @@ for i, config in enumerate(configs):
             best_betas.append(convexity)
             best_configs.append(config)
 
-            best_betas, best_configs = zip(*sorted(zip(best_betas, best_configs), key=lambda x: x[0]))
+            best_betas, best_configs = zip(*sorted(zip(best_betas, best_configs), reverse=True, key=lambda x: x[0]))
             best_betas = list(best_betas[:keep_configs])
             best_configs = list(best_configs[:keep_configs])
 

@@ -12,7 +12,7 @@ import numpy as np
 
 def parse_opentuner(base_dir: str):
     scores = []
-    __proc = subprocess.Popen(f'ls {base_dir}/opentuner/*.txt', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    __proc = subprocess.Popen(f'ls {base_dir}/*.txt', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     __proc.wait()
     EXIT_CODE = __proc.returncode
     __comm = __proc.communicate()
@@ -42,8 +42,17 @@ def parse_opentuner(base_dir: str):
     lines = lines.map(lambda x: float(x.split(" ")[1]))
 
     
-    lines = np.array(lines[:600]).reshape(20, 30)
-    maxes = list(map(lambda arr: max(arr), lines))
+    try:
+        lines = np.array(lines[:600]).reshape(20, 30)
+    except ValueError:
+        lines = np.array(lines[:250]).reshape(10, 25)
+
+    def foo(arr):
+        keep = [x for x in arr if x != 100.]
+        return max(keep)
+
+    maxes = list(map(foo, lines))
+    print('Maxes:', maxes)
     
     return maxes
 

@@ -52,6 +52,12 @@ class SmoothnessOptimizer(AbstractOptimizer):
         return Kz
 
     def _get_smoothness_clf(self, guess):
+        """
+        If you came here because you got freaked out the function name is
+        get SMOOTHNESS.... relax. It computes the strong convexity. I was
+        just too lazy to change the name of the function. I've TRIPLE checked
+        it at this point. It's the correct function.
+        """
         X, y = load_breast_cancer(return_X_y=True)  # TODO: Change for each dataset
         n_class = 2
         y = to_categorical(y, n_class)

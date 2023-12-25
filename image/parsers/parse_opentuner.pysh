@@ -4,7 +4,7 @@ import numpy as np
 
 def parse_opentuner(base_dir: str):
     scores = []
-    file = list`ls {base_dir}/opentuner/*.txt`[0]
+    file = list`ls {base_dir}/*.txt`[0]
 
     if EXIT_CODE != 0:
         return []
@@ -14,8 +14,17 @@ def parse_opentuner(base_dir: str):
     lines = lines.map(lambda x: float(x.split(" ")[1]))
 
     # Keep only the first 600 lines
-    lines = np.array(lines[:600]).reshape(20, 30)
-    maxes = list(map(lambda arr: max(arr), lines))
+    try:
+        lines = np.array(lines[:600]).reshape(20, 30)
+    except ValueError:
+        lines = np.array(lines[:250]).reshape(10, 25)
+
+    def foo(arr):
+        keep = [x for x in arr if x != 100.]
+        return max(keep)
+
+    maxes = list(map(foo, lines))
+    print('Maxes:', maxes)
     
     return maxes
 

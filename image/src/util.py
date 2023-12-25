@@ -38,7 +38,7 @@ def get_svhn():
     return (x_train, y_train), (x_test, y_test)
 
 
-def get_data(dataset: str='mnist'):
+def get_data(dataset: str='svhn'):
     data_loaders = {
         'mnist': (get_mnist, (28, 28, 1)),
         'svhn': (get_svhn, (32, 32, 3))

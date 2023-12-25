@@ -7,6 +7,7 @@ from common import hpo_space, eval
 
 
 scores = []
+total = 0
 class MyTuner(MeasurementInterface):
     def manipulator(self):
         manipulator = ConfigurationManipulator()
@@ -29,7 +30,14 @@ class MyTuner(MeasurementInterface):
         return manipulator
     
     def run(self, desired_result, input, limit):
+        global total, scores
         cfg = desired_result.configuration.data
+
+        # No idea how to stop this thing, so this is how we're doing it
+        total += 1
+        if total == 31:
+            total = 0
+            raise AssertionError("Limit exceeded.")
 
         try:
             score = eval(cfg)
@@ -44,7 +52,19 @@ class MyTuner(MeasurementInterface):
 
 if __name__ == "__main__":
     argparser = opentuner.default_argparser()
-    MyTuner.main(argparser.parse_args())
-    print('Scores:', scores)
-    print('Score:', max(scores))
+
+    all_scores = []
+    for _ in range(20):
+        try:
+            scores = []
+            MyTuner.main(argparser.parse_args())
+            print('Scores:', scores)
+            print('Score:', max(scores))
+
+            all_scores.append(max(scores))
+        except AssertionError:
+            continue
+
+    print('All scores:', all_scores)
+    print('Median:', np.median(all_scores))
 

@@ -16,7 +16,7 @@ for key, val in hpo_space.items():
         if isinstance(val[0], int):
             config['type'] = 'int'
         else:
-            config['type'] = 'float'
+            config['type'] = 'num'
         config['lb'] = val[0]
         config['ub'] = val[1]
     else:
