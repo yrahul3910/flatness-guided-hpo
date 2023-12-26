@@ -1,0 +1,28 @@
+import sys
+
+from numpy import array, float32
+import numpy as np
+
+
+def parse_stcvx(base_dir: str):
+    files = list`ls -1 {base_dir}/*.out`
+    
+    results = []
+    for file in files:
+        lines = list`grep "^Score:" {file}`
+        
+        # The code producing the results are a bit broken, so instead of simply
+        # reading the last line, we'll have to do it this way.
+        # Oh and the metrics are ["loss", "acc", "auc", "f1"]
+        lines = np.array([eval(x.split(':')[1].split(',')[2]) for x in lines])
+
+        lines = lines.reshape((10, 10))
+        results.append(np.max(np.mean(lines, axis=-1), axis=0))
+    
+    return results
+
+
+if __name__ == '__main__':
+    results = parse_stcvx(f'./results/{sys.argv[1]}/stcvx/')
+    print('AUC scores:', results)
+    print('Median AUC:', np.median(results, axis=0))
