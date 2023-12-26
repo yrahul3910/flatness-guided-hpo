@@ -7,16 +7,12 @@ from tensorflow.keras import backend as K
 import numpy as np
 
 
-def get_convexity(data: Dataset, config: Config, n_class: int = 10, dataset: str = 'mnist') -> float:
+def get_convexity(data: Dataset, config: Config) -> float:
     BATCH_SIZE = config.batch_size
     model = get_model(config, data)
 
-    if n_class > 2 and len(data.y_train.shape) == 1:
-        data.y_train = to_categorical(data.y_train, n_class)
-        data.y_test = to_categorical(data.y_test, n_class)
-
     # Fit for one epoch before computing smoothness
-    model.fit(data.x_train, data.y_train, batch_size=BATCH_SIZE, epochs=1, verbose=0),
+    model.fit(data.x_train, data.y_train, batch_size=BATCH_SIZE, epochs=1),
 
     Ka_func = K.function([model.layers[0].input], [model.layers[-2].output])
 

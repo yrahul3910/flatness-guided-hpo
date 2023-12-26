@@ -6,14 +6,16 @@ from util.config import config_space
 from util.data import Dataset
 from util.eval import eval
 
-from sklearn.preprocessing import LabelBinarizer, StandardScaler 
+from sklearn.preprocessing import LabelBinarizer, StandardScaler, OneHotEncoder, Normalizer
+from sklearn.feature_selection import VarianceThreshold
+from sklearn.pipeline import Pipeline
 import numpy as np
 import openml
 
 
 def run_experiment(opt_fn: Callable[[Dataset, dict, Callable[[dict], float]], None]):
     #task_ids = [10101, 53, 146818, 146821, 9952, 146822, 31, 3917]
-    task_ids = [53]
+    task_ids = [9952]
 
     for task_id in task_ids:
         task = openml.tasks.get_task(task_id)
@@ -26,19 +28,34 @@ def run_experiment(opt_fn: Callable[[Dataset, dict, Callable[[dict], float]], No
             for j in range(n_folds):
                 train_idx, test_idx = task.get_train_test_split_indices(repeat=i, fold=j)
                 X, y = task.get_X_and_y(dataset_format="dataframe")
-                X_train = np.array(X.iloc[train_idx])
-                y_train = y.iloc[train_idx]
-                X_test = np.array(X.iloc[test_idx])
-                y_test = y.iloc[test_idx]
+                X_train = X.iloc[train_idx]
+                y_train = np.array(y.iloc[train_idx])
+                X_test = X.iloc[test_idx]
+                y_test = np.array(y.iloc[test_idx])
 
-                binarizer = LabelBinarizer()
-                y_train = binarizer.fit_transform(y_train)
-                y_test = binarizer.transform(y_test)
+                # This changes for each dataset: see the OpenML task analysis page.
+                pipeline = Pipeline([
+                    ('hotencoding', OneHotEncoder(handle_unknown='ignore', sparse_output=False)),
+                    ('scaler', Normalizer()),
+                    #('variance_threshold', VarianceThreshold()),
+                ])
+                X_train = pipeline.fit_transform(X_train)
+                X_test = pipeline.transform(X_test)
 
-                transform = StandardScaler()
-                X_train = transform.fit_transform(X_train)
-                X_test = transform.transform(X_test)
+                X_train = np.array(X_train)
+                X_test = np.array(X_test)
 
+                if y_train.dtype == 'object':
+                    y_train = LabelBinarizer().fit_transform(y_train)
+                    y_test = LabelBinarizer().fit_transform(y_test)
+                
+                if len(y_train.shape) == 2 and y_train.shape[1] == 1:
+                    y_train = np.argmax(y_train, axis=1)
+                    y_test = np.argmax(y_test, axis=1)
+                
+                y_train = y_train.astype(np.float32)
+                y_test = y_test.astype(np.float32)
+                
                 data = Dataset(X_train, y_train, X_test, y_test)
 
                 print(
@@ -57,6 +74,7 @@ def run_experiment(opt_fn: Callable[[Dataset, dict, Callable[[dict], float]], No
                 fold_perfs.append(score)
                 print(f"Time taken: {end - start:.2f}s")
             
-            repeat_perfs.append(np.mean(fold_perfs))
+            repeat_perfs.append(np.mean(fold_perfs, axis=0))
         
         print(f"Task {task_id}: {repeat_perfs}")
+        print(f"Median: {np.median(repeat_perfs, axis=0)}")
