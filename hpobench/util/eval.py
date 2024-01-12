@@ -5,7 +5,7 @@ from util.config import Config
 from util.data import Dataset
 from util.model import get_model
 
-from tensorflow.keras.callbacks import EarlyStopping
+from keras.callbacks import EarlyStopping
 
 
 def eval(config: Config, data: Dataset, *args, **kwargs) -> List[float]:
@@ -20,6 +20,6 @@ def eval(config: Config, data: Dataset, *args, **kwargs) -> List[float]:
 
         gc.collect()
     except ValueError:
-        return [0., 0., 0., 0.]
+        return [0., 0., 0.]
 
     return score

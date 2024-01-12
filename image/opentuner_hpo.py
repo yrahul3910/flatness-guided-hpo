@@ -1,3 +1,4 @@
+import numpy as np
 import opentuner
 from opentuner import ConfigurationManipulator
 from opentuner import IntegerParameter, EnumParameter, FloatParameter

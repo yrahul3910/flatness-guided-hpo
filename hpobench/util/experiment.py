@@ -46,12 +46,13 @@ def run_experiment(opt_fn: Callable[[Dataset, dict, Callable[[dict], float]], No
                 X_test = np.array(X_test)
 
                 if y_train.dtype == 'object':
-                    y_train = LabelBinarizer().fit_transform(y_train)
-                    y_test = LabelBinarizer().fit_transform(y_test)
+                    binarizer = LabelBinarizer()
+                    y_train = binarizer.fit_transform(y_train)
+                    y_test = binarizer.transform(y_test)
                 
                 if len(y_train.shape) == 2 and y_train.shape[1] == 1:
-                    y_train = np.argmax(y_train, axis=1)
-                    y_test = np.argmax(y_test, axis=1)
+                    y_train = y_train.flatten()
+                    y_test = y_test.flatten()
                 
                 y_train = y_train.astype(np.float32)
                 y_test = y_test.astype(np.float32)

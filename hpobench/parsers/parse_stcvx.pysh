@@ -13,8 +13,8 @@ def parse_stcvx(base_dir: str):
         
         # The code producing the results are a bit broken, so instead of simply
         # reading the last line, we'll have to do it this way.
-        # Oh and the metrics are ["loss", "acc", "auc", "f1"]
-        lines = np.array([eval(x.split(':')[1].split(',')[2]) for x in lines])
+        # Oh and the metrics are ["loss", "acc", "auc"]
+        lines = np.array([eval(x.split(':')[1])[-1] for x in lines])
 
         lines = lines.reshape((10, 10))
         results.append(np.max(np.mean(lines, axis=-1), axis=0))

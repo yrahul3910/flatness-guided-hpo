@@ -1,7 +1,7 @@
-from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.metrics import AUC, F1Score
+from keras import Sequential
+from keras.layers import Dense
+from keras.optimizers import Adam
+from keras.metrics import AUC
 
 from util.config import Config
 from util.data import Dataset
@@ -24,7 +24,7 @@ def get_model(config: Config, data: Dataset):
     model.compile(
         loss=loss,
         optimizer=Adam(learning_rate=config.learning_rate_init),
-        metrics=['accuracy', AUC(curve='ROC'), F1Score()]
+        metrics=['accuracy', AUC(curve='ROC')]
     )
 
     return model

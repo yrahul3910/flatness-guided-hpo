@@ -17,16 +17,16 @@ def opt_fn(data: Dataset, config_space: dict, eval: Callable[[dict], float]):
         try:
             convexity = get_convexity(data, config)
 
-            if len(best_betas) < keep_configs or convexity > min(best_betas):
+            if len(best_betas) < keep_configs or convexity < max(best_betas):
                 best_betas.append(convexity)
                 best_configs.append(config)
 
-                best_betas, best_configs = zip(*sorted(zip(best_betas, best_configs), reverse=True, key=lambda x: x[0]))
+                best_betas, best_configs = zip(*sorted(zip(best_betas, best_configs), key=lambda x: x[0]))
                 best_betas = list(best_betas[:keep_configs])
                 best_configs = list(best_configs[:keep_configs])
         except KeyboardInterrupt:
             raise
-        except:
+        except:  # noqa: E722
             print('Error, skipping config')
     
     scores = []

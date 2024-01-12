@@ -42,7 +42,7 @@ def parse_stcvx(base_dir: str):
         
         
         
-        lines = np.array([eval(x.split(':')[1].split(',')[2]) for x in lines])
+        lines = np.array([eval(x.split(':')[1])[-1] for x in lines])
 
         lines = lines.reshape((10, 10))
         results.append(np.max(np.mean(lines, axis=-1), axis=0))
