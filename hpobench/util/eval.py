@@ -13,7 +13,7 @@ def eval(config: Config, data: Dataset, *args, **kwargs) -> List[float]:
 
     try:
         early_stop = EarlyStopping(monitor='loss', patience=5)
-        model.fit(data.x_train, data.y_train, batch_size=config.batch_size, epochs=50, callbacks=[early_stop])
+        model.fit(data.x_train, data.y_train, batch_size=config.batch_size, epochs=100, callbacks=[early_stop])
         score = model.evaluate(data.x_test, data.y_test, verbose=0)
         
         print(f'Score: {score}')
