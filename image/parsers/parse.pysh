@@ -6,15 +6,16 @@ def general_parse(dir):
     scores = []
     for file in list`ls {dir}/*.out`:
         if EXIT_CODE != 0:
+            print("ls failed:", STDERR)
             continue
 
         print("Parsing", file)
-        lines = float`tail -n1 {file} | cut -f 2 -d ":"`
+        lines = list.float`grep Accuracy {file} | cut -f 2 -d ":"`
 
         if 'bohb' in dir:
-            lines = -lines
+            lines = [-x for x in lines]
 
-        scores.append(lines)
+        scores.append(max(lines))
 
     return scores
 

@@ -24,24 +24,22 @@ def general_parse(dir):
         raise
     for file in _:
         if EXIT_CODE != 0:
+            print("ls failed:", STDERR)
             continue
 
         print("Parsing", file)
-        __proc = subprocess.Popen(f'tail -n1 {file} | cut -f 2 -d ":"', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        __proc = subprocess.Popen(f'grep Accuracy {file} | cut -f 2 -d ":"', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         __proc.wait()
         EXIT_CODE = __proc.returncode
         __comm = __proc.communicate()
         _, STDERR = __comm[0].decode('utf-8').rstrip(), __comm[1].decode('utf-8').rstrip()
-        try:
-            _ = float(_)
-        except ValueError:
-            raise
+        _ = [float(x) for x in _.split('\n')]
         lines = _
 
         if 'bohb' in dir:
-            lines = -lines
+            lines = [-x for x in lines]
 
-        scores.append(lines)
+        scores.append(max(lines))
 
     return scores
 

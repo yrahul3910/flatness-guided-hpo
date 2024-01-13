@@ -26,8 +26,8 @@ if __name__ == '__main__':
         'hyperopt': general_parse,
         'opentuner': parse_opentuner,
         'random': general_parse if dataset == 'mnist' else parse_random_svhn,
-        'stcvx': general_parse,
-        'turbo': parse_turbo
+        'stcvx_min': general_parse
+        
     }
 
     scores = {}

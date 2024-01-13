@@ -79,7 +79,7 @@ def run_experiment(data: Dataset, config: Config, n_class: int = 10, dataset: st
     model = get_model(data, config, n_class, dataset)
 
     print('[run_experiment] Got model')
-    model.fit(data.x_train, data.y_train, epochs=50, verbose=1, batch_size=BATCH_SIZE)
+    model.fit(data.x_train, data.y_train, epochs=100, verbose=1, batch_size=BATCH_SIZE)
     print('[run_experiment] Fit model')
 
     y_pred = np.argmax(model.predict(data.x_test), axis=-1)
@@ -103,14 +103,14 @@ def get_convexity(data: Dataset, config: Config, n_class: int = 10, dataset: str
     Ka_func = K.function([model.layers[0].input], [model.layers[-2].output])
 
     batch_size = BATCH_SIZE
-    best_mu = np.inf
+    best_mu = -np.inf
     for i in range((len(data.x_train) - 1) // batch_size + 1):
         start_i = i * batch_size
         end_i = start_i + batch_size
         xb = data.x_train[start_i:end_i]
 
         mu = np.linalg.norm(Ka_func([xb])) / np.linalg.norm(model.layers[-1].weights[0])
-        if mu < best_mu and mu != np.inf:
+        if mu > best_mu and mu != np.inf:
             best_mu = mu
 
     return best_mu
