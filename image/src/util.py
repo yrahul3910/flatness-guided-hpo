@@ -1,16 +1,14 @@
 import random
-from typing import List, Tuple
 
 import numpy as np
 import scipy
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelBinarizer
-from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.models import Sequential
-from tensorflow.keras import backend as K
-from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout, BatchNormalization
-from tensorflow.keras.datasets.mnist import load_data
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from keras.utils import to_categorical
+from keras.models import Sequential
+from keras import backend as K
+from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout, BatchNormalization
+from keras.datasets.mnist import load_data
 
 from src.data import Dataset
 from src.config import Config
@@ -20,7 +18,6 @@ BATCH_SIZE=64
 
 
 def get_mnist():
-    img_rows, img_cols = 28, 28
     return load_data()
 
 
@@ -58,11 +55,9 @@ def get_data(dataset: str='svhn'):
     if K.image_data_format() == 'channels_first':
         x_train = x_train.reshape(x_train.shape[0], img_channels, img_rows, img_cols)
         x_test = x_test.reshape(x_test.shape[0], img_channels, img_rows, img_cols)
-        input_shape = (img_channels, img_rows, img_cols)
     else:
         x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, img_channels)
         x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, img_channels)
-        input_shape = (img_rows, img_cols, img_channels)
 
     """
     y_train = to_categorical(y_train, num_classes=10)
