@@ -1,0 +1,112 @@
+running: {'--uuid': '264ddd8f72df5bc5b0633e189a5b86c6', '-db-root': '/home/ryedida/smoothness-hpo/bbo_challenge_starter_kit/output', '--opt-root': '/home/ryedida/smoothness-hpo/bbo_challenge_starter_kit/example_submissions', '--data-root': None, '--db': 'run_20240114_032559', '--opt': 'random', '--data': 'wine', '--classifier': 'MLP-adam', '--metric': 'nll', '--calls': 15, '--suggestions': 1, '--jobs-file': None, '--verbose': False, 'dry_run': False, 'rev': 'a376313', 'opt_rev': '0.0.8'}
+cmd: python /home/ryedida/.local/bin/bayesmark-exp -c MLP-adam -d wine -o random -u 264ddd8f72df5bc5b0633e189a5b86c6 -m nll -n 15 -p 1 -dir /home/ryedida/smoothness-hpo/bbo_challenge_starter_kit/output -b run_20240114_032559
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+computed signature: ([{'alpha': 0.019628224813442792, 'batch_size': 182, 'beta_1': 0.9410202200271762, 'beta_2': 0.9998021557676793, 'epsilon': 1.8662266976518e-08, 'hidden_layer_sizes': 147, 'learning_rate_init': 0.0005627932047415167, 'tol': 0.03690557729213761, 'validation_fraction': 0.8846827852548593}, {'alpha': 0.0019982467392329444, 'batch_size': 200, 'beta_1': 0.919111482530466, 'beta_2': 0.9998488260436156, 'epsilon': 5.981221901152555e-07, 'hidden_layer_sizes': 61, 'learning_rate_init': 2.2310905607443014e-05, 'tol': 1.2046852412030316e-05, 'validation_fraction': 0.8117896445826539}, {'alpha': 0.46659545670218433, 'batch_size': 219, 'beta_1': 0.9889789783750891, 'beta_2': 0.9999896868093284, 'epsilon': 2.4234724484675948e-08, 'hidden_layer_sizes': 167, 'learning_rate_init': 2.972334644335654e-05, 'tol': 0.0036281404040243792, 'validation_fraction': 0.17260651658522078}, {'alpha': 4.656005689076002, 'batch_size': 135, 'beta_1': 0.870503881627747, 'beta_2': 0.9948873266941017, 'epsilon': 2.1023308743480125e-07, 'hidden_layer_sizes': 118, 'learning_rate_init': 0.0018781738757161913, 'tol': 1.1889379831773004e-05, 'validation_fraction': 0.6264327093752792}, {'alpha': 0.04705159350400542, 'batch_size': 158, 'beta_1': 0.9870884262730957, 'beta_2': 0.9999596874382349, 'epsilon': 1.1981845126013875e-08, 'hidden_layer_sizes': 116, 'learning_rate_init': 0.00617340520407431, 'tol': 1.741413418158619e-05, 'validation_fraction': 0.6754299026638921}], [16.063962273407764, 23.274250254613083, 19.80193088400322, 3.463918210725012, 15.210579700922182])
+/home/ryedida/.local/lib/python3.8/site-packages/bayesmark/experiment.py:469: UserWarning: Baselines not found. Will not log intermediate scores.
+  warnings.warn("Baselines not found. Will not log intermediate scores.")
+
+starting sklearn study random MLP-adam wine nll 15 1
+with data root: None
+suggestion time taken 0.003320 iter 0 next_points [{'alpha': 0.009327737103400445, 'batch_size': 121, 'beta_1': 0.9739296127934939, 'beta_2': 0.9913323758444075, 'epsilon': 2.5285735627904543e-09, 'hidden_layer_sizes': 158, 'learning_rate_init': 0.0014272142582431888, 'tol': 0.07648372497212465, 'validation_fraction': 0.18629447799651852}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.129689 value 18.757702 suggestion {'alpha': 0.009327737103400445, 'batch_size': 121, 'beta_1': 0.9739296127934939, 'beta_2': 0.9913323758444075, 'epsilon': 2.5285735627904543e-09, 'hidden_layer_sizes': 158, 'learning_rate_init': 0.0014272142582431888, 'tol': 0.07648372497212465, 'validation_fraction': 0.18629447799651852}
+observation time 0.000002, current best 18.757702 at iter 0
+suggestion time taken 0.003301 iter 1 next_points [{'alpha': 5.66248113650356, 'batch_size': 124, 'beta_1': 0.9776081760189556, 'beta_2': 0.9996500914697173, 'epsilon': 9.176554053264963e-08, 'hidden_layer_sizes': 184, 'learning_rate_init': 0.001047337336651549, 'tol': 0.0001630930289711936, 'validation_fraction': 0.6350329028489806}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.139839 value 12.285188 suggestion {'alpha': 5.66248113650356, 'batch_size': 124, 'beta_1': 0.9776081760189556, 'beta_2': 0.9996500914697173, 'epsilon': 9.176554053264963e-08, 'hidden_layer_sizes': 184, 'learning_rate_init': 0.001047337336651549, 'tol': 0.0001630930289711936, 'validation_fraction': 0.6350329028489806}
+observation time 0.000001, current best 12.285188 at iter 1
+suggestion time taken 0.003279 iter 2 next_points [{'alpha': 0.011200915346276501, 'batch_size': 70, 'beta_1': 0.7543849137620723, 'beta_2': 0.9999811231712448, 'epsilon': 7.564445400060506e-07, 'hidden_layer_sizes': 151, 'learning_rate_init': 8.558716350038881e-05, 'tol': 0.027287974156234334, 'validation_fraction': 0.8586928157087151}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.099298 value 18.084224 suggestion {'alpha': 0.011200915346276501, 'batch_size': 70, 'beta_1': 0.7543849137620723, 'beta_2': 0.9999811231712448, 'epsilon': 7.564445400060506e-07, 'hidden_layer_sizes': 151, 'learning_rate_init': 8.558716350038881e-05, 'tol': 0.027287974156234334, 'validation_fraction': 0.8586928157087151}
+observation time 0.000001, current best 12.285188 at iter 2
+suggestion time taken 0.003243 iter 3 next_points [{'alpha': 4.994170280925684e-05, 'batch_size': 199, 'beta_1': 0.9719841356038179, 'beta_2': 0.9999983901051904, 'epsilon': 1.0444598071039965e-09, 'hidden_layer_sizes': 108, 'learning_rate_init': 1.7063220887608083e-05, 'tol': 0.017540940682611517, 'validation_fraction': 0.3889249150614388}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.122624 value 19.890175 suggestion {'alpha': 4.994170280925684e-05, 'batch_size': 199, 'beta_1': 0.9719841356038179, 'beta_2': 0.9999983901051904, 'epsilon': 1.0444598071039965e-09, 'hidden_layer_sizes': 108, 'learning_rate_init': 1.7063220887608083e-05, 'tol': 0.017540940682611517, 'validation_fraction': 0.3889249150614388}
+observation time 0.000001, current best 12.285188 at iter 3
+suggestion time taken 0.003201 iter 4 next_points [{'alpha': 0.06612892694346208, 'batch_size': 159, 'beta_1': 0.7272492105124811, 'beta_2': 0.9998494955807833, 'epsilon': 1.1569694628221724e-08, 'hidden_layer_sizes': 163, 'learning_rate_init': 3.100168797709053e-05, 'tol': 2.059390959576255e-05, 'validation_fraction': 0.13847513571979086}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.102956 value 22.914562 suggestion {'alpha': 0.06612892694346208, 'batch_size': 159, 'beta_1': 0.7272492105124811, 'beta_2': 0.9998494955807833, 'epsilon': 1.1569694628221724e-08, 'hidden_layer_sizes': 163, 'learning_rate_init': 3.100168797709053e-05, 'tol': 2.059390959576255e-05, 'validation_fraction': 0.13847513571979086}
+observation time 0.000001, current best 12.285188 at iter 4
+suggestion time taken 0.003211 iter 5 next_points [{'alpha': 0.10339100613822316, 'batch_size': 200, 'beta_1': 0.8751026375435682, 'beta_2': 0.9994470792074539, 'epsilon': 1.5578410783926097e-09, 'hidden_layer_sizes': 145, 'learning_rate_init': 0.016350421911353323, 'tol': 7.30539776340819e-05, 'validation_fraction': 0.7280347612680197}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.294695 value 5.812458 suggestion {'alpha': 0.10339100613822316, 'batch_size': 200, 'beta_1': 0.8751026375435682, 'beta_2': 0.9994470792074539, 'epsilon': 1.5578410783926097e-09, 'hidden_layer_sizes': 145, 'learning_rate_init': 0.016350421911353323, 'tol': 7.30539776340819e-05, 'validation_fraction': 0.7280347612680197}
+observation time 0.000001, current best 5.812458 at iter 5
+suggestion time taken 0.003304 iter 6 next_points [{'alpha': 4.2548217216072155, 'batch_size': 71, 'beta_1': 0.9314260638834164, 'beta_2': 0.9999860182613313, 'epsilon': 5.377830001126531e-08, 'hidden_layer_sizes': 90, 'learning_rate_init': 0.016002739033596745, 'tol': 0.0001301438439484282, 'validation_fraction': 0.8663171286247227}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.263899 value 9.534198 suggestion {'alpha': 4.2548217216072155, 'batch_size': 71, 'beta_1': 0.9314260638834164, 'beta_2': 0.9999860182613313, 'epsilon': 5.377830001126531e-08, 'hidden_layer_sizes': 90, 'learning_rate_init': 0.016002739033596745, 'tol': 0.0001301438439484282, 'validation_fraction': 0.8663171286247227}
+observation time 0.000001, current best 5.812458 at iter 6
+suggestion time taken 0.003206 iter 7 next_points [{'alpha': 4.139392830941236, 'batch_size': 162, 'beta_1': 0.9507539235387735, 'beta_2': 0.9884111109480365, 'epsilon': 2.490655355621871e-08, 'hidden_layer_sizes': 87, 'learning_rate_init': 0.002024791252232375, 'tol': 0.0001677373600013251, 'validation_fraction': 0.3202003376272702}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.149856 value 15.801434 suggestion {'alpha': 4.139392830941236, 'batch_size': 162, 'beta_1': 0.9507539235387735, 'beta_2': 0.9884111109480365, 'epsilon': 2.490655355621871e-08, 'hidden_layer_sizes': 87, 'learning_rate_init': 0.002024791252232375, 'tol': 0.0001677373600013251, 'validation_fraction': 0.3202003376272702}
+observation time 0.000013, current best 5.812458 at iter 7
+suggestion time taken 0.004508 iter 8 next_points [{'alpha': 0.0017527452496354265, 'batch_size': 112, 'beta_1': 0.7304738867499887, 'beta_2': 0.9998122048892273, 'epsilon': 1.2953835414397072e-08, 'hidden_layer_sizes': 172, 'learning_rate_init': 1.8290254184365677e-05, 'tol': 4.149867893553686e-05, 'validation_fraction': 0.26378169264391543}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.112480 value 20.909778 suggestion {'alpha': 0.0017527452496354265, 'batch_size': 112, 'beta_1': 0.7304738867499887, 'beta_2': 0.9998122048892273, 'epsilon': 1.2953835414397072e-08, 'hidden_layer_sizes': 172, 'learning_rate_init': 1.8290254184365677e-05, 'tol': 4.149867893553686e-05, 'validation_fraction': 0.26378169264391543}
+observation time 0.000001, current best 5.812458 at iter 8
+suggestion time taken 0.003958 iter 9 next_points [{'alpha': 1.4010111834943269, 'batch_size': 65, 'beta_1': 0.9575151297564971, 'beta_2': 0.9999182257457139, 'epsilon': 3.258284981128986e-07, 'hidden_layer_sizes': 151, 'learning_rate_init': 0.022658440237758874, 'tol': 0.012642945785066601, 'validation_fraction': 0.14439346317209092}]
+function_evaluation time 0.264680 value 9.056918 suggestion {'alpha': 1.4010111834943269, 'batch_size': 65, 'beta_1': 0.9575151297564971, 'beta_2': 0.9999182257457139, 'epsilon': 3.258284981128986e-07, 'hidden_layer_sizes': 151, 'learning_rate_init': 0.022658440237758874, 'tol': 0.012642945785066601, 'validation_fraction': 0.14439346317209092}
+observation time 0.000001, current best 5.812458 at iter 9
+suggestion time taken 0.003935 iter 10 next_points [{'alpha': 0.8862807678218019, 'batch_size': 243, 'beta_1': 0.9680169791434327, 'beta_2': 0.9960967270326122, 'epsilon': 1.7995938227671864e-09, 'hidden_layer_sizes': 98, 'learning_rate_init': 1.5046469901961176e-05, 'tol': 0.00045130260144647357, 'validation_fraction': 0.6783512028624199}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.099867 value 23.406301 suggestion {'alpha': 0.8862807678218019, 'batch_size': 243, 'beta_1': 0.9680169791434327, 'beta_2': 0.9960967270326122, 'epsilon': 1.7995938227671864e-09, 'hidden_layer_sizes': 98, 'learning_rate_init': 1.5046469901961176e-05, 'tol': 0.00045130260144647357, 'validation_fraction': 0.6783512028624199}
+observation time 0.000001, current best 5.812458 at iter 10
+suggestion time taken 0.003919 iter 11 next_points [{'alpha': 0.10543231143821404, 'batch_size': 207, 'beta_1': 0.8718345428376373, 'beta_2': 0.9999987013068743, 'epsilon': 3.120245730897881e-08, 'hidden_layer_sizes': 82, 'learning_rate_init': 2.682310202455871e-05, 'tol': 0.00014460100749966986, 'validation_fraction': 0.5658234630225762}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.099911 value 23.863384 suggestion {'alpha': 0.10543231143821404, 'batch_size': 207, 'beta_1': 0.8718345428376373, 'beta_2': 0.9999987013068743, 'epsilon': 3.120245730897881e-08, 'hidden_layer_sizes': 82, 'learning_rate_init': 2.682310202455871e-05, 'tol': 0.00014460100749966986, 'validation_fraction': 0.5658234630225762}
+observation time 0.000001, current best 5.812458 at iter 11
+suggestion time taken 0.003920 iter 12 next_points [{'alpha': 0.38577720607324817, 'batch_size': 157, 'beta_1': 0.851812786520797, 'beta_2': 0.9999847945753896, 'epsilon': 5.912898973917114e-08, 'hidden_layer_sizes': 84, 'learning_rate_init': 0.04924951329525624, 'tol': 0.048054940751379775, 'validation_fraction': 0.6862428347346001}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.162632 value 9.917635 suggestion {'alpha': 0.38577720607324817, 'batch_size': 157, 'beta_1': 0.851812786520797, 'beta_2': 0.9999847945753896, 'epsilon': 5.912898973917114e-08, 'hidden_layer_sizes': 84, 'learning_rate_init': 0.04924951329525624, 'tol': 0.048054940751379775, 'validation_fraction': 0.6862428347346001}
+observation time 0.000001, current best 5.812458 at iter 12
+suggestion time taken 0.003944 iter 13 next_points [{'alpha': 0.07156230716499426, 'batch_size': 26, 'beta_1': 0.9753217750335129, 'beta_2': 0.9921266126522909, 'epsilon': 4.992856413898732e-07, 'hidden_layer_sizes': 102, 'learning_rate_init': 0.0035906984151468013, 'tol': 4.6950897963989335e-05, 'validation_fraction': 0.2858982043085091}]
+function_evaluation time 0.422781 value 2.180454 suggestion {'alpha': 0.07156230716499426, 'batch_size': 26, 'beta_1': 0.9753217750335129, 'beta_2': 0.9921266126522909, 'epsilon': 4.992856413898732e-07, 'hidden_layer_sizes': 102, 'learning_rate_init': 0.0035906984151468013, 'tol': 4.6950897963989335e-05, 'validation_fraction': 0.2858982043085091}
+observation time 0.000001, current best 2.180454 at iter 13
+suggestion time taken 0.005191 iter 14 next_points [{'alpha': 3.563779539980962, 'batch_size': 201, 'beta_1': 0.7196573960553101, 'beta_2': 0.9232486503819426, 'epsilon': 2.4884718501824066e-07, 'hidden_layer_sizes': 185, 'learning_rate_init': 0.001197431911271619, 'tol': 1.2005371450745428e-05, 'validation_fraction': 0.2410137233003472}]
+/home/ryedida/.local/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:603: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+  warnings.warn(
+
+function_evaluation time 0.222842 value 9.703246 suggestion {'alpha': 3.563779539980962, 'batch_size': 201, 'beta_1': 0.7196573960553101, 'beta_2': 0.9232486503819426, 'epsilon': 2.4884718501824066e-07, 'hidden_layer_sizes': 185, 'learning_rate_init': 0.001197431911271619, 'tol': 1.2005371450745428e-05, 'validation_fraction': 0.2410137233003472}
+observation time 0.000001, current best 2.180454 at iter 14
+saving meta data: {'args': {'--uuid': '264ddd8f72df5bc5b0633e189a5b86c6', '-db-root': '/home/ryedida/smoothness-hpo/bbo_challenge_starter_kit/output', '--opt-root': '/home/ryedida/smoothness-hpo/bbo_challenge_starter_kit/example_submissions', '--data-root': None, '--db': 'run_20240114_032559', '--opt': 'random', '--data': 'wine', '--classifier': 'MLP-adam', '--metric': 'nll', '--calls': 15, '--suggestions': 1, '--jobs-file': None, '--verbose': False, 'dry_run': False, 'rev': 'a376313', 'opt_rev': '0.0.8'}, 'signature': ([{'alpha': 0.019628224813442792, 'batch_size': 182, 'beta_1': 0.9410202200271762, 'beta_2': 0.9998021557676793, 'epsilon': 1.8662266976518e-08, 'hidden_layer_sizes': 147, 'learning_rate_init': 0.0005627932047415167, 'tol': 0.03690557729213761, 'validation_fraction': 0.8846827852548593}, {'alpha': 0.0019982467392329444, 'batch_size': 200, 'beta_1': 0.919111482530466, 'beta_2': 0.9998488260436156, 'epsilon': 5.981221901152555e-07, 'hidden_layer_sizes': 61, 'learning_rate_init': 2.2310905607443014e-05, 'tol': 1.2046852412030316e-05, 'validation_fraction': 0.8117896445826539}, {'alpha': 0.46659545670218433, 'batch_size': 219, 'beta_1': 0.9889789783750891, 'beta_2': 0.9999896868093284, 'epsilon': 2.4234724484675948e-08, 'hidden_layer_sizes': 167, 'learning_rate_init': 2.972334644335654e-05, 'tol': 0.0036281404040243792, 'validation_fraction': 0.17260651658522078}, {'alpha': 4.656005689076002, 'batch_size': 135, 'beta_1': 0.870503881627747, 'beta_2': 0.9948873266941017, 'epsilon': 2.1023308743480125e-07, 'hidden_layer_sizes': 118, 'learning_rate_init': 0.0018781738757161913, 'tol': 1.1889379831773004e-05, 'validation_fraction': 0.6264327093752792}, {'alpha': 0.04705159350400542, 'batch_size': 158, 'beta_1': 0.9870884262730957, 'beta_2': 0.9999596874382349, 'epsilon': 1.1981845126013875e-08, 'hidden_layer_sizes': 116, 'learning_rate_init': 0.00617340520407431, 'tol': 1.741413418158619e-05, 'validation_fraction': 0.6754299026638921}], [16.063962273407764, 23.274250254613083, 19.80193088400322, 3.463918210725012, 15.210579700922182])}
+saving results
+saving timing
+saving suggest log
+done
