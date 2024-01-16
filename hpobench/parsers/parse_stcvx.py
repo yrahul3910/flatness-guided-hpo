@@ -27,6 +27,7 @@ def parse_stcvx(base_dir: str):
     
     results = []
     for file in files:
+        print(f'Parsing {file}')
         __proc = subprocess.Popen(f'grep "^Score:" {file}', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         __proc.wait()
         EXIT_CODE = __proc.returncode
@@ -51,6 +52,6 @@ def parse_stcvx(base_dir: str):
 
 
 if __name__ == '__main__':
-    results = parse_stcvx(f'./results/{sys.argv[1]}/stcvx/')
+    results = parse_stcvx(f'./results/{sys.argv[1]}/stcvx_min/')
     print('AUC scores:', results)
     print('Median AUC:', np.median(results, axis=0))

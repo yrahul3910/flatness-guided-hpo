@@ -9,6 +9,7 @@ def parse_stcvx(base_dir: str):
     
     results = []
     for file in files:
+        print(f'Parsing {file}')
         lines = list`grep "^Score:" {file}`
         
         # The code producing the results are a bit broken, so instead of simply
@@ -23,6 +24,6 @@ def parse_stcvx(base_dir: str):
 
 
 if __name__ == '__main__':
-    results = parse_stcvx(f'./results/{sys.argv[1]}/stcvx/')
+    results = parse_stcvx(f'./results/{sys.argv[1]}/stcvx_min/')
     print('AUC scores:', results)
     print('Median AUC:', np.median(results, axis=0))
