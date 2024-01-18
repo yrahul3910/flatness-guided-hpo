@@ -1,0 +1,29 @@
+import sys
+
+from numpy import array, float32
+import numpy as np
+
+
+def parse(base_dir: str):
+    files = list`ls -1 {base_dir}/*.out`
+    
+    results = []
+    for file in files:
+        print(f'Parsing {file}')
+        lines = list`grep "^Score:" {file}`
+        
+        # The code producing the results are a bit broken, so instead of simply
+        # reading the last line, we'll have to do it this way.
+        # Oh and the metrics are ["loss", "acc", "auc"]
+        lines = np.array([eval(x.split(':')[1])[-1] for x in lines])
+
+        lines = lines.reshape((int(len(lines) // 10), 10))
+        results.append(np.max(np.mean(lines, axis=-1), axis=0))
+    
+    return results
+
+
+if __name__ == '__main__':
+    results = parse(f'./results/{sys.argv[1]}/{sys.argv[2]}/')
+    print('AUC scores:', results)
+    print('Median AUC:', np.median(results, axis=0))
