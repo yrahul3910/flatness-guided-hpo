@@ -66,7 +66,7 @@ def run_experiment(opt_fn: Callable[[Dataset, dict, Callable[[dict], float]], No
 
                 start = time.time()
 
-                def evaluator(config):
+                def evaluator(config, args=None):
                     return eval(config, data)
                 
                 score = opt_fn(data, config_space, evaluator)

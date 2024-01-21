@@ -9,6 +9,9 @@ from keras.callbacks import EarlyStopping
 
 
 def eval(config: Config, data: Dataset, *args, **kwargs) -> List[float]:
+    if isinstance(config, dict):
+        config = Config(**config)
+
     model = get_model(config, data)
 
     try:
