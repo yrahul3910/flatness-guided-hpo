@@ -17,7 +17,7 @@ def opt_fn(data: Dataset, config_space: dict, eval: Callable[[dict], float]):
         try:
             convexity = get_convexity(data, config)
 
-            if len(best_betas) < keep_configs or convexity < max(best_betas):
+            if (len(best_betas) < keep_configs or convexity < max(best_betas)) and convexity > 0:
                 best_betas.append(convexity)
                 best_configs.append(config)
 

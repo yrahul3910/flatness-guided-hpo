@@ -15,7 +15,7 @@ def parse(base_dir: str):
         # The code producing the results are a bit broken, so instead of simply
         # reading the last line, we'll have to do it this way.
         # Oh and the metrics are ["loss", "acc", "auc"]
-        lines = np.array([eval(x.split(':')[1])[-1] for x in lines])
+        lines = np.array([eval(x.split(':')[1])[-1] for x in lines])[:300]
 
         lines = lines.reshape((int(len(lines) // 10), 10))
         results.append(np.max(np.mean(lines, axis=-1), axis=0))

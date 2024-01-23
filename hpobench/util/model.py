@@ -13,8 +13,8 @@ def get_model(config: Config, data: Dataset):
 
     model = Sequential()
 
-    for _ in range(config.depth):
-        model.add(Dense(config.width, activation='relu'))
+    for _ in range(int(config.depth)):
+        model.add(Dense(int(config.width), activation='relu'))
     
     if is_multiclass:
         model.add(Dense(data.y_train.shape[1], activation='softmax'))
