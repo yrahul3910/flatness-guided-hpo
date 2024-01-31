@@ -29,15 +29,12 @@ config_space = DesignSpace().parse(config_space)
 hebo = HEBO(config_space)
 
 # Use HEBO to perform hyper-parameter optimization for 30 iterations.
-
-
 scores = []
-for _ in range(20):
-    for _ in range(5):
-        configs = hebo.suggest(n_suggestions=6)
-        hebo.observe(configs, [eval(config) for _, config in configs.iterrows()])
+for _ in range(5):
+    configs = hebo.suggest(n_suggestions=6)
+    hebo.observe(configs, [eval(config) for _, config in configs.iterrows()])
 
-    scores.append(best_y)
-    print("[main] Accuracy:", hebo.best_y)
+scores.append(hebo.best_y)
+print("[main] Accuracy:", hebo.best_y)
 
 print('Scores:', scores)

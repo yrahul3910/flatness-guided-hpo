@@ -1,11 +1,4 @@
-import subprocess
 import os
-import threading
-
-class list(list):
-    def map(self, f):
-        return list(map(f, self))
-
 import sys
 
 from numpy import array, float32
@@ -13,36 +6,13 @@ import numpy as np
 
 
 def parse(base_dir: str):
-    __proc = subprocess.Popen(f'ls -1 {base_dir}/*.out', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    __proc.wait()
-    EXIT_CODE = __proc.returncode
-    __comm = __proc.communicate()
-    _, STDERR = __comm[0].decode('utf-8').rstrip(), __comm[1].decode('utf-8').rstrip()
-    _ = _.split('\n')
-    try:
-        _ = list(_)
-    except ValueError:
-        raise
-    files = _
+    files = [f'{base_dir}/{x}' for x in os.listdir(base_dir)]
     
     results = []
     for file in files:
         print(f'Parsing {file}')
-        __proc = subprocess.Popen(f'grep "^Score:" {file}', shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        __proc.wait()
-        EXIT_CODE = __proc.returncode
-        __comm = __proc.communicate()
-        _, STDERR = __comm[0].decode('utf-8').rstrip(), __comm[1].decode('utf-8').rstrip()
-        _ = _.split('\n')
-        try:
-            _ = list(_)
-        except ValueError:
-            raise
-        lines = _
-        
-        
-        
-        
+        lines = open(file, 'r').readlines()
+        lines = [line for line in lines if line.startswith('Score')][:300]
         lines = np.array([eval(x.split(':')[1])[-1] for x in lines])
 
         lines = lines.reshape((int(len(lines) // 10), 10))
