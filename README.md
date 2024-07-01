@@ -1,6 +1,7 @@
-# Strong convexity-based HPO
+# Flatness-guided HPO
 
-This repo contains the full source code and results for the strong convexity-based HPO paper.
+This repo contains the full source code and results for the flatness-guided HPO paper. While this was in development,
+the method was also called STCVX or AHSC temporarily, so you will likely find files with those names instead.
 
 * `image/` - Experiments on MNIST and SVHN
 * `hpobench/` - Experiments on the OpenML datasets
