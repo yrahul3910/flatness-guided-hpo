@@ -1,4 +1,5 @@
 from typing import Callable
+import traceback
 
 from util.config import get_many_random_hyperparams
 from util.data import Dataset
@@ -26,8 +27,9 @@ def opt_fn(data: Dataset, config_space: dict, eval: Callable[[dict], float]):
                 best_configs = list(best_configs[:keep_configs])
         except KeyboardInterrupt:
             raise
-        except:  # noqa: E722
+        except Exception as e:  # noqa: E722
             print('Error, skipping config')
+            traceback.print_exc()
     
     scores = []
     for beta, config in zip(best_betas, best_configs):

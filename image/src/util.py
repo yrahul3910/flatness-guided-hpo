@@ -95,7 +95,8 @@ def get_convexity(data: Dataset, config: Config, n_class: int = 10, dataset: str
     # Fit for one epoch before computing smoothness
     model.fit(data.x_train, data.y_train, batch_size=BATCH_SIZE, epochs=1),
 
-    Ka_func = K.function([model.layers[0].input], [model.layers[-2].output])
+    Ka1_func = K.function([model.layers[0].input], [model.layers[-2].output])
+    Ka_func = K.function([model.layers[0].input], [model.layers[-1].output])
 
     batch_size = BATCH_SIZE
     best_mu = -np.inf
@@ -104,7 +105,7 @@ def get_convexity(data: Dataset, config: Config, n_class: int = 10, dataset: str
         end_i = start_i + batch_size
         xb = data.x_train[start_i:end_i]
 
-        mu = np.linalg.norm(Ka_func([xb])) / np.linalg.norm(model.layers[-1].weights[0])
+        mu = np.linalg.norm(Ka_func([xb])) * np.linalg.norm(Ka1_func([xb])) / np.linalg.norm(model.layers[-1].weights[0])
         if mu > best_mu and mu != np.inf:
             best_mu = mu
 
