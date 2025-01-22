@@ -1,20 +1,27 @@
 import random
+from functools import partial
 
 import numpy as np
 import scipy
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelBinarizer
 from keras.utils import to_categorical
-from keras.models import Sequential
 from keras import backend as K
-from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout, BatchNormalization
+from keras.models import Sequential, Model
+from keras.layers import (
+    Dense,
+    Conv2D,
+    MaxPooling2D,
+    Flatten,
+    Dropout,
+    BatchNormalization,
+)
 from keras.datasets.mnist import load_data
 
 from src.data import Dataset
 from src.config import Config
 
-
-BATCH_SIZE=64
+BATCH_SIZE = 64
 
 
 def get_mnist():
@@ -22,12 +29,12 @@ def get_mnist():
 
 
 def get_svhn():
-    train_data = scipy.io.loadmat('train_32x32.mat')
-    x_train = train_data['X']
-    y_train = train_data['y']
-    test_data = scipy.io.loadmat('test_32x32.mat')
-    x_test = test_data['X']
-    y_test = test_data['y']
+    train_data = scipy.io.loadmat("train_32x32.mat")
+    x_train = train_data["X"]
+    y_train = train_data["y"]
+    test_data = scipy.io.loadmat("test_32x32.mat")
+    x_test = test_data["X"]
+    y_test = test_data["y"]
 
     x_train = np.moveaxis(x_train, -1, 0)
     x_test = np.moveaxis(x_test, -1, 0)
@@ -35,24 +42,21 @@ def get_svhn():
     return (x_train, y_train), (x_test, y_test)
 
 
-def get_data(dataset: str='svhn'):
-    data_loaders = {
-        'mnist': (get_mnist, (28, 28, 1)),
-        'svhn': (get_svhn, (32, 32, 3))
-    }
+def get_data(dataset: str = "svhn"):
+    data_loaders = {"mnist": (get_mnist, (28, 28, 1)), "svhn": (get_svhn, (32, 32, 3))}
 
     if dataset not in data_loaders:
-        raise ValueError('Invalid dataset name.')
+        raise ValueError("Invalid dataset name.")
 
     data_loader, (img_rows, img_cols, img_channels) = data_loaders[dataset]
     (x_train, y_train), (x_test, y_test) = data_loader()
 
-    x_train = x_train.astype('float32')
-    x_test = x_test.astype('float32')
+    x_train = x_train.astype("float32")
+    x_test = x_test.astype("float32")
     x_train /= 255
     x_test /= 255
 
-    if K.image_data_format() == 'channels_first':
+    if K.image_data_format() == "channels_first":
         x_train = x_train.reshape(x_train.shape[0], img_channels, img_rows, img_cols)
         x_test = x_test.reshape(x_test.shape[0], img_channels, img_rows, img_cols)
     else:
@@ -69,23 +73,27 @@ def get_data(dataset: str='svhn'):
     return Dataset(x_train, y_train, x_test, y_test)
 
 
-def run_experiment(data: Dataset, config: Config, n_class: int = 10, dataset: str = 'mnist') -> float:
-    print('[run_experiment] Getting model')
+def run_experiment(
+    data: Dataset, config: Config, n_class: int = 10, dataset: str = "mnist"
+) -> float:
+    print("[run_experiment] Getting model")
     model = get_model(data, config, n_class, dataset)
 
-    print('[run_experiment] Got model')
+    print("[run_experiment] Got model")
     model.fit(data.x_train, data.y_train, epochs=100, verbose=1, batch_size=BATCH_SIZE)
-    print('[run_experiment] Fit model')
+    print("[run_experiment] Fit model")
 
     y_pred = np.argmax(model.predict(data.x_test), axis=-1)
-    
+
     if len(data.y_test.shape) > 1:
         data.y_test = np.argmax(data.y_test, axis=1)
 
     return accuracy_score(data.y_test, y_pred)
 
 
-def get_convexity(data: Dataset, config: Config, n_class: int = 10, dataset: str = 'mnist') -> float:
+def get_convexity(
+    data: Dataset, config: Config, n_class: int = 10, dataset: str = "mnist"
+) -> float:
     model = get_model(data, config, n_class, dataset)
 
     if n_class > 2 and len(data.y_train.shape) == 1:
@@ -93,10 +101,14 @@ def get_convexity(data: Dataset, config: Config, n_class: int = 10, dataset: str
         data.y_test = to_categorical(data.y_test, n_class)
 
     # Fit for one epoch before computing smoothness
-    model.fit(data.x_train, data.y_train, batch_size=BATCH_SIZE, epochs=1),
+    (model.fit(data.x_train, data.y_train, batch_size=BATCH_SIZE, epochs=1),)
 
-    Ka1_func = K.function([model.layers[0].input], [model.layers[-2].output])
-    Ka_func = K.function([model.layers[0].input], [model.layers[-1].output])
+    def Ka_func_p(layer, xb):
+        tmp_model = Model(inputs=model.inputs, outputs=model.layers[layer].output)
+        return tmp_model(xb)
+
+    Ka_func = partial(Ka_func_p, -1)
+    Ka1_func = partial(Ka_func_p, -2)
 
     batch_size = BATCH_SIZE
     best_mu = -np.inf
@@ -105,7 +117,11 @@ def get_convexity(data: Dataset, config: Config, n_class: int = 10, dataset: str
         end_i = start_i + batch_size
         xb = data.x_train[start_i:end_i]
 
-        mu = np.linalg.norm(Ka_func([xb])) * np.linalg.norm(Ka1_func([xb])) / np.linalg.norm(model.layers[-1].weights[0])
+        mu = (
+            np.linalg.norm(Ka_func([xb]))
+            * np.linalg.norm(Ka1_func([xb]))
+            / np.linalg.norm(model.layers[-1].weights[0])
+        )
         if mu > best_mu and mu != np.inf:
             best_mu = mu
 
@@ -138,29 +154,47 @@ def get_many_random_hyperparams(options: dict, n: int) -> list:
     return hyperparams
 
 
-def get_model(data: Dataset, config: Config, n_classes: int = 10, dataset: str = 'mnist') -> Sequential:
-    if dataset == 'mnist':
-            return get_mnist_model(data, config, n_classes)
-    elif dataset == 'svhn':
-            return get_svhn_model(data, config, n_classes)
+def get_model(
+    data: Dataset, config: Config, n_classes: int = 10, dataset: str = "mnist"
+) -> Sequential:
+    if dataset == "mnist":
+        return get_mnist_model(data, config, n_classes)
+    elif dataset == "svhn":
+        return get_svhn_model(data, config, n_classes)
 
 
 def get_svhn_model(data: Dataset, config: Config, n_classes: int = 10) -> Sequential:
     learner = Sequential()
 
     for i in range(config.n_blocks):
-        n_block_filters = config.n_filters * (2 ** i)
-        learner.add(Conv2D(n_block_filters, (config.kernel_size, config.kernel_size), padding=config.padding, activation='relu'))
+        n_block_filters = config.n_filters * (2**i)
+        learner.add(
+            Conv2D(
+                n_block_filters,
+                (config.kernel_size, config.kernel_size),
+                padding=config.padding,
+                activation="relu",
+            )
+        )
         learner.add(BatchNormalization())
-        learner.add(Conv2D(n_block_filters, (config.kernel_size, config.kernel_size), padding=config.padding, activation='relu'))
+        learner.add(
+            Conv2D(
+                n_block_filters,
+                (config.kernel_size, config.kernel_size),
+                padding=config.padding,
+                activation="relu",
+            )
+        )
         learner.add(MaxPooling2D((2, 2)))
         learner.add(Dropout(config.dropout_rate))
 
     learner.add(Flatten())
-    learner.add(Dense(config.n_units, activation='relu'))
+    learner.add(Dense(config.n_units, activation="relu"))
     learner.add(Dropout(config.final_dropout_rate))
-    learner.add(Dense(n_classes, activation='softmax'))
-    learner.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    learner.add(Dense(n_classes, activation="softmax"))
+    learner.compile(
+        loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"]
+    )
 
     return learner
 
@@ -176,13 +210,23 @@ def get_mnist_model(data: Dataset, config: Config, n_class: int = 10) -> Sequent
     learner = Sequential()
 
     for i in range(config.n_blocks):
-        learner.add(Conv2D(config.n_filters, (config.kernel_size, config.kernel_size), padding=config.padding, kernel_initializer='he_uniform', activation='relu'))
+        learner.add(
+            Conv2D(
+                config.n_filters,
+                (config.kernel_size, config.kernel_size),
+                padding=config.padding,
+                kernel_initializer="he_uniform",
+                activation="relu",
+            )
+        )
         learner.add(MaxPooling2D(pool_size=(2, 2)))
 
     learner.add(Flatten())
-    learner.add(Dense(128, activation='relu', kernel_initializer='he_uniform'))
-    learner.add(Dense(n_class, activation='softmax'))
-    
-    learner.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    learner.add(Dense(128, activation="relu", kernel_initializer="he_uniform"))
+    learner.add(Dense(n_class, activation="softmax"))
+
+    learner.compile(
+        loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"]
+    )
 
     return learner

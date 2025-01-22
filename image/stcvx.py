@@ -1,4 +1,5 @@
 import os
+import traceback
 import random
 import gc
 
@@ -36,8 +37,9 @@ for i, config in enumerate(configs):
         gc.collect()
     except KeyboardInterrupt:
         raise
-    except:
-        print(f'Error, skipping config')
+    except Exception as e:
+        print(f'Error, skipping config: {e}')
+        traceback.print_exc()
     
 for beta, config in zip(best_betas, best_configs):
     data = deepcopy(data_orig)
