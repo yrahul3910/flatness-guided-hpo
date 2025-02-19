@@ -7,10 +7,10 @@ from torchvision.datasets import MNIST, SVHN
 from torch.utils.data import DataLoader
 from backpack.hessianfree.hvp import hessian_vector_product
 from backpack import extend
-import torch.nn.functional as F
 
 
 BATCH_SIZE = 64
+
 
 class ImageModel(torch.nn.Module):
     def __init__(self, dataset: str = "mnist", learning_rate=1e-3):
@@ -69,21 +69,6 @@ class ImageModel(torch.nn.Module):
 
         return x
 
-    def training_step(self, batch, batch_idx):
-        x, y = batch
-        logits = self(x)
-        loss = F.cross_entropy(logits, y)
-        self.log("train_loss", loss)
-        return loss
-
-    def validation_step(self, batch, batch_idx):
-        x, y = batch
-        logits = self(x)
-        loss = F.cross_entropy(logits, y)
-        acc = (logits.argmax(dim=1) == y).float().mean()
-        self.log("val_loss", loss, prog_bar=True)
-        self.log("val_acc", acc, prog_bar=True)
-
 
 def stcvx(model: ImageModel, dl: DataLoader, device):
     def Ka_func(xb):
@@ -94,7 +79,9 @@ def stcvx(model: ImageModel, dl: DataLoader, device):
     for xb, _ in dl:
         al, al1 = Ka_func(xb)
         Wl = model.state_dict()["fc2.0.weight"].cpu()
-        mu = (np.linalg.norm(al) * np.linalg.norm(al1) / np.linalg.norm(Wl)) / BATCH_SIZE
+        mu = (
+            np.linalg.norm(al) * np.linalg.norm(al1) / np.linalg.norm(Wl)
+        ) / BATCH_SIZE
         if mu > best_mu and mu != np.inf:
             best_mu = mu
 
@@ -141,11 +128,12 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 train_loader = DataLoader(dataset, num_workers=7, batch_size=BATCH_SIZE)
 loss_fn = extend(torch.nn.CrossEntropyLoss().to(device))
-model = extend(ImageModel(dataset=dataset_name).to(device))
+model = extend(
+    torch.nn.DistributedDataParallel(ImageModel(dataset=dataset_name)).to(device)
+)
 optim = torch.optim.Adam(model.parameters(), lr=0.001)
 
 num_epochs = 1
-torch.autograd.set_detect_anomaly(True)
 
 try:
     for epoch in range(num_epochs):
