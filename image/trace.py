@@ -1,35 +1,41 @@
 import torch
+import traceback
 import numpy as np
 import os
 from torchvision.transforms import v2
-from torchvision.datasets import MNIST
+from torchvision.datasets import MNIST, SVHN
 from torch.utils.data import DataLoader
 from backpack.hessianfree.hvp import hessian_vector_product
 from backpack import extend
 import torch.nn.functional as F
 
 
-
-class MNISTModel(torch.nn.Module):
-    def __init__(self, learning_rate=1e-3):
+class ImageModel(torch.nn.Module):
+    def __init__(self, dataset: str = "mnist", learning_rate=1e-3):
         super().__init__()
+
+        if dataset == "mnist":
+            n_channels = 1
+        else:
+            n_channels = 3
 
         # Define the network architecture
         self.conv_block_1 = torch.nn.Sequential(
-            torch.nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1),
+            torch.nn.Conv2d(in_channels=n_channels, out_channels=32 * n_channels, kernel_size=3, stride=1, padding=1),
             torch.nn.ReLU(),
-            torch.nn.BatchNorm2d(32)
+            torch.nn.BatchNorm2d(32 * n_channels)
         )
 
         self.conv_block_2 = torch.nn.Sequential(
-            torch.nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1),
+            torch.nn.Conv2d(in_channels=32 * n_channels, out_channels=64 * n_channels, groups=n_channels, kernel_size=3, stride=1, padding=1),
             torch.nn.ReLU(),
-            torch.nn.BatchNorm2d(64)
+            torch.nn.BatchNorm2d(64 * n_channels)
         )
 
         self.fc1 = torch.nn.Sequential(
             torch.nn.Flatten(),
-            torch.nn.Linear(64 * 28 * 28, 128),
+            torch.nn.Linear(64 * n_channels * 28 * 28, 128),
+            torch.nn.Linear(192 * 32 * 32, 128),
             torch.nn.ReLU(),
         )
 
@@ -64,7 +70,7 @@ class MNISTModel(torch.nn.Module):
         self.log('val_loss', loss, prog_bar=True)
         self.log('val_acc', acc, prog_bar=True)
 
-def stcvx(model: MNISTModel, dl: DataLoader, device):
+def stcvx(model: ImageModel, dl: DataLoader, device):
     def Ka_func(xb):
         model(xb.to(device))
         return model.al, model.al1
@@ -103,12 +109,18 @@ def hutchinson_trace_autodiff_blockwise(model, loss, V, device):
     return trace
 
 
-dataset = MNIST(os.getcwd(), download=True, transform=v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32)]))
+dataset_name = "mnist"
+
+if dataset_name == "mnist":
+    dataset = MNIST(os.getcwd(), download=True, transform=v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32)]))
+else:
+    dataset = SVHN(os.getcwd(), download=True, transform=v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32)]))
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 train_loader = DataLoader(dataset, num_workers=7, batch_size=128)
 loss_fn = extend(torch.nn.CrossEntropyLoss().to(device))
-model = extend(MNISTModel().to(device))
+model = extend(ImageModel(dataset=dataset_name).to(device))
 optim = torch.optim.Adam(model.parameters(), lr=0.001)
 
 num_epochs = 10
@@ -147,7 +159,8 @@ try:
         print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {avg_loss:.4f}")
         print(f"Total FGHPO estimate: {total_fghpo}")
         print(f"Total trace estimate: {total_trace}")
-except:
+except Exception:
+        traceback.print_exc()
         print('-' * 20)
         print(f"Total FGHPO estimate: {total_fghpo}")
         print(f"Total trace estimate: {total_trace}")
