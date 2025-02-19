@@ -10,6 +10,8 @@ from backpack import extend
 import torch.nn.functional as F
 
 
+BATCH_SIZE = 64
+
 class ImageModel(torch.nn.Module):
     def __init__(self, dataset: str = "mnist", learning_rate=1e-3):
         super().__init__()
@@ -49,11 +51,11 @@ class ImageModel(torch.nn.Module):
 
         self.fc1 = torch.nn.Sequential(
             torch.nn.Flatten(),
-            torch.nn.Linear(64 * n_channels * dims * dims, 128),
+            torch.nn.Linear(64 * n_channels * dims * dims, BATCH_SIZE),
             torch.nn.ReLU(),
         )
 
-        self.fc2 = torch.nn.Sequential(torch.nn.Linear(128, 10))
+        self.fc2 = torch.nn.Sequential(torch.nn.Linear(BATCH_SIZE, 10))
 
     def forward(self, x):
         x = self.conv_block_1(x)
@@ -92,7 +94,7 @@ def stcvx(model: ImageModel, dl: DataLoader, device):
     for xb, _ in dl:
         al, al1 = Ka_func(xb)
         Wl = model.state_dict()["fc2.0.weight"].cpu()
-        mu = (np.linalg.norm(al) * np.linalg.norm(al1) / np.linalg.norm(Wl)) / 128
+        mu = (np.linalg.norm(al) * np.linalg.norm(al1) / np.linalg.norm(Wl)) / BATCH_SIZE
         if mu > best_mu and mu != np.inf:
             best_mu = mu
 
@@ -120,7 +122,7 @@ def hutchinson_trace_autodiff_blockwise(model, loss, V, device):
     return trace
 
 
-dataset_name = "mnist"
+dataset_name = "svhn"
 
 if dataset_name == "mnist":
     dataset = MNIST(
@@ -137,12 +139,12 @@ else:
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-train_loader = DataLoader(dataset, num_workers=7, batch_size=128)
+train_loader = DataLoader(dataset, num_workers=7, batch_size=BATCH_SIZE)
 loss_fn = extend(torch.nn.CrossEntropyLoss().to(device))
 model = extend(ImageModel(dataset=dataset_name).to(device))
 optim = torch.optim.Adam(model.parameters(), lr=0.001)
 
-num_epochs = 10
+num_epochs = 1
 torch.autograd.set_detect_anomaly(True)
 
 try:
