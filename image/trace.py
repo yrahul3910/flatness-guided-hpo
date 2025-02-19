@@ -16,8 +16,10 @@ class ImageModel(torch.nn.Module):
 
         if dataset == "mnist":
             n_channels = 1
+            dims = 28
         else:
             n_channels = 3
+            dims = 32
 
         # Define the network architecture
         self.conv_block_1 = torch.nn.Sequential(
@@ -47,8 +49,7 @@ class ImageModel(torch.nn.Module):
 
         self.fc1 = torch.nn.Sequential(
             torch.nn.Flatten(),
-            torch.nn.Linear(64 * n_channels * 28 * 28, 128),
-            torch.nn.Linear(192 * 32 * 32, 128),
+            torch.nn.Linear(64 * n_channels * dims * dims, 128),
             torch.nn.ReLU(),
         )
 
