@@ -21,15 +21,28 @@ class ImageModel(torch.nn.Module):
 
         # Define the network architecture
         self.conv_block_1 = torch.nn.Sequential(
-            torch.nn.Conv2d(in_channels=n_channels, out_channels=32 * n_channels, kernel_size=3, stride=1, padding=1),
+            torch.nn.Conv2d(
+                in_channels=n_channels,
+                out_channels=32 * n_channels,
+                kernel_size=3,
+                stride=1,
+                padding=1,
+            ),
             torch.nn.ReLU(),
-            torch.nn.BatchNorm2d(32 * n_channels)
+            torch.nn.BatchNorm2d(32 * n_channels),
         )
 
         self.conv_block_2 = torch.nn.Sequential(
-            torch.nn.Conv2d(in_channels=32 * n_channels, out_channels=64 * n_channels, groups=n_channels, kernel_size=3, stride=1, padding=1),
+            torch.nn.Conv2d(
+                in_channels=32 * n_channels,
+                out_channels=64 * n_channels,
+                groups=n_channels,
+                kernel_size=3,
+                stride=1,
+                padding=1,
+            ),
             torch.nn.ReLU(),
-            torch.nn.BatchNorm2d(64 * n_channels)
+            torch.nn.BatchNorm2d(64 * n_channels),
         )
 
         self.fc1 = torch.nn.Sequential(
@@ -39,9 +52,7 @@ class ImageModel(torch.nn.Module):
             torch.nn.ReLU(),
         )
 
-        self.fc2 = torch.nn.Sequential(
-            torch.nn.Linear(128, 10)
-        )
+        self.fc2 = torch.nn.Sequential(torch.nn.Linear(128, 10))
 
     def forward(self, x):
         x = self.conv_block_1(x)
@@ -59,7 +70,7 @@ class ImageModel(torch.nn.Module):
         x, y = batch
         logits = self(x)
         loss = F.cross_entropy(logits, y)
-        self.log('train_loss', loss)
+        self.log("train_loss", loss)
         return loss
 
     def validation_step(self, batch, batch_idx):
@@ -67,8 +78,9 @@ class ImageModel(torch.nn.Module):
         logits = self(x)
         loss = F.cross_entropy(logits, y)
         acc = (logits.argmax(dim=1) == y).float().mean()
-        self.log('val_loss', loss, prog_bar=True)
-        self.log('val_acc', acc, prog_bar=True)
+        self.log("val_loss", loss, prog_bar=True)
+        self.log("val_acc", acc, prog_bar=True)
+
 
 def stcvx(model: ImageModel, dl: DataLoader, device):
     def Ka_func(xb):
@@ -79,16 +91,14 @@ def stcvx(model: ImageModel, dl: DataLoader, device):
     for xb, _ in dl:
         al, al1 = Ka_func(xb)
         Wl = model.state_dict()["fc2.0.weight"].cpu()
-        mu = (
-            np.linalg.norm(al) * np.linalg.norm(al1) / np.linalg.norm(Wl)
-        ) / 128
+        mu = (np.linalg.norm(al) * np.linalg.norm(al1) / np.linalg.norm(Wl)) / 128
         if mu > best_mu and mu != np.inf:
             best_mu = mu
 
     return best_mu
 
 
-def rademacher(shape, dtype=torch.float32, device='cpu'):
+def rademacher(shape, dtype=torch.float32, device="cpu"):
     """Sample from Rademacher distribution."""
     rand = ((torch.rand(shape) < 0.5)) * 2 - 1
     return rand.to(dtype).to(device)
@@ -112,9 +122,17 @@ def hutchinson_trace_autodiff_blockwise(model, loss, V, device):
 dataset_name = "mnist"
 
 if dataset_name == "mnist":
-    dataset = MNIST(os.getcwd(), download=True, transform=v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32)]))
+    dataset = MNIST(
+        os.getcwd(),
+        download=True,
+        transform=v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32)]),
+    )
 else:
-    dataset = SVHN(os.getcwd(), download=True, transform=v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32)]))
+    dataset = SVHN(
+        os.getcwd(),
+        download=True,
+        transform=v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32)]),
+    )
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -130,8 +148,8 @@ try:
     for epoch in range(num_epochs):
         model.train()
         total_loss = 0
-        total_fghpo = 0.
-        total_trace = 0.
+        total_fghpo = 0.0
+        total_trace = 0.0
 
         for batch_idx, (inputs, targets) in enumerate(train_loader):
             inputs, targets = inputs.to(device), targets.to(device)
@@ -151,16 +169,16 @@ try:
             total_loss += loss.item()
             total_fghpo += cur_fghpo
             total_trace += cur_trace
-            
+
         model.eval()
 
         avg_loss = total_loss / len(train_loader)
-        print('-' * 20)
+        print("-" * 20)
         print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {avg_loss:.4f}")
         print(f"Total FGHPO estimate: {total_fghpo}")
         print(f"Total trace estimate: {total_trace}")
 except Exception:
-        traceback.print_exc()
-        print('-' * 20)
-        print(f"Total FGHPO estimate: {total_fghpo}")
-        print(f"Total trace estimate: {total_trace}")
+    traceback.print_exc()
+    print("-" * 20)
+    print(f"Total FGHPO estimate: {total_fghpo}")
+    print(f"Total trace estimate: {total_trace}")
