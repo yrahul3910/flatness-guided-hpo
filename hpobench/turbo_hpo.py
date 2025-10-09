@@ -1,8 +1,7 @@
-from turbo import Turbo1
+from collections.abc import Callable
+
 import numpy as np
-
-from typing import Callable
-
+from turbo import Turbo1
 from util.config import Config
 from util.data import Dataset
 from util.experiment import run_experiment
@@ -11,22 +10,22 @@ from util.experiment import run_experiment
 def opt_fn(data: Dataset, config_space: dict, eval: Callable[[dict], float]):
     lb = []
     ub = []
-    for key, val in config_space.items():
+    for val in config_space.values():
         if isinstance(val, tuple):
             lb.append(val[0])
             ub.append(val[1])
-    
+
     def eval_wrapper(config):
         def eval_fn(config: dict):
             # Importantly, eval returns something to *maximize*
             return [-x for x in eval(Config(**config))]
-        
+
         def eval_fn_auc(config: dict):
             return eval_fn(config)[-1]
 
         cfg = {}
         j = 0  # index that we access config
-        for i, (key, val) in enumerate(config_space.items()):
+        for _i, (key, val) in enumerate(config_space.items()):
             if isinstance(val, tuple):
                 if isinstance(val[0], float):
                     cfg[key] = config[j]
@@ -50,10 +49,9 @@ def opt_fn(data: Dataset, config_space: dict, eval: Callable[[dict], float]):
         verbose=True
     )
     turbo1.optimize()
-    print('Score:', -min(turbo1.fX))
 
     return min(turbo1.fX)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_experiment(opt_fn)

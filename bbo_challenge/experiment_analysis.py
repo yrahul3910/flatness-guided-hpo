@@ -11,23 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Perform analysis to compare different optimizers across problems.
-"""
-import json
+"""Perform analysis to compare different optimizers across problems."""
 import logging
 import warnings
 from collections import OrderedDict
 
-import numpy as np
-import pandas as pd
-import xarray as xr
-import scipy.stats as stats
-from statsmodels.stats.multitest import multipletests
-
 import bayesmark.constants as cc
 import bayesmark.quantiles as qt
 import bayesmark.xr_util as xru
-from bayesmark.cmd_parse import CmdArgs, general_parser, parse_args, serializable_dict
+import numpy as np
+import pandas as pd
+import xarray as xr
+from bayesmark.cmd_parse import CmdArgs, general_parser, parse_args
 from bayesmark.constants import (
     ITER,
     LB_MEAN,
@@ -52,8 +47,9 @@ from bayesmark.experiment_aggregate import validate_agg_perf
 from bayesmark.experiment_baseline import do_baseline
 from bayesmark.np_util import cummin, linear_rescale
 from bayesmark.serialize import XRSerializer
-from bayesmark.signatures import analyze_signature_pair
 from bayesmark.stats import t_EB
+from scipy import stats
+from statsmodels.stats.multitest import multipletests
 
 # Mathematical settings
 EVAL_Q = 0.5  # Evaluate based on median loss across n_trials
@@ -62,20 +58,15 @@ ALPHA = 0.05  # ==> 95% CIs
 logger = logging.getLogger(__name__)
 
 
-def run_stats(data):
-    print(data)
-    print('----\nKruskal-Wallis\n----')
+def run_stats(data) -> None:
     # Perform Kruskal-Wallis test
-    _, p_value = stats.kruskal(*data.values())
-    print(f"Kruskal-Wallis test p-value: {p_value}")
+    _, _p_value = stats.kruskal(*data.values())
 
     # Calculate medians for each group
     group_medians = {key: np.mean(val) for key, val in data.items()}
-    print(f"Group means: {group_medians}")
 
     # Find the group with the largest median
     max_group = max(group_medians, key=group_medians.get)
-    print(f"Group with the largest mean: {max_group}")
 
     # Perform pairwise Mann-Whitney U tests
     groups = list(data.keys())
@@ -85,40 +76,30 @@ def run_stats(data):
     for i in range(num_groups):
         for j in range(i+1, num_groups):
             _, p = stats.mannwhitneyu(
-                data[groups[i]], data[groups[j]], alternative='two-sided')
+                data[groups[i]], data[groups[j]], alternative="two-sided")
             p_values[i, j] = p
             p_values[j, i] = p
 
-    print('Pairwise Mann-Whitney U tests')
-    print(pd.DataFrame(p_values, index=groups, columns=groups))
-    print()
 
     # Apply Bonferroni correction for multiple comparisons
-    adjusted_p_values = multipletests(p_values.ravel(), method='fdr_tsbh')[
+    adjusted_p_values = multipletests(p_values.ravel(), method="fdr_tsbh")[
         1].reshape(p_values.shape)
     post_hoc = pd.DataFrame(
         adjusted_p_values, index=groups, columns=groups)
 
-    print("Pairwise Mann-Whitney U tests with Benjamini/Hochberg correction:")
-    print(post_hoc)
-    print()
 
     # Check if the group with the largest median is significantly better than the others
     significantly_better = True
-    for key in data.keys():
+    for key in data:
         if key != max_group and post_hoc.loc[max_group, key] >= 0.05:
             significantly_better = False
             break
 
     if significantly_better:
-        print(
-            f"The group '{max_group}' with the largest median IS significantly better than the others, ", end='')
+        pass
     else:
-        print(
-            "The group with the largest median IS NOT significantly better than all the others, ", end='')
+        pass
 
-    print(
-        f'and the highest p-value is {round(max(post_hoc[max_group]), 2)}')
 
 
 def get_perf_array(evals, evals_visible):
@@ -136,6 +117,7 @@ def get_perf_array(evals, evals_visible):
     perf_array : :class:`numpy:numpy.ndarray` of shape (n_iter, n_trials)
         The best performance so far at iteration i from `evals`. Where the best has been selected according to
         `evals_visible`.
+
     """
     n_iter, _, n_trials = evals.shape
     assert evals.size > 0, "perf array not supported for empty arrays"
@@ -152,8 +134,7 @@ def get_perf_array(evals, evals_visible):
     assert visible_perf_array.shape == (n_iter, n_trials)
 
     # Get the minimum from the visible loss
-    perf_array = cummin(perf_array, visible_perf_array)
-    return perf_array
+    return cummin(perf_array, visible_perf_array)
 
 
 def compute_aggregates(perf_da, baseline_ds, visible_perf_da=None):
@@ -189,6 +170,7 @@ def compute_aggregates(perf_da, baseline_ds, visible_perf_da=None):
         Dataset with overall summary of performance of each method. Contains variables
         ``(PERF_MED, LB_MED, UB_MED, PERF_MEAN, LB_MEAN, UB_MEAN)``
         each with dimensions ``(ITER, METHOD)``.
+
     """
     validate_agg_perf(perf_da, min_trial=1)
 
@@ -341,14 +323,12 @@ def compute_aggregates(perf_da, baseline_ds, visible_perf_da=None):
     return agg_result, summary, raw_results
 
 
-def main():
-    """See README for instructions on calling analysis.
-    """
+def main() -> None:
+    """See README for instructions on calling analysis."""
     description = "Analyze results from aggregated studies"
     args = parse_args(general_parser(description))
 
     # Metric used on leaderboard
-    leaderboard_metric = cc.VISIBLE_TO_OPT
 
     logger.setLevel(logging.INFO)  # Note this is the module-wide logger
     if args[CmdArgs.verbose]:
@@ -357,18 +337,17 @@ def main():
     # Load in the eval data and sanity check
     perf_ds, meta = XRSerializer.load_derived(
         args[CmdArgs.db_root], db=args[CmdArgs.db], key=cc.EVAL_RESULTS)
-    logger.info("Meta data from source file: %s" % str(meta["args"]))
+    logger.info("Meta data from source file: {}".format(str(meta["args"])))
 
     # Check if there is baselines file, other make one
     if cc.BASELINE not in XRSerializer.get_derived_keys(args[CmdArgs.db_root], db=args[CmdArgs.db]):
-        warnings.warn("Baselines not found. Need to construct baseline.")
+        warnings.warn("Baselines not found. Need to construct baseline.", stacklevel=2)
         do_baseline(args)
 
     # Load in baseline scores data and sanity check (including compatibility with eval data)
     baseline_ds, meta_ref = XRSerializer.load_derived(
         args[CmdArgs.db_root], db=args[CmdArgs.db], key=cc.BASELINE)
-    logger.info("baseline data from source ref file: %s" %
-                str(meta_ref["args"]))
+    logger.info("baseline data from source ref file: {}".format(str(meta_ref["args"])))
 
     # Check test case signatures match between eval data and baseline data
     """
@@ -407,18 +386,15 @@ def main():
     agg_result = xru.ds_concat(agg_result, dims=(cc.OBJECTIVE,))
     summary = xru.ds_concat(summary, dims=(cc.OBJECTIVE,))
 
-    print('----')
     data = {}
-    for key in raw['_visible_to_opt'].keys():
-        print(key, end='\t\t')
-        results = raw['_visible_to_opt'][key]
-        if not key.startswith('smoothness'):
+    for key in raw["_visible_to_opt"]:
+        results = raw["_visible_to_opt"][key]
+        if not key.startswith("smoothness"):
             data[key] = 100 * (1. - results[-1, :])
         else:
             idx = np.argmin([np.mean(results[i, :])
                             for i in range(len(results))])
             data[key] = 100 * (1. - results[idx, :])
-    print('----')
     run_stats(data)
 
 

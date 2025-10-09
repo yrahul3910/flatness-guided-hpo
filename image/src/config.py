@@ -12,4 +12,4 @@ class Config:
     dropout_rate: float = 0.2
     final_dropout_rate: float = 0.4
     n_units: int = 128
-    
+

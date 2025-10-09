@@ -1,19 +1,19 @@
-import torch
-import traceback
-import numpy as np
 import os
-from torchvision.transforms import v2
-from torchvision.datasets import MNIST, SVHN
-from torch.utils.data import DataLoader
-from backpack.hessianfree.hvp import hessian_vector_product
-from backpack import extend
+import traceback
 
+import numpy as np
+import torch
+from backpack import extend
+from backpack.hessianfree.hvp import hessian_vector_product
+from torch.utils.data import DataLoader
+from torchvision.datasets import MNIST, SVHN
+from torchvision.transforms import v2
 
 BATCH_SIZE = 64
 
 
 class ImageModel(torch.nn.Module):
-    def __init__(self, dataset: str = "mnist", learning_rate=1e-3):
+    def __init__(self, dataset: str = "mnist", learning_rate=1e-3) -> None:
         super().__init__()
 
         if dataset == "mnist":
@@ -90,7 +90,7 @@ def stcvx(model: ImageModel, dl: DataLoader, device):
 
 def rademacher(shape, dtype=torch.float32, device="cpu"):
     """Sample from Rademacher distribution."""
-    rand = ((torch.rand(shape) < 0.5)) * 2 - 1
+    rand = (torch.rand(shape) < 0.5) * 2 - 1
     return rand.to(dtype).to(device)
 
 
@@ -136,13 +136,13 @@ optim = torch.optim.Adam(model.parameters(), lr=0.001)
 num_epochs = 1
 
 try:
-    for epoch in range(num_epochs):
+    for _epoch in range(num_epochs):
         model.train()
         total_loss = 0
         total_fghpo = 0.0
         total_trace = 0.0
 
-        for batch_idx, (inputs, targets) in enumerate(train_loader):
+        for _batch_idx, (inputs, targets) in enumerate(train_loader):
             inputs, targets = inputs.to(device), targets.to(device)
 
             optim.zero_grad()
@@ -153,8 +153,6 @@ try:
 
             cur_trace = hutchinson_trace_autodiff_blockwise(model, loss, 20, device)
             cur_fghpo = stcvx(model, train_loader, device)
-            print("Estimated trace:", cur_trace)
-            print("FGHPO estimate:", cur_fghpo)
             optim.step()
 
             total_loss += loss.item()
@@ -164,12 +162,5 @@ try:
         model.eval()
 
         avg_loss = total_loss / len(train_loader)
-        print("-" * 20)
-        print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {avg_loss:.4f}")
-        print(f"Total FGHPO estimate: {total_fghpo}")
-        print(f"Total trace estimate: {total_trace}")
 except Exception:
     traceback.print_exc()
-    print("-" * 20)
-    print(f"Total FGHPO estimate: {total_fghpo}")
-    print(f"Total trace estimate: {total_trace}")

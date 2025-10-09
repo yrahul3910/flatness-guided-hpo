@@ -1,6 +1,5 @@
-from dataclasses import dataclass
-from typing import Literal
 import random
+from dataclasses import dataclass
 
 
 @dataclass
@@ -10,7 +9,7 @@ class Config:
     batch_size: int
     alpha: float
     learning_rate_init: float
-    
+
 
 config_space = {
     "depth": (1, 4),
@@ -21,9 +20,7 @@ config_space = {
 }
 
 def get_random_hyperparams(options: dict) -> Config:
-    """
-    Get hyperparameters from options.
-    """
+    """Get hyperparameters from options."""
     hyperparams = {}
     for key, value in options.items():
         if isinstance(value, list):
@@ -37,9 +34,7 @@ def get_random_hyperparams(options: dict) -> Config:
 
 
 def get_many_random_hyperparams(options: dict, n: int) -> list:
-    """
-    Get n hyperparameters from options.
-    """
+    """Get n hyperparameters from options."""
     hyperparams = []
     for _ in range(n):
         hyperparams.append(get_random_hyperparams(options))

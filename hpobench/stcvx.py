@@ -1,10 +1,10 @@
-from typing import Callable
 import traceback
+from collections.abc import Callable
 
 from util.config import get_many_random_hyperparams
 from util.data import Dataset
-from util.stcvx import get_convexity
 from util.experiment import run_experiment
+from util.stcvx import get_convexity
 
 
 def opt_fn(data: Dataset, config_space: dict, eval: Callable[[dict], float]):
@@ -22,24 +22,22 @@ def opt_fn(data: Dataset, config_space: dict, eval: Callable[[dict], float]):
                 best_betas.append(convexity)
                 best_configs.append(config)
 
-                best_betas, best_configs = zip(*sorted(zip(best_betas, best_configs), key=lambda x: x[0]))
+                best_betas, best_configs = zip(*sorted(zip(best_betas, best_configs, strict=False), key=lambda x: x[0]), strict=False)
                 best_betas = list(best_betas[:keep_configs])
                 best_configs = list(best_configs[:keep_configs])
         except KeyboardInterrupt:
             raise
-        except Exception as e:  # noqa: E722
-            print('Error, skipping config')
+        except Exception:
             traceback.print_exc()
-    
+
     scores = []
-    for beta, config in zip(best_betas, best_configs):
-        print(f'Config: {config} | mu: {beta}')
+    for _beta, config in zip(best_betas, best_configs, strict=False):
 
         score = eval(config)
         scores.append(score)
-    
+
     return max(scores)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_experiment(opt_fn)

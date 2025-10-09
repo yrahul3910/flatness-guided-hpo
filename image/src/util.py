@@ -3,29 +3,34 @@ from functools import partial
 
 import numpy as np
 import scipy
+from keras import backend as K
+from keras.src.datasets.cifar10 import load_data as load_cifar10
+from keras.src.datasets.mnist import load_data as load_mnist
+from keras.src.layers import (
+    BatchNormalization,
+    Conv2D,
+    Dense,
+    Dropout,
+    Flatten,
+    MaxPooling2D,
+)
+from keras.src.models import Model, Sequential
+from keras.src.utils import to_categorical
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelBinarizer
-from keras.utils import to_categorical
-from keras import backend as K
-from keras.models import Sequential, Model
-from keras.layers import (
-    Dense,
-    Conv2D,
-    MaxPooling2D,
-    Flatten,
-    Dropout,
-    BatchNormalization,
-)
-from keras.datasets.mnist import load_data
 
-from src.data import Dataset
 from src.config import Config
+from src.data import Dataset
 
 BATCH_SIZE = 64
 
 
 def get_mnist():
-    return load_data()
+    return load_mnist()
+
+
+def get_cifar10():
+    return load_cifar10()
 
 
 def get_svhn():
@@ -43,10 +48,11 @@ def get_svhn():
 
 
 def get_data(dataset: str = "svhn"):
-    data_loaders = {"mnist": (get_mnist, (28, 28, 1)), "svhn": (get_svhn, (32, 32, 3))}
+    data_loaders = {"mnist": (get_mnist, (28, 28, 1)), "svhn": (get_svhn, (32, 32, 3)), "cifar10": (get_cifar10, (32, 32, 3))}
 
     if dataset not in data_loaders:
-        raise ValueError("Invalid dataset name.")
+        msg = "Invalid dataset name."
+        raise ValueError(msg)
 
     data_loader, (img_rows, img_cols, img_channels) = data_loaders[dataset]
     (x_train, y_train), (x_test, y_test) = data_loader()
@@ -76,12 +82,9 @@ def get_data(dataset: str = "svhn"):
 def run_experiment(
     data: Dataset, config: Config, n_class: int = 10, dataset: str = "mnist"
 ) -> float:
-    print("[run_experiment] Getting model")
     model = get_model(data, config, n_class, dataset)
 
-    print("[run_experiment] Got model")
     model.fit(data.x_train, data.y_train, epochs=100, verbose=1, batch_size=BATCH_SIZE)
-    print("[run_experiment] Fit model")
 
     y_pred = np.argmax(model.predict(data.x_test), axis=-1)
 
@@ -129,9 +132,7 @@ def get_convexity(
 
 
 def get_random_hyperparams(options: dict) -> Config:
-    """
-    Get hyperparameters from options.
-    """
+    """Get hyperparameters from options."""
     hyperparams = {}
     for key, value in options.items():
         if isinstance(value, list):
@@ -145,9 +146,7 @@ def get_random_hyperparams(options: dict) -> Config:
 
 
 def get_many_random_hyperparams(options: dict, n: int) -> list:
-    """
-    Get n hyperparameters from options.
-    """
+    """Get n hyperparameters from options."""
     hyperparams = []
     for _ in range(n):
         hyperparams.append(get_random_hyperparams(options))
@@ -159,8 +158,9 @@ def get_model(
 ) -> Sequential:
     if dataset == "mnist":
         return get_mnist_model(data, config, n_classes)
-    elif dataset == "svhn":
+    if dataset == "svhn":
         return get_svhn_model(data, config, n_classes)
+    return None
 
 
 def get_svhn_model(data: Dataset, config: Config, n_classes: int = 10) -> Sequential:
@@ -200,8 +200,7 @@ def get_svhn_model(data: Dataset, config: Config, n_classes: int = 10) -> Sequen
 
 
 def get_mnist_model(data: Dataset, config: Config, n_class: int = 10) -> Sequential:
-    """
-    Runs one experiment, given a Data instance.
+    """Runs one experiment, given a Data instance.
 
     :param {Data} data - The dataset to run on, NOT preprocessed.
     :param {dict} config - The config to use. Must be one in the format used in `process_configs`.
@@ -209,7 +208,7 @@ def get_mnist_model(data: Dataset, config: Config, n_class: int = 10) -> Sequent
     """
     learner = Sequential()
 
-    for i in range(config.n_blocks):
+    for _i in range(config.n_blocks):
         learner.add(
             Conv2D(
                 config.n_filters,

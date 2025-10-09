@@ -1,26 +1,25 @@
-from hebo.optimizers.hebo import HEBO
+from common import eval, hpo_space
 from hebo.design_space.design_space import DesignSpace
-
-from common import hpo_space, eval
-
+from hebo.optimizers.hebo import HEBO
 
 # Convert hpo_space to HEBO DesignSpace format
 config_space = []
 for key, val in hpo_space.items():
     config = {}
-    config['name'] = key
+    config["name"] = key
     if isinstance(val, list):
-        config['type'] = 'cat'
-        config['categories'] = val
+        config["type"] = "cat"
+        config["categories"] = val
     elif isinstance(val, tuple):
         if isinstance(val[0], int):
-            config['type'] = 'int'
+            config["type"] = "int"
         else:
-            config['type'] = 'num'
-        config['lb'] = val[0]
-        config['ub'] = val[1]
+            config["type"] = "num"
+        config["lb"] = val[0]
+        config["ub"] = val[1]
     else:
-        raise ValueError(f"Key {key} must be a list or tuple")
+        msg = f"Key {key} must be a list or tuple"
+        raise ValueError(msg)
 
     config_space.append(config)
 
@@ -35,6 +34,4 @@ for _ in range(5):
     hebo.observe(configs, [eval(config) for _, config in configs.iterrows()])
 
 scores.append(hebo.best_y)
-print("[main] Accuracy:", hebo.best_y)
 
-print('Scores:', scores)

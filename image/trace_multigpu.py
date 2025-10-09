@@ -1,19 +1,19 @@
-import torch
-import numpy as np
 import os
-from torchvision.transforms import v2
-from torchvision.datasets import MNIST, SVHN
-from torch.utils.data import DataLoader
-from backpack.hessianfree.hvp import hessian_vector_product
-from backpack import extend
-import lightning as L
 
+import lightning as L
+import numpy as np
+import torch
+from backpack import extend
+from backpack.hessianfree.hvp import hessian_vector_product
+from torch.utils.data import DataLoader
+from torchvision.datasets import MNIST, SVHN
+from torchvision.transforms import v2
 
 BATCH_SIZE = 64
 
 
 class ImageModel(L.LightningModule):
-    def __init__(self, dataset: str = "mnist"):
+    def __init__(self, dataset: str = "mnist") -> None:
         super().__init__()
         self.loss_fn = extend(torch.nn.CrossEntropyLoss())
 
@@ -70,12 +70,10 @@ class ImageModel(L.LightningModule):
 
         return x
 
-    def backward(self, loss):
+    def backward(self, loss) -> None:
         loss.backward(retain_graph=True)
-        cur_trace = hutchinson_trace_autodiff_blockwise(model, loss, 20, self.device)
-        cur_fghpo = stcvx(model, train_loader, self.device)
-        print(f"[{self.device}] Estimated trace: {cur_trace}")
-        print(f"[{self.device}] FGHPO estimate: {cur_fghpo}")
+        hutchinson_trace_autodiff_blockwise(model, loss, 20, self.device)
+        stcvx(model, train_loader, self.device)
 
     def training_step(self, batch, batch_idx):
         x, y = batch
@@ -106,7 +104,7 @@ def stcvx(model: ImageModel, dl: DataLoader, device):
 
 def rademacher(shape, dtype=torch.float32, device="cpu"):
     """Sample from Rademacher distribution."""
-    rand = ((torch.rand(shape) < 0.5)) * 2 - 1
+    rand = (torch.rand(shape) < 0.5) * 2 - 1
     return rand.to(dtype).to(device)
 
 

@@ -1,12 +1,12 @@
-from turbo import Turbo1
 import numpy as np
-from common import hpo_space, eval
+from common import eval, hpo_space
+from turbo import Turbo1
 
 
 def eval_wrapper(config):
     cfg = {}
     j = 0  # index that we access config
-    for i, (key, val) in enumerate(hpo_space.items()):
+    for _i, (key, val) in enumerate(hpo_space.items()):
         if isinstance(val, tuple):
             if isinstance(val[0], float):
                 cfg[key] = config[j]
@@ -24,7 +24,7 @@ def eval_wrapper(config):
 
 lb = []
 ub = []
-for key, val in hpo_space.items():
+for val in hpo_space.values():
     if isinstance(val, tuple):
         lb.append(val[0])
         ub.append(val[1])
@@ -38,4 +38,3 @@ turbo1 = Turbo1(
     verbose=True
 )
 turbo1.optimize()
-print('Score:', 100. - min(turbo1.fX))

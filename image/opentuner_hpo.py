@@ -1,18 +1,20 @@
-import numpy as np
 import opentuner
-from opentuner import ConfigurationManipulator
-from opentuner import IntegerParameter, EnumParameter, FloatParameter
-from opentuner import MeasurementInterface
-from opentuner import Result
-from common import hpo_space, eval
-
+from common import eval, hpo_space
+from opentuner import (
+    ConfigurationManipulator,
+    EnumParameter,
+    FloatParameter,
+    IntegerParameter,
+    MeasurementInterface,
+    Result,
+)
 
 scores = []
 total = 0
 class MyTuner(MeasurementInterface):
     def manipulator(self):
         manipulator = ConfigurationManipulator()
-        
+
         for key, val in hpo_space.items():
             if isinstance(val, list):
                 manipulator.add_parameter(
@@ -29,7 +31,7 @@ class MyTuner(MeasurementInterface):
                     )
 
         return manipulator
-    
+
     def run(self, desired_result, input, limit):
         global total, scores
         cfg = desired_result.configuration.data
@@ -38,7 +40,8 @@ class MyTuner(MeasurementInterface):
         total += 1
         if total == 31:
             total = 0
-            raise AssertionError("Limit exceeded.")
+            msg = "Limit exceeded."
+            raise AssertionError(msg)
 
         try:
             score = eval(cfg)
@@ -46,7 +49,6 @@ class MyTuner(MeasurementInterface):
             score = 0.
 
         scores.append(score)
-        print('[Accuracy]', score)
 
         return Result(time=100.-score)
 
@@ -59,13 +61,9 @@ if __name__ == "__main__":
         try:
             scores = []
             MyTuner.main(argparser.parse_args())
-            print('Scores:', scores)
-            print('Score:', max(scores))
 
             all_scores.append(max(scores))
         except AssertionError:
             continue
 
-    print('All scores:', all_scores)
-    print('Median:', np.median(all_scores))
 

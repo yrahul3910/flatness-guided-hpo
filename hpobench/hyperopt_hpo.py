@@ -1,9 +1,9 @@
-from hyperopt import hp, fmin, tpe
-from typing import Callable
+from collections.abc import Callable
 
+from hyperopt import fmin, hp, tpe
+from util.config import Config
 from util.data import Dataset
 from util.experiment import run_experiment
-from util.config import Config
 
 
 def opt_fn(data: Dataset, config_space: dict, eval: Callable[[dict], float]):
@@ -17,12 +17,13 @@ def opt_fn(data: Dataset, config_space: dict, eval: Callable[[dict], float]):
             else:
                 space[key] = hp.uniform(key, *val)
         else:
-            raise ValueError("Space must be a list or tuple")
-    
+            msg = "Space must be a list or tuple"
+            raise ValueError(msg)
+
     def eval_fn(config: dict):
         # Importantly, eval returns something to *maximize*
         return [-x for x in eval(Config(**config))]
-    
+
     def eval_fn_auc(config: dict):
         return eval_fn(config)[-1]
 
@@ -30,11 +31,9 @@ def opt_fn(data: Dataset, config_space: dict, eval: Callable[[dict], float]):
     for key, val in config_space.items():
         if isinstance(val, list):
             best[key] = val[best[key]]
-    score = eval_fn(best)
-
-    print(f'[main] Accuracy: {score}')
-    return score
+    return eval_fn(best)
 
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_experiment(opt_fn)

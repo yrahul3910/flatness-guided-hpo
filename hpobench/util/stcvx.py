@@ -1,11 +1,11 @@
+import gc
+
+import numpy as np
+from keras.models import Model
+
 from util.config import Config
 from util.data import Dataset
 from util.model import get_model
-
-from keras.models import Model
-import numpy as np
-
-import gc   
 
 
 def get_convexity(data: Dataset, config: Config) -> float:
@@ -20,7 +20,7 @@ def get_convexity(data: Dataset, config: Config) -> float:
         result = _model(xb)
         del _model
         return result
-    
+
     def Ka1_func(xb):
         _model = Model(inputs=[model.layers[0].input], outputs=[model.layers[-1].output])
         result = _model(xb)
