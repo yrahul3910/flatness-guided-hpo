@@ -4,6 +4,8 @@ from functools import partial
 import numpy as np
 import scipy
 from keras import backend as K
+from keras.callbacks import EarlyStopping
+from keras.layers import ReLU
 from keras.src.datasets.cifar10 import load_data as load_cifar10
 from keras.src.datasets.mnist import load_data as load_mnist
 from keras.src.layers import (
@@ -19,8 +21,8 @@ from keras.src.utils import to_categorical
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelBinarizer
 
-from src.config import Config
-from src.data import Dataset
+from image.src.config import Config
+from image.src.data import Dataset
 
 BATCH_SIZE = 64
 
@@ -48,7 +50,11 @@ def get_svhn():
 
 
 def get_data(dataset: str = "svhn"):
-    data_loaders = {"mnist": (get_mnist, (28, 28, 1)), "svhn": (get_svhn, (32, 32, 3)), "cifar10": (get_cifar10, (32, 32, 3))}
+    data_loaders = {
+        "mnist": (get_mnist, (28, 28, 1)),
+        "svhn": (get_svhn, (32, 32, 3)),
+        "cifar10": (get_cifar10, (32, 32, 3)),
+    }
 
     if dataset not in data_loaders:
         msg = "Invalid dataset name."
@@ -84,7 +90,15 @@ def run_experiment(
 ) -> float:
     model = get_model(data, config, n_class, dataset)
 
-    model.fit(data.x_train, data.y_train, epochs=100, verbose=1, batch_size=BATCH_SIZE)
+    model.fit(
+        data.x_train,
+        data.y_train,
+        validation_split=0.20,
+        epochs=100,
+        verbose=1,
+        batch_size=BATCH_SIZE,
+        callbacks=[EarlyStopping(monitor="val_loss", patience=10)],
+    )
 
     y_pred = np.argmax(model.predict(data.x_test), axis=-1)
 
@@ -104,7 +118,7 @@ def get_convexity(
         data.y_test = to_categorical(data.y_test, n_class)
 
     # Fit for one epoch before computing smoothness
-    (model.fit(data.x_train, data.y_train, batch_size=BATCH_SIZE, epochs=1),)
+    model.fit(data.x_train, data.y_train, batch_size=BATCH_SIZE, epochs=1)
 
     def Ka_func_p(layer, xb):
         tmp_model = Model(inputs=model.inputs, outputs=model.layers[layer].output)
@@ -160,6 +174,8 @@ def get_model(
         return get_mnist_model(data, config, n_classes)
     if dataset == "svhn":
         return get_svhn_model(data, config, n_classes)
+    if dataset == "cifar10":
+        return get_cifar10_model(data, config, n_classes)
     return None
 
 
@@ -222,6 +238,32 @@ def get_mnist_model(data: Dataset, config: Config, n_class: int = 10) -> Sequent
 
     learner.add(Flatten())
     learner.add(Dense(128, activation="relu", kernel_initializer="he_uniform"))
+    learner.add(Dense(n_class, activation="softmax"))
+
+    learner.compile(
+        loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"]
+    )
+
+
+def get_cifar10_model(data: Dataset, config: Config, n_class: int = 10) -> Sequential:
+    """Runs one experiment, given a Data insance."""
+    learner = Sequential()
+
+    for _i in range(config.n_blocks):
+        learner.add(
+            Conv2D(
+                config.n_filters,
+                config.kernel_size,
+                padding=config.padding,
+                kernel_initializer="he_uniform",
+            )
+        )
+        learner.add(BatchNormalization())
+        learner.add(ReLU())
+        learner.add(MaxPooling2D(pool_size=(2, 2)))
+
+    learner.add(Flatten())
+    learner.add(Dense(config.n_units, activation="relu"))
     learner.add(Dense(n_class, activation="softmax"))
 
     learner.compile(
