@@ -5,7 +5,7 @@ import numpy as np
 
 @dataclass
 class Dataset:
-    x_train: np.array
-    y_train: np.array
-    x_test: np.array
-    y_test: np.array
+    x_train: np.ndarray
+    y_train: np.ndarray
+    x_test: np.ndarray
+    y_test: np.ndarray

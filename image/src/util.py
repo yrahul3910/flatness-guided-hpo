@@ -21,7 +21,7 @@ from keras.src.utils import to_categorical
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelBinarizer
 
-from image.src.config import Config
+from image.src.config import Config, HpoOption, HpoSpace
 from image.src.data import Dataset
 
 BATCH_SIZE = 64
@@ -113,14 +113,16 @@ def get_convexity(
 ) -> float:
     model = get_model(data, config, n_class, dataset)
 
-    if n_class > 2 and len(data.y_train.shape) == 1:
-        data.y_train = to_categorical(data.y_train, n_class)
-        data.y_test = to_categorical(data.y_test, n_class)
+    if n_class > 2 and len(data.y_train.shape) == 1:  # noqa: PLR2004
+        data.y_train = np.array(to_categorical(data.y_train, n_class))
+        data.y_test = np.array(to_categorical(data.y_test, n_class))
 
     # Fit for one epoch before computing smoothness
     model.fit(data.x_train, data.y_train, batch_size=BATCH_SIZE, epochs=1)
 
-    def Ka_func_p(layer, xb):
+    def Ka_func_p(
+        layer, xb  # pyright: ignore[reportMissingParameterType] # noqa: ANN001
+    ):
         tmp_model = Model(inputs=model.inputs, outputs=model.layers[layer].output)
         return tmp_model(xb)
 
@@ -145,50 +147,48 @@ def get_convexity(
     return best_mu
 
 
-def get_random_hyperparams(options: dict) -> Config:
+def get_random_hyperparams(options: HpoSpace) -> Config:
     """Get hyperparameters from options."""
-    hyperparams = {}
+    hyperparams: dict[str, HpoOption] = {}
     for key, value in options.items():
         if isinstance(value, list):
             hyperparams[key] = random.choice(value)
-        elif isinstance(value, tuple):
-            if isinstance(value[0], int):
-                hyperparams[key] = random.randint(value[0], value[1])
-            else:
-                hyperparams[key] = random.uniform(value[0], value[1])
+        # tuple
+        elif isinstance(value[0], int):
+            hyperparams[key] = random.randint(value[0], value[1])
+        else:
+            hyperparams[key] = random.uniform(value[0], value[1])
+
     return Config(**hyperparams)
 
 
-def get_many_random_hyperparams(options: dict, n: int) -> list:
+def get_many_random_hyperparams(options: HpoSpace, n: int) -> list[Config]:
     """Get n hyperparameters from options."""
-    hyperparams = []
-    for _ in range(n):
-        hyperparams.append(get_random_hyperparams(options))
-    return hyperparams
+    return [get_random_hyperparams(options) for _ in range(n)]
 
 
 def get_model(
     data: Dataset, config: Config, n_classes: int = 10, dataset: str = "mnist"
-) -> Sequential:
+) -> Sequential | None:
     if dataset == "mnist":
-        return get_mnist_model(data, config, n_classes)
+        return get_mnist_model(config, n_classes)
     if dataset == "svhn":
-        return get_svhn_model(data, config, n_classes)
+        return get_svhn_model(config, n_classes)
     if dataset == "cifar10":
-        return get_cifar10_model(data, config, n_classes)
+        return get_cifar10_model(config, n_classes)
     return None
 
 
-def get_svhn_model(data: Dataset, config: Config, n_classes: int = 10) -> Sequential:
+def get_svhn_model(config: Config, n_classes: int = 10) -> Sequential:
     learner = Sequential()
 
-    for i in range(config.n_blocks):
-        n_block_filters = config.n_filters * (2**i)
+    for i in range(config["n_blocks"]):
+        n_block_filters = config["n_filters"] * (2**i)
         learner.add(
             Conv2D(
                 n_block_filters,
-                (config.kernel_size, config.kernel_size),
-                padding=config.padding,
+                (config["kernel_size"], config["kernel_size"]),
+                padding=config["padding"],
                 activation="relu",
             )
         )
@@ -196,8 +196,8 @@ def get_svhn_model(data: Dataset, config: Config, n_classes: int = 10) -> Sequen
         learner.add(
             Conv2D(
                 n_block_filters,
-                (config.kernel_size, config.kernel_size),
-                padding=config.padding,
+                (config["kernel_size"], config["kernel_size"]),
+                padding=config["padding"],
                 activation="relu",
             )
         )
@@ -205,7 +205,7 @@ def get_svhn_model(data: Dataset, config: Config, n_classes: int = 10) -> Sequen
         learner.add(Dropout(config.dropout_rate))
 
     learner.add(Flatten())
-    learner.add(Dense(config.n_units, activation="relu"))
+    learner.add(Dense(config["n_units"], activation="relu"))
     learner.add(Dropout(config.final_dropout_rate))
     learner.add(Dense(n_classes, activation="softmax"))
     learner.compile(
@@ -215,8 +215,8 @@ def get_svhn_model(data: Dataset, config: Config, n_classes: int = 10) -> Sequen
     return learner
 
 
-def get_mnist_model(data: Dataset, config: Config, n_class: int = 10) -> Sequential:
-    """Runs one experiment, given a Data instance.
+def get_mnist_model(config: Config, n_class: int = 10) -> Sequential:
+    """Run one experiment, given a Data instance.
 
     :param {Data} data - The dataset to run on, NOT preprocessed.
     :param {dict} config - The config to use. Must be one in the format used in `process_configs`.
@@ -224,12 +224,12 @@ def get_mnist_model(data: Dataset, config: Config, n_class: int = 10) -> Sequent
     """
     learner = Sequential()
 
-    for _i in range(config.n_blocks):
+    for _i in range(config["n_blocks"]):
         learner.add(
             Conv2D(
-                config.n_filters,
-                (config.kernel_size, config.kernel_size),
-                padding=config.padding,
+                config["n_filters"],
+                (config["kernel_size"], config["kernel_size"]),
+                padding=config["padding"],
                 kernel_initializer="he_uniform",
                 activation="relu",
             )
@@ -245,17 +245,18 @@ def get_mnist_model(data: Dataset, config: Config, n_class: int = 10) -> Sequent
     )
 
 
-def get_cifar10_model(data: Dataset, config: Config, n_class: int = 10) -> Sequential:
-    """Runs one experiment, given a Data insance."""
+def get_cifar10_model(config: Config, n_class: int = 10) -> Sequential:
+    """Run one experiment given a Data insance."""
     learner = Sequential()
 
-    for _i in range(config.n_blocks):
+    for i in range(config["n_blocks"]):
+        n_block_filters = config["n_filters"] * (2**i)
         learner.add(
             Conv2D(
-                config.n_filters,
-                config.kernel_size,
-                padding=config.padding,
-                kernel_initializer="he_uniform",
+                n_block_filters,
+                (config["kernel_size"], config["kernel_size"]),
+                padding=config["padding"],
+                activation="relu",
             )
         )
         learner.add(BatchNormalization())
@@ -263,7 +264,7 @@ def get_cifar10_model(data: Dataset, config: Config, n_class: int = 10) -> Seque
         learner.add(MaxPooling2D(pool_size=(2, 2)))
 
     learner.add(Flatten())
-    learner.add(Dense(config.n_units, activation="relu"))
+    learner.add(Dense(config["n_units"], activation="relu"))
     learner.add(Dense(n_class, activation="softmax"))
 
     learner.compile(

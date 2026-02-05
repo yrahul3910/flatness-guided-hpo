@@ -1,4 +1,4 @@
-from common import eval, hpo_space
+from common import evaluate, hpo_space
 from hebo.design_space.design_space import DesignSpace
 from hebo.optimizers.hebo import HEBO
 
@@ -31,7 +31,6 @@ hebo = HEBO(config_space)
 scores = []
 for _ in range(5):
     configs = hebo.suggest(n_suggestions=6)
-    hebo.observe(configs, [eval(config) for _, config in configs.iterrows()])
+    hebo.observe(configs, [evaluate(config) for _, config in configs.iterrows()])
 
 scores.append(hebo.best_y)
-

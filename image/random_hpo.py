@@ -1,5 +1,4 @@
-
-from common import eval, hpo_space
+from common import evaluate, hpo_space
 from src.util import get_many_random_hyperparams
 
 if __name__ == "__main__":
@@ -9,7 +8,6 @@ if __name__ == "__main__":
     scores = []
     for config in configs:
         try:
-            scores.append(eval(config))
+            scores.append(evaluate(config))
         except:
             continue
-

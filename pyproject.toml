@@ -3,7 +3,7 @@ name = "flatness-guided-hpo"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 dependencies = [
     "backpack-for-pytorch>=1.7.1",
     "bohb-hpo>=0.5.2",
@@ -15,6 +15,7 @@ dependencies = [
     "opentuner>=0.8.8",
     "ruff>=0.14.0",
     "scikit-learn>=1.6.1",
+    "scipy-stubs>=1.17.0.2",
     "tensorflow>=2.20.0",
     "torch>=2.6.0",
     "torchvision>=0.21.0",
@@ -26,7 +27,7 @@ override-dependencies = [
 ]
 
 [tool.ruff]
-target-version = "py310"
+target-version = "py313"
 line-length = 120
 exclude = [
     ".git",
@@ -39,11 +40,23 @@ exclude = [
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
+    "ANN002",
+    "ANN003",
+    "D101",
+    "D103",
     "D203",
     "D213",
     "N806",
     "PLR0913",
+    "S311",
     "TRY003",
     "COM812",
     "PLE1205"
 ]
+
+[tool.basedpyright]
+typeCheckingMode = "recommended"
+reportAny = false
+reportMissingTypeStubs = false
+reportUnknownMemberType = false
+reportUnknownParameterType = false

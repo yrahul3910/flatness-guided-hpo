@@ -1,6 +1,7 @@
 import numpy as np
-from common import eval, hpo_space
 from turbo import Turbo1
+
+from .common import evaluate, hpo_space
 
 
 def eval_wrapper(config):
@@ -17,9 +18,9 @@ def eval_wrapper(config):
             cfg[key] = np.random.choice(val)
 
     try:
-        return 100. - eval(cfg)
+        return 100.0 - evaluate(cfg)
     except:
-        return 100.
+        return 100.0
 
 
 lb = []
@@ -33,8 +34,8 @@ turbo1 = Turbo1(
     f=eval_wrapper,
     lb=np.array(lb),
     ub=np.array(ub),
-    n_init=2*len(lb)+1,
+    n_init=2 * len(lb) + 1,
     max_evals=30,
-    verbose=True
+    verbose=True,
 )
 turbo1.optimize()
