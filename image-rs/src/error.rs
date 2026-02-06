@@ -9,7 +9,7 @@ fn first_line(msg: &str) -> &str {
 
 #[derive(Debug)]
 pub enum Error {
-    Tch(tch::TchError),
+    Candle(candle_core::Error),
     Io(std::io::Error),
     Json(serde_json::Error),
     Msg(String),
@@ -18,7 +18,7 @@ pub enum Error {
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Error::Tch(e) => write!(f, "{}", first_line(&e.to_string())),
+            Error::Candle(e) => write!(f, "{}", first_line(&e.to_string())),
             Error::Io(e) => write!(f, "{}", first_line(&e.to_string())),
             Error::Json(e) => write!(f, "{}", first_line(&e.to_string())),
             Error::Msg(msg) => write!(f, "{}", first_line(msg)),
@@ -28,9 +28,9 @@ impl fmt::Display for Error {
 
 impl std::error::Error for Error {}
 
-impl From<tch::TchError> for Error {
-    fn from(e: tch::TchError) -> Self {
-        Error::Tch(e)
+impl From<candle_core::Error> for Error {
+    fn from(e: candle_core::Error) -> Self {
+        Error::Candle(e)
     }
 }
 

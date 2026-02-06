@@ -1,12 +1,14 @@
 use std::panic;
-use tch::nn::{self, OptimizerConfig};
+
+use candle_core::Device;
+use candle_nn::{self as nn, VarBuilder, VarMap};
 
 use crate::config::Config;
 use crate::data::Dataset;
 use crate::error::{Error, Result};
 use crate::model::CifarModel;
 
-const BATCH_SIZE: i64 = 64;
+const BATCH_SIZE: usize = 64;
 
 /// Compute the convexity/smoothness metric for a model configuration
 ///
@@ -17,14 +19,17 @@ const BATCH_SIZE: i64 = 64;
 /// - W is the weight matrix of the final classification layer
 ///
 /// Lower values indicate "flatter" loss landscape / smoother networks
-pub fn get_convexity(dataset: &Dataset, config: &Config, device: tch::Device) -> Result<f64> {
+pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Result<f64> {
     // Create model - catch panics from invalid configurations
-    let vs = nn::VarStore::new(device);
+    let varmap = VarMap::new();
+    let vb = VarBuilder::from_varmap(&varmap, candle_core::DType::F32, device);
     let model = panic::catch_unwind(panic::AssertUnwindSafe(|| {
-        CifarModel::new(&vs.root(), config, dataset.n_classes)
+        CifarModel::new(vb, config, dataset.n_classes as usize)
     }))
-    .map_err(|_| Error::Msg("Failed to create model - invalid configuration".into()))?;
-    let mut optimizer = nn::Adam::default().build(&vs, 1e-3)?;
+    .map_err(|_| Error::Msg("Failed to create model - invalid configuration".into()))?
+    .map_err(|e| Error::Candle(e))?;
+
+    let mut optimizer = nn::AdamW::new_lr(varmap.all_vars(), 1e-3)?;
 
     // Train for one epoch to get a trained model
     panic::catch_unwind(panic::AssertUnwindSafe(|| {
@@ -36,60 +41,58 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: tch::Device) ->
             BATCH_SIZE,
         )
     }))
-    .map_err(|_| Error::Msg("Panic during training".into()))??;
+    .map_err(|_| Error::Msg("Panic during training".into()))?
+    .map_err(|e| Error::from(e))?;
 
     // Get the weight matrix of the final layer
     let final_weights = model.get_final_layer_weights();
-    let weight_norm = f64::try_from(final_weights.norm())?;
+    let weight_norm = final_weights.norm()?.to_scalar::<f32>()? as f64;
 
     // Compute convexity metric across all batches
     let mut best_mu = f64::NEG_INFINITY;
-    let n_samples = dataset.x_train.size()[0];
+    let n_samples = dataset.x_train.dims()[0];
 
-    tch::no_grad(|| -> Result<()> {
-        for i in (0..n_samples).step_by(BATCH_SIZE as usize) {
-            let end = (i + BATCH_SIZE).min(n_samples);
-            let x_batch = dataset.x_train.narrow(0, i, end - i);
+    let mut i = 0;
+    while i < n_samples {
+        let end = (i + BATCH_SIZE).min(n_samples);
+        let len = end - i;
+        let x_batch = dataset.x_train.narrow(0, i, len)?;
 
-            // Get intermediate activations
-            // Returns: (final_output, penultimate_activation, last_layer_activation)
-            let (_final_out, penultimate, last_layer) = model.forward_with_activations(&x_batch);
+        // Get intermediate activations
+        let (_final_out, penultimate, last_layer) = model.forward_with_activations(&x_batch)?;
 
-            // Compute norms
-            // Ka = last hidden layer activation (fc1 output with ReLU)
-            let ka_norm = f64::try_from(last_layer.norm())?;
+        // Compute norms
+        let ka_norm = last_layer.norm()?.to_scalar::<f32>()? as f64;
+        let ka1_norm = penultimate.norm()?.to_scalar::<f32>()? as f64;
 
-            // Ka-1 = second-to-last layer activation (flattened conv output)
-            let ka1_norm = f64::try_from(penultimate.norm())?;
+        // Compute mu = ||Ka|| * ||Ka-1|| / ||W||
+        let mu = (ka_norm * ka1_norm) / weight_norm;
 
-            // Compute mu = ||Ka|| * ||Ka-1|| / ||W||
-            let mu = (ka_norm * ka1_norm) / weight_norm;
-
-            // Track the maximum mu value
-            if mu > best_mu && !mu.is_infinite() && !mu.is_nan() {
-                best_mu = mu;
-            }
+        // Track the maximum mu value
+        if mu > best_mu && !mu.is_infinite() && !mu.is_nan() {
+            best_mu = mu;
         }
 
-        Ok(())
-    })?;
+        i = end;
+    }
 
     // Return the maximum mu value (higher mu = less convex/smooth)
     Ok(best_mu)
 }
 
-pub fn run_experiment(dataset: &Dataset, config: &Config, device: tch::Device) -> Result<f64> {
+pub fn run_experiment(dataset: &Dataset, config: &Config, device: &Device) -> Result<f64> {
     // Create model - catch panics from invalid configurations
-    let vs = nn::VarStore::new(device);
+    let varmap = VarMap::new();
+    let vb = VarBuilder::from_varmap(&varmap, candle_core::DType::F32, device);
     let model = panic::catch_unwind(panic::AssertUnwindSafe(|| {
-        CifarModel::new(&vs.root(), config, dataset.n_classes)
+        CifarModel::new(vb, config, dataset.n_classes as usize)
     }))
-    .map_err(|_| Error::Msg("Failed to create model - invalid configuration".into()))?;
-    let mut optimizer = nn::Adam::default().build(&vs, 1e-3)?;
+    .map_err(|_| Error::Msg("Failed to create model - invalid configuration".into()))?
+    .map_err(|e| Error::Candle(e))?;
+
+    let mut optimizer = nn::AdamW::new_lr(varmap.all_vars(), 1e-3)?;
 
     // Train with early stopping
-    // Use raw labels (class indices) not one-hot encoded
-    // Catch panics from training
     panic::catch_unwind(panic::AssertUnwindSafe(|| {
         crate::model::train_with_early_stopping(
             &model,
@@ -101,7 +104,8 @@ pub fn run_experiment(dataset: &Dataset, config: &Config, device: tch::Device) -
             10,  // patience
         )
     }))
-    .map_err(|_| Error::Msg("Panic during training".into()))??;
+    .map_err(|_| Error::Msg("Panic during training".into()))?
+    .map_err(|e| Error::from(e))?;
 
     // Evaluate
     let accuracy =

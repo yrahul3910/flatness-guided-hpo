@@ -4,6 +4,7 @@ mod error;
 mod model;
 mod util;
 
+use candle_core::Device;
 use serde_json::json;
 
 use config::HpoSpace;
@@ -15,13 +16,18 @@ const KEEP_CONFIGS: usize = 5;
 const NUM_CONFIGS: usize = 30;
 
 fn main() -> Result<()> {
-    let device = tch::Device::cuda_if_available();
+    let device = if candle_core::utils::metal_is_available() {
+        Device::new_metal(0)?
+    } else {
+        println!("Metal not available, falling back to CPU");
+        Device::Cpu
+    };
     println!("Using device: {:?}", device);
 
-    let dataset = load_cifar10()?;
+    let dataset = load_cifar10(&device)?;
     println!(
         "Dataset loaded: {} training samples",
-        dataset.x_train.size()[0]
+        dataset.x_train.dims()[0]
     );
 
     let hpo_space = HpoSpace::default();
@@ -38,7 +44,7 @@ fn main() -> Result<()> {
             config.n_filters, config.kernel_size, config.n_blocks
         );
 
-        match get_convexity(&dataset, &config, device) {
+        match get_convexity(&dataset, &config, &device) {
             Ok(convexity) => {
                 println!("  Convexity: {:.6}", convexity);
 
@@ -85,7 +91,7 @@ fn main() -> Result<()> {
         println!("Training config with beta = {:.6}", beta);
         println!("Config: {:?}", config);
 
-        match run_experiment(&dataset, config, device) {
+        match run_experiment(&dataset, config, &device) {
             Ok(accuracy) => {
                 let result = json!({
                     "beta": beta,
