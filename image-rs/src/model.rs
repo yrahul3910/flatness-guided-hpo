@@ -125,16 +125,6 @@ impl CifarModel {
     }
 }
 
-pub fn train_one_epoch(
-    model: &CifarModel,
-    optimizer: &mut nn::AdamW,
-    x_train: &Tensor,
-    y_train: &Tensor,
-    batch_size: usize,
-) -> Result<f64> {
-    train_one_epoch_with_pb(model, optimizer, x_train, y_train, batch_size, None)
-}
-
 pub fn train_one_epoch_with_pb(
     model: &CifarModel,
     optimizer: &mut nn::AdamW,

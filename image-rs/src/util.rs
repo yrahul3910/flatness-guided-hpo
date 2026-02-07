@@ -2,6 +2,7 @@ use std::panic;
 
 use candle_core::Device;
 use candle_nn::{self as nn, VarBuilder, VarMap};
+use indicatif::{ProgressBar, ProgressStyle};
 
 use crate::config::Config;
 use crate::data::Dataset;
@@ -33,12 +34,21 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Res
 
     // Train for one epoch to get a trained model
     panic::catch_unwind(panic::AssertUnwindSafe(|| {
-        crate::model::train_one_epoch(
+        let n_train_batches = &dataset.x_train.shape().dim(0)?.div_ceil(BATCH_SIZE);
+        let pb = ProgressBar::new(*n_train_batches as u64);
+        pb.set_style(
+            ProgressStyle::with_template(&format!("|{{bar:30}}|",))
+                .unwrap()
+                .progress_chars("=> "),
+        );
+
+        crate::model::train_one_epoch_with_pb(
             &model,
             &mut optimizer,
             &dataset.x_train,
             &dataset.y_train,
             BATCH_SIZE,
+            Some(&pb),
         )
     }))
     .map_err(|_| Error::Msg("Panic during training".into()))?

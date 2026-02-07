@@ -39,10 +39,7 @@ fn main() -> Result<()> {
     while i < NUM_CONFIGS {
         let config = hpo_space.sample();
         println!("\nConfig {}/{}", i + 1, NUM_CONFIGS);
-        println!(
-            "  n_filters: {}, kernel_size: {}, n_blocks: {}",
-            config.n_filters, config.kernel_size, config.n_blocks
-        );
+        println!("{:#?}", &config);
 
         match get_convexity(&dataset, &config, &device) {
             Ok(convexity) => {
@@ -73,9 +70,8 @@ fn main() -> Result<()> {
 
                     best_betas = pairs.iter().map(|(beta, _)| *beta).collect();
                     best_configs = pairs.iter().map(|(_, cfg)| cfg.clone()).collect();
-
-                    i += 1;
                 }
+                i += 1;
             }
             Err(_) => {
                 eprintln!("  Skipping failed config.");
