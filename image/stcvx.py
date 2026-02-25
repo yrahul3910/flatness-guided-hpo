@@ -1,16 +1,14 @@
-import gc
 import json
 import os
 import random
 import traceback
-from copy import deepcopy
 
 from image.src.config import Config, hpo_space
 from image.src.data import Dataset
 from image.src.util import (
     get_convexity,
     get_data,
-    get_many_random_hyperparams,
+    get_random_hyperparams,
     run_experiment,
 )
 
@@ -56,6 +54,7 @@ while valid_count < num_configs:
         raise
     except Exception:  # noqa: BLE001
         # If model creation failed, just skip
+        traceback.print_exc()
         continue
 
 for beta, config in zip(best_betas, best_configs, strict=False):

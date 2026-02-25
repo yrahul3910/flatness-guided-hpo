@@ -33,10 +33,9 @@ hpo_space: HpoSpace = {
     "kernel_size": (2, 6),
     "padding": ["valid", "same"],
     "n_blocks": (2, 5),
-    # SVHN-only
-    "dropout_rate": (0.2, 0.5),
-    "final_dropout_rate": (0.2, 0.5),
+    "dropout_rate": (0.2, 0.6),
+    "final_dropout_rate": (0.3, 0.7),
     "n_units": [32, 64, 128, 256, 512],
     "learning_rate": (1e-4, 1e-2),
-    "weight_decay": (1e-6, 1e-3),
+    "weight_decay": (1e-5, 1e-1),
 }

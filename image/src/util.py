@@ -15,6 +15,9 @@ from keras.src.layers import (
     Dropout,
     Flatten,
     MaxPooling2D,
+    RandomFlip,
+    RandomRotation,
+    RandomTranslation,
 )
 from keras.src.models import Model, Sequential
 from keras.src.optimizers import Adam
@@ -224,6 +227,9 @@ def get_model(
 
 def get_svhn_model(config: Config, n_classes: int = 10) -> Sequential:
     learner = Sequential()
+    learner.add(RandomFlip("horizontal"))
+    learner.add(RandomTranslation(0.1, 0.1))
+    learner.add(RandomRotation(0.05))
 
     for i in range(config["n_blocks"]):
         n_block_filters = config["n_filters"] * (2**i)
@@ -300,6 +306,9 @@ def get_mnist_model(config: Config, n_class: int = 10) -> Sequential:
 def get_cifar10_model(config: Config, n_class: int = 10) -> Sequential:
     """Run one experiment given a Data insance."""
     learner = Sequential()
+    learner.add(RandomFlip("horizontal"))
+    learner.add(RandomTranslation(0.1, 0.1))
+    learner.add(RandomRotation(0.05))
 
     for i in range(config["n_blocks"]):
         n_block_filters = config["n_filters"] * (2**i)
