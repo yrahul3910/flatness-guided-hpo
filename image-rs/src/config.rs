@@ -10,6 +10,8 @@ pub struct Config {
     pub dropout_rate: f64,
     pub final_dropout_rate: f64,
     pub n_units: i64,
+    pub learning_rate: f64,
+    pub weight_decay: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -22,13 +24,15 @@ pub enum Padding {
 impl Default for Config {
     fn default() -> Self {
         Self {
-            n_filters: 3,
+            n_filters: 32,
             kernel_size: 3,
-            padding: Padding::Valid,
+            padding: Padding::Same,
             n_blocks: 2,
             dropout_rate: 0.2,
             final_dropout_rate: 0.4,
             n_units: 128,
+            learning_rate: 1e-3,
+            weight_decay: 1e-4,
         }
     }
 }
@@ -41,6 +45,8 @@ pub struct HpoSpace {
     pub dropout_rate: (f64, f64),
     pub final_dropout_rate: (f64, f64),
     pub n_units: Vec<i64>,
+    pub learning_rate: (f64, f64),
+    pub weight_decay: (f64, f64),
 }
 
 impl Default for HpoSpace {
@@ -49,10 +55,12 @@ impl Default for HpoSpace {
             n_filters: (32, 128),
             kernel_size: (2, 6),
             padding: vec![Padding::Valid, Padding::Same],
-            n_blocks: (2, 6),
-            dropout_rate: (0.2, 0.5),
-            final_dropout_rate: (0.2, 0.5),
+            n_blocks: (2, 5),
+            dropout_rate: (0.2, 0.6),
+            final_dropout_rate: (0.3, 0.7),
             n_units: vec![32, 64, 128, 256, 512],
+            learning_rate: (1e-4, 1e-2),
+            weight_decay: (1e-5, 1e-1),
         }
     }
 }
@@ -69,6 +77,8 @@ impl HpoSpace {
             dropout_rate: rng.gen_range(self.dropout_rate.0..self.dropout_rate.1),
             final_dropout_rate: rng.gen_range(self.final_dropout_rate.0..self.final_dropout_rate.1),
             n_units: self.n_units[rng.gen_range(0..self.n_units.len())],
+            learning_rate: rng.gen_range(self.learning_rate.0..self.learning_rate.1),
+            weight_decay: rng.gen_range(self.weight_decay.0..self.weight_decay.1),
         }
     }
 }

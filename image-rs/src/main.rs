@@ -18,8 +18,10 @@ const NUM_CONFIGS: usize = 30;
 fn main() -> Result<()> {
     let device = if candle_core::utils::metal_is_available() {
         Device::new_metal(0)?
+    } else if candle_core::utils::cuda_is_available() {
+        Device::new_cuda(0)?
     } else {
-        println!("Metal not available, falling back to CPU");
+        println!("Metal/CUDA not available, falling back to CPU");
         Device::Cpu
     };
     println!("Using device: {:?}", device);

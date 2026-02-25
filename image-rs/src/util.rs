@@ -1,7 +1,7 @@
 use std::panic;
 
 use candle_core::Device;
-use candle_nn::{self as nn, VarBuilder, VarMap};
+use candle_nn::{self as nn, Optimizer, VarBuilder, VarMap};
 use indicatif::{ProgressBar, ProgressStyle};
 
 use crate::config::Config;
@@ -21,6 +21,30 @@ const BATCH_SIZE: usize = 64;
 ///
 /// Lower values indicate "flatter" loss landscape / smoother networks
 pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Result<f64> {
+    // Check if architecture is valid for image size (32x32)
+    let mut current_size = 32i64;
+    let k = config.kernel_size;
+    for _ in 0..config.n_blocks {
+        match config.padding {
+            crate::config::Padding::Valid => {
+                // Two convs in each block
+                current_size -= k - 1;
+                current_size -= k - 1;
+            }
+            crate::config::Padding::Same => {
+                // Same padding keeps size
+            }
+        }
+        if current_size <= 0 { break; }
+        // Max pool
+        current_size /= 2;
+        if current_size <= 0 { break; }
+    }
+
+    if current_size <= 0 {
+        return Err(Error::Msg("Architecture results in zero-sized feature map".into()));
+    }
+
     // Create model - catch panics from invalid configurations
     let varmap = VarMap::new();
     let vb = VarBuilder::from_varmap(&varmap, candle_core::DType::F32, device);
@@ -30,12 +54,22 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Res
     .map_err(|_| Error::Msg("Failed to create model - invalid configuration".into()))?
     .map_err(|e| Error::Candle(e))?;
 
-    let mut optimizer = nn::AdamW::new_lr(varmap.all_vars(), 1e-3)?;
+    let params = nn::ParamsAdamW {
+        lr: config.learning_rate,
+        weight_decay: config.weight_decay,
+        ..Default::default()
+    };
+    let mut optimizer = nn::AdamW::new(varmap.all_vars(), params)?;
+
+    // Use a subset of the data for faster evaluation
+    let subset_size = 5000.min(dataset.x_train.dims()[0]);
+    let x_train_subset = dataset.x_train.narrow(0, 0, subset_size)?;
+    let y_train_subset = dataset.y_train.narrow(0, 0, subset_size)?;
 
     // Train for one epoch to get a trained model
     panic::catch_unwind(panic::AssertUnwindSafe(|| {
-        let n_train_batches = &dataset.x_train.shape().dim(0)?.div_ceil(BATCH_SIZE);
-        let pb = ProgressBar::new(*n_train_batches as u64);
+        let n_train_batches = subset_size.div_ceil(BATCH_SIZE);
+        let pb = ProgressBar::new(n_train_batches as u64);
         pb.set_style(
             ProgressStyle::with_template(&format!("|{{bar:30}}|",))
                 .unwrap()
@@ -45,8 +79,8 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Res
         crate::model::train_one_epoch_with_pb(
             &model,
             &mut optimizer,
-            &dataset.x_train,
-            &dataset.y_train,
+            &x_train_subset,
+            &y_train_subset,
             BATCH_SIZE,
             Some(&pb),
         )
@@ -58,15 +92,15 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Res
     let final_weights = model.get_final_layer_weights();
     let weight_norm = final_weights.norm()?.to_scalar::<f32>()? as f64;
 
-    // Compute convexity metric across all batches
-    let mut best_mu = f64::NEG_INFINITY;
-    let n_samples = dataset.x_train.dims()[0];
+    // Compute convexity metric across subset
+    let mut best_mu = 0.0f64;
+    let mut found_valid = false;
 
     let mut i = 0;
-    while i < n_samples {
-        let end = (i + BATCH_SIZE).min(n_samples);
+    while i < subset_size {
+        let end = (i + BATCH_SIZE).min(subset_size);
         let len = end - i;
-        let x_batch = dataset.x_train.narrow(0, i, len)?;
+        let x_batch = x_train_subset.narrow(0, i, len)?;
 
         // Get intermediate activations
         let (_final_out, penultimate, last_layer) = model.forward_with_activations(&x_batch)?;
@@ -76,14 +110,21 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Res
         let ka1_norm = penultimate.norm()?.to_scalar::<f32>()? as f64;
 
         // Compute mu = ||Ka|| * ||Ka-1|| / ||W||
-        let mu = (ka_norm * ka1_norm) / weight_norm;
+        let mu = (ka_norm * ka1_norm) / (weight_norm + 1e-8);
 
         // Track the maximum mu value
-        if mu > best_mu && !mu.is_infinite() && !mu.is_nan() {
-            best_mu = mu;
+        if !mu.is_infinite() && !mu.is_nan() && mu > 0.0 {
+            if mu > best_mu || !found_valid {
+                best_mu = mu;
+                found_valid = true;
+            }
         }
 
         i = end;
+    }
+
+    if !found_valid {
+        return Err(Error::Msg("No valid convexity metric found (possibly dead neurons)".into()));
     }
 
     // Return the maximum mu value (higher mu = less convex/smooth)
@@ -100,7 +141,12 @@ pub fn run_experiment(dataset: &Dataset, config: &Config, device: &Device) -> Re
     .map_err(|_| Error::Msg("Failed to create model - invalid configuration".into()))?
     .map_err(|e| Error::Candle(e))?;
 
-    let mut optimizer = nn::AdamW::new_lr(varmap.all_vars(), 1e-3)?;
+    let params = nn::ParamsAdamW {
+        lr: config.learning_rate,
+        weight_decay: config.weight_decay,
+        ..Default::default()
+    };
+    let mut optimizer = nn::AdamW::new(varmap.all_vars(), params)?;
 
     // Train with early stopping
     panic::catch_unwind(panic::AssertUnwindSafe(|| {
