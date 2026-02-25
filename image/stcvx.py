@@ -27,14 +27,17 @@ best_configs: list[Config] = []
 keep_configs = 5
 num_configs = 50
 
-configs: list[Config] = get_many_random_hyperparams(hpo_space, num_configs)
-
-for _i, config in enumerate(configs):
+valid_count = 0
+while valid_count < num_configs:
     try:
+        config = get_random_hyperparams(hpo_space)
         convexity = get_convexity(data, config, dataset=DATASET)
 
         if convexity == float("inf"):
             continue
+
+        valid_count += 1
+        print(f"Config {valid_count}/{num_configs}: mu={convexity:.4f}")
 
         if len(best_betas) < keep_configs or convexity < max(best_betas):
             best_betas.append(convexity)
@@ -52,7 +55,8 @@ for _i, config in enumerate(configs):
     except KeyboardInterrupt:
         raise
     except Exception:  # noqa: BLE001
-        traceback.print_exc()
+        # If model creation failed, just skip
+        continue
 
 for beta, config in zip(best_betas, best_configs, strict=False):
     acc = float(run_experiment(data, config, N_CLASSES, DATASET))

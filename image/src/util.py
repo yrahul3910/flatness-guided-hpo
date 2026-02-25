@@ -184,10 +184,34 @@ def get_model(
     data: Dataset, config: Config, n_classes: int = 10, dataset: str = "mnist"
 ) -> Sequential | None:
     # Check if architecture is valid for image size
-    img_size = data.x_train.shape[1]
-    # Each pooling layer divides size by 2.
-    if img_size / (2 ** config["n_blocks"]) < 1:
-        return None
+    # Precise simulation of spatial resolution
+    curr_h = data.x_train.shape[1]
+    curr_w = data.x_train.shape[2]
+    
+    k = config["kernel_size"]
+    pad = config["padding"]
+    
+    for _ in range(config["n_blocks"]):
+        if pad == "valid":
+            # For CIFAR/SVHN, we have TWO convs per block (in svhn_model) 
+            # or ONE per block (in cifar10/mnist). 
+            # To be safe, let's assume the most aggressive reduction.
+            if dataset == "svhn":
+                curr_h -= (k - 1) * 2
+                curr_w -= (k - 1) * 2
+            else:
+                curr_h -= (k - 1)
+                curr_w -= (k - 1)
+        
+        if curr_h <= 0 or curr_w <= 0:
+            return None
+            
+        # MaxPooling
+        curr_h //= 2
+        curr_w //= 2
+        
+        if curr_h <= 0 or curr_w <= 0:
+            return None
 
     if dataset == "mnist":
         return get_mnist_model(config, n_classes)
