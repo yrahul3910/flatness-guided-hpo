@@ -12,6 +12,8 @@ class Config(TypedDict):
     dropout_rate: float | None
     final_dropout_rate: float | None
     n_units: int
+    learning_rate: float
+    weight_decay: float
 
 
 class HpoSpace(TypedDict):
@@ -22,15 +24,19 @@ class HpoSpace(TypedDict):
     dropout_rate: tuple[float, float] | None
     final_dropout_rate: tuple[float, float] | None
     n_units: list[int]
+    learning_rate: tuple[float, float]
+    weight_decay: tuple[float, float]
 
 
 hpo_space: HpoSpace = {
-    "n_filters": (2, 6),
+    "n_filters": (32, 128),
     "kernel_size": (2, 6),
     "padding": ["valid", "same"],
-    "n_blocks": (2, 6),
+    "n_blocks": (2, 5),
     # SVHN-only
     "dropout_rate": (0.2, 0.5),
     "final_dropout_rate": (0.2, 0.5),
     "n_units": [32, 64, 128, 256, 512],
+    "learning_rate": (1e-4, 1e-2),
+    "weight_decay": (1e-6, 1e-3),
 }

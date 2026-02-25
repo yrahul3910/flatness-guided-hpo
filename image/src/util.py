@@ -17,6 +17,7 @@ from keras.src.layers import (
     MaxPooling2D,
 )
 from keras.src.models import Model, Sequential
+from keras.src.optimizers import Adam
 from keras.src.utils import to_categorical
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelBinarizer
@@ -102,23 +103,26 @@ def run_experiment(
 
     y_pred = np.argmax(model.predict(data.x_test), axis=-1)
 
-    if len(data.y_test.shape) > 1:
-        data.y_test = np.argmax(data.y_test, axis=1)
+    y_test_true = data.y_test
+    if len(y_test_true.shape) > 1:
+        y_test_true = np.argmax(y_test_true, axis=1)
 
-    return accuracy_score(data.y_test, y_pred)
+    return accuracy_score(y_test_true, y_pred)
 
 
 def get_convexity(
     data: Dataset, config: Config, n_class: int = 10, dataset: str = "mnist"
 ) -> float:
     model = get_model(data, config, n_class, dataset)
+    if model is None:
+        return np.inf
 
-    if n_class > 2 and len(data.y_train.shape) == 1:  # noqa: PLR2004
-        data.y_train = np.array(to_categorical(data.y_train, n_class))
-        data.y_test = np.array(to_categorical(data.y_test, n_class))
+    y_train = data.y_train
+    if n_class > 2 and len(y_train.shape) == 1:  # noqa: PLR2004
+        y_train = np.array(to_categorical(y_train, n_class))
 
     # Fit for one epoch before computing smoothness
-    model.fit(data.x_train, data.y_train, batch_size=BATCH_SIZE, epochs=1)
+    model.fit(data.x_train, y_train, batch_size=BATCH_SIZE, epochs=1)
 
     def Ka_func_p(
         layer, xb  # pyright: ignore[reportMissingParameterType] # noqa: ANN001
@@ -151,7 +155,9 @@ def get_random_hyperparams(options: HpoSpace) -> Config:
     """Get hyperparameters from options."""
     hyperparams: dict[str, HpoOption] = {}
     for key, value in options.items():
-        if isinstance(value, list):
+        if value is None:
+            hyperparams[key] = None
+        elif isinstance(value, list):
             hyperparams[key] = random.choice(value)
         # tuple
         elif isinstance(value[0], int):
@@ -170,6 +176,12 @@ def get_many_random_hyperparams(options: HpoSpace, n: int) -> list[Config]:
 def get_model(
     data: Dataset, config: Config, n_classes: int = 10, dataset: str = "mnist"
 ) -> Sequential | None:
+    # Check if architecture is valid for image size
+    img_size = data.x_train.shape[1]
+    # Each pooling layer divides size by 2.
+    if img_size / (2 ** config["n_blocks"]) < 1:
+        return None
+
     if dataset == "mnist":
         return get_mnist_model(config, n_classes)
     if dataset == "svhn":
@@ -202,14 +214,18 @@ def get_svhn_model(config: Config, n_classes: int = 10) -> Sequential:
             )
         )
         learner.add(MaxPooling2D((2, 2)))
-        learner.add(Dropout(config.dropout_rate))
+        learner.add(Dropout(config["dropout_rate"]))
 
     learner.add(Flatten())
     learner.add(Dense(config["n_units"], activation="relu"))
-    learner.add(Dropout(config.final_dropout_rate))
+    learner.add(Dropout(config["final_dropout_rate"]))
     learner.add(Dense(n_classes, activation="softmax"))
+    
+    optimizer = Adam(
+        learning_rate=config["learning_rate"], weight_decay=config["weight_decay"]
+    )
     learner.compile(
-        loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"]
+        loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"]
     )
 
     return learner
@@ -240,9 +256,14 @@ def get_mnist_model(config: Config, n_class: int = 10) -> Sequential:
     learner.add(Dense(128, activation="relu", kernel_initializer="he_uniform"))
     learner.add(Dense(n_class, activation="softmax"))
 
-    learner.compile(
-        loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"]
+    optimizer = Adam(
+        learning_rate=config["learning_rate"], weight_decay=config["weight_decay"]
     )
+    learner.compile(
+        loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"]
+    )
+
+    return learner
 
 
 def get_cifar10_model(config: Config, n_class: int = 10) -> Sequential:
@@ -256,7 +277,6 @@ def get_cifar10_model(config: Config, n_class: int = 10) -> Sequential:
                 n_block_filters,
                 (config["kernel_size"], config["kernel_size"]),
                 padding=config["padding"],
-                activation="relu",
             )
         )
         learner.add(BatchNormalization())
@@ -267,8 +287,11 @@ def get_cifar10_model(config: Config, n_class: int = 10) -> Sequential:
     learner.add(Dense(config["n_units"], activation="relu"))
     learner.add(Dense(n_class, activation="softmax"))
 
+    optimizer = Adam(
+        learning_rate=config["learning_rate"], weight_decay=config["weight_decay"]
+    )
     learner.compile(
-        loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"]
+        loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"]
     )
 
     return learner

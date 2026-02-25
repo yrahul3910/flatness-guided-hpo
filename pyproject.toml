@@ -3,7 +3,7 @@ name = "flatness-guided-hpo"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.14"
 dependencies = [
     "backpack-for-pytorch>=1.7.1",
     "bohb-hpo>=0.5.2",
