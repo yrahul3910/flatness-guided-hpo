@@ -111,18 +111,25 @@ def run_experiment(
 
 
 def get_convexity(
-    data: Dataset, config: Config, n_class: int = 10, dataset: str = "mnist"
+    data: Dataset,
+    config: Config,
+    n_class: int = 10,
+    dataset: str = "mnist",
+    subset_size: int = 5000,
 ) -> float:
     model = get_model(data, config, n_class, dataset)
     if model is None:
         return np.inf
 
-    y_train = data.y_train
-    if n_class > 2 and len(y_train.shape) == 1:  # noqa: PLR2004
-        y_train = np.array(to_categorical(y_train, n_class))
+    # Use a subset of the data for faster evaluation
+    x_train_subset = data.x_train[:subset_size]
+    y_train_subset = data.y_train[:subset_size]
+
+    if n_class > 2 and len(y_train_subset.shape) == 1:  # noqa: PLR2004
+        y_train_subset = np.array(to_categorical(y_train_subset, n_class))
 
     # Fit for one epoch before computing smoothness
-    model.fit(data.x_train, y_train, batch_size=BATCH_SIZE, epochs=1)
+    model.fit(x_train_subset, y_train_subset, batch_size=BATCH_SIZE, epochs=1, verbose=0)
 
     def Ka_func_p(
         layer, xb  # pyright: ignore[reportMissingParameterType] # noqa: ANN001
@@ -135,10 +142,10 @@ def get_convexity(
 
     batch_size = BATCH_SIZE
     best_mu = -np.inf
-    for i in range((len(data.x_train) - 1) // batch_size + 1):
+    for i in range((len(x_train_subset) - 1) // batch_size + 1):
         start_i = i * batch_size
         end_i = start_i + batch_size
-        xb = data.x_train[start_i:end_i]
+        xb = x_train_subset[start_i:end_i]
 
         mu = (
             np.linalg.norm(Ka_func([xb]))
