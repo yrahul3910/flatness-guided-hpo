@@ -75,8 +75,8 @@ fn main() -> Result<()> {
                 }
                 i += 1;
             }
-            Err(_) => {
-                eprintln!("  Skipping failed config.");
+            Err(e) => {
+                eprintln!("  Skipping failed config: {e}.");
             }
         }
     }

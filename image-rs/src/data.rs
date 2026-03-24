@@ -38,6 +38,8 @@ fn load_batch(path: &Path, device: &Device) -> Result<(Tensor, Tensor)> {
 }
 
 pub fn load_cifar10(device: &Device) -> Result<Dataset> {
+    println!("Loading CIFAR-10");
+
     // Load training batches
     let mut all_x_train: Vec<Tensor> = Vec::new();
     let mut all_y_train: Vec<Tensor> = Vec::new();
