@@ -16,9 +16,9 @@ from keras.src.layers import (
     Dropout,
     Flatten,
     MaxPooling2D,
+    RandomCrop,
     RandomFlip,
-    RandomRotation,
-    RandomTranslation,
+    ZeroPadding2D,
 )
 from keras.src.models import Model, Sequential
 from keras.src.optimizers import Adam
@@ -72,6 +72,16 @@ def get_data(dataset: str = "svhn"):
     x_test = x_test.astype("float32")
     x_train /= 255
     x_test /= 255
+
+    channel_stats = {
+        "cifar10": ([0.4914, 0.4822, 0.4465], [0.2470, 0.2435, 0.2616]),
+        "svhn":    ([0.4377, 0.4438, 0.4728], [0.1980, 0.2010, 0.1970]),
+        "mnist":   ([0.1307],                 [0.3081]),
+    }
+    if dataset in channel_stats:
+        mean, std = channel_stats[dataset]
+        x_train = (x_train - mean) / std
+        x_test  = (x_test  - mean) / std
 
     if K.image_data_format() == "channels_first":
         x_train = x_train.reshape(x_train.shape[0], img_channels, img_rows, img_cols)
@@ -308,9 +318,9 @@ def get_mnist_model(config: Config, n_class: int = 10) -> Sequential:
 def get_cifar10_model(config: Config, n_class: int = 10) -> Sequential:
     """Run one experiment given a Data insance."""
     learner = Sequential()
+    learner.add(ZeroPadding2D(padding=4))
+    learner.add(RandomCrop(32, 32))
     learner.add(RandomFlip("horizontal"))
-    learner.add(RandomTranslation(0.1, 0.1))
-    learner.add(RandomRotation(0.05))
 
     for i in range(config["n_blocks"]):
         n_block_filters = config["n_filters"] * (2**i)
