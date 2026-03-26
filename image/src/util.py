@@ -1,3 +1,4 @@
+import math
 import random
 from functools import partial
 
@@ -173,7 +174,8 @@ def get_random_hyperparams(options: HpoSpace) -> Config:
         elif isinstance(value[0], int):
             hyperparams[key] = random.randint(value[0], value[1])
         else:
-            hyperparams[key] = random.uniform(value[0], value[1])
+            lo, hi = value[0], value[1]
+            hyperparams[key] = math.exp(random.uniform(math.log(lo), math.log(hi)))
 
     return Config(**hyperparams)
 
