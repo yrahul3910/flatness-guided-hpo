@@ -35,14 +35,20 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Res
                 // Same padding keeps size
             }
         }
-        if current_size <= 0 { break; }
+        if current_size <= 0 {
+            break;
+        }
         // Max pool
         current_size /= 2;
-        if current_size <= 0 { break; }
+        if current_size <= 0 {
+            break;
+        }
     }
 
     if current_size <= 0 {
-        return Err(Error::Msg("Architecture results in zero-sized feature map".into()));
+        return Err(Error::Msg(
+            "Architecture results in zero-sized feature map".into(),
+        ));
     }
 
     // Create model - catch panics from invalid configurations
@@ -83,6 +89,7 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Res
             &y_train_subset,
             BATCH_SIZE,
             Some(&pb),
+            false,
         )
     }))
     .map_err(|_| Error::Msg("Panic during training".into()))?
@@ -105,9 +112,9 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Res
         // Get intermediate activations
         let (_final_out, penultimate, last_layer) = model.forward_with_activations(&x_batch)?;
 
-        // Compute norms
-        let ka_norm = last_layer.norm()?.to_scalar::<f32>()? as f64;
-        let ka1_norm = penultimate.norm()?.to_scalar::<f32>()? as f64;
+        // Compute norms; account for last batch being smaller
+        let ka_norm = last_layer.sqr()?.mean_all()?.sqrt()?.to_scalar::<f32>()? as f64;
+        let ka1_norm = penultimate.sqr()?.mean_all()?.sqrt()?.to_scalar::<f32>()? as f64;
 
         // Compute mu = ||Ka|| * ||Ka-1|| / ||W||
         let mu = (ka_norm * ka1_norm) / (weight_norm + 1e-8);
@@ -124,7 +131,9 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Res
     }
 
     if !found_valid {
-        return Err(Error::Msg("No valid convexity metric found (possibly dead neurons)".into()));
+        return Err(Error::Msg(
+            "No valid convexity metric found (possibly dead neurons)".into(),
+        ));
     }
 
     // Return the maximum mu value (higher mu = less convex/smooth)
@@ -132,7 +141,6 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Res
 }
 
 pub fn run_experiment(dataset: &Dataset, config: &Config, device: &Device) -> Result<f64> {
-    // Create model - catch panics from invalid configurations
     let varmap = VarMap::new();
     let vb = VarBuilder::from_varmap(&varmap, candle_core::DType::F32, device);
     let model = panic::catch_unwind(panic::AssertUnwindSafe(|| {

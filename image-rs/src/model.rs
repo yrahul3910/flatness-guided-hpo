@@ -2,6 +2,8 @@ use candle_core::{DType, Module, Tensor, D};
 use candle_nn::{self as nn, conv2d, linear, loss, Optimizer, VarBuilder};
 use indicatif::{ProgressBar, ProgressStyle};
 
+use crate::augment::augment_batch;
+
 use crate::config::{Config, Padding};
 use crate::error::Result;
 
@@ -132,6 +134,7 @@ pub fn train_one_epoch_with_pb(
     y_train: &Tensor,
     batch_size: usize,
     pb: Option<&ProgressBar>,
+    augment: bool,
 ) -> Result<f64> {
     let n_samples = x_train.dims()[0];
     let mut total_loss = 0.0;
@@ -143,6 +146,12 @@ pub fn train_one_epoch_with_pb(
         let len = end - i;
         let x_batch = x_train.narrow(0, i, len)?;
         let y_batch = y_train.narrow(0, i, len)?;
+
+        let x_batch = if augment {
+            augment_batch(&x_batch)?
+        } else {
+            x_batch
+        };
 
         let logits = model.forward(&x_batch)?;
         let ce_loss = loss::cross_entropy(&logits, &y_batch)?;
@@ -238,6 +247,7 @@ pub fn train_with_early_stopping(
             &y_train_split,
             batch_size,
             Some(&pb),
+            true,
         )?;
 
         // Validate

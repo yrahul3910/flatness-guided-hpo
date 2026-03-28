@@ -58,6 +58,20 @@ pub fn load_cifar10(device: &Device) -> Result<Dataset> {
     let test_path = Path::new("data").join("test_batch.bin");
     let (x_test, y_test) = load_batch(&test_path, device)?;
 
+    // Per-channel normalization with CIFAR-10 mean/std, shape [1, 3, 1, 1]
+    let mean = Tensor::from_vec(
+        vec![0.4914f32, 0.4822, 0.4465],
+        (1, 3, 1, 1),
+        device,
+    )?;
+    let std = Tensor::from_vec(
+        vec![0.2470f32, 0.2435, 0.2616],
+        (1, 3, 1, 1),
+        device,
+    )?;
+    let x_train = x_train.broadcast_sub(&mean)?.broadcast_div(&std)?;
+    let x_test = x_test.broadcast_sub(&mean)?.broadcast_div(&std)?;
+
     Ok(Dataset {
         x_train,
         y_train,
