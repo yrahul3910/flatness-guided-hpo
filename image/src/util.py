@@ -22,6 +22,7 @@ from keras.src.layers import (
 )
 from keras.src.models import Model, Sequential
 from keras.src.optimizers import Adam
+from keras.src.optimizers.schedules import CosineDecay
 from keras.src.utils import to_categorical
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelBinarizer
@@ -103,13 +104,16 @@ def get_data(dataset: str = "svhn"):
 def run_experiment(
     data: Dataset, config: Config, n_class: int = 10, dataset: str = "mnist"
 ) -> float:
-    model = get_model(data, config, n_class, dataset)
+    max_epochs = 100
+    n_train = int(len(data.x_train) * 0.8)
+    decay_steps = max_epochs * math.ceil(n_train / BATCH_SIZE)
+    model = get_model(data, config, n_class, dataset, decay_steps=decay_steps)
 
     model.fit(
         data.x_train,
         data.y_train,
         validation_split=0.20,
-        epochs=100,
+        epochs=max_epochs,
         verbose=1,
         batch_size=BATCH_SIZE,
         callbacks=[EarlyStopping(monitor="val_loss", patience=10)],
@@ -196,7 +200,7 @@ def get_many_random_hyperparams(options: HpoSpace, n: int) -> list[Config]:
 
 
 def get_model(
-    data: Dataset, config: Config, n_classes: int = 10, dataset: str = "mnist"
+    data: Dataset, config: Config, n_classes: int = 10, dataset: str = "mnist", decay_steps: int | None = None
 ) -> Sequential | None:
     # Check if architecture is valid for image size
     # Precise simulation of spatial resolution
@@ -229,15 +233,15 @@ def get_model(
             return None
 
     if dataset == "mnist":
-        return get_mnist_model(config, n_classes)
+        return get_mnist_model(config, n_classes, decay_steps=decay_steps)
     if dataset == "svhn":
-        return get_svhn_model(config, n_classes)
+        return get_svhn_model(config, n_classes, decay_steps=decay_steps)
     if dataset == "cifar10":
-        return get_cifar10_model(config, n_classes)
+        return get_cifar10_model(config, n_classes, decay_steps=decay_steps)
     return None
 
 
-def get_svhn_model(config: Config, n_classes: int = 10) -> Sequential:
+def get_svhn_model(config: Config, n_classes: int = 10, decay_steps: int | None = None) -> Sequential:
     learner = Sequential()
     learner.add(RandomFlip("horizontal"))
     learner.add(RandomTranslation(0.1, 0.1))
@@ -270,9 +274,8 @@ def get_svhn_model(config: Config, n_classes: int = 10) -> Sequential:
     learner.add(Dropout(config["final_dropout_rate"]))
     learner.add(Dense(n_classes, activation="softmax"))
     
-    optimizer = Adam(
-        learning_rate=config["learning_rate"], weight_decay=config["weight_decay"]
-    )
+    lr = CosineDecay(config["learning_rate"], decay_steps) if decay_steps else config["learning_rate"]
+    optimizer = Adam(learning_rate=lr, weight_decay=config["weight_decay"])
     learner.compile(
         loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"]
     )
@@ -280,7 +283,7 @@ def get_svhn_model(config: Config, n_classes: int = 10) -> Sequential:
     return learner
 
 
-def get_mnist_model(config: Config, n_class: int = 10) -> Sequential:
+def get_mnist_model(config: Config, n_class: int = 10, decay_steps: int | None = None) -> Sequential:
     """Run one experiment, given a Data instance.
 
     :param {Data} data - The dataset to run on, NOT preprocessed.
@@ -305,9 +308,8 @@ def get_mnist_model(config: Config, n_class: int = 10) -> Sequential:
     learner.add(Dense(128, activation="relu", kernel_initializer="he_uniform"))
     learner.add(Dense(n_class, activation="softmax"))
 
-    optimizer = Adam(
-        learning_rate=config["learning_rate"], weight_decay=config["weight_decay"]
-    )
+    lr = CosineDecay(config["learning_rate"], decay_steps) if decay_steps else config["learning_rate"]
+    optimizer = Adam(learning_rate=lr, weight_decay=config["weight_decay"])
     learner.compile(
         loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"]
     )
@@ -315,7 +317,7 @@ def get_mnist_model(config: Config, n_class: int = 10) -> Sequential:
     return learner
 
 
-def get_cifar10_model(config: Config, n_class: int = 10) -> Sequential:
+def get_cifar10_model(config: Config, n_class: int = 10, decay_steps: int | None = None) -> Sequential:
     """Run one experiment given a Data insance."""
     learner = Sequential()
     learner.add(ZeroPadding2D(padding=4))
@@ -339,9 +341,8 @@ def get_cifar10_model(config: Config, n_class: int = 10) -> Sequential:
     learner.add(Dense(config["n_units"], activation="relu"))
     learner.add(Dense(n_class, activation="softmax"))
 
-    optimizer = Adam(
-        learning_rate=config["learning_rate"], weight_decay=config["weight_decay"]
-    )
+    lr = CosineDecay(config["learning_rate"], decay_steps) if decay_steps else config["learning_rate"]
+    optimizer = Adam(learning_rate=lr, weight_decay=config["weight_decay"])
     learner.compile(
         loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"]
     )

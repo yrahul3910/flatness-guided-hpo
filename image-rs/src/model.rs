@@ -1,3 +1,5 @@
+use std::f64::consts::PI;
+
 use candle_core::{DType, Module, Tensor, D};
 use candle_nn::{self as nn, conv2d, linear, loss, Optimizer, VarBuilder};
 use indicatif::{ProgressBar, ProgressStyle};
@@ -221,12 +223,17 @@ pub fn train_with_early_stopping(
     let x_val = x_train.narrow(0, train_size, val_size)?;
     let y_val = y_train.narrow(0, train_size, val_size)?;
 
+    let initial_lr = optimizer.learning_rate();
     let mut best_val_loss = f64::INFINITY;
     let mut patience_counter = 0usize;
 
     let n_train_batches = (train_size + batch_size - 1) / batch_size;
 
     for epoch in 0..max_epochs {
+        // Cosine annealing: decay LR from initial_lr to ~0 over max_epochs
+        let lr = initial_lr * 0.5 * (1.0 + (PI * epoch as f64 / max_epochs as f64).cos());
+        optimizer.set_learning_rate(lr);
+
         // Create Keras-style progress bar for this epoch
         let pb = ProgressBar::new(n_train_batches as u64);
         pb.set_style(
