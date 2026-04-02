@@ -16,6 +16,7 @@ from keras.src.layers import (
     Flatten,
     MaxPooling2D,
     RandomFlip,
+    RandomRotation,
     RandomTranslation,
 )
 from keras.src.models import Model, Sequential
@@ -131,7 +132,7 @@ def get_convexity(
     config: Config,
     n_class: int = 10,
     dataset: str = "mnist",
-    subset_size: int = 5000,
+    subset_size: int = 1500,
 ) -> float:
     model = get_model(data, config, n_class, dataset)
     if model is None:
@@ -155,16 +156,17 @@ def get_convexity(
     ka_model = Model(inputs=model.inputs, outputs=model.layers[-1].output)
     ka1_model = Model(inputs=model.inputs, outputs=model.layers[-2].output)
 
+    ka_outs = ka_model.predict(x_train_subset, batch_size=BATCH_SIZE, verbose=0)
+    ka1_outs = ka1_model.predict(x_train_subset, batch_size=BATCH_SIZE, verbose=0)
+
     batch_size = BATCH_SIZE
     best_mu = -np.inf
-    for i in range((len(x_train_subset) - 1) // batch_size + 1):
+    num_batches = (len(x_train_subset) - 1) // batch_size + 1
+    for i in range(num_batches):
         start_i = i * batch_size
         end_i = start_i + batch_size
-        xb = x_train_subset[start_i:end_i]
-
-        # RMS norm: independent of both batch size and feature/filter dimensions
-        ka_rms = np.sqrt(np.mean(np.array(ka_model([xb], training=False)) ** 2))
-        ka1_rms = np.sqrt(np.mean(np.array(ka1_model([xb], training=False)) ** 2))
+        ka_rms = np.sqrt(np.mean(ka_outs[start_i:end_i] ** 2))
+        ka1_rms = np.sqrt(np.mean(ka1_outs[start_i:end_i] ** 2))
         mu = ka_rms * ka1_rms / w_rms
         if np.isfinite(mu) and mu > best_mu:
             best_mu = mu
@@ -229,14 +231,14 @@ def get_model(
     # Precise simulation of spatial resolution
     curr_h = data.x_train.shape[1]
     curr_w = data.x_train.shape[2]
-    
+
     k = config["kernel_size"]
     pad = config["padding"]
-    
+
     for _ in range(config["n_blocks"]):
         if pad == "valid":
-            # For CIFAR/SVHN, we have TWO convs per block (in svhn_model) 
-            # or ONE per block (in cifar10/mnist). 
+            # For CIFAR/SVHN, we have TWO convs per block (in svhn_model)
+            # or ONE per block (in cifar10/mnist).
             # To be safe, let's assume the most aggressive reduction.
             if dataset == "svhn":
                 curr_h -= (k - 1) * 2
@@ -244,14 +246,14 @@ def get_model(
             else:
                 curr_h -= (k - 1)
                 curr_w -= (k - 1)
-        
+
         if curr_h <= 0 or curr_w <= 0:
             return None
-            
+
         # MaxPooling
         curr_h //= 2
         curr_w //= 2
-        
+
         if curr_h <= 0 or curr_w <= 0:
             return None
 
@@ -296,7 +298,7 @@ def get_svhn_model(config: Config, n_classes: int = 10, decay_steps: int | None 
     learner.add(Dense(config["n_units"], activation="relu"))
     learner.add(Dropout(config["final_dropout_rate"]))
     learner.add(Dense(n_classes, activation="softmax"))
-    
+
     lr = CosineDecay(config["learning_rate"], decay_steps) if decay_steps else config["learning_rate"]
     optimizer = Adam(learning_rate=lr, weight_decay=config["weight_decay"])
     learner.compile(
