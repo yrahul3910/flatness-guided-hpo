@@ -74,3 +74,4 @@ for beta, config in zip(best_betas, best_configs, strict=False):
         print(json.dumps({"beta": float(beta), **config, "accuracy": acc}))
     except Exception:
         traceback.print_exc()
+

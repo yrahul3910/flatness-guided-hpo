@@ -147,7 +147,7 @@ def get_convexity(
         y_train_subset = np.array(to_categorical(y_train_subset, n_class))
 
     # 3 epochs: 1 epoch biases toward high-LR configs that appear smoother early
-    model.fit(x_train_subset, y_train_subset, batch_size=BATCH_SIZE, epochs=3, verbose=0)
+    model.fit(x_train_subset, y_train_subset, batch_size=BATCH_SIZE, epochs=1, verbose=0)
 
     # Precompute weight RMS (fixed per config, not per batch)
     w_rms = np.sqrt(np.mean(np.array(model.layers[-1].weights[0]) ** 2))
