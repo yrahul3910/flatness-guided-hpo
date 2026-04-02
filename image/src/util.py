@@ -16,9 +16,8 @@ from keras.src.layers import (
     Dropout,
     Flatten,
     MaxPooling2D,
-    RandomCrop,
     RandomFlip,
-    ZeroPadding2D,
+    RandomTranslation,
 )
 from keras.src.models import Model, Sequential
 from keras.src.optimizers import Adam
@@ -354,8 +353,7 @@ def get_mnist_model(config: Config, n_class: int = 10, decay_steps: int | None =
 def get_cifar10_model(config: Config, n_class: int = 10, decay_steps: int | None = None) -> Sequential:
     """Run one experiment given a Data insance."""
     learner = Sequential()
-    learner.add(ZeroPadding2D(padding=4))
-    learner.add(RandomCrop(32, 32))
+    learner.add(RandomTranslation(height_factor=4/32, width_factor=4/32, fill_mode="reflect"))
     learner.add(RandomFlip("horizontal"))
 
     for i in range(config["n_blocks"]):
