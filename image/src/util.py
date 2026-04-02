@@ -1,6 +1,5 @@
 import math
 import random
-from functools import partial
 
 import numpy as np
 import scipy
@@ -149,37 +148,28 @@ def get_convexity(
     # 3 epochs: 1 epoch biases toward high-LR configs that appear smoother early
     model.fit(x_train_subset, y_train_subset, batch_size=BATCH_SIZE, epochs=3, verbose=0)
 
-    def Ka_func_p(
-        layer, xb  # pyright: ignore[reportMissingParameterType] # noqa: ANN001
-    ):
-        tmp_model = Model(inputs=model.inputs, outputs=model.layers[layer].output)
-        return tmp_model(xb)
-
-    Ka_func = partial(Ka_func_p, -1)
-    Ka1_func = partial(Ka_func_p, -2)
-
     # Precompute weight RMS (fixed per config, not per batch)
     w_rms = np.sqrt(np.mean(np.array(model.layers[-1].weights[0]) ** 2))
 
+    # Submodels built once, not per-batch
+    ka_model = Model(inputs=model.inputs, outputs=model.layers[-1].output)
+    ka1_model = Model(inputs=model.inputs, outputs=model.layers[-2].output)
+
     batch_size = BATCH_SIZE
-    total_mu = 0.0
-    n_valid = 0
+    best_mu = -np.inf
     for i in range((len(x_train_subset) - 1) // batch_size + 1):
         start_i = i * batch_size
         end_i = start_i + batch_size
         xb = x_train_subset[start_i:end_i]
 
         # RMS norm: independent of both batch size and feature/filter dimensions
-        ka_rms = np.sqrt(np.mean(np.array(Ka_func([xb])) ** 2))
-        ka1_rms = np.sqrt(np.mean(np.array(Ka1_func([xb])) ** 2))
+        ka_rms = np.sqrt(np.mean(np.array(ka_model([xb], training=False)) ** 2))
+        ka1_rms = np.sqrt(np.mean(np.array(ka1_model([xb], training=False)) ** 2))
         mu = ka_rms * ka1_rms / w_rms
-        if np.isfinite(mu) and mu > 0:
-            total_mu += mu
-            n_valid += 1
+        if np.isfinite(mu) and mu > best_mu:
+            best_mu = mu
 
-    if n_valid == 0:
-        return np.inf
-    return total_mu / n_valid
+    return best_mu if best_mu > 0 else np.inf
 
 
 def _max_valid_blocks(kernel_size: int, img_size: int, n_convs_per_block: int) -> int:
