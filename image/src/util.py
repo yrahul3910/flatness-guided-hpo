@@ -139,15 +139,16 @@ def get_convexity(
     if model is None:
         return np.inf
 
-    # Use a subset of the data for faster evaluation
-    x_train_subset = data.x_train[:subset_size]
-    y_train_subset = data.y_train[:subset_size]
+    # Shuffle to remove class-sort bias (CIFAR-10 binary files are class-sorted)
+    indices = np.random.permutation(len(data.x_train))[:subset_size]
+    x_train_subset = data.x_train[indices]
+    y_train_subset = data.y_train[indices]
 
     if n_class > 2 and len(y_train_subset.shape) == 1:  # noqa: PLR2004
         y_train_subset = np.array(to_categorical(y_train_subset, n_class))
 
-    # Fit for one epoch before computing smoothness
-    model.fit(x_train_subset, y_train_subset, batch_size=BATCH_SIZE, epochs=1, verbose=0)
+    # 3 epochs: 1 epoch biases toward high-LR configs that appear smoother early
+    model.fit(x_train_subset, y_train_subset, batch_size=BATCH_SIZE, epochs=3, verbose=0)
 
     def Ka_func_p(
         layer, xb  # pyright: ignore[reportMissingParameterType] # noqa: ANN001
@@ -158,25 +159,48 @@ def get_convexity(
     Ka_func = partial(Ka_func_p, -1)
     Ka1_func = partial(Ka_func_p, -2)
 
+    # Precompute weight RMS (fixed per config, not per batch)
+    w_rms = np.sqrt(np.mean(np.array(model.layers[-1].weights[0]) ** 2))
+
     batch_size = BATCH_SIZE
-    best_mu = -np.inf
+    total_mu = 0.0
+    n_valid = 0
     for i in range((len(x_train_subset) - 1) // batch_size + 1):
         start_i = i * batch_size
         end_i = start_i + batch_size
         xb = x_train_subset[start_i:end_i]
 
-        mu = (
-            np.linalg.norm(Ka_func([xb]))
-            * np.linalg.norm(Ka1_func([xb]))
-            / np.linalg.norm(model.layers[-1].weights[0])
-        )
-        if mu > best_mu and mu != np.inf:
-            best_mu = mu
+        # RMS norm: independent of both batch size and feature/filter dimensions
+        ka_rms = np.sqrt(np.mean(np.array(Ka_func([xb])) ** 2))
+        ka1_rms = np.sqrt(np.mean(np.array(Ka1_func([xb])) ** 2))
+        mu = ka_rms * ka1_rms / w_rms
+        if np.isfinite(mu) and mu > 0:
+            total_mu += mu
+            n_valid += 1
 
-    return best_mu
+    if n_valid == 0:
+        return np.inf
+    return total_mu / n_valid
 
 
-def get_random_hyperparams(options: HpoSpace) -> Config:
+def _max_valid_blocks(kernel_size: int, img_size: int, n_convs_per_block: int) -> int:
+    """Return the max n_blocks that keeps feature map positive with valid padding."""
+    size = img_size
+    blocks = 0
+    while True:
+        size -= (kernel_size - 1) * n_convs_per_block
+        if size <= 0:
+            break
+        size //= 2  # max pool
+        if size <= 0:
+            break
+        blocks += 1
+    return blocks
+
+
+def get_random_hyperparams(
+    options: HpoSpace, img_size: int = 32, n_convs_per_block: int = 1
+) -> Config:
     """Get hyperparameters from options."""
     hyperparams: dict[str, HpoOption] = {}
     for key, value in options.items():
@@ -184,9 +208,19 @@ def get_random_hyperparams(options: HpoSpace) -> Config:
             hyperparams[key] = None
         elif isinstance(value, list):
             hyperparams[key] = random.choice(value)
-        # tuple
         elif isinstance(value[0], int):
-            hyperparams[key] = random.randint(value[0], value[1])
+            if key == "n_blocks" and hyperparams.get("padding") == "valid":
+                k = int(hyperparams.get("kernel_size", 3))
+                max_blocks = _max_valid_blocks(k, img_size, n_convs_per_block)
+                lo, hi = value[0], min(value[1], max_blocks)
+                if hi < lo:
+                    # No valid n_blocks exists for this kernel+padding combo; fall back
+                    hyperparams["padding"] = "same"
+                    hyperparams[key] = random.randint(value[0], value[1])
+                else:
+                    hyperparams[key] = random.randint(lo, hi)
+            else:
+                hyperparams[key] = random.randint(value[0], value[1])
         else:
             lo, hi = value[0], value[1]
             hyperparams[key] = math.exp(random.uniform(math.log(lo), math.log(hi)))
