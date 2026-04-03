@@ -60,8 +60,8 @@ def run_experiment(opt_fn: Callable[[Dataset, dict, Callable[[dict], float]], No
 
                 time.time()
 
-                def evaluator(config, args=None):
-                    return eval(config, data)
+                def evaluator(config, epochs=200):
+                    return eval(config, data, epochs=epochs)
 
                 score = opt_fn(data, config_space, evaluator)
                 time.time()

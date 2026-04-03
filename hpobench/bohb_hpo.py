@@ -22,12 +22,12 @@ def opt_fn(data: Dataset, config_space: dict, eval: Callable[[dict], float]):
             msg = f"Key {key} must be a list or tuple"
             raise ValueError(msg)
 
-    def eval_fn(config: dict):
+    def eval_fn(config: dict, epochs: int = 200):
         # Importantly, eval returns something to *maximize*
-        return [-x for x in eval(Config(**config))]
+        return [-x for x in eval(Config(**config), epochs=epochs)]
 
-    def eval_fn_auc(config: dict, args=None):
-        return eval_fn(config)[-1]
+    def eval_fn_auc(config: dict, budget=None):
+        return eval_fn(config, epochs=int(budget) if budget is not None else 200)[-1]
 
     opt = BOHB(configspace=bohb_space.ConfigurationSpace(space), evaluate=eval_fn_auc, min_budget=1, max_budget=30)
     logs = opt.optimize()
