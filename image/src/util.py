@@ -75,13 +75,13 @@ def get_data(dataset: str = "svhn"):
 
     channel_stats = {
         "cifar10": ([0.4914, 0.4822, 0.4465], [0.2470, 0.2435, 0.2616]),
-        "svhn":    ([0.4377, 0.4438, 0.4728], [0.1980, 0.2010, 0.1970]),
-        "mnist":   ([0.1307],                 [0.3081]),
+        "svhn": ([0.4377, 0.4438, 0.4728], [0.1980, 0.2010, 0.1970]),
+        "mnist": ([0.1307], [0.3081]),
     }
     if dataset in channel_stats:
         mean, std = channel_stats[dataset]
         x_train = (x_train - mean) / std
-        x_test  = (x_test  - mean) / std
+        x_test = (x_test - mean) / std
 
     if K.image_data_format() == "channels_first":
         x_train = x_train.reshape(x_train.shape[0], img_channels, img_rows, img_cols)
@@ -101,18 +101,19 @@ def get_data(dataset: str = "svhn"):
 
 
 def run_experiment(
-    data: Dataset, config: Config, n_class: int = 10, dataset: str = "mnist"
+    data: Dataset, config: Config, n_class: int = 10, dataset: str = "mnist", epochs: int = 100
 ) -> float:
-    max_epochs = 100
     n_train = int(len(data.x_train) * 0.8)
-    decay_steps = max_epochs * math.ceil(n_train / BATCH_SIZE)
+    decay_steps = epochs * math.ceil(n_train / BATCH_SIZE)
     model = get_model(data, config, n_class, dataset, decay_steps=decay_steps)
+    if model is None:
+        return 0.0
 
     model.fit(
         data.x_train,
         data.y_train,
         validation_split=0.20,
-        epochs=max_epochs,
+        epochs=epochs,
         verbose=1,
         batch_size=BATCH_SIZE,
         callbacks=[EarlyStopping(monitor="val_loss", patience=10)],
@@ -189,9 +190,7 @@ def _max_valid_blocks(kernel_size: int, img_size: int, n_convs_per_block: int) -
     return blocks
 
 
-def get_random_hyperparams(
-    options: HpoSpace, img_size: int = 32, n_convs_per_block: int = 1
-) -> Config:
+def get_random_hyperparams(options: HpoSpace, img_size: int = 32, n_convs_per_block: int = 1) -> Config:
     """Get hyperparameters from options."""
     hyperparams: dict[str, HpoOption] = {}
     for key, value in options.items():
@@ -244,8 +243,8 @@ def get_model(
                 curr_h -= (k - 1) * 2
                 curr_w -= (k - 1) * 2
             else:
-                curr_h -= (k - 1)
-                curr_w -= (k - 1)
+                curr_h -= k - 1
+                curr_w -= k - 1
 
         if curr_h <= 0 or curr_w <= 0:
             return None
@@ -301,9 +300,7 @@ def get_svhn_model(config: Config, n_classes: int = 10, decay_steps: int | None 
 
     lr = CosineDecay(config["learning_rate"], decay_steps) if decay_steps else config["learning_rate"]
     optimizer = Adam(learning_rate=lr, weight_decay=config["weight_decay"])
-    learner.compile(
-        loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"]
-    )
+    learner.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
 
     return learner
 
@@ -335,9 +332,7 @@ def get_mnist_model(config: Config, n_class: int = 10, decay_steps: int | None =
 
     lr = CosineDecay(config["learning_rate"], decay_steps) if decay_steps else config["learning_rate"]
     optimizer = Adam(learning_rate=lr, weight_decay=config["weight_decay"])
-    learner.compile(
-        loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"]
-    )
+    learner.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
 
     return learner
 
@@ -345,7 +340,7 @@ def get_mnist_model(config: Config, n_class: int = 10, decay_steps: int | None =
 def get_cifar10_model(config: Config, n_class: int = 10, decay_steps: int | None = None) -> Sequential:
     """Run one experiment given a Data insance."""
     learner = Sequential()
-    learner.add(RandomTranslation(height_factor=4/32, width_factor=4/32, fill_mode="reflect"))
+    learner.add(RandomTranslation(height_factor=4 / 32, width_factor=4 / 32, fill_mode="reflect"))
     learner.add(RandomFlip("horizontal"))
 
     for i in range(config["n_blocks"]):
@@ -367,8 +362,6 @@ def get_cifar10_model(config: Config, n_class: int = 10, decay_steps: int | None
 
     lr = CosineDecay(config["learning_rate"], decay_steps) if decay_steps else config["learning_rate"]
     optimizer = Adam(learning_rate=lr, weight_decay=config["weight_decay"])
-    learner.compile(
-        loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"]
-    )
+    learner.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
 
     return learner

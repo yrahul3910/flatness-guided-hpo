@@ -39,11 +39,10 @@ if __name__ == "__main__":
     for key, val in hpo_space.items():
         if isinstance(val, list):
             best[key] = val[best[key]]
-    
+
     try:
         score = float(run_experiment(data, best, N_CLASSES, DATASET))
         print(f"Best config: {best}")
         print(f"Best score: {score}")
     except Exception:
         traceback.print_exc()
-

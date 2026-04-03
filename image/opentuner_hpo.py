@@ -1,5 +1,6 @@
+import traceback
+
 import opentuner
-from common import evaluate, hpo_space
 from opentuner import (
     ConfigurationManipulator,
     EnumParameter,
@@ -9,9 +10,16 @@ from opentuner import (
     Result,
 )
 
+from image.src.config import hpo_space
+from image.src.data import Dataset
+from image.src.util import get_data, run_experiment
+
+DATASET = "cifar10"
+N_CLASSES = 10
+data: Dataset = get_data(DATASET)
+
 scores = []
 total = 0
-
 
 class MyTuner(MeasurementInterface):
     def manipulator(self):
@@ -40,13 +48,18 @@ class MyTuner(MeasurementInterface):
             raise AssertionError(msg)
 
         try:
-            score = evaluate(cfg)
-        except:
+            acc = float(run_experiment(data, cfg, N_CLASSES, DATASET))
+            # OpenTuner minimizes time
+            result = Result(time=1.0 - acc)
+            score = acc
+        except Exception:
+            traceback.print_exc()
+            result = Result(time=100.0)
             score = 0.0
 
         scores.append(score)
 
-        return Result(time=100.0 - score)
+        return result
 
 
 if __name__ == "__main__":
@@ -59,5 +72,6 @@ if __name__ == "__main__":
             MyTuner.main(argparser.parse_args())
 
             all_scores.append(max(scores))
+            print(f"Max score in this run: {all_scores[-1]}")
         except AssertionError:
             continue

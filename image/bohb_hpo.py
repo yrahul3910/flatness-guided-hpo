@@ -1,15 +1,26 @@
-from copy import deepcopy
+import traceback
 
 import bohb.configspace as bohb_space
 from bohb import BOHB
-from common import evaluate, hpo_space
-from src.util import get_data, get_model
+
+from image.src.config import hpo_space
+from image.src.data import Dataset
+from image.src.util import get_data, run_experiment
 
 if __name__ == "__main__":
-    data = get_data()
+    DATASET = "cifar10"
+    N_CLASSES = 10
 
-    def model_fn(config):
-        return get_model(deepcopy(data), config, 10)
+    data: Dataset = get_data(DATASET)
+
+    def evaluate_bohb(config, budget=100, *args, **kwargs):
+        try:
+            acc = float(run_experiment(data, config, N_CLASSES, DATASET, epochs=int(budget)))
+            # BOHB minimizes, so we return negative accuracy or 1.0 - acc
+            return 1.0 - acc
+        except Exception:
+            traceback.print_exc()
+            return 100.0
 
     # Convert the space to bohb format
     space = []
@@ -27,10 +38,16 @@ if __name__ == "__main__":
 
     opt = BOHB(
         configspace=bohb_space.ConfigurationSpace(space),
-        evaluate=evaluate,
+        evaluate=evaluate_bohb,
         min_budget=1,
         max_budget=30,
     )
     logs = opt.optimize()
     config = logs.best["hyperparameter"].to_dict()
-    score = evaluate(config)
+    
+    try:
+        score = float(run_experiment(data, config, N_CLASSES, DATASET))
+        print(f"Best config: {config}")
+        print(f"Best score: {score}")
+    except Exception:
+        traceback.print_exc()
