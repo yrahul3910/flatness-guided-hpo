@@ -18,8 +18,8 @@ from image.src.util import (
 file_number = os.getenv("SLURM_JOB_ID") or random.randint(1, 10000)
 results_log = f"stcvx_search_{file_number}.csv"
 
-DATASET = "cifar10"
-N_CLASSES = 10
+DATASET = "cifar100"
+N_CLASSES = 100
 
 data: Dataset = get_data(DATASET)
 
@@ -37,7 +37,7 @@ valid_count = 0
 while valid_count < num_configs:
     try:
         config = get_random_hyperparams(hpo_space)
-        convexity = get_convexity(data, config, dataset=DATASET)
+        convexity = get_convexity(data, config, n_class=N_CLASSES, dataset=DATASET)
 
         if not np.isfinite(convexity) or convexity <= 0:
             continue

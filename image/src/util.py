@@ -7,6 +7,7 @@ from keras import backend as K
 from keras.callbacks import EarlyStopping
 from keras.layers import ReLU
 from keras.src.datasets.cifar10 import load_data as load_cifar10
+from keras.src.datasets.cifar100 import load_data as load_cifar100
 from keras.src.datasets.mnist import load_data as load_mnist
 from keras.src.layers import (
     BatchNormalization,
@@ -39,6 +40,9 @@ def get_mnist():
 def get_cifar10():
     return load_cifar10()
 
+def get_cifar100():
+    return load_cifar100()
+
 
 def get_svhn():
     train_data = scipy.io.loadmat("train_32x32.mat")
@@ -59,6 +63,7 @@ def get_data(dataset: str = "svhn"):
         "mnist": (get_mnist, (28, 28, 1)),
         "svhn": (get_svhn, (32, 32, 3)),
         "cifar10": (get_cifar10, (32, 32, 3)),
+        "cifar100": (get_cifar100, (32, 32, 3)),
     }
 
     if dataset not in data_loaders:
@@ -74,6 +79,7 @@ def get_data(dataset: str = "svhn"):
     x_test /= 255
 
     channel_stats = {
+        "cifar100": ([0.5071, 0.4867, 0.4408], [0.2675, 0.2565, 0.2761]),
         "cifar10": ([0.4914, 0.4822, 0.4465], [0.2470, 0.2435, 0.2616]),
         "svhn": ([0.4377, 0.4438, 0.4728], [0.1980, 0.2010, 0.1970]),
         "mnist": ([0.1307], [0.3081]),
@@ -260,7 +266,7 @@ def get_model(
         return get_mnist_model(config, n_classes, decay_steps=decay_steps)
     if dataset == "svhn":
         return get_svhn_model(config, n_classes, decay_steps=decay_steps)
-    if dataset == "cifar10":
+    if dataset.startswith("cifar"):
         return get_cifar10_model(config, n_classes, decay_steps=decay_steps)
     return None
 

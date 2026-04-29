@@ -66,7 +66,7 @@ if __name__ == "__main__":
     argparser = opentuner.default_argparser()
 
     all_scores = []
-    for _ in range(20):
+    for _ in range(1):
         try:
             scores = []
             MyTuner.main(argparser.parse_args())
