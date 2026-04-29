@@ -1,4 +1,7 @@
 import gc
+import os
+
+os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "3")
 
 from image.src.config import Config
 from image.src.util import get_data, run_experiment

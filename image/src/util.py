@@ -123,7 +123,7 @@ def run_experiment(
         epochs=epochs,
         verbose=1,
         batch_size=BATCH_SIZE,
-        callbacks=[EarlyStopping(monitor="val_loss", patience=10)],
+        callbacks=[EarlyStopping(monitor="val_loss", patience=25, restore_best_weights=True)],
     )
 
     y_pred = np.argmax(model.predict(data.x_test), axis=-1)
@@ -350,6 +350,7 @@ def get_cifar10_model(config: Config, n_class: int = 10, decay_steps: int | None
     learner.add(RandomTranslation(height_factor=4 / 32, width_factor=4 / 32, fill_mode="reflect"))
     learner.add(RandomFlip("horizontal"))
 
+    half_blocks = max(1, config["n_blocks"] // 2)
     for i in range(config["n_blocks"]):
         n_block_filters = config["n_filters"] * (2**i)
         learner.add(
@@ -363,7 +364,8 @@ def get_cifar10_model(config: Config, n_class: int = 10, decay_steps: int | None
         learner.add(BatchNormalization())
         learner.add(ReLU())
         learner.add(MaxPooling2D(pool_size=(2, 2)))
-        learner.add(SpatialDropout2D(config["dropout_rate"]))
+        if i < half_blocks:
+            learner.add(SpatialDropout2D(config["dropout_rate"]))
 
     learner.add(Flatten())
     learner.add(Dense(config["n_units"], activation="relu", kernel_initializer="he_uniform"))
