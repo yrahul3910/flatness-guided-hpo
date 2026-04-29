@@ -19,6 +19,7 @@ from keras.src.layers import (
     RandomFlip,
     RandomRotation,
     RandomTranslation,
+    SpatialDropout2D,
 )
 from keras.src.models import Model, Sequential
 from keras.src.optimizers import Adam
@@ -297,7 +298,7 @@ def get_svhn_model(config: Config, n_classes: int = 10, decay_steps: int | None 
             )
         )
         learner.add(MaxPooling2D((2, 2)))
-        learner.add(Dropout(config["dropout_rate"]))
+        learner.add(SpatialDropout2D(config["dropout_rate"]))
 
     learner.add(Flatten())
     learner.add(Dense(config["n_units"], activation="relu"))
@@ -362,7 +363,7 @@ def get_cifar10_model(config: Config, n_class: int = 10, decay_steps: int | None
         learner.add(BatchNormalization())
         learner.add(ReLU())
         learner.add(MaxPooling2D(pool_size=(2, 2)))
-        learner.add(Dropout(config["dropout_rate"]))
+        learner.add(SpatialDropout2D(config["dropout_rate"]))
 
     learner.add(Flatten())
     learner.add(Dense(config["n_units"], activation="relu", kernel_initializer="he_uniform"))
