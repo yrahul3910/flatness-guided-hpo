@@ -26,7 +26,6 @@ from keras.src.optimizers import Adam
 from keras.src.optimizers.schedules import CosineDecay
 from keras.src.utils import to_categorical
 from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import LabelBinarizer
 
 from image.src.config import Config, HpoOption, HpoSpace
 from image.src.data import Dataset
@@ -97,13 +96,9 @@ def get_data(dataset: str = "svhn"):
         x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, img_channels)
         x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, img_channels)
 
-    """
-    y_train = to_categorical(y_train, num_classes=10)
-    y_test = to_categorical(y_test, num_classes=10)
-    """
-    lb = LabelBinarizer()
-    y_train = lb.fit_transform(y_train)
-    y_test = lb.transform(y_test)
+    n_classes = int(y_train.max()) + 1
+    y_train = to_categorical(y_train.ravel(), n_classes)
+    y_test = to_categorical(y_test.ravel(), n_classes)
     return Dataset(x_train, y_train, x_test, y_test)
 
 
