@@ -37,5 +37,5 @@ hpo_space: HpoSpace = {
     "final_dropout_rate": (0.3, 0.7),
     "n_units": [32, 64, 128, 256, 512],
     "learning_rate": (1e-4, 1e-2),
-    "weight_decay": (1e-5, 1e-1),
+    "weight_decay": (1e-5, 1e-3),
 }

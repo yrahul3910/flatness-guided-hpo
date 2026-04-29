@@ -356,14 +356,17 @@ def get_cifar10_model(config: Config, n_class: int = 10, decay_steps: int | None
                 n_block_filters,
                 (config["kernel_size"], config["kernel_size"]),
                 padding=config["padding"],
+                kernel_initializer="he_uniform",
             )
         )
         learner.add(BatchNormalization())
         learner.add(ReLU())
         learner.add(MaxPooling2D(pool_size=(2, 2)))
+        learner.add(Dropout(config["dropout_rate"]))
 
     learner.add(Flatten())
-    learner.add(Dense(config["n_units"], activation="relu"))
+    learner.add(Dense(config["n_units"], activation="relu", kernel_initializer="he_uniform"))
+    learner.add(Dropout(config["final_dropout_rate"]))
     learner.add(Dense(n_class, activation="softmax"))
 
     lr = CosineDecay(config["learning_rate"], decay_steps) if decay_steps else config["learning_rate"]
