@@ -27,7 +27,7 @@ data: Dataset = get_data(DATASET)
 best_betas: list[float] = []
 best_configs: list[Config] = []
 keep_configs = 10
-num_configs = 150
+num_configs = 100
 
 # Write CSV header
 with open(results_log, "w") as f:
@@ -49,7 +49,7 @@ while valid_count < num_configs:
         with open(results_log, "a") as f:
             f.write(f"{valid_count},{convexity}," + ",".join(str(config.get(k, "")) for k in hpo_space.keys()) + "\n")
 
-        if len(best_betas) < keep_configs or convexity < max(best_betas):
+        if len(best_betas) < keep_configs or (convexity < max(best_betas) and convexity > 0.1):
             best_betas.append(convexity)
             best_configs.append(config)
 
