@@ -13,13 +13,11 @@ from keras.src.layers import (
     BatchNormalization,
     Conv2D,
     Dense,
-    Dropout,
     Flatten,
     MaxPooling2D,
     RandomFlip,
     RandomRotation,
     RandomTranslation,
-    SpatialDropout2D,
 )
 from keras.src.models import Model, Sequential
 from keras.src.optimizers import Adam
@@ -293,11 +291,9 @@ def get_svhn_model(config: Config, n_classes: int = 10, decay_steps: int | None 
             )
         )
         learner.add(MaxPooling2D((2, 2)))
-        learner.add(SpatialDropout2D(config["dropout_rate"]))
 
     learner.add(Flatten())
     learner.add(Dense(config["n_units"], activation="relu"))
-    learner.add(Dropout(config["final_dropout_rate"]))
     learner.add(Dense(n_classes, activation="softmax"))
 
     lr = CosineDecay(config["learning_rate"], decay_steps) if decay_steps else config["learning_rate"]
@@ -345,7 +341,6 @@ def get_cifar10_model(config: Config, n_class: int = 10, decay_steps: int | None
     learner.add(RandomTranslation(height_factor=4 / 32, width_factor=4 / 32, fill_mode="reflect"))
     learner.add(RandomFlip("horizontal"))
 
-    half_blocks = max(1, config["n_blocks"] // 2)
     for i in range(config["n_blocks"]):
         n_block_filters = config["n_filters"] * (2**i)
         learner.add(
@@ -359,16 +354,13 @@ def get_cifar10_model(config: Config, n_class: int = 10, decay_steps: int | None
         learner.add(BatchNormalization())
         learner.add(ReLU())
         learner.add(MaxPooling2D(pool_size=(2, 2)))
-        if i < half_blocks:
-            learner.add(SpatialDropout2D(config["dropout_rate"]))
 
     learner.add(Flatten())
     learner.add(Dense(config["n_units"], activation="relu", kernel_initializer="he_uniform"))
-    learner.add(Dropout(config["final_dropout_rate"]))
-    learner.add(Dense(n_class, activation="softmax"))
+    learner.add(Dense(n_class, activation="softmax", kernel_initializer="he_uniform"))
 
     lr = CosineDecay(config["learning_rate"], decay_steps) if decay_steps else config["learning_rate"]
-    optimizer = Adam(learning_rate=lr, weight_decay=config["weight_decay"])
+    optimizer = Adam(learning_rate=lr, weight_decay=config["weight_decay"], clipnorm=1.0)
     learner.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
 
     return learner

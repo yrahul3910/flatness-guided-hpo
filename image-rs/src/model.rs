@@ -1,7 +1,7 @@
 use std::f64::consts::PI;
 
 use candle_core::{DType, Module, Tensor, D};
-use candle_nn::{self as nn, conv2d, linear, loss, Dropout, Optimizer, VarBuilder};
+use candle_nn::{self as nn, conv2d, linear, loss, Optimizer, VarBuilder};
 use indicatif::{ProgressBar, ProgressStyle};
 
 use crate::augment::augment_batch;
@@ -45,8 +45,6 @@ impl ConvBlock {
 
 pub struct CifarModel {
     conv_blocks: Vec<ConvBlock>,
-    dropout_blocks: Vec<Dropout>,
-    dropout_final: Dropout,
     fc1: nn::Linear,
     fc2: nn::Linear,
 }
@@ -59,7 +57,6 @@ impl CifarModel {
         };
 
         let mut conv_blocks = Vec::new();
-        let mut dropout_blocks = Vec::new();
         let mut in_channels: usize = 3; // RGB
 
         for i in 0..config.n_blocks {
@@ -72,10 +69,8 @@ impl CifarModel {
                 padding,
             )?;
             conv_blocks.push(block);
-            dropout_blocks.push(Dropout::new(config.dropout_rate as f32));
             in_channels = out_channels;
         }
-        let dropout_final = Dropout::new(config.final_dropout_rate as f32);
 
         // Determine flattened size with a dummy forward pass
         let dummy = Tensor::zeros(&[1, 3, 32, 32], DType::F32, vb.device())?;
@@ -92,21 +87,18 @@ impl CifarModel {
 
         Ok(Self {
             conv_blocks,
-            dropout_blocks,
-            dropout_final,
             fc1,
             fc2,
         })
     }
 
-    pub fn forward(&self, x: &Tensor, train: bool) -> candle_core::Result<Tensor> {
+    pub fn forward(&self, x: &Tensor) -> candle_core::Result<Tensor> {
         let mut x = x.clone();
-        for (block, dropout) in self.conv_blocks.iter().zip(self.dropout_blocks.iter()) {
+        for block in &self.conv_blocks {
             x = block.forward(&x)?;
-            x = dropout.forward(&x, train)?;
         }
         let x = x.flatten(1, 3)?;
-        let x = self.dropout_final.forward(&self.fc1.forward(&x)?.relu()?, train)?;
+        let x = self.fc1.forward(&x)?.relu()?;
         self.fc2.forward(&x)
     }
 
@@ -115,17 +107,15 @@ impl CifarModel {
     pub fn forward_with_activations(
         &self,
         x: &Tensor,
-        train: bool,
     ) -> candle_core::Result<(Tensor, Tensor, Tensor)> {
         let mut x = x.clone();
-        for (block, dropout) in self.conv_blocks.iter().zip(self.dropout_blocks.iter()) {
+        for block in &self.conv_blocks {
             x = block.forward(&x)?;
-            x = dropout.forward(&x, train)?;
         }
         let flattened = x.flatten(1, 3)?;
         let penultimate = flattened.clone();
 
-        let fc1_out = self.dropout_final.forward(&self.fc1.forward(&flattened)?.relu()?, train)?;
+        let fc1_out = self.fc1.forward(&flattened)?.relu()?;
         let last_layer = fc1_out.clone();
 
         let final_out = self.fc2.forward(&fc1_out)?;
@@ -165,7 +155,7 @@ pub fn train_one_epoch_with_pb(
             x_batch
         };
 
-        let logits = model.forward(&x_batch, true)?;
+        let logits = model.forward(&x_batch)?;
         let ce_loss = loss::cross_entropy(&logits, &y_batch)?;
 
         optimizer.backward_step(&ce_loss)?;
@@ -202,7 +192,7 @@ pub fn evaluate_accuracy(
         let x_batch = x_test.narrow(0, i, len)?;
         let y_batch = y_test.narrow(0, i, len)?;
 
-        let logits = model.forward(&x_batch, false)?;
+        let logits = model.forward(&x_batch)?;
         let predictions = logits.argmax(D::Minus1)?.to_dtype(DType::U32)?;
 
         let matches = predictions.eq(&y_batch)?.to_dtype(DType::F32)?.sum_all()?;
@@ -278,7 +268,7 @@ pub fn train_with_early_stopping(
             let x_batch = x_val.narrow(0, vi, len)?;
             let y_batch = y_val.narrow(0, vi, len)?;
 
-            let logits = model.forward(&x_batch, false)?;
+            let logits = model.forward(&x_batch)?;
             let ce_loss = loss::cross_entropy(&logits, &y_batch)?;
             val_total_loss += ce_loss.to_scalar::<f32>()? as f64;
             val_n_batches += 1;

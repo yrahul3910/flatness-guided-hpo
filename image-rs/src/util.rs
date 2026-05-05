@@ -110,7 +110,7 @@ pub fn get_convexity(dataset: &Dataset, config: &Config, device: &Device) -> Res
         let x_batch = x_train_subset.narrow(0, i, len)?;
 
         // Get intermediate activations
-        let (_final_out, penultimate, last_layer) = model.forward_with_activations(&x_batch, false)?;
+        let (_final_out, penultimate, last_layer) = model.forward_with_activations(&x_batch)?;
 
         // Compute norms; account for last batch being smaller
         let ka_norm = last_layer.sqr()?.mean_all()?.sqrt()?.to_scalar::<f32>()? as f64;
