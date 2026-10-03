@@ -1,0 +1,87 @@
+{
+  "protocol_version": "1.1-frozen-before-normalization-checkpoint-evaluation",
+  "revision_note": "Before any checkpoint evaluation, reduce the symmetry-panel values to the parent-specified bounded set and add a distinct float32-model reconstruction tolerance. Formulas and inferential scope are unchanged. The prior unevaluated version is retained as normalization_protocol_v1_draft_before_scope_alignment.json.",
+  "status": "exploratory mathematical comparability audit; not HPO efficacy evidence",
+  "candidate_selection_basis": "Two candidates fixed from explicit symmetry requirements and exact local curvature identities. Previously observed trajectory correlations were not used to choose formulas, aggregation, transformations, or tolerances.",
+  "evaluation_scope": {
+    "checkpoints": "All 16 final checkpoints in sibling trajectory-pilot: seeds 31 and 47 crossed with configuration IDs 0 through 7; no subsets or exclusions",
+    "examples": "Cached MNIST official-training x_train indices [0,1500), with exactly the pilot's float32 preprocessing; do not access validation examples or any labels, losses, or official test arrays",
+    "numeric_policy": "Saved model inference on CPU; convert frozen penultimate activations, head kernel and bias to float64; recompute softmax with stable centering for every transformation",
+    "training": "none",
+    "source_policy": "Do not edit original/corrected production code, manuscript, checkpoint, or existing evidence; retain all outputs and numerical failures"
+  },
+  "notation": {
+    "h": "B by D nonnegative penultimate ReLU activations",
+    "W": "D by K Keras final Dense kernel",
+    "b": "K-dimensional final bias, unchanged by every panel transformation",
+    "z": "h @ W + b",
+    "p": "rowwise softmax(z)",
+    "W_c": "W - mean(W, axis=1, keepdims=True), equivalently W @ (I_K - ones(K,K)/K)",
+    "z_c": "z - mean(z, axis=1, keepdims=True), equivalently centered log(p)",
+    "C_i": "diag(p_i) - outer(p_i,p_i)"
+  },
+  "original_score": {
+    "name": "original_rms_ratio_max",
+    "formula": "max over fixed consecutive 64-example batches b of RMS(p_b) * RMS(h_b) / RMS(W)",
+    "batch_size": 64,
+    "last_batch": "include final partial batch of 28, as in the existing 1500-example implementation",
+    "role": "unchanged comparator; no new theorem claim"
+  },
+  "candidates": [
+    {
+      "id": "relative_head_trace_centered",
+      "formula": "mean_i [(1 - sum_k p_ik^2) * sum_j h_ij^2 * sum_k W_c[j,k]^2]",
+      "aggregation": "arithmetic mean over all 1500 examples, not a maximum over batches; no division by hidden width and no normalization across checkpoints",
+      "interpretation": "Exact trace of the final-kernel categorical-cross-entropy Hessian expressed in local perturbations deltaW_j = norm(W_c[j,:]) * deltaTheta_j, with row scales fixed at the audited checkpoint. A zero row scale makes this coordinate map singular; no invertibility is assumed.",
+      "expected_invariant_under": ["arbitrary output common-row shifts", "global positive adjacent-layer rescaling", "per-unit positive diagonal adjacent-layer rescaling", "hidden-neuron permutation"],
+      "known_failure": "Uniformly duplicating every hidden neuron r times and splitting its outgoing weights by r reduces this score by exactly 1/r, despite unchanged predictions. Bias/hidden redistribution and cancelling hidden paths can also change the score.",
+      "scope_limit": "A separately defined local relative-coordinate head metric; neither a repaired lower bound for the published proxy nor an invariant measure of the full network or generalization"
+    },
+    {
+      "id": "temperature_curvature",
+      "formula": "mean_i [sum_k p_ik * z_c,ik^2 - (sum_k p_ik * z_c,ik)^2]",
+      "aggregation": "arithmetic mean over all 1500 examples; no width, class-count, or across-checkpoint normalization",
+      "interpretation": "Exact second derivative at alpha=1 of mean categorical cross-entropy with logits alpha*z_c, treating each model's current centered logits as fixed. Equivalently mean Var_{k~p_i}(log p_ik). Independent of labels.",
+      "expected_invariant_under": ["arbitrary output common-row shifts", "global positive adjacent-layer rescaling", "per-unit positive diagonal adjacent-layer rescaling", "hidden-neuron permutation", "uniform hidden-neuron duplication"],
+      "known_failure": "Uniform predictions have value zero, and saturated predictions approach zero; confidence on wrong labels cannot be distinguished from confidence on correct labels. This is not a model-selection guarantee.",
+      "scope_limit": "An output-confidence curvature control with changed scientific meaning, not original weight-space flatness or a repair of the paper's theorem"
+    }
+  ],
+  "diagnostic_not_third_candidate": {
+    "name": "unweighted_exact_head_trace",
+    "formula": "mean_i [(1-sum_k p_ik^2) * sum_j h_ij^2]",
+    "purpose": "Show that exact raw final-kernel curvature itself changes under positive rescaling and duplication; do not select among metrics using this diagnostic"
+  },
+  "transformation_panel": {
+    "baseline": true,
+    "common_uniform_row_shift": {"values": [-100, -1, 0, 1, 100], "formula": "W_new = W + c; h and b unchanged"},
+    "common_nonuniform_row_shift": {"formula": "v = linspace(-2,2,D); W_new = W + v[:,None]; h and b unchanged"},
+    "global_positive_rescale": {"values": [0.1, 1, 10], "formula": "h_new = h/s; W_new = s*W; b unchanged; realizable by scaling penultimate affine kernel and bias by 1/s"},
+    "per_unit_positive_rescale": {"vectors": ["geomspace(0.1,10,D)"], "formula": "h_new[:,j] = h[:,j]/s_j; W_new[j,:] = s_j*W[j,:]; b unchanged"},
+    "hidden_permutation": {"formula": "reverse all hidden columns and corresponding output-kernel rows; b unchanged"},
+    "uniform_hidden_duplication": {"factors": [2,4], "formula": "Repeat each hidden column r times and each corresponding output-kernel row r times divided by r; b unchanged"}
+  },
+  "analytic_expectations": {
+    "predictions": "unchanged under every panel transformation; centered logits unchanged even when raw logits receive a common-class shift",
+    "original_global_rescale": "new score / old score = 1/s^2",
+    "original_uniform_duplication": "new score / old score = r",
+    "relative_head_trace_global_and_per_unit_rescale": "ratio = 1",
+    "relative_head_trace_common_shifts_and_permutation": "ratio = 1",
+    "relative_head_trace_uniform_duplication": "ratio = 1/r; report as a demonstrated limitation, not failed numerical implementation",
+    "temperature_curvature": "ratio = 1 under every panel transformation",
+    "unweighted_head_trace_global_rescale": "ratio = 1/s^2",
+    "unweighted_head_trace_uniform_duplication": "ratio = r",
+    "original_nonuniform_rescale_or_gauge_shift": "no invariant-score expectation; report all changes without choosing favorable examples"
+  },
+  "numerical_tolerances": {
+    "baseline_saved_float32_vs_reconstructed_float64_probability_max_absolute_difference": 1e-5,
+    "centered_logits_allclose": {"rtol": 1e-8, "atol": 1e-9},
+    "probability_max_absolute_difference": 1e-9,
+    "metric_analytic_expectation_allclose": {"rtol": 1e-8, "atol": 1e-10},
+    "policy": "Record every numerical failure without changing tolerance or excluding a checkpoint. Do not clip or smooth scores to improve findings; small negative variance from roundoff may be reported explicitly. Use absolute comparisons when a baseline metric is zero instead of undefined ratios. Argmax differences at probability ties should be reported separately, not mistaken for a theoretical symmetry failure."
+  },
+  "reporting": {
+    "required": ["protocol SHA256", "source SHA256", "all model SHA256 values", "data SHA256 and fixed indices/preprocessing", "all checkpoint by transformation results", "zero or near-zero component counts", "numerical failures", "all expected invariances and known noninvariances"],
+    "forbidden_inference": "Do not report improved early selection, validation correlation, final accuracy, or generalization from this inference-only invariance panel. Scores are distinct from the original method and must not replace historical results."
+  }
+}

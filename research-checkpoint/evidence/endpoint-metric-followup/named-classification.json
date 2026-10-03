@@ -1,0 +1,126 @@
+{
+  "source": "sweep-results/research-audit-20261002/named-trajectory-audit/mechanism-pilot/execution/events.jsonl",
+  "source_sha256": "adb0327326d520b289065e93f8b2a1802620b7cf8322e5bde9dffb20402b5aa9",
+  "rows": [
+    {
+      "task_id": 53,
+      "seed": 211,
+      "learning_rate": 1.0,
+      "epoch": 30,
+      "accuracy": 0.1895424836601307,
+      "errors": 124,
+      "n_validation": 153,
+      "hidden_zero_fraction": 0.9995915032679739
+    },
+    {
+      "task_id": 53,
+      "seed": 211,
+      "learning_rate": 0.0010000000474974513,
+      "epoch": 30,
+      "accuracy": 0.6535947712418301,
+      "errors": 53,
+      "n_validation": 153,
+      "hidden_zero_fraction": 0.23202614379084968
+    },
+    {
+      "task_id": 53,
+      "seed": 223,
+      "learning_rate": 1.0,
+      "epoch": 30,
+      "accuracy": 0.27450980392156865,
+      "errors": 111,
+      "n_validation": 153,
+      "hidden_zero_fraction": 0.9996936274509803
+    },
+    {
+      "task_id": 53,
+      "seed": 223,
+      "learning_rate": 0.0010000000474974513,
+      "epoch": 30,
+      "accuracy": 0.6339869281045751,
+      "errors": 56,
+      "n_validation": 153,
+      "hidden_zero_fraction": 0.14522058823529413
+    },
+    {
+      "task_id": 10101,
+      "seed": 211,
+      "learning_rate": 1.0,
+      "epoch": 30,
+      "accuracy": 0.8444444444444444,
+      "errors": 21,
+      "n_validation": 135,
+      "hidden_zero_fraction": 0.9997685185185186
+    },
+    {
+      "task_id": 10101,
+      "seed": 211,
+      "learning_rate": 0.0010000000474974513,
+      "epoch": 30,
+      "accuracy": 0.7925925925925926,
+      "errors": 28,
+      "n_validation": 135,
+      "hidden_zero_fraction": 0.26157407407407407
+    },
+    {
+      "task_id": 10101,
+      "seed": 223,
+      "learning_rate": 1.0,
+      "epoch": 30,
+      "accuracy": 0.8444444444444444,
+      "errors": 21,
+      "n_validation": 135,
+      "hidden_zero_fraction": 1.0
+    },
+    {
+      "task_id": 10101,
+      "seed": 223,
+      "learning_rate": 0.0010000000474974513,
+      "epoch": 30,
+      "accuracy": 0.7555555555555555,
+      "errors": 33,
+      "n_validation": 135,
+      "hidden_zero_fraction": 0.27337962962962964
+    },
+    {
+      "task_id": 146822,
+      "seed": 211,
+      "learning_rate": 1.0,
+      "epoch": 30,
+      "accuracy": 0.15865384615384615,
+      "errors": 350,
+      "n_validation": 416,
+      "hidden_zero_fraction": 1.0
+    },
+    {
+      "task_id": 146822,
+      "seed": 211,
+      "learning_rate": 0.0010000000474974513,
+      "epoch": 30,
+      "accuracy": 0.6947115384615384,
+      "errors": 127,
+      "n_validation": 416,
+      "hidden_zero_fraction": 0.24872295673076922
+    },
+    {
+      "task_id": 146822,
+      "seed": 223,
+      "learning_rate": 1.0,
+      "epoch": 30,
+      "accuracy": 0.12740384615384615,
+      "errors": 363,
+      "n_validation": 416,
+      "hidden_zero_fraction": 1.0
+    },
+    {
+      "task_id": 146822,
+      "seed": 223,
+      "learning_rate": 0.0010000000474974513,
+      "epoch": 30,
+      "accuracy": 0.6754807692307693,
+      "errors": 135,
+      "n_validation": 416,
+      "hidden_zero_fraction": 0.09945913461538461
+    }
+  ]
+}

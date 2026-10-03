@@ -1,0 +1,54 @@
+[
+  {
+    "name": "ruff-format",
+    "command": [
+      "<ORIGINAL_CHECKOUT>/.venv/bin/ruff",
+      "format",
+      "--check",
+      "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/theory-assumptions-review/verify_witness.py"
+    ],
+    "exit_code": 0,
+    "output": "1 file already formatted\n"
+  },
+  {
+    "name": "ruff-check",
+    "command": [
+      "<ORIGINAL_CHECKOUT>/.venv/bin/ruff",
+      "check",
+      "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/theory-assumptions-review/verify_witness.py"
+    ],
+    "exit_code": 0,
+    "output": "All checks passed!\n"
+  },
+  {
+    "name": "basedpyright",
+    "command": [
+      "basedpyright",
+      "--pythonpath",
+      "<ORIGINAL_CHECKOUT>/.venv/bin/python",
+      "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/theory-assumptions-review/verify_witness.py"
+    ],
+    "exit_code": 0,
+    "output": "0 errors, 0 warnings, 0 notes\n"
+  },
+  {
+    "name": "witness-reproduction",
+    "command": [
+      "<ORIGINAL_CHECKOUT>/.venv/bin/python",
+      "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/theory-assumptions-review/verify_witness.py"
+    ],
+    "exit_code": 0,
+    "output": "Five lower-bound violations verified; analytic and autodiff head blocks agree within 1.0e-12.\n"
+  },
+  {
+    "name": "no-sloppy-ignored-evidence-mirror",
+    "command": [
+      "no-sloppy",
+      "--ruff-config",
+      "pyproject.toml",
+      "verify_witness.py"
+    ],
+    "exit_code": 0,
+    "output": "Exact executable script and pyproject.toml copied into a temporary Git repository because the original evidence directory is gitignored.\nno-sloppy: clean (1 path(s) checked)\n"
+  }
+]

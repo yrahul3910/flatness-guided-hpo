@@ -1,0 +1,75 @@
+Methods follow-up: read-only consistency review
+Snapshot: 2026-10-02T22:52:55Z
+
+No manuscript, appendix, README, or production source was edited. This note proposes small author-review changes to the un-included operational appendix. It does not resolve the pending scientific framing, approve a final protocol, or report a matched CIFAR benchmark. No tests, training, or external actions were performed for this review.
+
+1. Replace the newly stale BOHB table row
+
+Location: paper/appendix/operational_protocol_audit_draft.tex:38.
+The existing phrase "linear continuous draws, rounded continuous integer draws" describes the earlier native-unit adapter. Current image/bohb_hpo.py imports matched_contract.decode, uses five numeric unit coordinates and two native categorical coordinates, and records method label bohb-unit-coordinate. The decoder uses inclusive integer bins, conditional valid-padding depth, and logarithmic learning-rate/weight-decay mappings. The installed ordered-discrete categorical treatment remains. The 199-call schedule and 11 full-budget calls were not changed.
+
+Exact replacement row:
+        BOHB unit-coordinate & 199 objective calls; 11 full-budget calls & Installed \texttt{bohb-hpo} 0.5.2 with five numeric unit coordinates and two ordered-discrete categorical coordinates; shared CIFAR decoding gives inclusive integer bins, conditional depth, and logarithmic learning rate/weight decay. \\
+
+Exact sentence to add after the BOHB budget paragraph at line 43:
+This is the separately labeled \texttt{bohb-unit-coordinate} adapter: its coordinate geometry and sampling laws differ from historical BOHB runs, which retain their original identity; the other baseline adapters have not thereby become matched.
+
+Evidence: image/bohb_hpo.py:1-59 and metadata/decoder call in its main block; image/src/matched_contract.py:59-80; bohb-coordinate-fix/report.md. No change is needed to the existing cold-fit, 99-to-100 mapping, full-budget-only incumbent, or 199-versus-30 budget statements.
+
+2. Scope the existing lifecycle description to its actual runner
+
+Locations: operational appendix lines 6, 9, 17, 19, 48, and 50. The existing automatic 80/20 split, threshold 0.1, 100 eligible probes/ten finalists/1,000 attempts, trial-order seeds, incumbent-only retention, and test-once statements remain accurate for the corresponding SearchRun/STCVX entry points. They do not describe the new MatchedRun. Do not replace them globally.
+
+Exact sentence to add at the end of the opening paragraph:
+The following lifecycle describes the \texttt{SearchRun} entry points; the separate matched screening development runner below uses explicit fit/validation arrays and has no test-evaluation path.
+
+Exact new paragraph to insert before "Seeds and retained evidence":
+\paragraph{Separate matched screening development runner.}
+\texttt{image/matched\_hpo.py} accepts caller-prepared CIFAR fit/validation arrays and performs no automatic dataset split or official-test evaluation. Its CLI defaults to eight proposed occurrences and two finalists per arm, with configurable counts. RMS, same-probe validation cross-entropy, and a random-shortlist control share the complete recorded probe population. Common exclusions cover failed, nonfinite, nonpositive-RMS, or negative-CE outcomes; the current call applies no 0.1 threshold and performs no replacement sampling. It trains each candidate in the union of the three shortlists once from a fresh phase-specific initialization, restores validation-loss-selected weights, and chooses each arm's incumbent by validation accuracy with candidate-ID tie breaking. Finalist failures consume slots. Each arm's logical cost includes all probes and its own finalists, while shared physical work and ranking time remain separate. This development comparison is not the existing 100-eligible/ten-finalist STCVX procedure or the 30-fit random-search baseline; final scale and eligibility policy remain undecided.
+
+Evidence: image/matched_hpo.py RunSettings, _finals, run, and CLI; image/src/matched_contract.py shortlist. The current _finals call leaves shortlist.threshold at None. This omits the 0.1 threshold but still enforces common validity exclusions. The random arm pays for the same probe population; it is a screening control, not a cost-free random baseline. An incomplete probe population prevents selection, while completed failed probes remain recorded and can be excluded under the common policy.
+
+3. Add the matched runner's distinct seed/provenance contract
+
+Location: append immediately after the existing SearchRun provenance paragraph at line 50; keep its claims scoped to SearchRun.
+
+Exact addition:
+For \texttt{MatchedRun}, dataset, repetition, occurrence ID, phase, and RNG role determine recorded seeds independently of method rank or execution order. It saves input/source hashes, the proposal manifest, probe subset order, every probe outcome, all shortlists, per-phase histories, and attempted-phase artifacts/checkpoints. It retains augmentation and shuffle state separately; the model archive alone is not a continuation interface. Array preparation, original row IDs, and upstream dataset provenance remain the caller's responsibility. Its deadline is cooperative, so a hard subprocess or provider limit is still required.
+
+Evidence: image/src/matched_contract.py phase_seed and make_manifest; image/matched_hpo.py metadata, _validate, _phase, and run; image/src/matched_training.py fit_phase and its callback/state records. Candidate occurrence IDs remain distinct even when decoded configurations coincide. The shared role seeds and explicit fixed_fixture mode do not change the pending final benchmark decisions.
+
+4. Refresh BOHB RNG and adapter-evidence wording
+
+Location: replace the BOHB-specific final two sentences of the operational appendix's seed paragraph at line 48.
+
+Exact replacement:
+BOHB seeds its private configuration generator and restores the legacy global NumPy state after each objective call, isolating proposal randomness from model reseeding. Initial-sampler and fixed synthetic KDE checks verify the recorded adapter behavior; complete adaptive replay with trained objectives remains untested. Its \texttt{adapter.json} and append-only proposal ledger retain latent coordinates, decoded configurations, raw/mapped budgets, eligibility, losses, and failures.
+
+Evidence: image/bohb_hpo.py unit_space, evaluate_bohb try/finally, adapter.json, and bohb-proposals.jsonl; bohb-coordinate-fix/report.md. The initial-seeding-only description is now incomplete. The fixed-KDE verification does not justify calling a full trained search reproducible or successful.
+
+5. README consistency and two small clarifications
+
+The new matched-runner section (image/README.md:28-38) agrees with the inspected APIs: four explicit fit/validation arrays, no test path, retained union fits, no replacement finalists, separate logical/physical costs, caller-owned preprocessing provenance, a cooperative limit, and a separately labeled BOHB adapter. It correctly leaves final scale, framing, eligibility, and actual-data preparation unresolved. No scientific rewrite is required for that section.
+
+At image/README.md:15, replace only "Every search writes `metadata.json`, `events.jsonl`, `incumbent.keras`, and a source snapshot." with:
+Every initialized `SearchRun` records metadata and source snapshots and appends attempted-trial/run events; `incumbent.keras` exists only after a successful eligible candidate. BOHB also writes `adapter.json` and `bohb-proposals.jsonl`. The separate `matched_hpo.py` development runner follows the validation-only contract below.
+
+Reason: a failed or interrupted search need not produce an incumbent. The listed six SearchRun entry points still test only their selected incumbent; that policy must not be generalized to MatchedRun.
+
+Optional clarification after image/README.md:32:
+The CLI defaults to eight candidate occurrences and two finalists per arm. The current integration applies common validity exclusions without the legacy 0.1 threshold; final eligibility remains a separate decision. Its random-shortlist arm shares and pays for the probes, so it is not the standalone 30-fit random baseline.
+
+The README's line-6 parenthetical "strong convexity-based HPO" is a pre-existing terminology problem, not introduced by this integration. A neutral author-review replacement would be "STCVX image entry point using the recorded RMS screening score". Do not treat that wording suggestion as approval of a new empirical framing or a silent replacement of the manuscript's scientific claim.
+
+Keep unchanged / do not infer
+
+The HEBO, Hyperopt, and TuRBO table rows were not made stale by these inspected changes. Their adapters still differ from the shared CIFAR decoder. The 100/10 legacy STCVX policy remains in image/stcvx.py; it has not become the MatchedRun default. The matched runner prepares infrastructure and preserves evidence; neither its code nor bounded synthetic checks establish CIFAR efficacy, cost-matched search superiority, or a repaired curvature theorem. Do not insert synthetic fixture accuracies as experimental results. Do not extend the shared CIFAR geometry decoder's comparability claim to MNIST or SVHN without separate validation.
+
+Inspected source hashes
+
+90b8d39a0249eb2cbc346439576a76cf46c326b426ba215dcf65bfd8bc46cef6  image/bohb_hpo.py
+34543ebf279db38e2a3aae55124084c7135e8b8283543971d1f9187ee59902ff  image/matched_hpo.py
+fbb58579d82a09eda23150fb63ff9fcc95a4fee0a431faccc40b09848b4519d5  image/src/matched_contract.py
+1dd1a156c03f8b6d04bf1f5f37034eeea8245adb8e309b038bd3853376e2d236  image/src/matched_training.py
+84f6faf223a34ec6d727ca86ca97473d2a03ec6f47a392aa35027b2671a5741d  image/README.md
+58d30a8ad0562c59d204a44a933d691cafe160fdde944beaed207e2025de13db  paper/appendix/operational_protocol_audit_draft.tex

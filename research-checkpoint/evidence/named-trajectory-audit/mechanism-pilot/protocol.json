@@ -1,0 +1,70 @@
+{
+  "protocol_version": "mechanism-pilot-v1",
+  "question": "With paired initialization and shuffles, does Adam learning rate 1.0 versus 0.001 change the historical h/W ratio through hidden-activation growth, output-kernel norm changes, or numerical/representation degeneracy?",
+  "evidence_status": "Prospective mechanism diagnostic using a historical preprocessing condition; not exact 2024 replay, unbiased validation, HPO comparison, or confirmatory generalization evidence.",
+  "task_order": [53, 10101, 146822],
+  "dataset_names": {"53": "vehicle", "10101": "btsc", "146822": "segment"},
+  "seed_order": [211, 223],
+  "learning_rate_order": [1.0, 0.001],
+  "run_order": "Dataset, then seed, then learning rate in listed order; 12 prescribed runs; no replacement runs.",
+  "input_sha256": {
+    "53": "1642dcd0ec1a041840c28ee26bfaa3e24860d0f5670e8f6da126823531878f39",
+    "10101": "b69299803411812449970670cf7d9f0cb2a3297e8332caa3af09af81e1d522f5",
+    "146822": "42e8a7dcca9eebd117437fd52a2e17c39109a4ccb9d8e8827908ae1fdbebc511"
+  },
+  "data": {
+    "input_names": "data-recovery/task-{task_id}-train-repeat0-fold0.npz",
+    "ordering": "Recovered OpenML repeat0/fold0 TRAIN row order, independently checked against installed OpenML0.15.1 offline. No sort or shuffle before choosing internal validation.",
+    "source_features": "Raw numeric columns and original Unicode labels from the training-only archives; source hashes and excluded columns in training-manifest.json.",
+    "preprocessing": "Fit OneHotEncoder(handle_unknown=ignore, sparse_output=False, dtype=float32), then row-L2 Normalizer on the whole OpenML training fold. This includes internal validation rows by design.",
+    "label_encoding": "Fit sklearn LabelBinarizer to original training-fold string labels; sorted class order. Binary result is an N by 1 float32 array; multiclass is one-hot float32.",
+    "inner_training": "First floor(0.8*N) rows, shuffled only within this prefix during training.",
+    "inner_validation": "Remaining final rows, never used for gradient updates; preprocessing and historical proxy still see them.",
+    "expected_rows_train_validation": {"53": [608, 153], "10101": [538, 135], "146822": [1663, 416]},
+    "expected_one_hot_width": {"53": 1384, "10101": 173, "146822": 11536},
+    "score_rows": "Whole recovered OpenML training fold in original order, batches of128 including final partial batch.",
+    "official_test_access": "No official test arrays, labels, or metrics opened or used. Raw downloaded ARFFs are not opened by this runner."
+  },
+  "training": {
+    "hidden_depth": 3,
+    "hidden_width": 64,
+    "hidden_activation": "relu",
+    "output": "One linear Dense head then sigmoid for binary or softmax for multiclass; separate Activation layer exposes actual float32 logits for stable diagnostics.",
+    "optimizer": "Keras Adam, beta1=0.9, beta2=0.999, epsilon=1e-7, constant learning rate, no weight decay or other regularization.",
+    "loss": "Keras binary_crossentropy or categorical_crossentropy on activated output; metric loss is separately recomputed from the frozen current model logits.",
+    "historical_alpha": "Recorded historical alpha=1e-6 was ignored by its model builder; no regularization added here.",
+    "batch_size": 128,
+    "epochs": 30,
+    "early_stopping": false,
+    "initialization": "Clear Keras session and set_random_seed(seed) before each run. Require identical initial weight hashes within each dataset/seed learning-rate pair.",
+    "shuffles": "Precompute30 np.random.default_rng(seed).permutation(inner_train_rows) permutations once per dataset/seed, save them, use identical arrays across the learning-rate pair; record sequence and per-epoch hashes.",
+    "execution": "Local CPU only, TensorFlow deterministic operations enabled, intra-op2 and inter-op1 threads. No paid resources or downloads."
+  },
+  "measurements": {
+    "original_ratio": "For every ordered batch, h_f=np.linalg.norm(float32 hidden), w_f=np.linalg.norm(float32 final kernel), ratio=float32(h_f)/float32(w_f). Bias excluded. No probability factor, RMS normalization, width normalization, or epsilon denominator.",
+    "original_max_rule": "Start best=-inf; replace only when ratio>best and ratio!=+inf. Preserve NaN/infinity values and per-batch validity separately; never replace undefined values with zero.",
+    "float64_checks": "Also log final-kernel Frobenius norm and each batch hidden Frobenius norm computed after float64 conversion, to distinguish float32 norm overflow from tensor degeneration.",
+    "stable_current_model": "Collect float32 logits and hidden activations from the frozen current network, then convert to float64. Binary CE=logaddexp(0,z)-y*z; multiclass CE=logsumexp(z)-y dot z. Report train, internal-validation and wholefold CE, accuracy, output entropy, mean maximum class probability, and hidden-zero fraction.",
+    "binary_probabilities": "Use sigmoid(z); diagnostics over the two classes [1-p,p]. Unary sigmoid is never centered as a one-class softmax.",
+    "exact_head_trace": "Final-kernel block only, excluding bias: mean_i(||h_i||_2^2*c_i), with c_i=p_i(1-p_i) for binary sigmoid, or1-sum_k p_ik^2 for multiclass softmax. Not full-Hessian trace, not gauge-invariant curvature.",
+    "mechanism_comparison": "Compare paired learning-rate trajectories at the same epoch within dataset/seed. For positive finite norms, log(max_b||h_b||/||W||)=log(max_b||h_b||)-log||W|| permits component attribution. Check invalid ratios, hidden zeros, entropy, loss, accuracy and trace before interpreting growth. Do not optimize thresholds, choose favorable epochs, or pool only successful subsets.",
+    "decision_standard": "Report whether paired effects reproduce across both fixed seeds in each dataset, including exceptions and negative evidence. No significance claim from two seeds and no claim of explaining the unrecorded 2024 component trajectories."
+  },
+  "failures_and_budget": {
+    "wall_seconds_cap": 300,
+    "guard": "Shared local loop deadline checked between epochs and before starting new runs/datasets. An active epoch, diagnostics, checkpoint and final logging can exceed the threshold; this is an approximate wall-clock bound, not a process kill or CPU-seconds accounting limit.",
+    "numerical_failure": "Nonfinite weights, hidden activations, logits or current-model cross-entropy terminate that run after preserving available components and a failure checkpoint. Undefined ratio alone is logged as degeneracy and does not terminate finite training.",
+    "remaining_runs": "Attempt other predefined runs after individual failures while the shared time budget remains; do not resample or replace failures. Record unstarted and timeout statuses explicitly.",
+    "checkpoints": "Save and hash epoch1 and epoch30 checkpoints, or a terminal failure/timeout checkpoint when applicable; retain checkpoint errors explicitly.",
+    "completeness": "Any failed, timed-out or unstarted run makes the12-run panel incomplete. Retain every completed/partial run and do not report complete-panel conclusions from a selected subset."
+  },
+  "provenance": "Snapshot runner, this protocol, repository pyproject, preparation source and training manifest; hash input files, source files, package-version map, initialization, shuffles and checkpoints. Nonfinite JSON numbers are explicit strings nan/inf/-inf. Existing execution directory prevents overwrite.",
+  "differences_from_historical_plot": [
+    "This uses recovered public task files and recorded fold ordering, not original cached arrays or kernel state.",
+    "One-hot encoding and row normalization are explicitly float32; historical sklearn defaults likely produced float64 before Keras conversion.",
+    "Fresh fixed seeds211/223 and paired shuffles replace unknown interactive initialization/order history.",
+    "A separate output Activation layer exposes logits while preserving sigmoid/softmax function and loss family; current TF/Keras versions differ from the saved2024 environment.",
+    "Fixed30epochs replace max200epochs with training-loss EarlyStopping(patience5,min_delta1e-3).",
+    "Stable current-model losses and component logs are new measurements; they cannot reconstruct the missing original components."
+  ]
+}

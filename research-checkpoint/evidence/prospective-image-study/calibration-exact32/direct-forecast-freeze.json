@@ -1,0 +1,33 @@
+{
+  "frozen_utc": "2026-10-03T02:40:15.894025+00:00",
+  "status": "literal_frozen_formula_implementation_ready_before_new_timing_inspection",
+  "source_sha256": "efca216abe1cc745e5e1b69463fb26e6f72eef2283e2afae0ada327c6aba36d9",
+  "source_lines": 198,
+  "protocol_sha256": "fd521d9ce01cce3e1a37d01b02173eb65764f929661563d2dd80c79e57004847",
+  "command": "python direct_cost_forecast.py RESULTS_DIRECTORY LAUNCH_ELIGIBILITY NEW_OUTPUT",
+  "fixed_costs": {
+    "worker_usd_per_hour": 0.812592,
+    "startup_idle_shutdown_seconds": 15616,
+    "scientific_cap_usd": 42,
+    "other_reserve_usd": 3,
+    "prior_plus_calibration_holds_usd": 5
+  },
+  "actual_exact32_timing_records_inspected": 0,
+  "original_nine_case_calculator_modified": false,
+  "checks": {
+    "ruff": "pass",
+    "no_sloppy_errors": 0,
+    "no_sloppy_advisory_warnings": 2,
+    "type_errors": 0,
+    "type_advisory_warnings": 7,
+    "basedpyright_exit_code": 1,
+    "basedpyright_exit_note": "Zero errors; nonzero status accompanies seven advisory typing warnings. Output retained.",
+    "synthetic_arithmetic_and_gate_checks": "pass",
+    "independent_source_review": "Passed at b238e9b1168b8ab20889ffa3eb96ce33b26468b83524eb0abc381f413d40001e; final change adds only two blank lines."
+  },
+  "evidence_sha256": {
+    "qa/direct-forecast-synthetic.json": "b725fe9f1b5bfb522af4bc0362eec8df343da3caa64d30e14d29fa39954b5b48",
+    "qa/direct-forecast-no-sloppy-final.txt": "8dc04252330a8a25a0e5d9150d4bf5dd4d2880561bb261aa91a96d1550625182",
+    "qa/direct-forecast-basedpyright-final.txt": "df0888fcde8f07af3c9ceecd62eeef6f1bacbcd7d96db28cde89071ecc24c74d"
+  }
+}

@@ -1,0 +1,5163 @@
+{
+  "created_utc": "2026-10-03T00:51:35.947958+00:00",
+  "status": "prospective_candidate_design_frozen_before_new_calibration_or_training",
+  "datasets": [
+    "cifar10",
+    "cifar100"
+  ],
+  "candidate_count": 64,
+  "repetitions_per_dataset": [
+    2000,
+    2001,
+    2002,
+    2003
+  ],
+  "minimum_study_repetition_prefix": [
+    2000,
+    2001
+  ],
+  "candidate_files_sha256": {
+    "cifar10-2000.json": "93ac7e6551a7cf9671f3eebe8bb6248afb15bb5eec6fa31f8c47e8fc110c309b",
+    "cifar10-2001.json": "dfba4dbbf1d7798c35256b7a90b927b1336416350b2553e1fa7d92bdbc3c5dd2",
+    "cifar10-2002.json": "7591cdd56808c978539905a0c6be35703d3205f610ff095314bfaa0b85c623ad",
+    "cifar10-2003.json": "0a8af33160ffe3d655d9f20932955d619677667c6cb10f0b01339cee4fc6ed24",
+    "cifar100-2000.json": "1496638323a59e43971aabefdcf9f34bf75a2e4a2202b78e51939f01b129be41",
+    "cifar100-2001.json": "ee500ef2f4788fdfcd1a03a12f857f549372dc9c2b3ff7d9bef813735535fa11",
+    "cifar100-2002.json": "f35363f0daedd4776838bf311effe43e6f9ab8c64205f207dbaaf75dee5083a9",
+    "cifar100-2003.json": "649e317d16d9d30a486140bfd32cec72d53371e1a9bbbd0d24c2de4720802b4c"
+  },
+  "seed_roles": [
+    [
+      "cifar10",
+      2000,
+      "shared",
+      "proposal/rng",
+      2007058724
+    ],
+    [
+      "cifar10",
+      2000,
+      "shared",
+      "probe/subset",
+      1880864270
+    ],
+    [
+      "cifar10",
+      2000,
+      "shared",
+      "probe/shuffle",
+      171565566
+    ],
+    [
+      "cifar10",
+      2000,
+      "shared",
+      "final/shuffle",
+      1672285474
+    ],
+    [
+      "cifar10",
+      2000,
+      "shared",
+      "selection/random",
+      1854135567
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000000",
+      "probe/init",
+      52997803
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000000",
+      "probe/augmentation",
+      799077105
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000000",
+      "final/init",
+      240467813
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000000",
+      "final/augmentation",
+      380613577
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000000",
+      "probe/translation",
+      1548836908
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000000",
+      "probe/flip",
+      1695139744
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000000",
+      "final/translation",
+      1402745755
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000000",
+      "final/flip",
+      814840314
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000001",
+      "probe/init",
+      1846077021
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000001",
+      "probe/augmentation",
+      404855879
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000001",
+      "final/init",
+      1033155473
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000001",
+      "final/augmentation",
+      1509599585
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000001",
+      "probe/translation",
+      1962414221
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000001",
+      "probe/flip",
+      1478050592
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000001",
+      "final/translation",
+      1055174911
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000001",
+      "final/flip",
+      776768087
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000002",
+      "probe/init",
+      2123779629
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000002",
+      "probe/augmentation",
+      198135954
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000002",
+      "final/init",
+      1205550483
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000002",
+      "final/augmentation",
+      1115097640
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000002",
+      "probe/translation",
+      761898021
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000002",
+      "probe/flip",
+      860897116
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000002",
+      "final/translation",
+      1548407586
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000002",
+      "final/flip",
+      891128915
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000003",
+      "probe/init",
+      23708441
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000003",
+      "probe/augmentation",
+      1052393830
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000003",
+      "final/init",
+      1790888464
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000003",
+      "final/augmentation",
+      586805522
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000003",
+      "probe/translation",
+      989846512
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000003",
+      "probe/flip",
+      426068652
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000003",
+      "final/translation",
+      453444421
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000003",
+      "final/flip",
+      1088704320
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000004",
+      "probe/init",
+      867653124
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000004",
+      "probe/augmentation",
+      223463828
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000004",
+      "final/init",
+      1914196828
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000004",
+      "final/augmentation",
+      468322941
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000004",
+      "probe/translation",
+      416660309
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000004",
+      "probe/flip",
+      1907859293
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000004",
+      "final/translation",
+      504794636
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000004",
+      "final/flip",
+      1689654233
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000005",
+      "probe/init",
+      1717580675
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000005",
+      "probe/augmentation",
+      2095470239
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000005",
+      "final/init",
+      151735031
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000005",
+      "final/augmentation",
+      1917047459
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000005",
+      "probe/translation",
+      1943434815
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000005",
+      "probe/flip",
+      1237426515
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000005",
+      "final/translation",
+      1491450619
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000005",
+      "final/flip",
+      1986998974
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000006",
+      "probe/init",
+      1003574355
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000006",
+      "probe/augmentation",
+      1671626743
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000006",
+      "final/init",
+      343064879
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000006",
+      "final/augmentation",
+      677758649
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000006",
+      "probe/translation",
+      862741218
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000006",
+      "probe/flip",
+      258259309
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000006",
+      "final/translation",
+      498406497
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000006",
+      "final/flip",
+      283638953
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000007",
+      "probe/init",
+      1005344771
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000007",
+      "probe/augmentation",
+      1192924104
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000007",
+      "final/init",
+      1301368759
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000007",
+      "final/augmentation",
+      566059379
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000007",
+      "probe/translation",
+      243151751
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000007",
+      "probe/flip",
+      1257915753
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000007",
+      "final/translation",
+      1308297979
+    ],
+    [
+      "cifar10",
+      2000,
+      "c000007",
+      "final/flip",
+      236383454
+    ],
+    [
+      "cifar10",
+      2001,
+      "shared",
+      "proposal/rng",
+      1021816783
+    ],
+    [
+      "cifar10",
+      2001,
+      "shared",
+      "probe/subset",
+      1524210368
+    ],
+    [
+      "cifar10",
+      2001,
+      "shared",
+      "probe/shuffle",
+      1229040593
+    ],
+    [
+      "cifar10",
+      2001,
+      "shared",
+      "final/shuffle",
+      1149463251
+    ],
+    [
+      "cifar10",
+      2001,
+      "shared",
+      "selection/random",
+      520185484
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000000",
+      "probe/init",
+      2072966240
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000000",
+      "probe/augmentation",
+      2078013302
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000000",
+      "final/init",
+      1886620323
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000000",
+      "final/augmentation",
+      982732871
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000000",
+      "probe/translation",
+      1107153483
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000000",
+      "probe/flip",
+      1726056816
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000000",
+      "final/translation",
+      88110679
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000000",
+      "final/flip",
+      1901875613
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000001",
+      "probe/init",
+      452468707
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000001",
+      "probe/augmentation",
+      2008214487
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000001",
+      "final/init",
+      720297088
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000001",
+      "final/augmentation",
+      1638806531
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000001",
+      "probe/translation",
+      612625506
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000001",
+      "probe/flip",
+      1296605629
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000001",
+      "final/translation",
+      551279617
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000001",
+      "final/flip",
+      1683662288
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000002",
+      "probe/init",
+      1871663393
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000002",
+      "probe/augmentation",
+      1711010512
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000002",
+      "final/init",
+      273821666
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000002",
+      "final/augmentation",
+      1721467587
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000002",
+      "probe/translation",
+      169933380
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000002",
+      "probe/flip",
+      1115716164
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000002",
+      "final/translation",
+      1858604153
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000002",
+      "final/flip",
+      195155429
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000003",
+      "probe/init",
+      1521312391
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000003",
+      "probe/augmentation",
+      1368953127
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000003",
+      "final/init",
+      220663075
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000003",
+      "final/augmentation",
+      509847969
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000003",
+      "probe/translation",
+      1272270560
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000003",
+      "probe/flip",
+      1175924946
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000003",
+      "final/translation",
+      1171294882
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000003",
+      "final/flip",
+      1071203027
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000004",
+      "probe/init",
+      620165043
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000004",
+      "probe/augmentation",
+      993637868
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000004",
+      "final/init",
+      2088990187
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000004",
+      "final/augmentation",
+      240859581
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000004",
+      "probe/translation",
+      1544536486
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000004",
+      "probe/flip",
+      649485222
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000004",
+      "final/translation",
+      1547559515
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000004",
+      "final/flip",
+      452663762
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000005",
+      "probe/init",
+      1600120268
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000005",
+      "probe/augmentation",
+      718089858
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000005",
+      "final/init",
+      1113507051
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000005",
+      "final/augmentation",
+      379516756
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000005",
+      "probe/translation",
+      1145451797
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000005",
+      "probe/flip",
+      1009567707
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000005",
+      "final/translation",
+      1381293181
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000005",
+      "final/flip",
+      1109293947
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000006",
+      "probe/init",
+      638775136
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000006",
+      "probe/augmentation",
+      1015000500
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000006",
+      "final/init",
+      614532784
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000006",
+      "final/augmentation",
+      2071658391
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000006",
+      "probe/translation",
+      2081396083
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000006",
+      "probe/flip",
+      1562637592
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000006",
+      "final/translation",
+      2121509150
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000006",
+      "final/flip",
+      756195341
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000007",
+      "probe/init",
+      985042037
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000007",
+      "probe/augmentation",
+      1709139365
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000007",
+      "final/init",
+      71743238
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000007",
+      "final/augmentation",
+      875887087
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000007",
+      "probe/translation",
+      2088811570
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000007",
+      "probe/flip",
+      1818516863
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000007",
+      "final/translation",
+      1031284535
+    ],
+    [
+      "cifar10",
+      2001,
+      "c000007",
+      "final/flip",
+      2137119669
+    ],
+    [
+      "cifar10",
+      2002,
+      "shared",
+      "proposal/rng",
+      1054402180
+    ],
+    [
+      "cifar10",
+      2002,
+      "shared",
+      "probe/subset",
+      222721729
+    ],
+    [
+      "cifar10",
+      2002,
+      "shared",
+      "probe/shuffle",
+      1847624072
+    ],
+    [
+      "cifar10",
+      2002,
+      "shared",
+      "final/shuffle",
+      1160940489
+    ],
+    [
+      "cifar10",
+      2002,
+      "shared",
+      "selection/random",
+      1833826324
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000000",
+      "probe/init",
+      2129016653
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000000",
+      "probe/augmentation",
+      1821870311
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000000",
+      "final/init",
+      1821670527
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000000",
+      "final/augmentation",
+      157023207
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000000",
+      "probe/translation",
+      1900190836
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000000",
+      "probe/flip",
+      1907134168
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000000",
+      "final/translation",
+      1284208489
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000000",
+      "final/flip",
+      1033464305
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000001",
+      "probe/init",
+      2141972339
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000001",
+      "probe/augmentation",
+      1353940435
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000001",
+      "final/init",
+      1874651610
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000001",
+      "final/augmentation",
+      2000333901
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000001",
+      "probe/translation",
+      2089808772
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000001",
+      "probe/flip",
+      550150282
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000001",
+      "final/translation",
+      825935691
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000001",
+      "final/flip",
+      1347670006
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000002",
+      "probe/init",
+      1869966777
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000002",
+      "probe/augmentation",
+      574191216
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000002",
+      "final/init",
+      1565077773
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000002",
+      "final/augmentation",
+      866967348
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000002",
+      "probe/translation",
+      1863928329
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000002",
+      "probe/flip",
+      1458810352
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000002",
+      "final/translation",
+      392754372
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000002",
+      "final/flip",
+      1632205459
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000003",
+      "probe/init",
+      509934190
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000003",
+      "probe/augmentation",
+      1599363354
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000003",
+      "final/init",
+      1415320829
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000003",
+      "final/augmentation",
+      1871061777
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000003",
+      "probe/translation",
+      242801731
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000003",
+      "probe/flip",
+      360656843
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000003",
+      "final/translation",
+      1090104174
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000003",
+      "final/flip",
+      163403888
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000004",
+      "probe/init",
+      1007539640
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000004",
+      "probe/augmentation",
+      1425171925
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000004",
+      "final/init",
+      177161533
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000004",
+      "final/augmentation",
+      1041091899
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000004",
+      "probe/translation",
+      1351347047
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000004",
+      "probe/flip",
+      510480194
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000004",
+      "final/translation",
+      1096214421
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000004",
+      "final/flip",
+      1554534736
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000005",
+      "probe/init",
+      1431693932
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000005",
+      "probe/augmentation",
+      303631758
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000005",
+      "final/init",
+      700862105
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000005",
+      "final/augmentation",
+      1192750427
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000005",
+      "probe/translation",
+      276415802
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000005",
+      "probe/flip",
+      1418223833
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000005",
+      "final/translation",
+      562847912
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000005",
+      "final/flip",
+      1022107883
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000006",
+      "probe/init",
+      992843059
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000006",
+      "probe/augmentation",
+      523693957
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000006",
+      "final/init",
+      2105372688
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000006",
+      "final/augmentation",
+      1036924422
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000006",
+      "probe/translation",
+      178091741
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000006",
+      "probe/flip",
+      948837594
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000006",
+      "final/translation",
+      829846774
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000006",
+      "final/flip",
+      485286686
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000007",
+      "probe/init",
+      2145368922
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000007",
+      "probe/augmentation",
+      1425792011
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000007",
+      "final/init",
+      1673688405
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000007",
+      "final/augmentation",
+      775904613
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000007",
+      "probe/translation",
+      51761272
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000007",
+      "probe/flip",
+      1670189798
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000007",
+      "final/translation",
+      871376865
+    ],
+    [
+      "cifar10",
+      2002,
+      "c000007",
+      "final/flip",
+      1299261486
+    ],
+    [
+      "cifar10",
+      2003,
+      "shared",
+      "proposal/rng",
+      2118338282
+    ],
+    [
+      "cifar10",
+      2003,
+      "shared",
+      "probe/subset",
+      1885094044
+    ],
+    [
+      "cifar10",
+      2003,
+      "shared",
+      "probe/shuffle",
+      1703245925
+    ],
+    [
+      "cifar10",
+      2003,
+      "shared",
+      "final/shuffle",
+      393057044
+    ],
+    [
+      "cifar10",
+      2003,
+      "shared",
+      "selection/random",
+      576568108
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000000",
+      "probe/init",
+      2134600575
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000000",
+      "probe/augmentation",
+      304227946
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000000",
+      "final/init",
+      156117875
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000000",
+      "final/augmentation",
+      1467227905
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000000",
+      "probe/translation",
+      911062648
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000000",
+      "probe/flip",
+      351848290
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000000",
+      "final/translation",
+      1566543746
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000000",
+      "final/flip",
+      1116307212
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000001",
+      "probe/init",
+      572929668
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000001",
+      "probe/augmentation",
+      1606853984
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000001",
+      "final/init",
+      991676325
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000001",
+      "final/augmentation",
+      191388869
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000001",
+      "probe/translation",
+      1548876098
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000001",
+      "probe/flip",
+      1923353006
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000001",
+      "final/translation",
+      2062248459
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000001",
+      "final/flip",
+      647421936
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000002",
+      "probe/init",
+      1730854800
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000002",
+      "probe/augmentation",
+      201699012
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000002",
+      "final/init",
+      42820367
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000002",
+      "final/augmentation",
+      131006419
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000002",
+      "probe/translation",
+      586132438
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000002",
+      "probe/flip",
+      984957648
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000002",
+      "final/translation",
+      243464556
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000002",
+      "final/flip",
+      122880842
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000003",
+      "probe/init",
+      1778651198
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000003",
+      "probe/augmentation",
+      356992918
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000003",
+      "final/init",
+      547698708
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000003",
+      "final/augmentation",
+      496616000
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000003",
+      "probe/translation",
+      664036116
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000003",
+      "probe/flip",
+      322772864
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000003",
+      "final/translation",
+      1848256386
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000003",
+      "final/flip",
+      888607206
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000004",
+      "probe/init",
+      767452671
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000004",
+      "probe/augmentation",
+      225745355
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000004",
+      "final/init",
+      830057750
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000004",
+      "final/augmentation",
+      697918907
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000004",
+      "probe/translation",
+      1002090102
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000004",
+      "probe/flip",
+      1096113118
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000004",
+      "final/translation",
+      1434327803
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000004",
+      "final/flip",
+      1524146198
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000005",
+      "probe/init",
+      1953035320
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000005",
+      "probe/augmentation",
+      1984962312
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000005",
+      "final/init",
+      132761571
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000005",
+      "final/augmentation",
+      166575797
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000005",
+      "probe/translation",
+      1248118345
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000005",
+      "probe/flip",
+      1027803382
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000005",
+      "final/translation",
+      1323394633
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000005",
+      "final/flip",
+      393270543
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000006",
+      "probe/init",
+      503602057
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000006",
+      "probe/augmentation",
+      1561902475
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000006",
+      "final/init",
+      306081720
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000006",
+      "final/augmentation",
+      1398550184
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000006",
+      "probe/translation",
+      820690682
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000006",
+      "probe/flip",
+      1639312211
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000006",
+      "final/translation",
+      1269600027
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000006",
+      "final/flip",
+      705351265
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000007",
+      "probe/init",
+      983493103
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000007",
+      "probe/augmentation",
+      2013932962
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000007",
+      "final/init",
+      1853477140
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000007",
+      "final/augmentation",
+      407529984
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000007",
+      "probe/translation",
+      204783265
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000007",
+      "probe/flip",
+      1556549168
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000007",
+      "final/translation",
+      1528835725
+    ],
+    [
+      "cifar10",
+      2003,
+      "c000007",
+      "final/flip",
+      2141275492
+    ],
+    [
+      "cifar100",
+      2000,
+      "shared",
+      "proposal/rng",
+      1909469101
+    ],
+    [
+      "cifar100",
+      2000,
+      "shared",
+      "probe/subset",
+      1061653970
+    ],
+    [
+      "cifar100",
+      2000,
+      "shared",
+      "probe/shuffle",
+      1650139290
+    ],
+    [
+      "cifar100",
+      2000,
+      "shared",
+      "final/shuffle",
+      756110420
+    ],
+    [
+      "cifar100",
+      2000,
+      "shared",
+      "selection/random",
+      284328484
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000000",
+      "probe/init",
+      1338184053
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000000",
+      "probe/augmentation",
+      701034287
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000000",
+      "final/init",
+      1855398780
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000000",
+      "final/augmentation",
+      1108742275
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000000",
+      "probe/translation",
+      1909871251
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000000",
+      "probe/flip",
+      772487746
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000000",
+      "final/translation",
+      1276464733
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000000",
+      "final/flip",
+      965714534
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000001",
+      "probe/init",
+      1815532056
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000001",
+      "probe/augmentation",
+      573333694
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000001",
+      "final/init",
+      906575203
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000001",
+      "final/augmentation",
+      1391615725
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000001",
+      "probe/translation",
+      653812251
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000001",
+      "probe/flip",
+      255316823
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000001",
+      "final/translation",
+      324481462
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000001",
+      "final/flip",
+      1487640624
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000002",
+      "probe/init",
+      801913341
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000002",
+      "probe/augmentation",
+      1687037956
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000002",
+      "final/init",
+      785389541
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000002",
+      "final/augmentation",
+      1728011706
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000002",
+      "probe/translation",
+      511414518
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000002",
+      "probe/flip",
+      2058632862
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000002",
+      "final/translation",
+      924919858
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000002",
+      "final/flip",
+      268835903
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000003",
+      "probe/init",
+      631740128
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000003",
+      "probe/augmentation",
+      144069425
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000003",
+      "final/init",
+      111151953
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000003",
+      "final/augmentation",
+      447810549
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000003",
+      "probe/translation",
+      142444371
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000003",
+      "probe/flip",
+      1986739041
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000003",
+      "final/translation",
+      904483791
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000003",
+      "final/flip",
+      1039808164
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000004",
+      "probe/init",
+      1068489081
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000004",
+      "probe/augmentation",
+      1946793608
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000004",
+      "final/init",
+      207706803
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000004",
+      "final/augmentation",
+      473760199
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000004",
+      "probe/translation",
+      1358123084
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000004",
+      "probe/flip",
+      703508715
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000004",
+      "final/translation",
+      1798231378
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000004",
+      "final/flip",
+      1800452945
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000005",
+      "probe/init",
+      1748458536
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000005",
+      "probe/augmentation",
+      372610628
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000005",
+      "final/init",
+      405525330
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000005",
+      "final/augmentation",
+      65517107
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000005",
+      "probe/translation",
+      85134771
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000005",
+      "probe/flip",
+      278099184
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000005",
+      "final/translation",
+      2080012825
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000005",
+      "final/flip",
+      1443732326
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000006",
+      "probe/init",
+      385462114
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000006",
+      "probe/augmentation",
+      528641239
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000006",
+      "final/init",
+      228958685
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000006",
+      "final/augmentation",
+      326998173
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000006",
+      "probe/translation",
+      1569592184
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000006",
+      "probe/flip",
+      441482118
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000006",
+      "final/translation",
+      1831037239
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000006",
+      "final/flip",
+      2019171784
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000007",
+      "probe/init",
+      1708657819
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000007",
+      "probe/augmentation",
+      1012144713
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000007",
+      "final/init",
+      237469642
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000007",
+      "final/augmentation",
+      217949435
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000007",
+      "probe/translation",
+      590855777
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000007",
+      "probe/flip",
+      520309200
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000007",
+      "final/translation",
+      752003615
+    ],
+    [
+      "cifar100",
+      2000,
+      "c000007",
+      "final/flip",
+      650458050
+    ],
+    [
+      "cifar100",
+      2001,
+      "shared",
+      "proposal/rng",
+      1599808468
+    ],
+    [
+      "cifar100",
+      2001,
+      "shared",
+      "probe/subset",
+      318087492
+    ],
+    [
+      "cifar100",
+      2001,
+      "shared",
+      "probe/shuffle",
+      549811663
+    ],
+    [
+      "cifar100",
+      2001,
+      "shared",
+      "final/shuffle",
+      1853239471
+    ],
+    [
+      "cifar100",
+      2001,
+      "shared",
+      "selection/random",
+      1186906762
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000000",
+      "probe/init",
+      866125626
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000000",
+      "probe/augmentation",
+      820876372
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000000",
+      "final/init",
+      1973557917
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000000",
+      "final/augmentation",
+      116160933
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000000",
+      "probe/translation",
+      1710792957
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000000",
+      "probe/flip",
+      990301380
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000000",
+      "final/translation",
+      1859919444
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000000",
+      "final/flip",
+      19808626
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000001",
+      "probe/init",
+      1826271284
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000001",
+      "probe/augmentation",
+      587937543
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000001",
+      "final/init",
+      1767853184
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000001",
+      "final/augmentation",
+      1861423127
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000001",
+      "probe/translation",
+      2090048464
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000001",
+      "probe/flip",
+      812753313
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000001",
+      "final/translation",
+      30688886
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000001",
+      "final/flip",
+      982833742
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000002",
+      "probe/init",
+      617701171
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000002",
+      "probe/augmentation",
+      411925390
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000002",
+      "final/init",
+      21684437
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000002",
+      "final/augmentation",
+      769355888
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000002",
+      "probe/translation",
+      984167199
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000002",
+      "probe/flip",
+      976699003
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000002",
+      "final/translation",
+      1607423415
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000002",
+      "final/flip",
+      642618269
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000003",
+      "probe/init",
+      1036731981
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000003",
+      "probe/augmentation",
+      619696558
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000003",
+      "final/init",
+      29564455
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000003",
+      "final/augmentation",
+      2110832342
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000003",
+      "probe/translation",
+      1749359308
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000003",
+      "probe/flip",
+      1733558679
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000003",
+      "final/translation",
+      1228381472
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000003",
+      "final/flip",
+      1381210426
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000004",
+      "probe/init",
+      1627694281
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000004",
+      "probe/augmentation",
+      2142126048
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000004",
+      "final/init",
+      1969860318
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000004",
+      "final/augmentation",
+      592020927
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000004",
+      "probe/translation",
+      1743485314
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000004",
+      "probe/flip",
+      276063089
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000004",
+      "final/translation",
+      102982970
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000004",
+      "final/flip",
+      1304595918
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000005",
+      "probe/init",
+      1959309278
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000005",
+      "probe/augmentation",
+      791930614
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000005",
+      "final/init",
+      1168321776
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000005",
+      "final/augmentation",
+      1745724900
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000005",
+      "probe/translation",
+      1412443072
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000005",
+      "probe/flip",
+      1651436855
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000005",
+      "final/translation",
+      122273155
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000005",
+      "final/flip",
+      99874893
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000006",
+      "probe/init",
+      508264195
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000006",
+      "probe/augmentation",
+      1975273386
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000006",
+      "final/init",
+      1784728994
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000006",
+      "final/augmentation",
+      553374705
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000006",
+      "probe/translation",
+      1649462223
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000006",
+      "probe/flip",
+      940458804
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000006",
+      "final/translation",
+      64540453
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000006",
+      "final/flip",
+      187221027
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000007",
+      "probe/init",
+      1844673604
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000007",
+      "probe/augmentation",
+      942129215
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000007",
+      "final/init",
+      943662586
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000007",
+      "final/augmentation",
+      1554268081
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000007",
+      "probe/translation",
+      755879733
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000007",
+      "probe/flip",
+      814785318
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000007",
+      "final/translation",
+      1636531785
+    ],
+    [
+      "cifar100",
+      2001,
+      "c000007",
+      "final/flip",
+      2051577418
+    ],
+    [
+      "cifar100",
+      2002,
+      "shared",
+      "proposal/rng",
+      1260861294
+    ],
+    [
+      "cifar100",
+      2002,
+      "shared",
+      "probe/subset",
+      1340720644
+    ],
+    [
+      "cifar100",
+      2002,
+      "shared",
+      "probe/shuffle",
+      1016374116
+    ],
+    [
+      "cifar100",
+      2002,
+      "shared",
+      "final/shuffle",
+      141853870
+    ],
+    [
+      "cifar100",
+      2002,
+      "shared",
+      "selection/random",
+      1631409901
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000000",
+      "probe/init",
+      1978216716
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000000",
+      "probe/augmentation",
+      138063399
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000000",
+      "final/init",
+      1771450640
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000000",
+      "final/augmentation",
+      424947508
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000000",
+      "probe/translation",
+      1115232607
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000000",
+      "probe/flip",
+      777123261
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000000",
+      "final/translation",
+      22009057
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000000",
+      "final/flip",
+      369132540
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000001",
+      "probe/init",
+      1925185191
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000001",
+      "probe/augmentation",
+      1648426371
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000001",
+      "final/init",
+      321830663
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000001",
+      "final/augmentation",
+      851455707
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000001",
+      "probe/translation",
+      2018577405
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000001",
+      "probe/flip",
+      1464624262
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000001",
+      "final/translation",
+      1351706468
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000001",
+      "final/flip",
+      1470037644
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000002",
+      "probe/init",
+      2099608204
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000002",
+      "probe/augmentation",
+      1298901078
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000002",
+      "final/init",
+      100263020
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000002",
+      "final/augmentation",
+      1127566914
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000002",
+      "probe/translation",
+      813413887
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000002",
+      "probe/flip",
+      1630491376
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000002",
+      "final/translation",
+      450207703
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000002",
+      "final/flip",
+      917980320
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000003",
+      "probe/init",
+      1804532639
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000003",
+      "probe/augmentation",
+      415462350
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000003",
+      "final/init",
+      1851892018
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000003",
+      "final/augmentation",
+      90899076
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000003",
+      "probe/translation",
+      1895820555
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000003",
+      "probe/flip",
+      1141578602
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000003",
+      "final/translation",
+      1614417799
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000003",
+      "final/flip",
+      891975194
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000004",
+      "probe/init",
+      325720139
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000004",
+      "probe/augmentation",
+      1902879449
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000004",
+      "final/init",
+      1155363905
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000004",
+      "final/augmentation",
+      1156785007
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000004",
+      "probe/translation",
+      95993968
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000004",
+      "probe/flip",
+      1940259739
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000004",
+      "final/translation",
+      236145597
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000004",
+      "final/flip",
+      1332763500
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000005",
+      "probe/init",
+      1894477378
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000005",
+      "probe/augmentation",
+      644370646
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000005",
+      "final/init",
+      978653022
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000005",
+      "final/augmentation",
+      1968185671
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000005",
+      "probe/translation",
+      62161553
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000005",
+      "probe/flip",
+      183730765
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000005",
+      "final/translation",
+      726268018
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000005",
+      "final/flip",
+      1758558885
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000006",
+      "probe/init",
+      975266243
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000006",
+      "probe/augmentation",
+      966010719
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000006",
+      "final/init",
+      1300168115
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000006",
+      "final/augmentation",
+      1058318136
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000006",
+      "probe/translation",
+      380811005
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000006",
+      "probe/flip",
+      90003901
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000006",
+      "final/translation",
+      764014525
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000006",
+      "final/flip",
+      1458030338
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000007",
+      "probe/init",
+      965143071
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000007",
+      "probe/augmentation",
+      664024793
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000007",
+      "final/init",
+      161970671
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000007",
+      "final/augmentation",
+      734439766
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000007",
+      "probe/translation",
+      1038308394
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000007",
+      "probe/flip",
+      1660906457
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000007",
+      "final/translation",
+      1842227831
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000007",
+      "final/flip",
+      108427932
+    ],
+    [
+      "cifar100",
+      2003,
+      "shared",
+      "proposal/rng",
+      406807591
+    ],
+    [
+      "cifar100",
+      2003,
+      "shared",
+      "probe/subset",
+      1749736248
+    ],
+    [
+      "cifar100",
+      2003,
+      "shared",
+      "probe/shuffle",
+      1536955751
+    ],
+    [
+      "cifar100",
+      2003,
+      "shared",
+      "final/shuffle",
+      282476363
+    ],
+    [
+      "cifar100",
+      2003,
+      "shared",
+      "selection/random",
+      1482320193
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000000",
+      "probe/init",
+      55942818
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000000",
+      "probe/augmentation",
+      371258214
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000000",
+      "final/init",
+      1364063502
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000000",
+      "final/augmentation",
+      1417689723
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000000",
+      "probe/translation",
+      1237289744
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000000",
+      "probe/flip",
+      1603223551
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000000",
+      "final/translation",
+      152059186
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000000",
+      "final/flip",
+      1541691829
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000001",
+      "probe/init",
+      816785006
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000001",
+      "probe/augmentation",
+      1048602892
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000001",
+      "final/init",
+      1885181663
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000001",
+      "final/augmentation",
+      673201310
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000001",
+      "probe/translation",
+      889564520
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000001",
+      "probe/flip",
+      2021197781
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000001",
+      "final/translation",
+      1600670576
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000001",
+      "final/flip",
+      1474167774
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000002",
+      "probe/init",
+      182508881
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000002",
+      "probe/augmentation",
+      1390750114
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000002",
+      "final/init",
+      1588823143
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000002",
+      "final/augmentation",
+      1866339751
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000002",
+      "probe/translation",
+      406290723
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000002",
+      "probe/flip",
+      986778666
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000002",
+      "final/translation",
+      1279428463
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000002",
+      "final/flip",
+      1943780406
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000003",
+      "probe/init",
+      2089741527
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000003",
+      "probe/augmentation",
+      1910401389
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000003",
+      "final/init",
+      66078941
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000003",
+      "final/augmentation",
+      744914674
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000003",
+      "probe/translation",
+      212643764
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000003",
+      "probe/flip",
+      1202129696
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000003",
+      "final/translation",
+      1673303675
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000003",
+      "final/flip",
+      1599087944
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000004",
+      "probe/init",
+      28369850
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000004",
+      "probe/augmentation",
+      1869910691
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000004",
+      "final/init",
+      1864386051
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000004",
+      "final/augmentation",
+      1632040396
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000004",
+      "probe/translation",
+      469382284
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000004",
+      "probe/flip",
+      1643855170
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000004",
+      "final/translation",
+      11713069
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000004",
+      "final/flip",
+      139062214
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000005",
+      "probe/init",
+      1266971932
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000005",
+      "probe/augmentation",
+      542299969
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000005",
+      "final/init",
+      2129550880
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000005",
+      "final/augmentation",
+      2005395769
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000005",
+      "probe/translation",
+      1292803103
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000005",
+      "probe/flip",
+      1560431923
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000005",
+      "final/translation",
+      1939563946
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000005",
+      "final/flip",
+      1766040605
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000006",
+      "probe/init",
+      1477311640
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000006",
+      "probe/augmentation",
+      462650226
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000006",
+      "final/init",
+      1042896355
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000006",
+      "final/augmentation",
+      797398629
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000006",
+      "probe/translation",
+      2047559398
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000006",
+      "probe/flip",
+      1076765779
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000006",
+      "final/translation",
+      609687157
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000006",
+      "final/flip",
+      359677114
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000007",
+      "probe/init",
+      1874929690
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000007",
+      "probe/augmentation",
+      2083326751
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000007",
+      "final/init",
+      803671482
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000007",
+      "final/augmentation",
+      657129753
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000007",
+      "probe/translation",
+      285642800
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000007",
+      "probe/flip",
+      2029408829
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000007",
+      "final/translation",
+      1336419655
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000007",
+      "final/flip",
+      2058710514
+    ]
+  ],
+  "seed_collisions": 0,
+  "architecture_estimates": [
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000000",
+      "config": {
+        "n_filters": 111,
+        "kernel_size": 3,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 512,
+        "learning_rate": 0.00040086968405935597,
+        "weight_decay": 0.0007525148865968465
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 231084032,
+      "trainable_parameters": 19779404,
+      "nontrainable_parameters": 6882,
+      "approx_checkpoint_tensor_bytes_with_Adam": 237380376
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000001",
+      "config": {
+        "n_filters": 64,
+        "kernel_size": 5,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 64,
+        "learning_rate": 0.00018869522392081506,
+        "weight_decay": 1.861731022306899e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 162333312,
+      "trainable_parameters": 4440266,
+      "nontrainable_parameters": 1920,
+      "approx_checkpoint_tensor_bytes_with_Adam": 53290872
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000002",
+      "config": {
+        "n_filters": 46,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 32,
+        "learning_rate": 0.0010205571801207825,
+        "weight_decay": 8.293927001208353e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 13419624,
+      "trainable_parameters": 205200,
+      "nontrainable_parameters": 276,
+      "approx_checkpoint_tensor_bytes_with_Adam": 2463504
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000003",
+      "config": {
+        "n_filters": 128,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.001390632684295068,
+        "weight_decay": 0.00022594954711523512
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 72881152,
+      "trainable_parameters": 4859530,
+      "nontrainable_parameters": 1792,
+      "approx_checkpoint_tensor_bytes_with_Adam": 58321528
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000004",
+      "config": {
+        "n_filters": 45,
+        "kernel_size": 6,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 256,
+        "learning_rate": 0.009111246375327632,
+        "weight_decay": 0.0003066691928615043
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 154462720,
+      "trainable_parameters": 12589191,
+      "nontrainable_parameters": 2790,
+      "approx_checkpoint_tensor_bytes_with_Adam": 151081452
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000005",
+      "config": {
+        "n_filters": 71,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 256,
+        "learning_rate": 0.0010012045743184228,
+        "weight_decay": 0.0003385282601772865
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 29403092,
+      "trainable_parameters": 955717,
+      "nontrainable_parameters": 426,
+      "approx_checkpoint_tensor_bytes_with_Adam": 11470308
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000006",
+      "config": {
+        "n_filters": 109,
+        "kernel_size": 5,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 256,
+        "learning_rate": 0.00018132941240116697,
+        "weight_decay": 0.0009396766837613854
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 617127424,
+      "trainable_parameters": 50961852,
+      "nontrainable_parameters": 6758,
+      "approx_checkpoint_tensor_bytes_with_Adam": 611569256
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000007",
+      "config": {
+        "n_filters": 57,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 32,
+        "learning_rate": 0.009881465019746717,
+        "weight_decay": 0.0003249624149227546
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 29651264,
+      "trainable_parameters": 341051,
+      "nontrainable_parameters": 342,
+      "approx_checkpoint_tensor_bytes_with_Adam": 4093980
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000000",
+      "config": {
+        "n_filters": 127,
+        "kernel_size": 4,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 512,
+        "learning_rate": 0.00022450176799146786,
+        "weight_decay": 0.0009258656993982532
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 70834544,
+      "trainable_parameters": 3780209,
+      "nontrainable_parameters": 762,
+      "approx_checkpoint_tensor_bytes_with_Adam": 45365556
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000001",
+      "config": {
+        "n_filters": 99,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.003938091389509153,
+        "weight_decay": 3.667747141003837e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 53160868,
+      "trainable_parameters": 920721,
+      "nontrainable_parameters": 594,
+      "approx_checkpoint_tensor_bytes_with_Adam": 11051028
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000002",
+      "config": {
+        "n_filters": 94,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.0009519829766126572,
+        "weight_decay": 0.00027981282816600284
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 48503400,
+      "trainable_parameters": 1033632,
+      "nontrainable_parameters": 564,
+      "approx_checkpoint_tensor_bytes_with_Adam": 12405840
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000003",
+      "config": {
+        "n_filters": 105,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.00036925970957836735,
+        "weight_decay": 4.199339862401904e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 59285740,
+      "trainable_parameters": 1021839,
+      "nontrainable_parameters": 630,
+      "approx_checkpoint_tensor_bytes_with_Adam": 12264588
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000004",
+      "config": {
+        "n_filters": 81,
+        "kernel_size": 2,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 512,
+        "learning_rate": 0.000623953717086448,
+        "weight_decay": 0.0005991122555580765
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 15291116,
+      "trainable_parameters": 4124087,
+      "nontrainable_parameters": 486,
+      "approx_checkpoint_tensor_bytes_with_Adam": 49490988
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000005",
+      "config": {
+        "n_filters": 107,
+        "kernel_size": 3,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.00017824541254548036,
+        "weight_decay": 0.0005363222681167106
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 111983616,
+      "trainable_parameters": 4547364,
+      "nontrainable_parameters": 1498,
+      "approx_checkpoint_tensor_bytes_with_Adam": 54574360
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000006",
+      "config": {
+        "n_filters": 72,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 32,
+        "learning_rate": 0.0011595126162395357,
+        "weight_decay": 1.989358282477552e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 32809280,
+      "trainable_parameters": 949106,
+      "nontrainable_parameters": 2160,
+      "approx_checkpoint_tensor_bytes_with_Adam": 11397912
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000007",
+      "config": {
+        "n_filters": 92,
+        "kernel_size": 2,
+        "padding": "valid",
+        "n_blocks": 3,
+        "n_units": 64,
+        "learning_rate": 0.0004027936043190045,
+        "weight_decay": 2.2564560891352965e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 24295632,
+      "trainable_parameters": 554278,
+      "nontrainable_parameters": 1288,
+      "approx_checkpoint_tensor_bytes_with_Adam": 6656488
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000000",
+      "config": {
+        "n_filters": 108,
+        "kernel_size": 3,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.005795568307911342,
+        "weight_decay": 0.0002117721689868307
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 39102896,
+      "trainable_parameters": 1210586,
+      "nontrainable_parameters": 648,
+      "approx_checkpoint_tensor_bytes_with_Adam": 14529624
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000001",
+      "config": {
+        "n_filters": 91,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 256,
+        "learning_rate": 0.004887973277422831,
+        "weight_decay": 4.744389819157403e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 52744704,
+      "trainable_parameters": 2144693,
+      "nontrainable_parameters": 2730,
+      "approx_checkpoint_tensor_bytes_with_Adam": 25747236
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000002",
+      "config": {
+        "n_filters": 103,
+        "kernel_size": 2,
+        "padding": "valid",
+        "n_blocks": 4,
+        "n_units": 64,
+        "learning_rate": 0.0001140689326413943,
+        "weight_decay": 0.0008518423816085612
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 35529460,
+      "trainable_parameters": 1841633,
+      "nontrainable_parameters": 3090,
+      "approx_checkpoint_tensor_bytes_with_Adam": 22111956
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000003",
+      "config": {
+        "n_filters": 73,
+        "kernel_size": 5,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 128,
+        "learning_rate": 0.0017456733239072184,
+        "weight_decay": 0.0006621126371976656
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 210540288,
+      "trainable_parameters": 5904636,
+      "nontrainable_parameters": 2190,
+      "approx_checkpoint_tensor_bytes_with_Adam": 70864392
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000004",
+      "config": {
+        "n_filters": 122,
+        "kernel_size": 3,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 32,
+        "learning_rate": 0.00011501475400883153,
+        "weight_decay": 3.012134737117162e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 209254720,
+      "trainable_parameters": 5760226,
+      "nontrainable_parameters": 3660,
+      "approx_checkpoint_tensor_bytes_with_Adam": 69137352
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000005",
+      "config": {
+        "n_filters": 46,
+        "kernel_size": 5,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 512,
+        "learning_rate": 0.001004043104060172,
+        "weight_decay": 1.3036602793611765e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 85545984,
+      "trainable_parameters": 2986626,
+      "nontrainable_parameters": 1380,
+      "approx_checkpoint_tensor_bytes_with_Adam": 35845032
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000006",
+      "config": {
+        "n_filters": 75,
+        "kernel_size": 4,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.00029687697563904737,
+        "weight_decay": 0.000795128832848698
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 25048240,
+      "trainable_parameters": 424989,
+      "nontrainable_parameters": 450,
+      "approx_checkpoint_tensor_bytes_with_Adam": 5101668
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000007",
+      "config": {
+        "n_filters": 70,
+        "kernel_size": 6,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.0002703287117458545,
+        "weight_decay": 0.0007650316633368168
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 98632320,
+      "trainable_parameters": 935144,
+      "nontrainable_parameters": 420,
+      "approx_checkpoint_tensor_bytes_with_Adam": 11223408
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000000",
+      "config": {
+        "n_filters": 124,
+        "kernel_size": 5,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 128,
+        "learning_rate": 0.003537943522730951,
+        "weight_decay": 1.3958564813987733e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 404165888,
+      "trainable_parameters": 4873130,
+      "nontrainable_parameters": 1736,
+      "approx_checkpoint_tensor_bytes_with_Adam": 58484504
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000001",
+      "config": {
+        "n_filters": 83,
+        "kernel_size": 3,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 32,
+        "learning_rate": 0.00821787884944294,
+        "weight_decay": 1.5276266513218284e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 23164790,
+      "trainable_parameters": 318584,
+      "nontrainable_parameters": 498,
+      "approx_checkpoint_tensor_bytes_with_Adam": 3825000
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000002",
+      "config": {
+        "n_filters": 48,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.0017269600651125248,
+        "weight_decay": 0.0002762693035048628
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 14494912,
+      "trainable_parameters": 270522,
+      "nontrainable_parameters": 288,
+      "approx_checkpoint_tensor_bytes_with_Adam": 3247416
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000003",
+      "config": {
+        "n_filters": 94,
+        "kernel_size": 6,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 128,
+        "learning_rate": 0.0010636796204982204,
+        "weight_decay": 7.194196375693195e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 662050048,
+      "trainable_parameters": 54289144,
+      "nontrainable_parameters": 5828,
+      "approx_checkpoint_tensor_bytes_with_Adam": 651493040
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000004",
+      "config": {
+        "n_filters": 46,
+        "kernel_size": 5,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 256,
+        "learning_rate": 0.00019945945164885132,
+        "weight_decay": 1.1937396391282732e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 13876160,
+      "trainable_parameters": 701290,
+      "nontrainable_parameters": 276,
+      "approx_checkpoint_tensor_bytes_with_Adam": 8416584
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000005",
+      "config": {
+        "n_filters": 36,
+        "kernel_size": 4,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 512,
+        "learning_rate": 0.003713492350647038,
+        "weight_decay": 2.658466559682596e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 7398080,
+      "trainable_parameters": 970766,
+      "nontrainable_parameters": 216,
+      "approx_checkpoint_tensor_bytes_with_Adam": 11650056
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000006",
+      "config": {
+        "n_filters": 83,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 512,
+        "learning_rate": 0.0003751382895735558,
+        "weight_decay": 3.487648272653155e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 44710912,
+      "trainable_parameters": 2527597,
+      "nontrainable_parameters": 2490,
+      "approx_checkpoint_tensor_bytes_with_Adam": 30341124
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000007",
+      "config": {
+        "n_filters": 124,
+        "kernel_size": 4,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 256,
+        "learning_rate": 0.00014001930612045544,
+        "weight_decay": 1.7132347222411086e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 66131264,
+      "trainable_parameters": 2089126,
+      "nontrainable_parameters": 744,
+      "approx_checkpoint_tensor_bytes_with_Adam": 25072488
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000000",
+      "config": {
+        "n_filters": 69,
+        "kernel_size": 3,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 32,
+        "learning_rate": 0.0062101660133610645,
+        "weight_decay": 0.0005986396549358242
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 16321838,
+      "trainable_parameters": 250490,
+      "nontrainable_parameters": 414,
+      "approx_checkpoint_tensor_bytes_with_Adam": 3007536
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000001",
+      "config": {
+        "n_filters": 103,
+        "kernel_size": 5,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.000605689273884374,
+        "weight_decay": 2.1776907423662374e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 59773400,
+      "trainable_parameters": 1211330,
+      "nontrainable_parameters": 618,
+      "approx_checkpoint_tensor_bytes_with_Adam": 14538432
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000002",
+      "config": {
+        "n_filters": 107,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.00017579470582105287,
+        "weight_decay": 0.00022642325345774317
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 196397056,
+      "trainable_parameters": 5397211,
+      "nontrainable_parameters": 1498,
+      "approx_checkpoint_tensor_bytes_with_Adam": 64772524
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000003",
+      "config": {
+        "n_filters": 116,
+        "kernel_size": 5,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.00022042840312995438,
+        "weight_decay": 0.000299288546720678
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 74478400,
+      "trainable_parameters": 1060308,
+      "nontrainable_parameters": 696,
+      "approx_checkpoint_tensor_bytes_with_Adam": 12726480
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000004",
+      "config": {
+        "n_filters": 76,
+        "kernel_size": 4,
+        "padding": "valid",
+        "n_blocks": 3,
+        "n_units": 128,
+        "learning_rate": 0.00029358001543197974,
+        "weight_decay": 5.499981118001277e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 28441664,
+      "trainable_parameters": 981344,
+      "nontrainable_parameters": 1064,
+      "approx_checkpoint_tensor_bytes_with_Adam": 11780384
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000005",
+      "config": {
+        "n_filters": 48,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 32,
+        "learning_rate": 0.006069974113826313,
+        "weight_decay": 4.8164159168296654e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 14448320,
+      "trainable_parameters": 223988,
+      "nontrainable_parameters": 288,
+      "approx_checkpoint_tensor_bytes_with_Adam": 2689008
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000006",
+      "config": {
+        "n_filters": 61,
+        "kernel_size": 5,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 32,
+        "learning_rate": 0.0005700144272134912,
+        "weight_decay": 2.902496178640216e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 147636864,
+      "trainable_parameters": 3980166,
+      "nontrainable_parameters": 1830,
+      "approx_checkpoint_tensor_bytes_with_Adam": 47769312
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000007",
+      "config": {
+        "n_filters": 35,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.0007354465838307453,
+        "weight_decay": 0.00010352890381771012
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 3232000,
+      "trainable_parameters": 303819,
+      "nontrainable_parameters": 210,
+      "approx_checkpoint_tensor_bytes_with_Adam": 3646668
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000000",
+      "config": {
+        "n_filters": 94,
+        "kernel_size": 2,
+        "padding": "valid",
+        "n_blocks": 3,
+        "n_units": 32,
+        "learning_rate": 0.0005543014317709776,
+        "weight_decay": 0.0005631610143842885
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 25229416,
+      "trainable_parameters": 468162,
+      "nontrainable_parameters": 1316,
+      "approx_checkpoint_tensor_bytes_with_Adam": 5623208
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000001",
+      "config": {
+        "n_filters": 86,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 256,
+        "learning_rate": 0.009100551973578421,
+        "weight_decay": 1.285183838397062e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 67658752,
+      "trainable_parameters": 3085578,
+      "nontrainable_parameters": 516,
+      "approx_checkpoint_tensor_bytes_with_Adam": 37029000
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000002",
+      "config": {
+        "n_filters": 69,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.00021539801092537844,
+        "weight_decay": 4.727239111076089e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 22661120,
+      "trainable_parameters": 2505521,
+      "nontrainable_parameters": 966,
+      "approx_checkpoint_tensor_bytes_with_Adam": 30070116
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000003",
+      "config": {
+        "n_filters": 62,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 512,
+        "learning_rate": 0.004335750812215345,
+        "weight_decay": 4.0621470943092266e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 38651904,
+      "trainable_parameters": 4241586,
+      "nontrainable_parameters": 372,
+      "approx_checkpoint_tensor_bytes_with_Adam": 50900520
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000004",
+      "config": {
+        "n_filters": 90,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 32,
+        "learning_rate": 0.009185634124745387,
+        "weight_decay": 0.00010678362101512943
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 67510400,
+      "trainable_parameters": 5566862,
+      "nontrainable_parameters": 5580,
+      "approx_checkpoint_tensor_bytes_with_Adam": 66824664
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000005",
+      "config": {
+        "n_filters": 89,
+        "kernel_size": 4,
+        "padding": "valid",
+        "n_blocks": 3,
+        "n_units": 256,
+        "learning_rate": 0.0008120308983343481,
+        "weight_decay": 0.0001154236754122298
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 38435152,
+      "trainable_parameters": 1390593,
+      "nontrainable_parameters": 1246,
+      "approx_checkpoint_tensor_bytes_with_Adam": 16692100
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000006",
+      "config": {
+        "n_filters": 111,
+        "kernel_size": 3,
+        "padding": "valid",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.00022575897233526903,
+        "weight_decay": 2.4669124879261443e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 55332086,
+      "trainable_parameters": 2075342,
+      "nontrainable_parameters": 1554,
+      "approx_checkpoint_tensor_bytes_with_Adam": 24910320
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000007",
+      "config": {
+        "n_filters": 126,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 256,
+        "learning_rate": 0.0024048236993453416,
+        "weight_decay": 0.00012543231383218347
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 84134632,
+      "trainable_parameters": 2215962,
+      "nontrainable_parameters": 756,
+      "approx_checkpoint_tensor_bytes_with_Adam": 26594568
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000000",
+      "config": {
+        "n_filters": 108,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.0009191615177539628,
+        "weight_decay": 0.0005957535211024385
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 200001536,
+      "trainable_parameters": 5464448,
+      "nontrainable_parameters": 1512,
+      "approx_checkpoint_tensor_bytes_with_Adam": 65579424
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000001",
+      "config": {
+        "n_filters": 47,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.0003339395376376209,
+        "weight_decay": 0.0008610918617236266
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 13982132,
+      "trainable_parameters": 267367,
+      "nontrainable_parameters": 282,
+      "approx_checkpoint_tensor_bytes_with_Adam": 3209532
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000002",
+      "config": {
+        "n_filters": 62,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 64,
+        "learning_rate": 0.00019152597336849912,
+        "weight_decay": 1.2915882119016064e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 66287872,
+      "trainable_parameters": 879834,
+      "nontrainable_parameters": 868,
+      "approx_checkpoint_tensor_bytes_with_Adam": 10561480
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000003",
+      "config": {
+        "n_filters": 58,
+        "kernel_size": 5,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.0008388936358343886,
+        "weight_decay": 1.4154976422695977e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 20422400,
+      "trainable_parameters": 365236,
+      "nontrainable_parameters": 348,
+      "approx_checkpoint_tensor_bytes_with_Adam": 4384224
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000004",
+      "config": {
+        "n_filters": 50,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 32,
+        "learning_rate": 0.0013711609302208773,
+        "weight_decay": 0.0004243043158579607
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 84406400,
+      "trainable_parameters": 6835982,
+      "nontrainable_parameters": 3100,
+      "approx_checkpoint_tensor_bytes_with_Adam": 82044184
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000005",
+      "config": {
+        "n_filters": 32,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 256,
+        "learning_rate": 0.0004358368697189733,
+        "weight_decay": 5.592372776947854e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 7525760,
+      "trainable_parameters": 365572,
+      "nontrainable_parameters": 192,
+      "approx_checkpoint_tensor_bytes_with_Adam": 4387632
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000006",
+      "config": {
+        "n_filters": 74,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 64,
+        "learning_rate": 0.0046555674925763835,
+        "weight_decay": 3.9938811630571693e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 93665536,
+      "trainable_parameters": 1190934,
+      "nontrainable_parameters": 1036,
+      "approx_checkpoint_tensor_bytes_with_Adam": 14295352
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000007",
+      "config": {
+        "n_filters": 71,
+        "kernel_size": 2,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.007755519433448989,
+        "weight_decay": 0.000800736592528028
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 9174772,
+      "trainable_parameters": 493695,
+      "nontrainable_parameters": 426,
+      "approx_checkpoint_tensor_bytes_with_Adam": 5926044
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000000",
+      "config": {
+        "n_filters": 65,
+        "kernel_size": 6,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 256,
+        "learning_rate": 0.0009622196221313154,
+        "weight_decay": 3.2101323559570524e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 164029440,
+      "trainable_parameters": 2620301,
+      "nontrainable_parameters": 910,
+      "approx_checkpoint_tensor_bytes_with_Adam": 31447252
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000001",
+      "config": {
+        "n_filters": 32,
+        "kernel_size": 3,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.00011338441496799975,
+        "weight_decay": 8.289236383964001e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 6140416,
+      "trainable_parameters": 556900,
+      "nontrainable_parameters": 192,
+      "approx_checkpoint_tensor_bytes_with_Adam": 6683568
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000002",
+      "config": {
+        "n_filters": 125,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.00012817271191043012,
+        "weight_decay": 0.0007088569895180258
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 34566400,
+      "trainable_parameters": 1158189,
+      "nontrainable_parameters": 750,
+      "approx_checkpoint_tensor_bytes_with_Adam": 13901268
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000003",
+      "config": {
+        "n_filters": 92,
+        "kernel_size": 3,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 256,
+        "learning_rate": 0.004857281824814524,
+        "weight_decay": 0.0001387873437012534
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 29704432,
+      "trainable_parameters": 1877364,
+      "nontrainable_parameters": 552,
+      "approx_checkpoint_tensor_bytes_with_Adam": 22530576
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000004",
+      "config": {
+        "n_filters": 127,
+        "kernel_size": 5,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 256,
+        "learning_rate": 0.0017344887824665262,
+        "weight_decay": 4.6071230433270284e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 89763800,
+      "trainable_parameters": 2468674,
+      "nontrainable_parameters": 762,
+      "approx_checkpoint_tensor_bytes_with_Adam": 29627136
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000005",
+      "config": {
+        "n_filters": 35,
+        "kernel_size": 4,
+        "padding": "valid",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.0003939002889519847,
+        "weight_decay": 0.000769169439527555
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 6906160,
+      "trainable_parameters": 321907,
+      "nontrainable_parameters": 490,
+      "approx_checkpoint_tensor_bytes_with_Adam": 3864844
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000006",
+      "config": {
+        "n_filters": 38,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 64,
+        "learning_rate": 0.00012717579173925842,
+        "weight_decay": 1.2429076228437564e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 37439744,
+      "trainable_parameters": 1058290,
+      "nontrainable_parameters": 1140,
+      "approx_checkpoint_tensor_bytes_with_Adam": 12704040
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000007",
+      "config": {
+        "n_filters": 35,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 256,
+        "learning_rate": 0.0006010592090770629,
+        "weight_decay": 0.0005782763491836547
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 42030080,
+      "trainable_parameters": 3506251,
+      "nontrainable_parameters": 2170,
+      "approx_checkpoint_tensor_bytes_with_Adam": 42083692
+    }
+  ],
+  "calibration_representatives": [
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000005",
+      "config": {
+        "n_filters": 36,
+        "kernel_size": 4,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 512,
+        "learning_rate": 0.003713492350647038,
+        "weight_decay": 2.658466559682596e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 7398080,
+      "trainable_parameters": 970766,
+      "nontrainable_parameters": 216,
+      "approx_checkpoint_tensor_bytes_with_Adam": 11650056
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000001",
+      "config": {
+        "n_filters": 99,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.003938091389509153,
+        "weight_decay": 3.667747141003837e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 53160868,
+      "trainable_parameters": 920721,
+      "nontrainable_parameters": 594,
+      "approx_checkpoint_tensor_bytes_with_Adam": 11051028
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000003",
+      "config": {
+        "n_filters": 94,
+        "kernel_size": 6,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 128,
+        "learning_rate": 0.0010636796204982204,
+        "weight_decay": 7.194196375693195e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 662050048,
+      "trainable_parameters": 54289144,
+      "nontrainable_parameters": 5828,
+      "approx_checkpoint_tensor_bytes_with_Adam": 651493040
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000007",
+      "config": {
+        "n_filters": 35,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.0007354465838307453,
+        "weight_decay": 0.00010352890381771012
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 3232000,
+      "trainable_parameters": 303819,
+      "nontrainable_parameters": 210,
+      "approx_checkpoint_tensor_bytes_with_Adam": 3646668
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000003",
+      "config": {
+        "n_filters": 62,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 512,
+        "learning_rate": 0.004335750812215345,
+        "weight_decay": 4.0621470943092266e-05
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 38651904,
+      "trainable_parameters": 4241586,
+      "nontrainable_parameters": 372,
+      "approx_checkpoint_tensor_bytes_with_Adam": 50900520
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000000",
+      "config": {
+        "n_filters": 108,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.0009191615177539628,
+        "weight_decay": 0.0005957535211024385
+      },
+      "forward_multiply_accumulates_per_image_excluding_BN_activation_augmentation": 200001536,
+      "trainable_parameters": 5464448,
+      "nontrainable_parameters": 1512,
+      "approx_checkpoint_tensor_bytes_with_Adam": 65579424
+    }
+  ],
+  "calibration_selection_rule": "Per dataset, minimum, upper median and maximum analytic forward-convolution/dense MAC estimate among all32prospectivelyfixedcandidates; ties block/candidate ascending. No model outcomes used.",
+  "max_snapshot_tensor_GiB_both_probe_and_final_for_all_candidates": 5.872499205172062,
+  "size_selection": "Choose completed same repetition prefix for both tasks using timing/memory/disk/budget gate before scientific outcomes; do not change candidate distributions after calibration."
+}

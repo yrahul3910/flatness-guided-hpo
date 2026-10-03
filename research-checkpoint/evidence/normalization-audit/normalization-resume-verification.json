@@ -1,0 +1,20 @@
+{
+  "verification_scope": "Normalization audit scripts and retained all16 evidence only; no model inference/training",
+  "analytical_fixture_numerical_and_semantic_output_exactly_preserved": true,
+  "preserved_executed_source_sha256": "2559fd1aa2850e1e66e5a18c374514ab4a415bee9c998172ab64d2df1f67bd81",
+  "current_executed_source_sha256": "fdcf8ec3c4e393c5598351e2d53679d13e8c3d64bf40896de17c32fbd6889c18",
+  "sha256": {
+    "normalization_identities.py": "fdcf8ec3c4e393c5598351e2d53679d13e8c3d64bf40896de17c32fbd6889c18",
+    "normalization_identity_results.json": "38dde687d6969687ea3f8fb163a0cb6df7814a8187084fed71830db3d01290f6",
+    "check_saved_models.py": "4080c42e33706b96da2164ecab6a375fbd9400332380f7ffe52215cf3988a6df",
+    "normalization_protocol.json": "0f9364f9d435483dfc3cbe282483b65ceea1686094b6428da85a255acb57b44d",
+    "normalization-resume-style.log": "b368d18a5f824162923bed4f0cd75ee4f776b727f6895dc78e8bc296fec0b3c0",
+    "normalization-resume-integrity.json": "57197c796dd2f895e207878c9f29133f22604ce0b5fa47a642f38969fb749f7b",
+    "normalization-identities-resume-fixture.log": "05db10a1d31e32a0148b7a78220641d3345e42f2f8f695404a5b20c743135034"
+  },
+  "formatter_pass": true,
+  "repository_ruff_pass": true,
+  "python312_compilation_pass": true,
+  "direct_no_sloppy_repository_configuration_pass": true,
+  "no_sloppy_findings": 0
+}

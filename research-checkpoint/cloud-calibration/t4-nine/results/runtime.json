@@ -1,0 +1,12 @@
+{
+  "tensorflow": "2.16.2",
+  "keras": "3.13.2",
+  "gpu": {
+    "compute_capability": [
+      7,
+      5
+    ],
+    "device_name": "Tesla T4"
+  },
+  "protocol_sha256": "6acf284ed91dbb1fa038fbb5810b829bf7432c8a180af82083afd47c886df641"
+}

@@ -1,5 +1,6 @@
 import math
 import random
+from pathlib import Path
 
 import numpy as np
 import scipy
@@ -38,17 +39,19 @@ def get_mnist():
 def get_cifar10():
     return load_cifar10()
 
+
 def get_cifar100():
     return load_cifar100()
 
 
 def get_svhn():
+    # SVHN stores the digit zero as label 10.
     train_data = scipy.io.loadmat("train_32x32.mat")
     x_train = train_data["X"]
-    y_train = train_data["y"]
+    y_train = train_data["y"] % 10
     test_data = scipy.io.loadmat("test_32x32.mat")
     x_test = test_data["X"]
-    y_test = test_data["y"]
+    y_test = test_data["y"] % 10
 
     x_train = np.moveaxis(x_train, -1, 0)
     x_test = np.moveaxis(x_test, -1, 0)
@@ -71,8 +74,8 @@ def get_data(dataset: str = "svhn"):
     data_loader, (img_rows, img_cols, img_channels) = data_loaders[dataset]
     (x_train, y_train), (x_test, y_test) = data_loader()
 
-    x_train = x_train.astype("float32")
-    x_test = x_test.astype("float32")
+    x_train = x_train.astype("float32").reshape(-1, img_rows, img_cols, img_channels)
+    x_test = x_test.astype("float32").reshape(-1, img_rows, img_cols, img_channels)
     x_train /= 255
     x_test /= 255
 
@@ -82,17 +85,13 @@ def get_data(dataset: str = "svhn"):
         "svhn": ([0.4377, 0.4438, 0.4728], [0.1980, 0.2010, 0.1970]),
         "mnist": ([0.1307], [0.3081]),
     }
-    if dataset in channel_stats:
-        mean, std = channel_stats[dataset]
-        x_train = (x_train - mean) / std
-        x_test = (x_test - mean) / std
+    mean, std = (np.asarray(values, dtype=np.float32) for values in channel_stats[dataset])
+    x_train = (x_train - mean) / std
+    x_test = (x_test - mean) / std
 
     if K.image_data_format() == "channels_first":
-        x_train = x_train.reshape(x_train.shape[0], img_channels, img_rows, img_cols)
-        x_test = x_test.reshape(x_test.shape[0], img_channels, img_rows, img_cols)
-    else:
-        x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, img_channels)
-        x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, img_channels)
+        x_train = np.moveaxis(x_train, -1, 1)
+        x_test = np.moveaxis(x_test, -1, 1)
 
     n_classes = int(y_train.max()) + 1
     y_train = to_categorical(y_train.ravel(), n_classes)
@@ -101,13 +100,26 @@ def get_data(dataset: str = "svhn"):
 
 
 def run_experiment(
-    data: Dataset, config: Config, n_class: int = 10, dataset: str = "mnist", epochs: int = 100
+    data: Dataset,
+    config: Config,
+    n_class: int = 10,
+    dataset: str = "mnist",
+    epochs: int = 100,
+    checkpoint: Path | None = None,
 ) -> float:
+    """Train a candidate and return accuracy on the reserved validation examples.
+
+    The final fifth of the training arrays is reserved for validation, matching Keras's `validation_split` behavior.
+    Early stopping restores the minimum-validation-loss weights. If `checkpoint` is supplied, those same weights are
+    saved for later evaluation of the selected candidate. The official test arrays are never read here.
+    """
     n_train = int(len(data.x_train) * 0.8)
     decay_steps = epochs * math.ceil(n_train / BATCH_SIZE)
     model = get_model(data, config, n_class, dataset, decay_steps=decay_steps)
+
     if model is None:
-        return 0.0
+        msg = "Configuration has invalid spatial dimensions."
+        raise ValueError(msg)
 
     model.fit(
         data.x_train,
@@ -119,13 +131,16 @@ def run_experiment(
         callbacks=[EarlyStopping(monitor="val_loss", patience=25, restore_best_weights=True)],
     )
 
-    y_pred = np.argmax(model.predict(data.x_test), axis=-1)
+    y_pred = np.argmax(model.predict(data.x_train[n_train:]), axis=-1)
+    y_validation = data.y_train[n_train:]
 
-    y_test_true = data.y_test
-    if len(y_test_true.shape) > 1:
-        y_test_true = np.argmax(y_test_true, axis=1)
+    if len(y_validation.shape) > 1:
+        y_validation = np.argmax(y_validation, axis=1)
 
-    return accuracy_score(y_test_true, y_pred)
+    if checkpoint is not None:
+        model.save(checkpoint)
+
+    return float(accuracy_score(y_validation, y_pred))
 
 
 def get_convexity(
@@ -139,15 +154,16 @@ def get_convexity(
     if model is None:
         return np.inf
 
-    # Shuffle to remove class-sort bias (CIFAR-10 binary files are class-sorted)
-    indices = np.random.permutation(len(data.x_train))[:subset_size]
+    # Keep proxy training disjoint from the validation examples used to select the final candidate.
+    n_train = int(len(data.x_train) * 0.8)
+    subset_rng = np.random.default_rng(random.getrandbits(64))
+    indices = subset_rng.permutation(n_train)[:subset_size]
     x_train_subset = data.x_train[indices]
     y_train_subset = data.y_train[indices]
 
     if n_class > 2 and len(y_train_subset.shape) == 1:  # noqa: PLR2004
         y_train_subset = np.array(to_categorical(y_train_subset, n_class))
 
-    # 3 epochs: 1 epoch biases toward high-LR configs that appear smoother early
     model.fit(x_train_subset, y_train_subset, batch_size=BATCH_SIZE, epochs=1, verbose=0)
 
     # Precompute weight RMS (fixed per config, not per batch)
@@ -228,8 +244,10 @@ def get_model(
 ) -> Sequential | None:
     # Check if architecture is valid for image size
     # Precise simulation of spatial resolution
-    curr_h = data.x_train.shape[1]
-    curr_w = data.x_train.shape[2]
+    if K.image_data_format() == "channels_first":
+        curr_h, curr_w = data.x_train.shape[2:4]
+    else:
+        curr_h, curr_w = data.x_train.shape[1:3]
 
     k = config["kernel_size"]
     pad = config["padding"]
@@ -335,11 +353,19 @@ def get_mnist_model(config: Config, n_class: int = 10, decay_steps: int | None =
     return learner
 
 
-def get_cifar10_model(config: Config, n_class: int = 10, decay_steps: int | None = None) -> Sequential:
+def get_cifar10_model(
+    config: Config,
+    n_class: int = 10,
+    decay_steps: int | None = None,
+    *,
+    augmentation_seeds: tuple[int | None, int | None] = (None, None),
+) -> Sequential:
     """Run one experiment given a Data insance."""
     learner = Sequential()
-    learner.add(RandomTranslation(height_factor=4 / 32, width_factor=4 / 32, fill_mode="reflect"))
-    learner.add(RandomFlip("horizontal"))
+    learner.add(
+        RandomTranslation(height_factor=4 / 32, width_factor=4 / 32, fill_mode="reflect", seed=augmentation_seeds[0])
+    )
+    learner.add(RandomFlip("horizontal", seed=augmentation_seeds[1]))
 
     for i in range(config["n_blocks"]):
         n_block_filters = config["n_filters"] * (2**i)

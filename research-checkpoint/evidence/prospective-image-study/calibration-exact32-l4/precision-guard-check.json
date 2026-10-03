@@ -1,0 +1,31 @@
+{
+  "source_sha256": "b9d1d8ac356a0e795abd307aa4467cae6c531e15966aca94d9c1a35d9156268c",
+  "actual_main_AST_executed_with_mock_TF": true,
+  "all_profile_helper_ASTs_unchanged": true,
+  "guard_before_first_profile": true,
+  "cases": [
+    {
+      "query_return": false,
+      "GPU_count": 1,
+      "rejected_before_profile": false
+    },
+    {
+      "query_return": true,
+      "GPU_count": 1,
+      "rejected_before_profile": true
+    },
+    {
+      "query_return": null,
+      "GPU_count": 1,
+      "rejected_before_profile": true
+    },
+    {
+      "query_return": false,
+      "GPU_count": 0,
+      "rejected_before_profile": true
+    }
+  ],
+  "model_calls": 0,
+  "research_arrays_loaded": 0,
+  "cloud_calls": 0
+}

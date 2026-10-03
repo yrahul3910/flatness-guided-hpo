@@ -1,0 +1,53 @@
+% Author-review draft; deliberately not included by the manuscript.
+% Describes the audited image entry points, not a completed matched benchmark.
+\section{Image method and comparison protocol audit}%
+\label{sec:operational-protocol-audit-draft}
+
+This draft addresses the reviewers' requests for a method overview, baseline settings, and interpretable runtime comparisons. It describes the current image implementation; historical tables and tabular experiments require separate provenance. The screening score is an empirical heuristic. Its implementation name, \texttt{get\_convexity}, does not establish strong convexity, a Hessian lower bound, or generalization.
+
+\paragraph{Screen, retrain, select, then test.}
+FGHPO's image entry point is named STCVX in code. The final 20\% of the official training array is validation data. Each sampled configuration gets a newly initialized probe, trained for one epoch at constant learning rate on at most 1,500 randomly permuted examples from the first 80\%. With batch size 64, inference produces probabilities $p_b$, penultimate activations $h_b$, and final kernel $W$. Define
+\begin{equation}
+    q=\max_{b:\,q_b\ \mathrm{finite}}q_b,\qquad
+    q_b=\frac{\operatorname{RMS}(p_b)\operatorname{RMS}(h_b)}{\operatorname{RMS}(W)},
+    \qquad \operatorname{RMS}(A)=\sqrt{\frac{1}{|A|}\sum_j A_j^2}.
+\end{equation}
+The final partial batch is included. Invalid model geometry or no positive finite batch maximum returns infinity. This batch-RMS expression is distinct from the historical tabular Frobenius ratio.
+
+STCVX accepts only finite $q>0.1$, collects 100 eligible probes, and keeps the ten smallest scores. The threshold is a heuristic, not a proved curvature condition. The default cap is 1,000 attempts, configurable through \texttt{FGHPO\_MAX\_PROBE\_ATTEMPTS}; insufficient eligible probes terminate the search. Rejected and caught failed probes remain recorded.
+
+Each finalist starts a fresh model, without the probe's weights. Adam uses the configured weight decay and a cosine learning-rate schedule over the requested training budget, normally 100 epochs. Training uses the first 80\%, batch size 64, and validation-loss early stopping with patience 25 and best-weight restoration. The candidate returns the restored checkpoint's validation accuracy. The search keeps a strictly higher accuracy, retaining the earlier incumbent on ties. BOHB permits only full-budget fits to become incumbents. Finally, \texttt{SearchRun.finish} evaluates the saved incumbent's official-test accuracy once and closes that run to further search or test attempts. Checkpoint selection by loss and candidate selection by accuracy are separate decisions.
+
+\paragraph{Current comparison settings.}
+The nominal space contains filters 32--128, kernel size 2--6, blocks 2--5, padding \{valid, same\}, units \{32, 64, 128, 256, 512\}, learning rate $[10^{-4},10^{-2}]$, and weight decay $[10^{-5},10^{-3}]$. MNIST currently fixes its dense layer at 128 units regardless of the sampled units. Table~\ref{tab:operational-settings} records configured budgets, not completed experiments or matched compute.
+
+\begin{table}[htbp]
+    \centering
+    \small
+    \caption{Audited image entry points and unresolved comparison differences. A full fit requests at most 100 epochs.}%
+    \label{tab:operational-settings}
+    \begin{tabularx}{\linewidth}{@{}p{0.13\linewidth}p{0.25\linewidth}X@{}}
+        \toprule
+        Method & Configured work & Sampling and comparison issues \\
+        \midrule
+        STCVX & 100 eligible one-epoch probes; ten fresh full fits & Log-uniform continuous draws; inclusive integer draws; geometry-conditioned sampling; rejected probes add cost. \\
+        Random & 30 full-fit attempts & Uses the STCVX sampler; 30 draws need not mean 30 valid fits. \\
+        HEBO & Five batches of six suggestions & Linear numeric coordinates and inclusive integer bounds; minimizes one minus validation accuracy. \\
+        Hyperopt/TPE & 30 objective evaluations & Linear uniform continuous variables; integer upper bounds excluded, unlike the nominal inclusive ranges. \\
+        TuRBO & Maximum 30 evaluations; 15 initial points; batch size one & Seven-coordinate continuous adapter: rounded integers and equal-width category bins. The ordinal encoding supplies neither a categorical kernel nor matched priors across methods. \\
+        BOHB & 199 objective calls; 11 full-budget calls & Installed \texttt{bohb-hpo} 0.5.2, resources 1--100 and default $\eta=3$; linear continuous draws, rounded continuous integer draws. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+BOHB's installed loop yields 199 calls, not the nominal 30 used by other baselines. Every callback starts fresh; it does not resume a lower-budget checkpoint. The wrapper maps nominal full rungs truncated to 99 back to 100 epochs. The other optimizer wrappers return penalty 100 for caught invalid/failed fits; random and STCVX skip caught failed final fits. Failure attempts and eligibility filtering must count toward cost. Epoch counts alone establish no runtime advantage.
+
+TuRBO's adapter deterministically decodes all seven coordinates to native Python values. Official upstream source pinned at commit \texttt{de0db39} was imported through a scoped path, without installing or declaring the dependency in the project. The \href{run:../sweep-results/research-audit-20261002/turbo-integration/upstream/acquisition-manifest.json}{source manifest} preserves the full commit and file hashes. The actual seven-coordinate entry point completed exactly 30 evaluations with the real optimizer and an analytic objective replacing model training; a separate smaller optimizer-only check verified seeded replay. These checks establish integration behavior, not image-training results or matched-domain HPO performance. Final environments still require an explicit dependency pin and encoding policy.
+
+\paragraph{Seeds and retained evidence.}
+The run seed is \texttt{FGHPO\_SEED} (default zero). STCVX uses run seed plus attempt number for sampling and probe initialization, resetting it between these stages. Final fits use run seed plus trial number, so initialization depends on evaluation order. HEBO also seeds Torch and its Sobol scramble; Hyperopt receives a seeded NumPy generator. TuRBO seeds Torch and preserves its global NumPy proposal state around each model evaluation, including handled failures; category decoding uses no random draw. BOHB now explicitly seeds its private configuration generator. A focused real-sampler check verified repeatable initial proposals for the same seed and variation across seeds; it does not establish reproducibility of complete trained or density-model trajectories.
+
+\texttt{SearchRun} refuses existing output directories and records source snapshots/hashes, Git revision, command, configurations, seeds, core package versions, requested epochs, validation scores, errors, and per-trial or cumulative elapsed times. It retains the incumbent, not every discarded candidate checkpoint. Final studies additionally need dataset/split hashes, actual epochs and updates, component traces, optimizer versions, hardware, timing boundaries, and all required checkpoints. Recording a seed alone does not establish cross-platform determinism.
+
+\paragraph{Choices required before final comparisons.}
+Freeze datasets and independent repetitions; common search-space support, distributions, and geometry constraints; a justified cost budget including failed/rejected probes; threshold and tie rules; subset/augmentation policy; checkpoint and candidate objectives; and candidate/phase seed identities independent of selection rank. Use the same hardware and report actual work and wall time, with uncertainty across independent searches. Train the complete diagnostic candidate pool when comparing early scores with final validation outcomes, including early validation loss as a competing predictor. Keep exploratory panels separate from final benchmarks, preserve negative results, and reserve official-test evaluation for the frozen selection procedure. The \href{run:../NOTES.md}{experiment ledger} documents the remaining decisions; no matched benchmark or HPO advantage is asserted here.

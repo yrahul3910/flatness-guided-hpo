@@ -1,0 +1,86 @@
+Theory repair preserving inexpensive screening
+
+The one-epoch, forward-pass screening idea has a defensible local-curvature foundation. The original activation/weight ratio does not acquire a valid proof by adjusting a constant or centering weights. A repair changes the measured quantity to an exact softmax-head curvature statistic and narrows the claim to sensitivity of the current predictor. Whether this screen improves endpoint classification metrics remains an empirical question. No manuscript, production code, existing evidence, or training state was changed for this review.
+
+1. The invalid derivation step
+
+In paper/main.tex:498, the correct per-example final-kernel gradient is h(p-e_y)^T, not hp^T. More decisively, :504 and :518 differentiate the hidden activation h through an inverse output Jacobian while computing a partial derivative with respect to the independent final kernel W. Holding all earlier parameters fixed means dh/dW=0. That extra derivative creates the spurious inverse-weight term used at :530-535. A pseudoinverse cannot supply this missing dependence. Softmax singularity alone is not a sufficient criticism because a rectangular Jacobian product can have full column rank.
+
+The existing independently reproduced stationary example is separate from the artificial common-shift diagnostic. With five identical inputs, labels (0,0,0,1,1), h=1, and already centered W=(t,-t), t=log(3/2)/2, all predictions are (0.6,0.4). This globally minimizes the sample-mean cross-entropy for those indistinguishable inputs and has zero parameter gradient. The claimed ratio is 2.5151458962; the exact final-kernel Hessian Frobenius norm is 0.48. The written theorem permits conflicting duplicate labels. This disproves its universal bound; it does not demonstrate failure on typical trained candidates. Source: ../theory-assumptions-review/review.md and results.json.
+
+2. A valid, cheap replacement theorem
+
+Fix n feature vectors h_i in R^d, a finite affine head z_i=W^T h_i+b, K>=2, and unregularized sample-mean categorical cross-entropy L. Differentiate only W; hold h_i and b fixed. Let p_i=softmax(z_i), C_i=diag(p_i)-p_i p_i^T, H=d^2L/dvec(W)^2, and
+
+  H = mean_i C_i tensor (h_i h_i^T), up to a coordinate permutation;
+  T = trace(H) = mean_i (1-||p_i||_2^2)||h_i||_2^2.
+
+The gradient and Hessian follow directly by differentiating logsumexp(z_i)-z_i,y_i. Each C_i is a covariance matrix, so H is positive semidefinite. For finite logits its rank is r=(K-1)rank([h_1,...,h_n]). If r>0, the nonnegative eigenvalues give
+
+  T/sqrt(r) <= ||H||_F <= T;
+  T/r <= lambda_max(H) <= T.
+
+One may replace r in the lower bounds by the cheap upper bound (K-1)min(n,d); no rank computation is required to use T. If all features vanish, H=T=0. The trace is exact and costs per-example probability and feature squared norms after an ordinary forward pass. No Hessian construction, differentiation through training, stationarity, low loss, or smoothness of earlier activations is needed.
+
+This repairs the direction needed for screening: small T upper-bounds head curvature. It also lower-bounds the full-network Hessian Frobenius norm through its head block, where that full Hessian exists, but does not upper-bound full-network curvature. The claim is explicitly about the head. If bias is included among perturbed coordinates, replace h_i by [h_i;1] throughout; then the trace becomes mean_i (1-||p_i||^2)(||h_i||^2+1). An explicit L2 penalty would add its own curvature. Decoupled optimizer weight decay is not automatically a loss-Hessian term.
+
+3. Finite local sensitivity, including at a one-epoch probe
+
+Let a perturbation D satisfy ||D||_F<=rho, let R=max_i||h_i||, a=sqrt(2)rho R, and g=dL/dW. Define phi_+(a)=(exp(a)-1-a)/a^2 and phi_-(a)=(exp(-a)-1+a)/a^2, with both values 1/2 at zero. Then the exact remainder
+
+  B(D)=L(W+D)-L(W)-<g,D>
+      =mean_i KL(p_i(W) || p_i(W+D))
+
+satisfies
+
+  phi_-(a) vec(D)^T H vec(D) <= B(D)
+      <= phi_+(a) vec(D)^T H vec(D).
+
+Proof: for u_i=D^T h_i, softmax(z_i+t u_i)_k/p_ik lies between exp(-t osc(u_i)) and exp(t osc(u_i)), where osc(u)=max(u)-min(u). The variance identity v^T C(p)v=min_c sum_k p_k(v_k-c)^2 therefore compares the two covariance matrices in positive-semidefinite order. Since osc(u_i)<=sqrt(2)||D||_F||h_i||, e^(-ta)H(W)<=H(W+tD)<=e^(ta)H(W). Integrating Taylor's exact remainder with weight (1-t) gives phi_- and phi_+. The KL identity follows by subtracting the linear term from logsumexp.
+
+Consequently, deterministic head-only worst-case loss increase is at most
+
+  rho||g||_F + rho^2 phi_+(a) lambda_max(H)
+  <= rho||g||_F + rho^2 phi_+(a) T.
+
+The gradient term cannot be dropped at an ordinary one-epoch checkpoint. For a zero-mean bounded perturbation with covariance Cov(vec(D))=sigma^2 I, it cancels in expectation, giving
+
+  sigma^2 phi_-(a) T <= E[L(W+D)-L(W)]
+      = E[mean_i KL(p_i(W)||p_i(W+D))]
+      <= sigma^2 phi_+(a) T.
+
+Thus T measures local expected prediction sensitivity without assuming convergence. Bounded noise, such as fixed-radius spherical or appropriately scaled Rademacher noise, satisfies the premise. An untruncated Gaussian does not satisfy this fixed-radius premise. Isotropic noise restricted to the class-contrast subspace also gives T because H annihilates common-class directions. A sphere of total radius rho in dimension D_head=d(K-1) has sigma^2=rho^2/D_head. Fixed per-coordinate variance and fixed total perturbation energy are different conventions across widths; neither normalization should be selected after seeing endpoint outcomes. For large a the finite bound becomes loose.
+
+The finite inequalities were checked independently by the bound_review and repair_critic agents. They are elementary derivations here, not a claim imported wholesale from a generalization theorem. No new numerical experiment is claimed in this note.
+
+4. What remains of the original score and maximum-over-batches rule
+
+The image implementation at image/src/util.py:170-187 and image/src/matched_training.py:117-122 computes max_batch RMS(P)RMS(H_features)/RMS(W). For a batch of B rows, this equals ||P||_F||H_features||_F/(B||W||_F). It is a product of batch RMS quantities, not an RMS of per-example products. T instead averages the paired per-example values (1-||p_i||^2)||h_i||^2. The historical tabular callback omits the probability factor; main.tex:365 displays yet another numerator. These formulas must retain separate names and provenance.
+
+Replicating examples leaves the mean-loss Hessian and T unchanged. An unnormalized product of batch Frobenius norms grows with batch size, whereas the image RMS ratio removes that explicit factor. Neither operation proves the ratio is curvature. For a disjoint partition, T_full=sum_B (|B|/n)T_B exactly; averaging must weight a short tail batch. max_B T_B is an upper bound on T_full and hence on the fixed-feature full-sample head Hessian norm, but depends on the partition and can be conservative. The weighted mean is the exact trace target.
+
+In contrast, max_B of curvature lower bounds only lower-bounds max_B of batch curvatures. It need not lower-bound or upper-bound the average-loss curvature. Minimizing such a lower bound does not force actual curvature down. The parameter-ball supremum in sharpness and the maximum over data batches are also different operations. A covering argument does not establish their equivalence without a specified function class, metric, sampling assumptions, and error bound. The derivation at main.tex:290-305 also omits the gradient and finite-radius remainder; at a saddle, a spectral norm measures negative as well as positive curvature. A lower Frobenius-norm bound is not strong convexity, which requires every relevant Hessian eigenvalue to have a positive lower bound.
+
+There is no nontrivial universal positive multiplicative rescue of the original ratio. Already centered kernels approaching zero make its denominator vanish while exact curvature stays finite; saturated binary predictions make exact curvature decay exponentially while the ratio decays only inversely with kernel size. Uniform restrictions such as a positive probability floor, a positive feature-norm floor, and bounded parameter scales can manufacture a restricted constant, but those exclude the problematic regimes and do not arise from the paper's assumptions or ordinary training guarantees. The exact trace gives a direct statement without those restrictions.
+
+5. Parameterization and practical relevance
+
+The prior common-shift experiment changes output kernel weights, not biases: check_saved_models.py:71-77 constructs W'=W+c for scalar c, or W'=W+v 1^T for a prescribed vector v, keeping hidden activations and b fixed. Every class logit receives the same input-dependent addition h^T v, so probabilities are unchanged for every input, not only the scored sample. The raw Frobenius/RMS kernel norm changes; class-centered W_c=W(I-11^T/K) does not. The extreme shift panel establishes a universal invariance defect, not evidence that ordinary training visits those extreme values. Actual common-mode distributions and realistic ranking changes require the separate checkpoint audit.
+
+Raw T is already invariant to that output-kernel common shift because h and p are unchanged. It still depends on hidden-layer rescaling: h->h/s, W->sW sends T->T/s^2, and neuron duplication also changes raw coordinate curvature. These are properties of the specified perturbation geometry. The previously defined relative-head trace C1 uses fixed local row scales r_j=||W_c[j,:]|| and effective features h_ij r_j. The same theorem then applies in those declared perturbation coordinates. C1 removes positive row-rescaling and common-shift effects, but its known duplication failure remains. It is a separate proposed score, not proof of the original ratio. Source: ../normalization-audit/normalization_derivation.txt.
+
+6. Endpoint classification and tabular dynamics
+
+A valid same-sample classification statement uses labels and margins. If m_i=z_i,y_i-max_{k!=y_i}z_ik > sqrt(2)rho||h_i||, every allowed head perturbation preserves correctness on example i. Thus perturbed empirical error is at most the fraction of examples failing this margin condition. This concerns the current frozen-feature predictor under head perturbations. It does not order classification accuracies of different candidates, predict accuracy after more training, or establish population generalization. Loss correlations cannot stand in for endpoint accuracy, AUC, F1, or another declared task metric.
+
+The degenerate tabular behavior is directly relevant. If hidden features die, the original activation ratio and exact kernel trace both approach zero even if the classifier has learned little. Including bias retains some uncertainty curvature for a bias-only classifier, but confident incorrect predictions can still have tiny curvature. Any empirical screen therefore needs a declared learning-quality eligibility rule or a separately justified combination with fit/margins, not an inference that the smallest curvature alone must be best. No threshold or combined score is chosen here, and none should be fitted to these already inspected pilot outcomes.
+
+The defensible next research claim is that inexpensive early head-sensitivity measurements may screen configurations efficiently under a fixed training and perturbation protocol. Test it against early task-metric/CE and random-selection baselines using common candidates, endpoint task metrics, and separate selection versus final evaluation data. Distinguish a continued trajectory's last checkpoint, a checkpoint selected by minimum validation loss, and a fresh independent retraining after a probe. They are different algorithms and estimands. An early-rank versus later-loss observation does not answer any of those endpoint classification questions by itself.
+
+Primary sources checked
+
+Boyd and Vandenberghe, Convex Optimization, section 3.1.5, printed p.74, gives the log-sum-exp Hessian and its positive-semidefinite interpretation. The head trace and finite KL bounds above are derived explicitly from that elementary structure: https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf
+
+Dinh et al., ICML 2017, demonstrate parameterization dependence of conventional flatness. That result warns against universal interpretation; it does not prove that a fixed-protocol practical screen fails: https://proceedings.mlr.press/v70/dinh17b.html
+
+Tsuzuku et al., ICML 2020, and Kwon et al., ICML 2021, connect specified normalized perturbation notions to generalization analyses under their own assumptions. They motivate declaring perturbation geometry; neither establishes this original ratio or one-epoch endpoint-accuracy ranking. Their bounds retain terms besides curvature: https://proceedings.mlr.press/v119/tsuzuku20a.html and https://proceedings.mlr.press/v139/kwon21b.html. The earlier detailed primary-source audit is ../normalization-audit/primary_sources.txt.

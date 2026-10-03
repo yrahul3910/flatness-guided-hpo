@@ -1,0 +1,32 @@
+{
+  "status": "PASS: all32 per-candidate components and aggregate cost gate independently reproduced",
+  "reviewed_utc": "2026-10-03T03:09:30.837420+00:00",
+  "scope": "Pure arithmetic over already verified retained timing JSON; did not import or execute production calculator, load arrays/models, change formula or launch cloud resources.",
+  "forecast_path": "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/direct-cost-forecast-20261003.json",
+  "forecast_sha256": "fd2dc0f519f7e0a5a56ff02a49a006ff3757336bdc91cdb7058614d47fb936d0",
+  "calculator_sha256": "c0285c820df8a398b6bb05c0802546fb9715097accc5abbfcf64fe4869a89b1a",
+  "records_review_sha256": "018b9993f2a365b1ac4e7307eaf2613a11c97da6d12422e82406e3bffa64f842",
+  "rule_sha256": "901f515c4c7ee1a2e6ec733a966d85e2afda99b5e58be606d45ae7d96ec6a1f7",
+  "cases": 32,
+  "components_per_case_verified": 6,
+  "component_seconds_after_2x": {
+    "training": 86872.03605697554,
+    "inference": 29386.88945777775,
+    "probe_score": 35.45045411800001,
+    "two_phase_build_warmup_checkpoint_hash": 695.5469794919995,
+    "epoch_weight_copy_check_and_restore": 2239.290617579973,
+    "data_io_validation_array_hash_proxy": 165.2587951414516
+  },
+  "backend_seconds_after_2x": 119394.47236108471,
+  "paid_overhead_seconds": 15616,
+  "rate_usd_per_hour": 1.021392,
+  "scientific_worker_usd": 38.30517121828696,
+  "scientific_cap_usd": 42,
+  "prior_and_calibration_holds_usd": 6,
+  "other_reserve_usd": 2,
+  "cumulative_forecast_usd": 46.30517121828696,
+  "cumulative_cap_usd": 50,
+  "decision": "prefix_2",
+  "scientific_budget_headroom_usd": 3.694828781713042,
+  "limitation": "A passing short-calibration planning estimate is not a guaranteed runtime or provider hard spending cap. Scientific launch still requires the bounded executor and frozen assignment with identical TF32 policy."
+}

@@ -1,0 +1,92 @@
+{
+  "created_utc": "2026-10-03T00:41:36.375740+00:00",
+  "supersedes_count_only": "preservation-status-20261003T003406679655Z.json",
+  "prior_report_sha256": "a2a0e646397fabedc304e52bd68da7e335aef2d3f1b44f4a98aa713f452538f5",
+  "correction": "The matrix has ten concern rows. The prior report omitted the separate bkEw contributions/method-overview row at NOTES.md:72; it was not merged into another row. All preservation checks in the prior report are unchanged.",
+  "reviewer_row_count": 10,
+  "reviewer_rows": [
+    {
+      "matrix_line": 63,
+      "concern": "Decision-level effectiveness and generalization",
+      "status": "open",
+      "remaining": "Matched classification comparisons across tasks, candidate architectures and repetitions with a prospective evaluation policy and complete budgets; this two-block pilot does not close the decision-level requirement.",
+      "four_arm_followup": "Completed frozen four-arm KMNIST pilot: original215/219, trace219/219, earlyCE212/202, random221/202 errors per1000. No trace selection advantage; two blocks do not establish efficacy or broad generalization."
+    },
+    {
+      "matrix_line": 64,
+      "concern": "Head curvature, full Hessian, and model ordering",
+      "status": "partly addressed",
+      "evidence": "Invalid hidden-activation derivative located; independently checked exact head trace and finite head-perturbation bounds retain the gradient term without assuming stationarity.",
+      "remaining": "The original ratio bound remains false. Head-only trace, fixed-feature assumptions, perturbation geometry, feature-rescaling sensitivity, and lack of a future-accuracy or full-Hessian-ordering guarantee need explicit final treatment.",
+      "four_arm_followup": "Exact head-only trace was used with fixed features/bias and Euclidean geometry explicitly declared; empirical task errors do not establish full-Hessian or eventual-accuracy ordering."
+    },
+    {
+      "matrix_line": 65,
+      "concern": "Width, learning rate, initialization, and rescaling comparability",
+      "status": "partly addressed",
+      "evidence": "Exact invariance controls retained. Actual fixed-architecture lifecycle checkpoints show centering changes score magnitude but no candidate ranks or selections; extreme shifts are not practical failure evidence.",
+      "remaining": "Broader architecture/width/initialization and realistic rescaling comparisons; raw corrected trace still depends on feature scale. No normalization is shown to ensure accuracy ordering.",
+      "four_arm_followup": "Fixed architecture and candidate-based seeds control this panel; feature-rescaling sensitivity remains explicit and uncorrected. No cross-width result."
+    },
+    {
+      "matrix_line": 66,
+      "concern": "Across-candidate early-to-endpoint comparison against validation baseline",
+      "status": "partly addressed; matrix wording needs clarification",
+      "evidence": "Complete per-epoch multi-candidate panels and distinct continuation, minimum-CE-epoch, and fresh-retrain/restored classifications are retained.",
+      "remaining": "Frozen classification-first comparisons with separate tuning/stopping and untouched evaluation, more tasks and repetitions. The matrix phrase fixed-100 endpoint favors original refers to loss correlation, not classification; the later endpoint report supersedes that interpretation.",
+      "four_arm_followup": "The new pilot measures only selected-incumbent holdout classification, deliberately not all-candidate holdout correlations. Earlier fixed100 favors original referred to loss correlation, not classification. Broader prespecified trajectories remain open."
+    },
+    {
+      "matrix_line": 67,
+      "concern": "Figure 5 units and increasing named-dataset trajectories",
+      "status": "partly addressed",
+      "evidence": "Historical hidden/weight formula, LR, plotting vertices, and source provenance recovered; 12-run component panel rejects a universal decreasing-score expectation. Classification consequences differ by dataset; blood-transfusion raw accuracy reaches the majority baseline.",
+      "remaining": "Original component logs are absent, so exact historical causes are unverified. Final labels, units, and explanation must distinguish original curves from prospective mechanism diagnostics and connect degeneration to the corrected quantity without claiming it proves poor accuracy universally.",
+      "four_arm_followup": "No new historical-curve claim; prior named-data component and classification evidence unchanged."
+    },
+    {
+      "matrix_line": 68,
+      "concern": "One epoch, nonstationarity, and learning-rate confounding",
+      "status": "partly addressed",
+      "evidence": "Corrected local head-perturbation interpretation retains linear term or cancels it only under declared zero-mean perturbations; it does not require one-epoch convergence. Existing panels retain strong LR associations.",
+      "remaining": "Prespecified empirical assessment of useful early screening across LR/width/init; two decay values per LR do not resolve within-LR behavior. Local sensitivity does not entail eventual task quality.",
+      "four_arm_followup": "One-epoch scores screened a fixed LR/WD panel without stationarity assumptions. RMS selected only lowest-LR finalists here; no general within-LR inference."
+    },
+    {
+      "matrix_line": 69,
+      "concern": "Runtime, hardware, and fair resource budgets",
+      "status": "open; engineering groundwork complete",
+      "evidence": "Matched runner records source, seeds, phases, costs, checkpoints, and shared final fits. BOHB schedule and corrected native-KDE coordinate path were independently verified.",
+      "remaining": "Real matched runtime/quality study, repetitions, provider hardware/software, search domains, effective budgets and baseline adapters. Tiny synthetic fixtures and exploratory MNIST timings are not the final runtime table.",
+      "four_arm_followup": "Local bounded runtime and logical/physical accounting independently verified:16probes+10finals566epochs13584updates118.337seconds. Identical caps/stopping policy, unequal realized costs. Final matched runtime study remains open."
+    },
+    {
+      "matrix_line": 70,
+      "concern": "Algorithm identities, spaces, settings, and effective trials",
+      "status": "partly addressed",
+      "evidence": "Image validation-only selection fixes, BOHB coordinate/KDE tests, and pinned-source TuRBO integration are retained.",
+      "remaining": "Remaining shared-domain/cost adapters and final artifact-to-caption/table audit; historical test-based searches remain exploratory. BOHB call/epoch schedule differs from a nominal trial count; new fixed-pool study must retain distinct method labels.",
+      "four_arm_followup": "All four arms share candidates, eligible pool, retraining caps and candidate-based seeds; legacy strict RMS>0.1 passed for all16. Full baseline search-adapter comparison remains open."
+    },
+    {
+      "matrix_line": 71,
+      "concern": "Figure notation, units, equality/inequality, and context",
+      "status": "open",
+      "remaining": "Verify exact reviewed manuscript revision, figure labels and plotted quantities, Lemma notation, and all historical response claims. Existing manuscript additions do not establish full coverage, and filter-normalized plot axes do not prove proxy comparability.",
+      "four_arm_followup": "No main-manuscript or historical-figure changes; exact reviewed revision and figure/notation audit still open."
+    },
+    {
+      "matrix_line": 72,
+      "reviewer": "bkEw, 2024-07-21, PDF p.1",
+      "concern": "Clear goal and contributions, relevance of Theorem 1, and coherent method overview/motivation",
+      "status": "partly addressed; final presentation remains open",
+      "evidence": "Separate un-included curvature and operational-protocol drafts explain restricted valid identities and the probe/final/restore/select/test lifecycle. The user has directed theory repair while preserving fast screening and keeping the original heuristic as a comparison baseline.",
+      "remaining": "Main-manuscript contributions, motivation, theorem context, and method overview remain unchanged. A final account must distinguish original score and corrected head-only quantity, its perturbation geometry and feature-rescaling sensitivity, the checkpoint policy and primary task metric, and measured evidence from any guarantee. Broad efficacy claims require the valid broader comparison. No new pilot outcomes were inspected in this audit.",
+      "four_arm_followup": "The new evidence supports retaining the fast-screening idea as an investigated hypothesis with restricted head sensitivity theory, not claiming efficacy from the corrected identity. Final contributions/method exposition and broader supporting evidence remain open."
+    }
+  ],
+  "scope": "Root update after completed pilot; prior reports retained. All ten rows remain open or partly addressed for final publication.",
+  "source_status_path": "sweep-results/research-audit-20261002/audit-script-maintenance/reviewer-status-addendum-20261003.json",
+  "source_status_sha256": "2af266ef77b27ab668f9def7ab899de4e29a9b847bb40b949cb25f1d23633c89",
+  "pilot_report": "report.txt"
+}

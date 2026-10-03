@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "protocol_sha256": "2fc73082c79a4d0dad9d92da0bc41c7025d9359a068c98c2aa70920cc71dfdb4",
+  "source_pairs_verified": 24,
+  "seed_roles": 40,
+  "seed_collisions": 0,
+  "completed_probes": 16,
+  "union_finalists": 10,
+  "checkpoint_file_and_weight_hashes": 26,
+  "history_epochs": 566,
+  "optimizer_updates": 13584,
+  "finals_restoring_before_terminal_epoch": 10,
+  "distinct_evaluated_checkpoints": 6,
+  "arm_evaluations": 8,
+  "lock_precedes_all_evaluation": true,
+  "classification_errors_by_checkpoint": {
+    "block401/final/c000001/model-complete.keras": 215,
+    "block401/final/c000002/model-complete.keras": 219,
+    "block401/final/c000006/model-complete.keras": 212,
+    "block401/final/c000000/model-complete.keras": 221,
+    "block419/final/c000000/model-complete.keras": 219,
+    "block419/final/c000006/model-complete.keras": 202
+  },
+  "costs_reconciled": true,
+  "run_seconds": 115.1673535000009,
+  "subprocess_seconds": 118.33687550001196,
+  "limitations": [
+    "Restored tuning CE is checked against saved history, not recomputed by inference.",
+    "Saved checkpoint arrays and optimizer iterations were read with ZIP/HDF5; no model was loaded.",
+    "Evaluation labels came from saved prediction records; prepared dataset arrays were not loaded."
+  ],
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0,
+  "legacy_threshold": {
+    "direction": "strict original_rms > 0.1",
+    "logged_not_applied": true,
+    "eligible": 16,
+    "total": 16,
+    "minimum": 0.6314702033996582,
+    "maximum": 3.9863176345825195,
+    "pool_would_change": false
+  }
+}

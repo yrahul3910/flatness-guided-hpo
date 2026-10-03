@@ -1,0 +1,97 @@
+{
+  "version": "4-frozen-before-training",
+  "prepared_utc": "2026-10-02T20:59:06.688407+00:00",
+  "status": "Exploratory bounded local CPU diagnostic, no confirmatory or converged-generalization claim",
+  "question": "Does the original score rank epoch-100 validation CE in the minimization direction compared with same-epoch validation CE, across eight configurations independently for two fresh initialization seeds?",
+  "declared_change_bundle": "Relative to the prior five-epoch pilot, endpoint, cosine schedule horizon and initialization seeds all change. Do not attribute differences causally to endpoint alone. Within this panel, same-epoch comparisons are primary. Reported loss also uses stable reconstructed logit CE, correcting probability-clipping underestimation possible in the older pilot. It is an explicitly declared numerical-definition change, not an endpoint-only experiment.",
+  "dataset": "Cached MNIST npz only, no downloads; access x_train and y_train arrays only; never load x_test or y_test",
+  "dataset_sha256": "731c5ac602752760c8e48fbffcf8c3b850d9dc2a2aedcf2cc48468fc17b673d1",
+  "train_indices": [
+    0,
+    1500
+  ],
+  "validation_indices": [
+    1500,
+    1875
+  ],
+  "indices": "Half-open intervals in official training partition",
+  "preprocessing": "float32, channels_last: (pixel/float32(255)-float32(0.1307))/float32(0.3081)",
+  "seeds": [
+    71,
+    89
+  ],
+  "config_order": "product(learning_rate, weight_decay), learning_rate outer loop, IDs0..7",
+  "learning_rate": [
+    0.0001,
+    0.0003,
+    0.001,
+    0.003
+  ],
+  "weight_decay": [
+    1e-05,
+    0.001
+  ],
+  "architecture": {
+    "n_filters": 32,
+    "kernel_size": 2,
+    "padding": "same",
+    "n_blocks": 2,
+    "n_units": 128,
+    "note": "Existing get_mnist_model, no architecture code changes"
+  },
+  "optimizer": "Existing get_mnist_model Adam, cosine decay from each initial LR to zero over2400 steps",
+  "epochs": 100,
+  "early_stopping": false,
+  "batch_size": 64,
+  "batches_per_epoch": 24,
+  "last_batch_size": 28,
+  "initialization": "Reset keras.utils.set_random_seed(seed) for every candidate; exact initial weight hashes must agree within seed",
+  "shuffle": "Independent numpy.default_rng(seed) for each candidate; identical permutation hashes within seed at every epoch",
+  "scores": {
+    "original_rms_ratio_max": "Original float32 model outputs and hidden activations: max across fixed ordered training batches64 (including last28) of RMS(p)*RMS(h)/RMS(W). Current candidate model only.",
+    "relative_head_trace_centered": "C1 from frozen normalization_protocol.json; full-training arithmetic mean_i[(1-sum_k p_ik^2) * sum_j h_ij^2 * sum_k W_c[j,k]^2]. No formula changes.",
+    "temperature_curvature": "C2 from frozen normalization_protocol.json; full-training arithmetic mean_i[sum_k p_ik*z_c,ik^2-(sum_k p_ik*z_c,ik)^2]. No formula changes.",
+    "normalization_sha256": "0f9364f9d435483dfc3cbe282483b65ceea1686094b6428da85a255acb57b44d",
+    "numeric_policy": "C1/C2 recompute centered logits and stable softmax in float64 from frozen float32 model activations/kernel/bias; arithmetic means over all1500training examples. Do not clip, invert, smooth or normalize scores across checkpoints.",
+    "scientific_scope": "C1 and C2 are separately named controls with different meaning; neither repairs the original theorem or implies HPO success. Retain known limitations from normalization protocol."
+  },
+  "epoch_logging": "Training and validation CE are mean(logsumexp(z)-sum(y*z)) from float64 logits reconstructed from current model hidden activations/kernel/bias, without clipping predicted probabilities. Accuracy uses actual float32 model probabilities. Record maximum absolute probability reconstruction discrepancy for both splits and fail on discrepancy>1e-5. Retain each original-score batch, optimizer step/LR and shuffle hash.",
+  "primary_target": "Per-candidate validation CE at exactly epoch100",
+  "secondary_target": "Per-candidate minimum validation CE across all100 epochs, separately labelled validation-selected best-across100 target, repeated validation use and not unbiased test evidence",
+  "primary_analysis": "For each seed separately and every epoch1..100: Spearman across all8 configurations, each score vs primary target, compared with same-epoch validation CE. All metrics minimized, no sign reversal. No p-values or pooled claim.",
+  "secondary_analysis": "The same fixed correlations against the separately named secondary target. Do not substitute it for primary after inspection.",
+  "selection_regrets": {
+    "epochs": [
+      1,
+      2,
+      5,
+      10,
+      20,
+      50
+    ],
+    "direction": "minimize every score and validation CE",
+    "tie_break": "lowest config ID",
+    "formula": "target_loss(selected candidate)-min target_loss(all8 candidates)",
+    "targets": "Primary and secondary separately"
+  },
+  "learning_rate_analysis": "For each seed/epoch/metric report LR-score and LR-target Spearman associations. Prespecified sensitivity collapses each LR pair to arithmetic mean score/target across bothWDs; four LR-level points, descriptive only. Within-LR n=2 cannot support correlation inference.",
+  "terminal_diagnostic": "At epoch100 compute L2 norm of full-network gradient of mean training categorical CE over all1500 examples, inference mode, sample-weighted batch gradient accumulation in float64; exclude optimizer weight-decay term. Do not infer stationarity from schedule ending at0. Gradient uses TensorFlow logits-aware categorical CE on current model tensors (float32 autodiff), with no NumPy conversion before differentiating. Float64 reported CE and float32 gradient have the same un-clipped mathematical loss.",
+  "resources": {
+    "device": "CPU only",
+    "intra_threads": 2,
+    "inter_threads": 1,
+    "training_loop_cap_seconds": 900,
+    "cap_semantics": "Check before each epoch. Active epoch and final checkpoint I/O may extend past bound. Stop without new epochs and mark entire panel INCOMPLETE. No paid compute."
+  },
+  "integrity": "All16 candidates required for correlations/regrets; otherwise no aggregate available-subset analysis. Preserve every epoch, failure, unstarted identity, complete and partial optimizer-bearing checkpoints, next shuffle RNG states. No exclusions or overwritten runs.",
+  "checkpoint_policy": "Save epoch1 and epoch100 optimizer-bearing models for complete candidates; partial model and RNG state on timeout/failure. No implicit continuation.",
+  "source_sha256": {
+    "sweep-results/research-audit-20261002/long-endpoint-pilot/run-prepared-20261002-v1/run_pilot.py": "ed1fb3811111af6b4274d0761f5975875c2c32729877acfefd9a4b5d298de22a",
+    "image/src/util.py": "a59437f085192fbc5df189684124e8de63196eef963be9c247aad14001295f52",
+    "image/src/config.py": "1e87a606e1bf54127f955cbfdcebdb48ab78d40d76d6aa200cdfc2ffc68131e9",
+    "pyproject.toml": "a9613ecf8fad8d69b9e5150524fda11b8852eabee9140e9d8ae21c7030c88f54",
+    "uv.lock": "c7435dcd49775c94e5952e197d14b06a4feb0ad3614bee227b7b9494208a16ea",
+    "sweep-results/research-audit-20261002/normalization-audit/normalization_protocol.json": "0f9364f9d435483dfc3cbe282483b65ceea1686094b6428da85a255acb57b44d"
+  },
+  "revision_note": "Whitespace-only source correction after copied-source no-sloppy check. All scientific definitions unchanged; all earlier unexecuted protocol drafts retained."
+}

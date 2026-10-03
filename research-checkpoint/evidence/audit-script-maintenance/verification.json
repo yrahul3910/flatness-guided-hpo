@@ -1,0 +1,65 @@
+{
+  "source_chain": {
+    "practical-gauge-followup": {
+      "original": "sweep-results/research-audit-20261002/practical-gauge-followup/analyze.py",
+      "original_sha256": "f42ff037d235d25f86f8418bf2b422d48831433f7d01568eec2ffcc997ea7831",
+      "maintained": "sweep-results/research-audit-20261002/practical-gauge-followup/maintained/analyze.py",
+      "maintained_sha256": "8d356d860c489d0e533d552d0c80fe9cee205e6c77338a583ef28c61cca4bedb"
+    },
+    "endpoint-metric-followup": {
+      "original": "sweep-results/research-audit-20261002/endpoint-metric-followup/analyze.py",
+      "original_sha256": "beed2c0380d6f1c0989b035a5fb0e4995713c483ef6955189edb0b59dd46c2bb",
+      "maintained": "sweep-results/research-audit-20261002/endpoint-metric-followup/maintained/analyze.py",
+      "maintained_sha256": "dadfce52be3fd2a3a5c416d44b59a89c605f15871302516a679887a42b102841"
+    }
+  },
+  "original_files_verified": 69,
+  "original_files_changed": [],
+  "endpoint_replay_directory": "sweep-results/research-audit-20261002/endpoint-metric-followup/replays/run-20261003T001323854953Z",
+  "endpoint_replay": {
+    "metric-summary.json": {
+      "all_values_equal": true,
+      "byte_identical": true,
+      "sha256": "d2108cacf6aea1e78f2ea9e2b57570250e630a0a25c936ff4a5eeff1a5ac92da"
+    },
+    "candidate-endpoints.json": {
+      "all_values_equal": true,
+      "byte_identical": true,
+      "sha256": "66dbb3135febe2af89b2fc3ffbc6165966d273e9804873a8f1d8633f33accd69"
+    }
+  },
+  "endpoint_comparison_count": 50,
+  "endpoint_candidate_row_count": 112,
+  "training_updates": 0,
+  "checkpoint_reloads": 0,
+  "new_holdout_reads": 0,
+  "gauge_inference_rerun": false,
+  "static": {
+    "ruff": "pass",
+    "ruff_format": "pass",
+    "python_compile": "pass",
+    "no_sloppy": {
+      "errors": 0,
+      "warnings": 0,
+      "heuristics": 0,
+      "mechanism": "Direct bundled run_ruff + run_rules, full maintained files; unchanged rule set, Python target 3.12 matches supported project minimum and execution interpreter. Bundled default target 3.14 wrongly recommends removing a required quoted TYPE_CHECKING annotation."
+    },
+    "project_basedpyright": {
+      "original-typecheck.json": {
+        "filesAnalyzed": 2,
+        "errorCount": 28,
+        "warningCount": 142,
+        "informationCount": 0,
+        "timeInSec": 0.795
+      },
+      "typecheck.json": {
+        "filesAnalyzed": 2,
+        "errorCount": 22,
+        "warningCount": 144,
+        "informationCount": 0,
+        "timeInSec": 0.777
+      }
+    }
+  },
+  "typing_findings": "Six documented Keras/Spearman errors removed. All 22 retained errors are inherited reportMissingTypeArgument diagnostics for bare dict, Mapping, or ndarray. No type/lint rule disabled. The maintained scripts still have 144 dynamic-record warnings; type checking is not green."
+}

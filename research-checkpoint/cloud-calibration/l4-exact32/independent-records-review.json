@@ -1,0 +1,277 @@
+{
+  "status": "PASS: independently verified L4 exact32 calibration records with TF32 disabled; ready for the frozen direct forecast",
+  "reviewed_utc": "2026-10-03T03:08:12.737097+00:00",
+  "reviewer": "/root/pilot_review",
+  "scope": "Source/JSON/log/tar/raw-byte review only. No cloud/model/research-array access, formula change, forecast execution, original-source edit or new model test. Calculator source was independently reviewed before new timing records were inspected.",
+  "archive_sha256": "961b9f801f0e7ef6eead369dcafa9880e25aec204492c1efcc1c82f080189b75",
+  "archive_bytes": 31377,
+  "archive_members": 41,
+  "uncompressed_bytes": 125140,
+  "all_archive_member_and_extracted_file_hashes_match": true,
+  "frozen_provenance_sha256": {
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/timing-protocol.json": "113b8af3c5e1596a39ea7395d3a08de94fb8458b65c157b66c388e9cf5ea51a9",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/calibrate.py": "b9d1d8ac356a0e795abd307aa4467cae6c531e15966aca94d9c1a35d9156268c",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/modal_launch.py": "169c5dd0c9dcd97b494f302b245ac46d4acbd760feb09df70063a5d9a62724fc",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/payload.tar.gz": "ef2c246211741aa0c0ff60026baa5fcbbe80ccc850673cbfbd16df4edf9fd13c",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/direct-forecast-rule.json": "901f515c4c7ee1a2e6ec733a966d85e2afda99b5e58be606d45ae7d96ec6a1f7",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/eligibility-addendum.json": "4fa2019a69330d484a16446807c83bf543022daad794c4f8380b318f8fc61047",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/direct_cost_forecast.py": "c0285c820df8a398b6bb05c0802546fb9715097accc5abbfcf64fe4869a89b1a",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/launch-eligibility.json": "3664f8d1941e09623963767c066a5798109720d2d0be996652c27491298f2a4f",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/ledger.json": "0edd8d9eff016d45e6fb396ca88e6dd267de549a2a6dcfe32f063e11e857ad78",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/app-status.json": "4392f1caff3ba4e5776c57ead7bd1858d30d8f89817ab4899798ab8f84f54e2d",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/container-status.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "source_hashes_checked": 25,
+  "training_input_byte_hashes_checked": 2,
+  "single_observed_and_returned_attempt": "216d8675-a16b-4198-81fd-581cdaa22ed6",
+  "provider_task_id": "<PROVIDER_ID>",
+  "app_id": "<PROVIDER_ID>",
+  "actual_start_utc": "2026-10-03T03:01:34.903426+00:00",
+  "controller_elapsed_seconds": 243.77347870799713,
+  "calibrator_elapsed_seconds": 224.63108229637146,
+  "exact_case_identities_and_timing_schemas_match": true,
+  "cases": [
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000000",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 801036032
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000001",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 641155328
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000002",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 505114112
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000003",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1483339776
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000004",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 834686720
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000005",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 763334400
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000006",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2662320896
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000007",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1507629312
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000000",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1565048576
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000001",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1527645440
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000002",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1544438784
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000003",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1549805824
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000004",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1604683264
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000005",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1734034432
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000006",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1701230848
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000007",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2017188608
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000000",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1672536320
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000001",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1819966208
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000002",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2134364416
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000003",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1857493248
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000004",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1817464320
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000005",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1822487808
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000006",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2082273024
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000007",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1820302080
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000000",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2145044736
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000001",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2144553984
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000002",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1945481216
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000003",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2096493312
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000004",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2159232768
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000005",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2098211840
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000006",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2173675520
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000007",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2201649152
+    }
+  ],
+  "total_optimizer_updates": 576,
+  "maximum_gpu_peak_bytes": 2662320896,
+  "memory_gate_bytes": 15032385536,
+  "quality_values": "No quality values in exact allowed timing-record schema; no numeric quality-report patterns in captured stdout/stderr. Returned files are JSON/logs only, not predictions, checkpoints or arrays.",
+  "stdout_bytes": 0,
+  "stderr_bytes": 4787,
+  "terminal_proof": {
+    "app_state": "stopped",
+    "app_list_aggregate_tasks": "1",
+    "exact_app_current_container_list": [],
+    "interpretation": "The exact target app is stopped and its separately preserved running-container query is empty. Frozen corrected launcher performs both checks within its shared ten-second budget.",
+    "stop_cli_returncode": 1,
+    "cleanup_verified": true
+  },
+  "eligibility_record_matches_independent_checks": true,
+  "formula_review": "Literal frozen own-candidate maxima and62524/78695 workloads, two-phase overhead,405weight proxy,3*61500/2524 data proxy and2x totals; fixed1.021392USD/hour,15616s paid overhead,6holds+42science+2other. No new timings used to modify formula.",
+  "remaining": "Parent owns frozen calculator execution, subsequent resource/launch decision and account-billing reconciliation. This audit is not scientific-launch authorization.",
+  "tensor_float_32_execution_enabled": false
+}

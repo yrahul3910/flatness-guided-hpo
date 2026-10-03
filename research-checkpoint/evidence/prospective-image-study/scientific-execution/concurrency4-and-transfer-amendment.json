@@ -1,0 +1,26 @@
+{
+  "frozen_utc": "2026-10-03T03:18:50.861109+00:00",
+  "status": "prospective_resource_and_delivery_amendment_before_scientific_runs",
+  "parent_direction": "Adopt up to four concurrent independent one-GPU apps; root manages four controllers and stops all others on any cohort failure. Preserve fixed per-block caps and total42USD science allocation.",
+  "sequential_draft_sha256": "3284883beeae928b7660fba5f71615fca6627b880aba8117056a105fbd5bc3ed",
+  "sequential_draft_archive": "sweep-results/research-audit-20261002/prospective-image-study/scientific-execution/unexecuted-sequential-budget-draft",
+  "updated_plan_sha256": "dac829a45a7033614fb21374d8bb68be314036d231621a4e99339eededd15100",
+  "unchanged": [
+    "candidate configurations, order and scientific seeds",
+    "all four blocks before local evaluation",
+    "stage/workload formula and2x margin",
+    "per-block hard/provider/RunSettings seconds",
+    "sum135012s and38.30560464USD exposure",
+    "TF32 disabled,14GiB GPU peak gate and two-core/16GiB upper worker quote",
+    "prior holds6USD and other reserves2USD, cumulative50USD"
+  ],
+  "changed": [
+    "up to four separate one-GPU apps concurrently, no pool",
+    "atomic pre-reservation of all four block caps and aggregate overlap-aware accounting",
+    "stop all other apps on any cohort failure",
+    "checkpoint-derived per-block raw/2x-wire transfer caps"
+  ],
+  "total_wire_gib": "9.625",
+  "total_network_usd": "0.38500",
+  "no_cloud_model_or_array_access": true
+}

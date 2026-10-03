@@ -1,0 +1,18 @@
+{
+  "protocol_sha256": "2fc73082c79a4d0dad9d92da0bc41c7025d9359a068c98c2aa70920cc71dfdb4",
+  "protocol_path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/protocol.json",
+  "frozen_utc": "2026-10-03T00:30:25.952510+00:00",
+  "source_count": 24,
+  "seed_roles_unique": 40,
+  "ruff_check": "pass",
+  "ruff_format": "pass",
+  "contract_checks": 3,
+  "independent_review": "pass",
+  "basedpyright": {
+    "errors": 22,
+    "all_error_rule": "reportMissingTypeArgument",
+    "warnings": 173,
+    "status": "not_clean; call/narrowing errors fixed, generic annotations remain"
+  },
+  "no_model_training_or_model_holdout_evaluation_before_freeze": true
+}

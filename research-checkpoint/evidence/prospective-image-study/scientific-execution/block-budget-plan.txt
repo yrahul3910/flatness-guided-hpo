@@ -1,0 +1,19 @@
+Four-block concurrent scientific budget and transfer assignment
+
+Four independent one-GPU Modal L4 apps, each limited to two physical CPU cores and16GiB RAM. Root pre-reserves all four caps atomically, runs one controller per app, sums overlapping exposure, and stops every app on any cohort failure. All four blocks must seal before local evaluation.
+
+dataset   repetition run max(s) provider(s) hard total(s) raw cap(bytes) wire GiB quoted worker USD
+cifar10   2000      53266       53866         54016     2684354560 5        15.32541952
+cifar10   2001      24279       24879         25029      805306368 1.5      7.10122788
+cifar100  2000      25995       26595         26745      738197504 1.375    7.5880914
+cifar100  2001      28472       29072         29222      939524096 1.75     8.29086584
+
+Timers are unchanged:3904s overhead per block =120s startup +3154s ACK/slippage +600s terminal transfer +30s verified shutdown. RunSettings includes ACK waits; no clock pause or deadline reset. Every provider timeout is below24h.
+
+Sum of charged exposure caps:135012s =38.30560464USD. Scientific contingency:3.69439536USD. Total with6USD prior holds and2USD other reserves:46.30560464USD, under50USD.
+
+Transfer caps derive from actual calibration checkpoint bytes plus explicit permutation/history/source/log allowances. Sum raw cap=5,167,382,528bytes; doubled wire allowance=10,334,765,056bytes (9.625GiB), costing0.38500USD at0.04USD/GiB, below0.50USD.
+
+Immutable phase files transfer once; root logs use deltas and a final untransferred-byte flush. No checkpoint replay/refetch. Missing, corrupt or oversized transfers fail the cohort. No persistent volume or returned training/evaluation arrays.
+
+Budgetplan SHA256: dac829a45a7033614fb21374d8bb68be314036d231621a4e99339eededd15100

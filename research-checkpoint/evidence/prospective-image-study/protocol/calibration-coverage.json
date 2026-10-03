@@ -1,0 +1,66 @@
+{
+  "status": "pre_calibration_additive_coverage_design",
+  "prepared_utc": "2026-10-03T01:00:29.750809+00:00",
+  "source_plan": "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/plan.json",
+  "source_plan_sha256": "dc4d2a1bd1107b6080f89656c782b9e35086d4015c2009c0871f9c2dbb79fc38",
+  "original_plan_unchanged": true,
+  "representatives": [
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2003,
+      "candidate_id": "c000005",
+      "purpose": "minimum_analytic_forward_mac_per_dataset"
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000001",
+      "purpose": "upper_median_analytic_forward_mac_per_dataset"
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2003,
+      "candidate_id": "c000003",
+      "purpose": "maximum_analytic_forward_mac_per_dataset"
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000007",
+      "purpose": "minimum_analytic_forward_mac_per_dataset"
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000003",
+      "purpose": "upper_median_analytic_forward_mac_per_dataset"
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2002,
+      "candidate_id": "c000000",
+      "purpose": "maximum_analytic_forward_mac_per_dataset"
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000003",
+      "purpose": "maximum_single_conv_output_activation_at_batch64"
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2002,
+      "candidate_id": "c000004",
+      "purpose": "maximum_trainable_parameter_count"
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2003,
+      "candidate_id": "c000002",
+      "purpose": "maximum_single_conv_output_activation_at_batch64"
+    }
+  ],
+  "selection_basis": "Static frozen shapes, convolution/dense MACs, parameter counts and largest single convolution output; no model or task outcomes. CIFAR10 maximum-parameter candidate is already its maximum-MAC representative.",
+  "limits": "Nine representatives improve architecture/memory coverage but do not establish a walltime or peak-memory guarantee. Final profiling steps and conservative extrapolation must be frozen before calibration; include actual full-fit and tuning inference passes, compilation, backward/optimizer work, scoring and I/O.",
+  "model_calls": 0
+}

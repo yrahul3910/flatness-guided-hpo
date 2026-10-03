@@ -1,0 +1,18 @@
+{
+  "status": "complete_saved_record_reanalysis",
+  "files_sha256": {
+    "report.md": "8b58295a09877b5fbd81a7aec84a74714a505c044ec839ebe44130a6d4b8c7b0",
+    "metric-summary.json": "d2108cacf6aea1e78f2ea9e2b57570250e630a0a25c936ff4a5eeff1a5ac92da",
+    "candidate-endpoints.json": "66dbb3135febe2af89b2fc3ffbc6165966d273e9804873a8f1d8633f33accd69",
+    "named-classification.json": "9f548ab23246eb285d9b6a8973ec8677d616c59d39a7ea374b0290852d975da7",
+    "analyze.py": "beed2c0380d6f1c0989b035a5fb0e4995713c483ef6955189edb0b59dd46c2bb"
+  },
+  "classification_comparisons": 50,
+  "candidate_endpoint_records": 112,
+  "named_epoch30_rows": 12,
+  "new_training_updates": 0,
+  "checkpoint_reloads": 0,
+  "ruff_check": "pass",
+  "ruff_format": "pass",
+  "no_sloppy": "direct invocation skipped ignored audit path; not claimed as pass"
+}

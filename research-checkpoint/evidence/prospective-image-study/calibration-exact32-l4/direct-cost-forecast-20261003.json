@@ -1,0 +1,511 @@
+{
+  "decision": "prefix_2",
+  "launch_authorized": false,
+  "candidates": [
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 3217.1294660120434,
+        "inference": 1099.7699092059343,
+        "probe_score": 0.8019555710000006,
+        "two_phase_build_warmup_checkpoint_hash": 34.16569396199999,
+        "epoch_weight_copy_check_and_restore": 139.97003633999984,
+        "data_io_validation_array_hash_proxy": 3.50066096850226
+      },
+      "gpu_peak_bytes": 801036032
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 1628.4491469400607,
+        "inference": 526.4580851221891,
+        "probe_score": 0.7326190850000032,
+        "two_phase_build_warmup_checkpoint_hash": 12.354265335999997,
+        "epoch_weight_copy_check_and_restore": 33.03200007000058,
+        "data_io_validation_array_hash_proxy": 2.4309056267824936
+      },
+      "gpu_peak_bytes": 641155328
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 579.1251737040647,
+        "inference": 265.6260602912621,
+        "probe_score": 0.42440476800000226,
+        "two_phase_build_warmup_checkpoint_hash": 7.223544356000005,
+        "epoch_weight_copy_check_and_restore": 6.576609509998548,
+        "data_io_validation_array_hash_proxy": 2.3388815734945387
+      },
+      "gpu_peak_bytes": 505114112
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 2418.760947679939,
+        "inference": 991.2915617650152,
+        "probe_score": 0.5768149790000052,
+        "two_phase_build_warmup_checkpoint_hash": 10.588194782000002,
+        "epoch_weight_copy_check_and_restore": 37.50633719999879,
+        "data_io_validation_array_hash_proxy": 2.5457492745641983
+      },
+      "gpu_peak_bytes": 1483339776
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 2252.367202008068,
+        "inference": 618.7004933118587,
+        "probe_score": 0.8495052840000028,
+        "two_phase_build_warmup_checkpoint_hash": 15.745187762000015,
+        "epoch_weight_copy_check_and_restore": 84.7389802500017,
+        "data_io_validation_array_hash_proxy": 2.5619711666009986
+      },
+      "gpu_peak_bytes": 834686720
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 728.1352466072285,
+        "inference": 284.89013887658393,
+        "probe_score": 0.47539176399999405,
+        "two_phase_build_warmup_checkpoint_hash": 7.697889990000064,
+        "epoch_weight_copy_check_and_restore": 11.171928645002538,
+        "data_io_validation_array_hash_proxy": 2.4180548801503483
+      },
+      "gpu_peak_bytes": 763334400
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 6942.354528340028,
+        "inference": 1498.586233962189,
+        "probe_score": 0.8376280909999991,
+        "two_phase_build_warmup_checkpoint_hash": 23.743634560000032,
+        "epoch_weight_copy_check_and_restore": 334.29743644499666,
+        "data_io_validation_array_hash_proxy": 2.3553910340737563
+      },
+      "gpu_peak_bytes": 2662320896
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 897.6278692927187,
+        "inference": 306.8748462465842,
+        "probe_score": 0.42702420100000893,
+        "two_phase_build_warmup_checkpoint_hash": 7.528736788000003,
+        "epoch_weight_copy_check_and_restore": 7.617344894998581,
+        "data_io_validation_array_hash_proxy": 2.6037596856179013
+      },
+      "gpu_peak_bytes": 1507629312
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 985.6610360520887,
+        "inference": 379.97981577967585,
+        "probe_score": 0.4316550110000037,
+        "two_phase_build_warmup_checkpoint_hash": 8.033855397999929,
+        "epoch_weight_copy_check_and_restore": 29.32729739999587,
+        "data_io_validation_array_hash_proxy": 2.361316744255215
+      },
+      "gpu_peak_bytes": 1565048576
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 780.5392995407392,
+        "inference": 352.22093656126714,
+        "probe_score": 0.44360600400000294,
+        "two_phase_build_warmup_checkpoint_hash": 7.648363836000044,
+        "epoch_weight_copy_check_and_restore": 10.969959195002303,
+        "data_io_validation_array_hash_proxy": 2.2759736523379903
+      },
+      "gpu_peak_bytes": 1527645440
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 759.7642624879795,
+        "inference": 349.3974878405837,
+        "probe_score": 0.4265286979999985,
+        "two_phase_build_warmup_checkpoint_hash": 7.521557416000007,
+        "epoch_weight_copy_check_and_restore": 11.760382710002233,
+        "data_io_validation_array_hash_proxy": 2.3314392937795057
+      },
+      "gpu_peak_bytes": 1544438784
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 908.2636393599814,
+        "inference": 363.743876528444,
+        "probe_score": 0.4320654079999997,
+        "two_phase_build_warmup_checkpoint_hash": 7.771703530000025,
+        "epoch_weight_copy_check_and_restore": 10.983977865002501,
+        "data_io_validation_array_hash_proxy": 2.317531400158763
+      },
+      "gpu_peak_bytes": 1549805824
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 827.6153072874455,
+        "inference": 268.45410283249623,
+        "probe_score": 0.4440806330000129,
+        "two_phase_build_warmup_checkpoint_hash": 8.300068417999995,
+        "epoch_weight_copy_check_and_restore": 29.118032685000657,
+        "data_io_validation_array_hash_proxy": 2.338675070919056
+      },
+      "gpu_peak_bytes": 1604683264
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 1254.8693723721915,
+        "inference": 441.71409557840184,
+        "probe_score": 0.5565670809999972,
+        "two_phase_build_warmup_checkpoint_hash": 10.479885033999977,
+        "epoch_weight_copy_check_and_restore": 31.677762689996527,
+        "data_io_validation_array_hash_proxy": 2.42134422860596
+      },
+      "gpu_peak_bytes": 1734034432
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 975.9635011278219,
+        "inference": 356.2401558069174,
+        "probe_score": 0.6706878090000004,
+        "two_phase_build_warmup_checkpoint_hash": 11.657263001999894,
+        "epoch_weight_copy_check_and_restore": 14.034272219997916,
+        "data_io_validation_array_hash_proxy": 2.4158038193341325
+      },
+      "gpu_peak_bytes": 1701230848
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 886.5077257966959,
+        "inference": 429.2206446052791,
+        "probe_score": 0.5895172660000014,
+        "two_phase_build_warmup_checkpoint_hash": 9.794661331999947,
+        "epoch_weight_copy_check_and_restore": 10.344490559999002,
+        "data_io_validation_array_hash_proxy": 2.2815418389455204
+      },
+      "gpu_peak_bytes": 2017188608
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 688.6999217560893,
+        "inference": 262.4455084159624,
+        "probe_score": 0.4299255530000039,
+        "two_phase_build_warmup_checkpoint_hash": 7.818603197999892,
+        "epoch_weight_copy_check_and_restore": 7.293862484993241,
+        "data_io_validation_array_hash_proxy": 2.8968117664438995
+      },
+      "gpu_peak_bytes": 1672536320
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 918.7073357011221,
+        "inference": 370.2621096017688,
+        "probe_score": 0.43185647100000324,
+        "two_phase_build_warmup_checkpoint_hash": 8.019344537999984,
+        "epoch_weight_copy_check_and_restore": 12.992321429993723,
+        "data_io_validation_array_hash_proxy": 2.6365005410054843
+      },
+      "gpu_peak_bytes": 1819966208
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 1866.0446610965303,
+        "inference": 613.2583012393696,
+        "probe_score": 0.5667649059999746,
+        "two_phase_build_warmup_checkpoint_hash": 10.894512496000004,
+        "epoch_weight_copy_check_and_restore": 43.079636970007584,
+        "data_io_validation_array_hash_proxy": 2.4738713932262155
+      },
+      "gpu_peak_bytes": 2134364416
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 981.7307148878684,
+        "inference": 354.8424293196008,
+        "probe_score": 0.44477726599998846,
+        "two_phase_build_warmup_checkpoint_hash": 8.156615319999958,
+        "epoch_weight_copy_check_and_restore": 11.95087850999414,
+        "data_io_validation_array_hash_proxy": 2.45221523058632
+      },
+      "gpu_peak_bytes": 1857493248
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 820.3800925327739,
+        "inference": 334.35697974222546,
+        "probe_score": 0.5705790300000046,
+        "two_phase_build_warmup_checkpoint_hash": 9.959445801999948,
+        "epoch_weight_copy_check_and_restore": 12.401865855003962,
+        "data_io_validation_array_hash_proxy": 2.496334414421636
+      },
+      "gpu_peak_bytes": 1817464320
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 642.777419284198,
+        "inference": 288.8722386744433,
+        "probe_score": 0.4660209840000107,
+        "two_phase_build_warmup_checkpoint_hash": 7.879704748000108,
+        "epoch_weight_copy_check_and_restore": 7.401390390005247,
+        "data_io_validation_array_hash_proxy": 3.033442495840901
+      },
+      "gpu_peak_bytes": 1822487808
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 1589.0901013690132,
+        "inference": 541.7528272550592,
+        "probe_score": 0.7156026369999893,
+        "two_phase_build_warmup_checkpoint_hash": 12.788612410000042,
+        "epoch_weight_copy_check_and_restore": 35.21237386500118,
+        "data_io_validation_array_hash_proxy": 2.700068758716518
+      },
+      "gpu_peak_bytes": 2082273024
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 647.9837927644876,
+        "inference": 262.3592586959554,
+        "probe_score": 0.4325428120000083,
+        "two_phase_build_warmup_checkpoint_hash": 7.998386539999899,
+        "epoch_weight_copy_check_and_restore": 7.374533624997497,
+        "data_io_validation_array_hash_proxy": 2.541555773773347
+      },
+      "gpu_peak_bytes": 1820302080
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 897.9894455833154,
+        "inference": 446.61595302558646,
+        "probe_score": 0.5785237129999814,
+        "two_phase_build_warmup_checkpoint_hash": 10.043446278000033,
+        "epoch_weight_copy_check_and_restore": 10.25978886000658,
+        "data_io_validation_array_hash_proxy": 2.45782142828842
+      },
+      "gpu_peak_bytes": 2145044736
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 1139.1668971756126,
+        "inference": 437.5921104996858,
+        "probe_score": 0.4212441310000088,
+        "two_phase_build_warmup_checkpoint_hash": 8.839073836000011,
+        "epoch_weight_copy_check_and_restore": 24.72646256999738,
+        "data_io_validation_array_hash_proxy": 2.6790668985735597
+      },
+      "gpu_peak_bytes": 2144553984
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 1020.7537564848802,
+        "inference": 340.65240267843217,
+        "probe_score": 0.6978753680000125,
+        "two_phase_build_warmup_checkpoint_hash": 10.652623816000073,
+        "epoch_weight_copy_check_and_restore": 20.868671114997994,
+        "data_io_validation_array_hash_proxy": 2.562735628169303
+      },
+      "gpu_peak_bytes": 1945481216
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 912.4401800365822,
+        "inference": 345.886441557403,
+        "probe_score": 0.42828351800000064,
+        "two_phase_build_warmup_checkpoint_hash": 8.968710279999982,
+        "epoch_weight_copy_check_and_restore": 29.249309789997824,
+        "data_io_validation_array_hash_proxy": 2.7075119887087076
+      },
+      "gpu_peak_bytes": 2096493312
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 1557.8095317408824,
+        "inference": 437.8970683799111,
+        "probe_score": 0.823483331999995,
+        "two_phase_build_warmup_checkpoint_hash": 15.225752567999962,
+        "epoch_weight_copy_check_and_restore": 40.27064080499741,
+        "data_io_validation_array_hash_proxy": 3.653008554080172
+      },
+      "gpu_peak_bytes": 2159232768
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 1714.0137411319838,
+        "inference": 344.5471313525815,
+        "probe_score": 0.5470661610000036,
+        "two_phase_build_warmup_checkpoint_hash": 10.963077207999902,
+        "epoch_weight_copy_check_and_restore": 15.340624829991043,
+        "data_io_validation_array_hash_proxy": 2.7010653072512407
+      },
+      "gpu_peak_bytes": 2098211840
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 1023.6577461888129,
+        "inference": 349.4789273287721,
+        "probe_score": 0.5541431299999999,
+        "two_phase_build_warmup_checkpoint_hash": 10.570852586,
+        "epoch_weight_copy_check_and_restore": 20.10787537500775,
+        "data_io_validation_array_hash_proxy": 2.4398013191362113
+      },
+      "gpu_peak_bytes": 2173675520
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 971.638966144526,
+        "inference": 429.4565968074362,
+        "probe_score": 0.4964863939999873,
+        "two_phase_build_warmup_checkpoint_hash": 8.740222620000054,
+        "epoch_weight_copy_check_and_restore": 17.988223634999656,
+        "data_io_validation_array_hash_proxy": 2.698585814381227
+      },
+      "gpu_peak_bytes": 2201649152
+    }
+  ],
+  "component_seconds_after_2x": {
+    "training": 86872.03605697554,
+    "inference": 29386.88945777775,
+    "probe_score": 35.45045411800001,
+    "two_phase_build_warmup_checkpoint_hash": 695.5469794919995,
+    "epoch_weight_copy_check_and_restore": 2239.290617579973,
+    "data_io_validation_array_hash_proxy": 165.2587951414516
+  },
+  "backend_seconds_after_2x": 119394.47236108471,
+  "scientific_worker_usd": 38.30517121828696,
+  "prior_and_calibration_holds_usd": 6,
+  "other_reserve_usd": 2,
+  "cumulative_forecast_usd": 46.30517121828696,
+  "input_sha256": {
+    "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/timing-protocol.json": "113b8af3c5e1596a39ea7395d3a08de94fb8458b65c157b66c388e9cf5ea51a9",
+    "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/direct-forecast-rule.json": "901f515c4c7ee1a2e6ec733a966d85e2afda99b5e58be606d45ae7d96ec6a1f7",
+    "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/eligibility-addendum.json": "4fa2019a69330d484a16446807c83bf543022daad794c4f8380b318f8fc61047",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/completion.json": "baf196d297f27c80e02a564a92a9075ba82616d75a93a7b7baf9a39212215bc0",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/runtime.json": "0e8c96fb1912012155b38468f4523f384456a065040879b1119e757f6157354a",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/launch-eligibility.json": "3664f8d1941e09623963767c066a5798109720d2d0be996652c27491298f2a4f",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-00-cifar10-c000000/timing.json": "ba5e288d251e5f101e0892c182cb2f5b16f0eed964193941905273c554de67dd",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-01-cifar10-c000001/timing.json": "620c83b3bbaf76f811a866eb542a88666edb819631292d69243f407e4a6589b2",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-02-cifar10-c000002/timing.json": "cf68759b70b76d4d4557a53fc1df4088ec2f379bcb73de98c94b5646dcde2fd9",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-03-cifar10-c000003/timing.json": "705fcc855986db8cb4ba81ec95467db1822eb573dd14cfdb6372742c486a022e",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-04-cifar10-c000004/timing.json": "2d5768e8530dba4de67ae7b1d69bae46a0c5d7b3114a68b6a21bbfbab81d79f0",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-05-cifar10-c000005/timing.json": "84506fe297ef8dc35eb2fe895cbb9e1a54b559896504a9048950294aa43cfdaf",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-06-cifar10-c000006/timing.json": "9877723774574d70996dad98a093e161d4684238e6661d5ee034a7cfafe8f052",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-07-cifar10-c000007/timing.json": "828178d055dd1c7927537238165d7df1d7dd6ee63e10fc5ac67fb14b98bbaaf7",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-08-cifar10-c000000/timing.json": "91732a1283e9ca40a05fcf465cf1fd6c7a022792cee996f9d61c00895e1fbe2f",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-09-cifar10-c000001/timing.json": "3cb36793ce620775b4bc39cc600bf4cb394644c35e7ca8f2e9ea9eee822b5a12",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-10-cifar10-c000002/timing.json": "019711b54699f71c2511a40d692c544c23112cc0a1a55a1623b10ce846d80b7c",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-11-cifar10-c000003/timing.json": "5ccedaabfa85ec57ebcc3ba06f4bf812dc2ba0b7832e71c79dd370d3a1ded6bb",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-12-cifar10-c000004/timing.json": "c3e39d2f91c94c254594b52ec97f9f79e61a9522f0c94553c61b55adfc1897f5",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-13-cifar10-c000005/timing.json": "9f77d223d47b5328f9c074995ea59aba4fe1b1977150a2fd4d0a65f0720e081e",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-14-cifar10-c000006/timing.json": "459430c3f79b307a48f166489e9999f6261d4d4fec8b9024f14d34c639f16306",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-15-cifar10-c000007/timing.json": "a2fe449d7edf555615f110c0cbc54bd27d46a4da9c8f978ff7e96e2b34ad88c0",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-16-cifar100-c000000/timing.json": "b1a70294edeaae1d3756299b0c4f821432144df25bcc1b078e9e3f38b19a6125",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-17-cifar100-c000001/timing.json": "caf100a5fbdd305b5cc5ac8eaae55f5189a8103e04aa4fb0f6b2f67e72112cf2",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-18-cifar100-c000002/timing.json": "56f1c463d6c984c315574a058015faa83316b34cefbf155dcfac2475f08db96c",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-19-cifar100-c000003/timing.json": "f78d30fe08e6fea6161ee94f6818e57449ff3f74520c246fd20fcf494414f312",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-20-cifar100-c000004/timing.json": "13dc91438094f88b65a81d14a9275d6b1d26ffd36cf9d6fcecdee13120b98119",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-21-cifar100-c000005/timing.json": "80dd9b457cd7f9dbc674227cd6cca4576a1282273ecff59765644a0a918ba204",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-22-cifar100-c000006/timing.json": "88c9887969ecd9b8f4fa25036d621bbebbc91e6ca292d2c91f9a37dfc06a1211",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-23-cifar100-c000007/timing.json": "1fd5c784ee835089c0eb8041a02f636db52d861a04544ba1ada96966d640e0e3",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-24-cifar100-c000000/timing.json": "c86fae68cdf6e4283ee093b665cb5bdd05394096be62371f4a31dc0d02eca002",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-25-cifar100-c000001/timing.json": "633ca5ca6d0a7d9784f5f228ed424e9719f8432635cb4b207fd03b097926bc70",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-26-cifar100-c000002/timing.json": "8fd573ab69378dd0d8caa6169c9cb618353879ab01f9a6a5efb64883092c1e5c",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-27-cifar100-c000003/timing.json": "2f894199fd70b0e4ff69a94e2b0ce7441ab5950801adde56560ce2b0cb7da55f",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-28-cifar100-c000004/timing.json": "9fc81d1c139782bd3bcb34c8dca354e136061c7b9faa3cd3d5f24fcd759ea737",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-29-cifar100-c000005/timing.json": "1d70f7679eb685317e17d09338c772c36d62387d14dc5b7d792ab9a5975b6fbf",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-30-cifar100-c000006/timing.json": "88c382a81887604097fc282f0eeac58b21e67903575d114dcd225ca56462d67c",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/run-20261003T030100Z/evidence/results/case-31-cifar100-c000007/timing.json": "bc0a52d7f3830a2733e03e5b5e516c92492cb387b7e96f4ec3cdb39ba3261352"
+  },
+  "calculator_sha256": "c0285c820df8a398b6bb05c0802546fb9715097accc5abbfcf64fe4869a89b1a",
+  "worker_usd_per_hour": 1.021392,
+  "paid_startup_idle_shutdown_seconds": 15616,
+  "limits": "Short-run timings with 2x margin are planning estimates, not observed study costs or guarantees."
+}

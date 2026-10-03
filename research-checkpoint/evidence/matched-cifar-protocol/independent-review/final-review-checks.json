@@ -1,0 +1,107 @@
+{
+  "created_utc": "2026-10-02T22:24:52.910786+00:00",
+  "status": "No remaining fairness defect identified in the proposed primary ablation or pure helper within declared scope. Preparation only; no launch endorsement.",
+  "source_sha256": {
+    "protocol_draft.json": "3f5e23558befa40d74eec8b264307c0b750a32fe936b597387b64998841de7af",
+    "rationale.txt": "701ae9569445e736429cc7edaa8c0a4eb0513e7fe58741d558f2084ca9c6e232",
+    "contract/shared_contract.py": "fc505b9a015540cf4db15a2233908c8eaad49071dec98346c943b4ffaa0c4114",
+    "contract/test_shared_contract.py": "1d254249f9abf6cf8163cdf1e8bb13daad4b56bcfc9dfef583c28803a0914f35",
+    "independent-review/bohb_kde_fixture.py": "99862ffb072d2e2eed4fcb7536ea9835ac1ca26e9b9befa8aa8763d6a3b30687",
+    "independent-review/bohb_kde_fixture.json": "d4a1dd9c639fc86d847bc3f1d57e59774dc28e0ea133de052b2c48c4ed639ac4"
+  },
+  "resolved_mismatches": [
+    "integer repetition IDs0 and1000..1019",
+    "Python random.Random proposals/selection versus NumPy PCG64 subset/shuffles",
+    "exact base10 continuous decoding",
+    "digest reconstructibility rather than requiring stored full digest",
+    "per-manifest versus suite-wide collision checks",
+    "raw records persisted before potentially raising shortlist call"
+  ],
+  "suite_seed_preflight": {
+    "executed_contract_sha256": "28c25cc5a3e6be9ca479e298118a0e12ec5e49701afa8da22ebd91a838bbef80",
+    "datasets": [
+      "cifar10",
+      "cifar100"
+    ],
+    "development": {
+      "repetition": 0,
+      "candidate_count": 8
+    },
+    "publication": {
+      "repetitions": [
+        1000,
+        1001,
+        1002,
+        1003,
+        1004,
+        1005,
+        1006,
+        1007,
+        1008,
+        1009,
+        1010,
+        1011,
+        1012,
+        1013,
+        1014,
+        1015,
+        1016,
+        1017,
+        1018,
+        1019
+      ],
+      "candidate_count": 100
+    },
+    "manifests": 42,
+    "required_seed_roles": 16274,
+    "distinct_values": 16274,
+    "collisions": [],
+    "note": "Computed before subsequent source layout cleanup. Parent reported no seed-semantic change; final source review confirms the same seed derivation. Not repeated for formatting."
+  },
+  "independent_unit_run": {
+    "tests_passed": 3,
+    "seconds": 0.033,
+    "command": "PYTHONPATH=.:sweep-results/research-audit-20261002/matched-cifar-protocol <ORIGINAL_CHECKOUT>/.venv/bin/python -m unittest contract.test_shared_contract -v",
+    "scope": "Passed before later root-added duplicate-occurrence fixture and source layout cleanup; those final edits were read-reviewed, not independently rerun. Initial unittest discover invocation failed at relative test import before running tests; package invocation above corrected the invocation."
+  },
+  "bohb_fixture": {
+    "executed_source_sha256": "99862ffb072d2e2eed4fcb7536ea9835ac1ca26e9b9befa8aa8763d6a3b30687",
+    "seeds": [
+      607,
+      619
+    ],
+    "considered_candidates": 128,
+    "all_integer_coordinates": [
+      32,
+      2,
+      2
+    ],
+    "learning_rate_upper_clips": 15,
+    "weight_decay_upper_clips": 3,
+    "returned_candidates": 2,
+    "sampling_errors": 0,
+    "objective_calls": 0,
+    "scope": "Actual installed get_sample forced KDE branch, five numeric native-domain parameters, real KDEs fit to fixed synthetic observations. Does not evaluate full optimizer search behavior. First fixture setup failed on package import alias; failed source/note retained."
+  },
+  "fixture_qa": {
+    "formatter": "pass",
+    "repository_ruff": "pass",
+    "python312_compile": "pass",
+    "direct_no_sloppy_errors": 0,
+    "direct_no_sloppy_warnings": 2,
+    "warning_reason": "SLOP005 callback extraction warnings intentionally retained for required objective and PDF callback interfaces."
+  },
+  "remaining_requirements": [
+    "author choice of scientific framing/threshold/population and repetition scale",
+    "actual training runner integration with explicit shuffle/augmentation streams",
+    "bounded approved integration/checkpoint audit and source/data freeze",
+    "provider/hardware/data/cost authorization",
+    "secondary BOHB coordinate adapter/library review and other deferred optimizer requirements"
+  ],
+  "activities": {
+    "training": false,
+    "official_test_evaluation": false,
+    "paid_resources": false,
+    "production_edits": false
+  }
+}

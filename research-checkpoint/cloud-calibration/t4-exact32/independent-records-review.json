@@ -1,0 +1,281 @@
+{
+  "status": "PASS: independently verified exact32 calibration records; ready for the frozen direct forecast",
+  "reviewed_utc": "2026-10-03T02:44:27.704064+00:00",
+  "reviewer": "/root/pilot_review",
+  "scope": "Source/JSON/log/tar/raw-byte review only. No cloud/model/research-array access, formula change, forecast execution, original-source edit or new model test. Calculator source was independently reviewed before new timing records were inspected.",
+  "archive_sha256": "867676c19b9e77b17e885d5fc4fdae925ffd88bc6c32da284355da6f1f08735b",
+  "archive_bytes": 30602,
+  "archive_members": 41,
+  "uncompressed_bytes": 122858,
+  "all_archive_member_and_extracted_file_hashes_match": true,
+  "frozen_provenance_sha256": {
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32/timing-protocol.json": "fd521d9ce01cce3e1a37d01b02173eb65764f929661563d2dd80c79e57004847",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32/calibrate.py": "15cbd93843bae0daa3e15bc3eed9bcf4f92f080d08ed41e163b6f64de6cb3959",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32/modal_launch.py": "16abb50acc920252e480f19766888e440507e5936bba09b8758faf0d4edfc494",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-calibration/payload.tar.gz": "9462ddd6b34c42c2fa066c0acd2bd31c099414d7cd49110683c8522bc57975e3",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration/exact32-direct-forecast-rule-20261003.json": "4e4c81d5806f52e06bb95e06189051540db41bde45d62753b371dcb8f915f025",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration/exact32-eligibility-addendum-20261003.json": "8159a15acc3dec3f692da2e5eb4134f7d3c09ca0c77e65d153d503da8975e194",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32/direct_cost_forecast.py": "efca216abe1cc745e5e1b69463fb26e6f72eef2283e2afae0ada327c6aba36d9",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-calibration/run-20261003T023400Z/launch-eligibility.json": "ae77298b2ca094d792520a2935f0408bd158f973ff26d53526d659833648e2b0",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-calibration/run-20261003T023400Z/ledger.json": "6bc0a72d5d06a87ac90f104c13d7a90ace85cec3f64944f79eb343c6b440e360",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-calibration/run-20261003T023400Z/app-status.json": "e41bd725fb7638d3cd2213c8772709d54f02e8c847fde8ba1ab4ac8c382f759c",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-calibration/run-20261003T023400Z/container-status.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "source_hashes_checked": 25,
+  "training_input_byte_hashes_checked": 2,
+  "single_observed_and_returned_attempt": "1f89974f-9ee5-48ba-a4ce-7ca30832f603",
+  "provider_task_id": "<PROVIDER_ID>",
+  "app_id": "<PROVIDER_ID>",
+  "actual_start_utc": "2026-10-03T02:33:44.649968+00:00",
+  "controller_elapsed_seconds": 231.02538712500245,
+  "calibrator_elapsed_seconds": 211.898095369339,
+  "exact_case_identities_and_timing_schemas_match": true,
+  "cases": [
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000000",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 714218752
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000001",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 591842560
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000002",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 494853120
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000003",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 625649920
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000004",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1494739712
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000005",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 758156800
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000006",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 3109906432
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000007",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1453380352
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000000",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1598600448
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000001",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1579273984
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000002",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1540714496
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000003",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1619323392
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000004",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1490905088
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000005",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1670934528
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000006",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1579386624
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000007",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2032195328
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000000",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1596527360
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000001",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1774025472
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000002",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2294096128
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000003",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1979281408
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000004",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1998698496
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000005",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1767120384
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000006",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1880305920
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000007",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1736631808
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000000",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2259222528
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000001",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2144866816
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000002",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2146909440
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000003",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2127339264
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000004",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 3464009472
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000005",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2417013760
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000006",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2140105728
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000007",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2317948928
+    }
+  ],
+  "total_optimizer_updates": 576,
+  "maximum_gpu_peak_bytes": 3464009472,
+  "memory_gate_bytes": 15032385536,
+  "quality_values": "No quality values in exact allowed timing-record schema; no numeric quality-report patterns in captured stdout/stderr. Returned files are JSON/logs only, not predictions, checkpoints or arrays.",
+  "stdout_bytes": 0,
+  "stderr_bytes": 4786,
+  "terminal_proof": {
+    "app_state": "stopped",
+    "app_list_aggregate_tasks": "1",
+    "exact_app_current_container_list": [],
+    "interpretation": "The aggregate reported1 immediately after stop; the separately preserved exact-app running-container query was empty. Frozen corrected launcher performs both checks within its shared ten-second budget.",
+    "stop_cli_returncode": 1,
+    "cleanup_verified": true
+  },
+  "eligibility_record_matches_independent_checks": true,
+  "formula_review": "Literal frozen own-candidate maxima and62524/78695 workloads, two-phase overhead,405weight proxy,3*61500/2524 data proxy and2x totals; fixed.812592USD/hour,15616s paid overhead,5holds+42science+3other. No new timings used to modify formula.",
+  "remaining": "Parent owns frozen calculator execution, subsequent resource/launch decision and account-billing reconciliation. This audit is not scientific-launch authorization.",
+  "calculator_format_only_delta": {
+    "prior_reviewed_sha256": "b238e9b1168b8ab20889ffa3eb96ce33b26468b83524eb0abc381f413d40001e",
+    "final_sha256": "efca216abe1cc745e5e1b69463fb26e6f72eef2283e2afae0ada327c6aba36d9",
+    "exact_byte_proof": "Removing the two empty lines105 and154 from final source reproduces the prior reviewed SHA256 exactly."
+  }
+}

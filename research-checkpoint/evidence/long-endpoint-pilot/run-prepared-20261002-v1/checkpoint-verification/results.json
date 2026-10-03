@@ -1,0 +1,1764 @@
+{
+  "results": [
+    {
+      "checkpoint": "seed71-config0-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 1.4547452356727621,
+          "reloaded": 1.4547452356727621,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 20.32345975411595,
+          "reloaded": 20.3234597539181,
+          "absolute_difference": 1.978506247723999e-10,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.6257297599756936,
+          "reloaded": 0.625729759941225,
+          "absolute_difference": 3.446853913402492e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 1.7660376277314402,
+          "reloaded": 1.766037627801219,
+          "absolute_difference": 6.977884936532064e-11,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 1.8179819516671316,
+          "reloaded": 1.8179819480045762,
+          "absolute_difference": 3.66255537009863e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.444,
+          "reloaded": 0.444,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.42133333333333334,
+          "reloaded": 0.42133333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config0-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 8.168319031498916,
+          "reloaded": 8.168319031498916,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 3.5062515397081113,
+          "reloaded": 3.5062515396103366,
+          "absolute_difference": 9.777467724347844e-11,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.1968343267134572,
+          "reloaded": 0.1968343267039126,
+          "absolute_difference": 9.544615098278086e-12,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.010777172042106225,
+          "reloaded": 0.010777172041780247,
+          "absolute_difference": 3.2597709254122975e-13,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.20706590755919554,
+          "reloaded": 0.2070659070349487,
+          "absolute_difference": 5.242468403832135e-10,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9493333333333334,
+          "reloaded": 0.9493333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config1-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 1.4547335278710434,
+          "reloaded": 1.4547335278710434,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 20.32314817751634,
+          "reloaded": 20.323148177924995,
+          "absolute_difference": 4.086544436177064e-10,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.6257231456052588,
+          "reloaded": 0.6257231455799771,
+          "absolute_difference": 2.5281665649856677e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 1.766038829452094,
+          "reloaded": 1.766038829436294,
+          "absolute_difference": 1.5799805908045528e-11,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 1.8179824325922194,
+          "reloaded": 1.8179824352012053,
+          "absolute_difference": 2.6089859161970708e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.444,
+          "reloaded": 0.444,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.42133333333333334,
+          "reloaded": 0.42133333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config1-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 8.189482262432895,
+          "reloaded": 8.189482262432895,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 3.527122318691328,
+          "reloaded": 3.527122318351911,
+          "absolute_difference": 3.39416938999193e-10,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.19727538192864774,
+          "reloaded": 0.197275381896902,
+          "absolute_difference": 3.174574492170734e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.010767270523561624,
+          "reloaded": 0.010767270522387112,
+          "absolute_difference": 1.174511876644857e-12,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.20731512353390266,
+          "reloaded": 0.20731512522569567,
+          "absolute_difference": 1.6917930112381185e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9493333333333334,
+          "reloaded": 0.9493333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config2-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 2.3299863971276222,
+          "reloaded": 2.3299863971276222,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 17.158630529638657,
+          "reloaded": 17.1586305298145,
+          "absolute_difference": 1.758415635322308e-10,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 1.0466799707444043,
+          "reloaded": 1.0466799707782024,
+          "absolute_difference": 3.379807544945379e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 1.043769389949002,
+          "reloaded": 1.0437693899482063,
+          "absolute_difference": 7.955858194463872e-13,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 1.0348515231004785,
+          "reloaded": 1.0348515256484607,
+          "absolute_difference": 2.5479822696183874e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.6973333333333334,
+          "reloaded": 0.6973333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.7066666666666667,
+          "reloaded": 0.7066666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config2-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 9.49153369394531,
+          "reloaded": 9.49153369394531,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.6085622630392823,
+          "reloaded": 0.6085622631086637,
+          "absolute_difference": 6.938138952250483e-11,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.0490913006310471,
+          "reloaded": 0.04909130063802015,
+          "absolute_difference": 6.97304713970226e-12,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.0012572501019185332,
+          "reloaded": 0.001257250102078249,
+          "absolute_difference": 1.5971577359275013e-13,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.22728662902971625,
+          "reloaded": 0.22728662178843903,
+          "absolute_difference": 7.241277216740727e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.952,
+          "reloaded": 0.952,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config3-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 2.3299380117877595,
+          "reloaded": 2.3299380117877595,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 17.157973187757854,
+          "reloaded": 17.157973187805993,
+          "absolute_difference": 4.813927034774679e-11,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 1.0466732088049588,
+          "reloaded": 1.046673208825342,
+          "absolute_difference": 2.0383250642908024e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 1.0437797001406377,
+          "reloaded": 1.0437797001441786,
+          "absolute_difference": 3.5409453147394743e-12,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 1.0348605079009952,
+          "reloaded": 1.0348605051129192,
+          "absolute_difference": 2.7880759922993548e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.6973333333333334,
+          "reloaded": 0.6973333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.7066666666666667,
+          "reloaded": 0.7066666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config3-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 9.485423112455289,
+          "reloaded": 9.485423112455289,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.6039148560169347,
+          "reloaded": 0.6039148560922595,
+          "absolute_difference": 7.532474644023068e-11,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.04885497394171259,
+          "reloaded": 0.04885497394948956,
+          "absolute_difference": 7.77696657072724e-12,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.0012494561599962974,
+          "reloaded": 0.0012494561601750932,
+          "absolute_difference": 1.7879578026458454e-13,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.22790626233230005,
+          "reloaded": 0.22790625902529071,
+          "absolute_difference": 3.307009333042288e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9493333333333334,
+          "reloaded": 0.9493333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config4-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 3.463456795716714,
+          "reloaded": 3.463456795716714,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 13.16070615793184,
+          "reloaded": 13.16070615788371,
+          "absolute_difference": 4.8128612206710386e-11,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 1.0292542573893901,
+          "reloaded": 1.0292542573698455,
+          "absolute_difference": 1.954458817010618e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.5296348327123818,
+          "reloaded": 0.5296348327114848,
+          "absolute_difference": 8.96949181594664e-13,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.4748550639533813,
+          "reloaded": 0.4748550614435803,
+          "absolute_difference": 2.5098009781565622e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.8413333333333334,
+          "reloaded": 0.8413333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8533333333333334,
+          "reloaded": 0.8533333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config4-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 11.236442298813083,
+          "reloaded": 11.236442298813083,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.1438311650517391,
+          "reloaded": 0.1438311650473135,
+          "absolute_difference": 4.425598776336415e-12,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.012563636225503454,
+          "reloaded": 0.01256363622472431,
+          "absolute_difference": 7.79144110341079e-13,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.00020842374134714465,
+          "reloaded": 0.00020842374133991074,
+          "absolute_difference": 7.233905315040534e-15,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.24279305474092594,
+          "reloaded": 0.2427930573164777,
+          "absolute_difference": 2.575551771855089e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9493333333333334,
+          "reloaded": 0.9493333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config5-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 3.4633371737326835,
+          "reloaded": 3.4633371737326835,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 13.159849628229901,
+          "reloaded": 13.159849628264748,
+          "absolute_difference": 3.4846792118514713e-11,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 1.0293091293360654,
+          "reloaded": 1.0293091293427954,
+          "absolute_difference": 6.729949930672774e-12,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.5296488012956133,
+          "reloaded": 0.5296488013000217,
+          "absolute_difference": 4.408362563879109e-12,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.4748712743097894,
+          "reloaded": 0.47487127691191366,
+          "absolute_difference": 2.6021242383045262e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.8413333333333334,
+          "reloaded": 0.8413333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8533333333333334,
+          "reloaded": 0.8533333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config5-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 11.180241131574299,
+          "reloaded": 11.180241131574299,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.14568553978310256,
+          "reloaded": 0.14568553978174023,
+          "absolute_difference": 1.362326917941914e-12,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.012812236916035299,
+          "reloaded": 0.012812236915782696,
+          "absolute_difference": 2.5260349367783874e-13,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.00021363018066542357,
+          "reloaded": 0.00021363018066326115,
+          "absolute_difference": 2.1624141279680265e-15,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.24262146744808985,
+          "reloaded": 0.24262146451325198,
+          "absolute_difference": 2.9348378727256375e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.952,
+          "reloaded": 0.952,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config6-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 3.920134524938498,
+          "reloaded": 3.920134524938498,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 13.76371857129925,
+          "reloaded": 13.763718571306905,
+          "absolute_difference": 7.65432162097568e-12,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.8983774416270711,
+          "reloaded": 0.8983774416519926,
+          "absolute_difference": 2.4921509300668276e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.5308601106930014,
+          "reloaded": 0.5308601106766117,
+          "absolute_difference": 1.6389778423331336e-11,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.5213907849995966,
+          "reloaded": 0.5213907851940205,
+          "absolute_difference": 1.9442392140689435e-10,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.844,
+          "reloaded": 0.844,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8426666666666667,
+          "reloaded": 0.8426666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config6-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 12.860745820736021,
+          "reloaded": 12.860745820736021,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.08040033870538893,
+          "reloaded": 0.0804003387054052,
+          "absolute_difference": 1.6264767310758543e-14,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.005530463755432114,
+          "reloaded": 0.005530463755420385,
+          "absolute_difference": 1.1728465421079193e-14,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 7.773433670994123e-05,
+          "reloaded": 7.773433670992406e-05,
+          "absolute_difference": 1.7171051906739176e-17,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.2766463954174647,
+          "reloaded": 0.27664639551888615,
+          "absolute_difference": 1.0142142681246469e-10,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.952,
+          "reloaded": 0.952,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config7-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 3.9163967189499798,
+          "reloaded": 3.9163967189499798,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 13.74306830461436,
+          "reloaded": 13.743068304224073,
+          "absolute_difference": 3.9028691389830783e-10,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.8995029282389579,
+          "reloaded": 0.8995029281781189,
+          "absolute_difference": 6.083900050413149e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.530458394535734,
+          "reloaded": 0.5304583945263727,
+          "absolute_difference": 9.361289521336857e-12,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.5211930825845037,
+          "reloaded": 0.521193083234649,
+          "absolute_difference": 6.501452709528621e-10,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.8426666666666667,
+          "reloaded": 0.8426666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8453333333333334,
+          "reloaded": 0.8453333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed71-config7-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 12.990182460291967,
+          "reloaded": 12.990182460291967,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.08597146699542872,
+          "reloaded": 0.08597146699468813,
+          "absolute_difference": 7.405881463640185e-13,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.005795754080735928,
+          "reloaded": 0.005795754080559438,
+          "absolute_difference": 1.7648989908414237e-13,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 8.263759271277138e-05,
+          "reloaded": 8.263759271178964e-05,
+          "absolute_difference": 9.817315146584682e-16,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.27085212780616885,
+          "reloaded": 0.2708521305154229,
+          "absolute_difference": 2.709254043331555e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9466666666666667,
+          "reloaded": 0.9466666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config0-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 2.290974272509949,
+          "reloaded": 2.290974272509949,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 31.61822805297431,
+          "reloaded": 31.618228053809986,
+          "absolute_difference": 8.356764169548114e-10,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.8356341784298538,
+          "reloaded": 0.8356341784211961,
+          "absolute_difference": 8.657630168329433e-12,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 1.555642718433907,
+          "reloaded": 1.5556427185630655,
+          "absolute_difference": 1.2915846170358236e-10,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 1.4513613824768292,
+          "reloaded": 1.4513613828849663,
+          "absolute_difference": 4.081370796882311e-10,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.46266666666666667,
+          "reloaded": 0.46266666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.48533333333333334,
+          "reloaded": 0.48533333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config0-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 9.251029196706721,
+          "reloaded": 9.251029196706721,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 2.518824788992179,
+          "reloaded": 2.5188247886248996,
+          "absolute_difference": 3.672795401143958e-10,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.1521965006398207,
+          "reloaded": 0.15219650059109321,
+          "absolute_difference": 4.872749426176881e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.0068901023878798024,
+          "reloaded": 0.006890102386501841,
+          "absolute_difference": 1.377961113269155e-12,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.16543956713681815,
+          "reloaded": 0.16543956886931288,
+          "absolute_difference": 1.7324947310104477e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.944,
+          "reloaded": 0.944,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config1-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 2.2909547218784656,
+          "reloaded": 2.2909547218784656,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 31.617768050572533,
+          "reloaded": 31.617768050479924,
+          "absolute_difference": 9.260858746529266e-11,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.8356290630475876,
+          "reloaded": 0.8356290630683315,
+          "absolute_difference": 2.0743962103608737e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 1.5556438472808214,
+          "reloaded": 1.555643847168803,
+          "absolute_difference": 1.1201839456020934e-10,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 1.4513631495102948,
+          "reloaded": 1.4513631449543067,
+          "absolute_difference": 4.5559880312850964e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.46266666666666667,
+          "reloaded": 0.46266666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.48533333333333334,
+          "reloaded": 0.48533333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config1-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 9.244971200998531,
+          "reloaded": 9.244971200998531,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 2.5138473150589915,
+          "reloaded": 2.513847315041026,
+          "absolute_difference": 1.7965628984484283e-11,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.1523072154676713,
+          "reloaded": 0.15230721546930404,
+          "absolute_difference": 1.6327494911649865e-12,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.006890891673500123,
+          "reloaded": 0.006890891673406737,
+          "absolute_difference": 9.338623624399744e-14,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.16661645766846273,
+          "reloaded": 0.1666164574037899,
+          "absolute_difference": 2.6467281144526567e-10,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.944,
+          "reloaded": 0.944,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config2-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 3.7405702469510795,
+          "reloaded": 3.7405702469510795,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 22.920049583054745,
+          "reloaded": 22.920049583505893,
+          "absolute_difference": 4.511484519298392e-10,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 1.1231811769697044,
+          "reloaded": 1.1231811768651887,
+          "absolute_difference": 1.0451572940439746e-10,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.726016787068265,
+          "reloaded": 0.7260167872139143,
+          "absolute_difference": 1.4564927042215459e-10,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.6570145750263925,
+          "reloaded": 0.6570145796333616,
+          "absolute_difference": 4.606969139508976e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.7793333333333333,
+          "reloaded": 0.7793333333333333,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8026666666666666,
+          "reloaded": 0.8026666666666666,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config2-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 10.543205729862938,
+          "reloaded": 10.543205729862938,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.47336412273900025,
+          "reloaded": 0.4733641226894206,
+          "absolute_difference": 4.9579673699895466e-11,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.03901764257416321,
+          "reloaded": 0.03901764256690152,
+          "absolute_difference": 7.261691248316993e-12,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.0009325501393307156,
+          "reloaded": 0.0009325501392192338,
+          "absolute_difference": 1.1148178734321501e-13,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.18346419737385614,
+          "reloaded": 0.183464199750225,
+          "absolute_difference": 2.3763688516975634e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.952,
+          "reloaded": 0.952,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config3-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 3.740501895714368,
+          "reloaded": 3.740501895714368,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 22.91937276449181,
+          "reloaded": 22.919372765829568,
+          "absolute_difference": 1.3377565721839346e-09,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 1.123192448598402,
+          "reloaded": 1.1231924486397336,
+          "absolute_difference": 4.133160480535025e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.7260232034857563,
+          "reloaded": 0.7260232035170826,
+          "absolute_difference": 3.132627490742834e-11,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.6570200933913048,
+          "reloaded": 0.6570200897541658,
+          "absolute_difference": 3.6371390343958865e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.7793333333333333,
+          "reloaded": 0.7793333333333333,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8026666666666666,
+          "reloaded": 0.8026666666666666,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config3-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 10.52797757478024,
+          "reloaded": 10.52797757478024,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.47329504502087866,
+          "reloaded": 0.4732950449682143,
+          "absolute_difference": 5.266437286266523e-11,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.0391489469555275,
+          "reloaded": 0.039148946946714946,
+          "absolute_difference": 8.81255485252197e-12,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.0009379279893086181,
+          "reloaded": 0.0009379279891588682,
+          "absolute_difference": 1.4974989564348062e-13,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.18506751939477684,
+          "reloaded": 0.18506751812494926,
+          "absolute_difference": 1.2698275764222444e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9466666666666667,
+          "reloaded": 0.9466666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config4-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 5.238106051966451,
+          "reloaded": 5.238106051966451,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 14.791845316597392,
+          "reloaded": 14.791845314667933,
+          "absolute_difference": 1.9294592590313187e-09,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.6652074010794915,
+          "reloaded": 0.6652074010534594,
+          "absolute_difference": 2.603206539220082e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.3743685345554583,
+          "reloaded": 0.3743685345401614,
+          "absolute_difference": 1.5296930389041563e-11,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.3603667253390322,
+          "reloaded": 0.360366728605471,
+          "absolute_difference": 3.266438786120318e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.88,
+          "reloaded": 0.88,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.872,
+          "reloaded": 0.872,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config4-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 11.6479234826112,
+          "reloaded": 11.6479234826112,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.09401438446842618,
+          "reloaded": 0.09401438444621925,
+          "absolute_difference": 2.2206930738732922e-11,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.009674849199967838,
+          "reloaded": 0.009674849195408087,
+          "absolute_difference": 4.559751881627605e-12,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.0001518191105499535,
+          "reloaded": 0.00015181911049641942,
+          "absolute_difference": 5.35340814646762e-14,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.19341204861470035,
+          "reloaded": 0.19341205239463863,
+          "absolute_difference": 3.7799382790471014e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9546666666666667,
+          "reloaded": 0.9546666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config5-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 5.23791868891502,
+          "reloaded": 5.23791868891502,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 14.791427309200008,
+          "reloaded": 14.791427310492224,
+          "absolute_difference": 1.2922161118922304e-09,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.6652928529859307,
+          "reloaded": 0.6652928530845474,
+          "absolute_difference": 9.861678140765662e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.3744104846639516,
+          "reloaded": 0.37441048467770965,
+          "absolute_difference": 1.3758050254608634e-11,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.3604314814538317,
+          "reloaded": 0.3604314822356664,
+          "absolute_difference": 7.818347080856825e-10,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.88,
+          "reloaded": 0.88,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.872,
+          "reloaded": 0.872,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config5-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 11.650434468497147,
+          "reloaded": 11.650434468497147,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.09417004783183874,
+          "reloaded": 0.09417004784009567,
+          "absolute_difference": 8.256922923166599e-12,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.009732142216561983,
+          "reloaded": 0.009732142218158315,
+          "absolute_difference": 1.5963324412338054e-12,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.00015289494603483198,
+          "reloaded": 0.00015289494605399886,
+          "absolute_difference": 1.9166878370904805e-14,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.19306930125151422,
+          "reloaded": 0.19306930241750936,
+          "absolute_difference": 1.1659951337783525e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9573333333333334,
+          "reloaded": 0.9573333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config6-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 4.734523846960032,
+          "reloaded": 4.734523846960032,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 9.779148345800794,
+          "reloaded": 9.779148346328945,
+          "absolute_difference": 5.281517445610007e-10,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.5630625864516146,
+          "reloaded": 0.5630625864371642,
+          "absolute_difference": 1.445032982161365e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.36967566071261,
+          "reloaded": 0.3696756607347508,
+          "absolute_difference": 2.2140789202040878e-11,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.36607146982078104,
+          "reloaded": 0.366071470482086,
+          "absolute_difference": 6.61304955240638e-10,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.8746666666666667,
+          "reloaded": 0.8746666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.888,
+          "reloaded": 0.888,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config6-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 13.000009593957655,
+          "reloaded": 13.000009593957655,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.03915219726170962,
+          "reloaded": 0.03915219726171678,
+          "absolute_difference": 7.16093850883226e-15,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.003706773090490903,
+          "reloaded": 0.003706773090483144,
+          "absolute_difference": 7.758984427175264e-15,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 4.731054226206529e-05,
+          "reloaded": 4.731054226234714e-05,
+          "absolute_difference": 2.8185190726476295e-16,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.22416711728409397,
+          "reloaded": 0.22416711963609018,
+          "absolute_difference": 2.351996208904694e-09,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9546666666666667,
+          "reloaded": 0.9546666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config7-epoch1.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 4.6658895106027956,
+          "reloaded": 4.6658895106027956,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 9.314675410385089,
+          "reloaded": 9.314675409995262,
+          "absolute_difference": 3.8982683747690317e-10,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.5679113326357591,
+          "reloaded": 0.5679113326481423,
+          "absolute_difference": 1.2383205572064071e-11,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 0.3589210284296763,
+          "reloaded": 0.358921028412377,
+          "absolute_difference": 1.7299328636255495e-11,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.362217245252691,
+          "reloaded": 0.3622172453059754,
+          "absolute_difference": 5.328437691076715e-11,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 0.8806666666666667,
+          "reloaded": 0.8806666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8933333333333333,
+          "reloaded": 0.8933333333333333,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "seed89-config7-epoch100.keras",
+      "metrics": {
+        "original_rms_ratio_max": {
+          "logged": 12.81117816471944,
+          "reloaded": 12.81117816471944,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "relative_head_trace_centered": {
+          "logged": 0.039376448218524276,
+          "reloaded": 0.03937644821906442,
+          "absolute_difference": 5.401443181618504e-13,
+          "passed": true
+        },
+        "temperature_curvature": {
+          "logged": 0.0037903332604818066,
+          "reloaded": 0.0037903332605852334,
+          "absolute_difference": 1.034268157229512e-13,
+          "passed": true
+        },
+        "training_loss": {
+          "logged": 4.8784724796507343e-05,
+          "reloaded": 4.8784724797351707e-05,
+          "absolute_difference": 8.443630994045548e-16,
+          "passed": true
+        },
+        "validation_loss": {
+          "logged": 0.21420804270663862,
+          "reloaded": 0.2142080419526407,
+          "absolute_difference": 7.539979196558022e-10,
+          "passed": true
+        },
+        "training_accuracy": {
+          "logged": 1.0,
+          "reloaded": 1.0,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9546666666666667,
+          "reloaded": 0.9546666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    }
+  ]
+}

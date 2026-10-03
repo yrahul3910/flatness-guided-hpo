@@ -1,0 +1,209 @@
+{
+  "created_utc": "2026-10-03T00:48:23.659442+00:00",
+  "status": "data membership and provenance frozen for prospective sealed CIFAR rerun; not a complete launch protocol",
+  "claim": "prospective within-study holdout separation; no globally untouched or historically unexposed CIFAR claim",
+  "scope_datasets": [
+    "cifar10",
+    "cifar100"
+  ],
+  "official_source_url": "https://www.cs.toronto.edu/~kriz/cifar.html",
+  "official_source_resolved_url": "https://cave.cs.toronto.edu/kriz/cifar.html",
+  "archives": [
+    {
+      "path": "<LOCAL_HOME>/.keras/datasets/cifar-10-batches-py-target_archive",
+      "bytes": 170498071,
+      "sha256": "6d958be074577803d12ecdefd02955f39262c83c16fe9348329d7fe0b5c001ce",
+      "md5": "c58f30108f718f92721af3b95e74349a",
+      "read_mode": "opaque archive bytes only; not extracted or deserialized"
+    },
+    {
+      "path": "<RESEARCH_WORKTREE>/image-rs/data.tar.gz",
+      "bytes": 169572133,
+      "sha256": "425627641093e03256ebd238752e9c07d40fc4b224e5db6adc15b317a1857965",
+      "md5": "18fa9756949f89c4537ab4829686458c",
+      "read_mode": "opaque archive bytes only; not extracted or deserialized"
+    }
+  ],
+  "cifar10_official_python_md5": "c58f30108f718f92721af3b95e74349a",
+  "cifar10_keras_python_sha256": "6d958be074577803d12ecdefd02955f39262c83c16fe9348329d7fe0b5c001ce",
+  "cifar10_official_binary_md5": "c32a1d4ab5d03f1284b67883e8d87530",
+  "cifar100_official_python_md5": "eb9058c3a382ffc7106e4002c42a8d85",
+  "cifar100_keras_python_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+  "cifar100_cache_present_at_audit": false,
+  "cache_top_level_cifar_paths": [
+    "<LOCAL_HOME>/.keras/datasets/cifar-10-batches-py-target",
+    "<LOCAL_HOME>/.keras/datasets/cifar-10-batches-py-target_archive"
+  ],
+  "split": {
+    "cifar10": {
+      "fit": {
+        "official_partition": "train",
+        "range_half_open": [
+          0,
+          40000
+        ],
+        "count": 40000,
+        "row_id_namespace": "cifar10/train",
+        "indices_path": "cifar10-fit-indices.npy",
+        "dtype": "int64",
+        "array_sha256": "684e243fe527dfe93ae874c59a8938399aa2997aa52ecabbd6020e0b9895db79",
+        "file_sha256": "a3b3ab19caa3e9ae82158a85e7959bad8f5db642bedb86912997abe0f35d6e39"
+      },
+      "tuning": {
+        "official_partition": "train",
+        "range_half_open": [
+          40000,
+          50000
+        ],
+        "count": 10000,
+        "row_id_namespace": "cifar10/train",
+        "indices_path": "cifar10-tuning-indices.npy",
+        "dtype": "int64",
+        "array_sha256": "f24ddb1d6fc91e214922492334d63277e2ba81167c771133c5d4336cc110c823",
+        "file_sha256": "a943167d83a28452f1e58184f6fee29cb10b76f35af7d8735051f185ef922d7a"
+      },
+      "final": {
+        "official_partition": "test",
+        "range_half_open": [
+          0,
+          10000
+        ],
+        "count": 10000,
+        "row_id_namespace": "cifar10/test",
+        "indices_path": "cifar10-final-indices.npy",
+        "dtype": "int64",
+        "array_sha256": "9e1c19b3fdc185411bd1a987deb6a9fda2531116aac060a84c4d878854d1c099",
+        "file_sha256": "3e7d12429f219ff5b6814ff1948c5b0e771431218bfb55b619b183b1e1264c51"
+      }
+    },
+    "cifar100": {
+      "fit": {
+        "official_partition": "train",
+        "range_half_open": [
+          0,
+          40000
+        ],
+        "count": 40000,
+        "row_id_namespace": "cifar100/train",
+        "indices_path": "cifar100-fit-indices.npy",
+        "dtype": "int64",
+        "array_sha256": "684e243fe527dfe93ae874c59a8938399aa2997aa52ecabbd6020e0b9895db79",
+        "file_sha256": "a3b3ab19caa3e9ae82158a85e7959bad8f5db642bedb86912997abe0f35d6e39"
+      },
+      "tuning": {
+        "official_partition": "train",
+        "range_half_open": [
+          40000,
+          50000
+        ],
+        "count": 10000,
+        "row_id_namespace": "cifar100/train",
+        "indices_path": "cifar100-tuning-indices.npy",
+        "dtype": "int64",
+        "array_sha256": "f24ddb1d6fc91e214922492334d63277e2ba81167c771133c5d4336cc110c823",
+        "file_sha256": "a943167d83a28452f1e58184f6fee29cb10b76f35af7d8735051f185ef922d7a"
+      },
+      "final": {
+        "official_partition": "test",
+        "range_half_open": [
+          0,
+          10000
+        ],
+        "count": 10000,
+        "row_id_namespace": "cifar100/test",
+        "indices_path": "cifar100-final-indices.npy",
+        "dtype": "int64",
+        "array_sha256": "9e1c19b3fdc185411bd1a987deb6a9fda2531116aac060a84c4d878854d1c099",
+        "file_sha256": "3e7d12429f219ff5b6814ff1948c5b0e771431218bfb55b619b183b1e1264c51"
+      }
+    }
+  },
+  "numpy": "1.26.4",
+  "index_randomization": "none; retain prior draft last20percent tuning",
+  "cifar10_row_order": "data_batch_1 through data_batch_5, 10000 rows each, installed Keras loader ordering",
+  "cifar100_row_order": "official train file order; fine_labels only",
+  "test_isolation": "Do not call Keras load_data in preparation/training workers because it loads both train and test. Read verified training members only and provide explicit fit/tuning arrays. Separate finalizer receives test only after suite lock.",
+  "historical_source_sha256": "184960778e7179098d1b74b642914bf29a7751d4b6fc3a9b69a184565d3d67d3",
+  "historical_source_git_head": "b2d7116c2b154081342f88618be15a144054eb59",
+  "source_sha256": {
+    "image/src/util.py": "0265e474b930fc19c2a210e095e38f48a19a5e38021a9bb532f7ba3c47530e76",
+    "image/src/experiment.py": "e1f23d62214d931989f8d8bcde955fb476b4e222e53aeac2a506073513fc68de",
+    "image/matched_hpo.py": "34543ebf279db38e2a3aae55124084c7135e8b8283543971d1f9187ee59902ff",
+    "image/src/matched_training.py": "1dd1a156c03f8b6d04bf1f5f37034eeea8245adb8e309b038bd3853376e2d236",
+    "image/test_cifar100.py": "cec9c0455fb78b709f381dced22b7910f92b0c9276bf8302ab6dc595bb2eb049",
+    "image-rs/src/data.rs": "1e341e7a09048f731dfbbd7d01dad04c9df0a445ae4687aff5a05fad08cded77",
+    "image-rs/src/util.rs": "b2c17f0e40881bbf0665bf9759c86f609b5c6f09fe8b02744e5de6971a414712",
+    "image-rs/src/model.rs": "f64bb1dfcc11bc6a19461e6d93d18871a0d3a391a17dd3896bfb00b7e5318c54",
+    "sweep-results/research-audit-20261002/matched-cifar-protocol/protocol_draft.json": "3f5e23558befa40d74eec8b264307c0b750a32fe936b597387b64998841de7af",
+    "sweep-results/research-audit-20261002/matched-runner-integration/backend/run-20261002T223958949122Z/protocol.json": "b5e63c5e730eadfb9a7137a3eb08345d0c2975d1c69c35c88d243be7a217ece7",
+    "sweep-results/research-audit-20261002/matched-runner-integration/orchestrator-fixture/run-20261002T224932530385Z/protocol.json": "008eed76dd62c9f0483038efefa1bae620583629eb6123f88398d1087cfc12ee",
+    ".cloudexp/research-audit-20261002/gcloud-inventory.json": "4ff0e82adffe2c26c6a8abbaea5c97591f9060eec095d80c44a6085ddc2a93b7",
+    ".cloudexp/research-audit-20261002/cloud-resume-20261002T205000Z.json": "bf8f6ae5ced262b2749c426f7d1a6a887d4bc63d3cedb7a0457d032c09cd81b9",
+    ".cloudexp/research-audit-20261002/recovery-ledger.json": "a6f83ff0886032a07d99c00f1d183599cbef31303b837610b08e8fbfd344e7b5",
+    "results/cifar10/bohb.txt": "b7cd9ca044b3ebd273a9bd9d71bd7f66ee57880f94e87536667653b76981d4ab",
+    "results/cifar10/hebo.txt": "fb3e6bd94d694713a82fa355548f9e8edd831398bc8154fcde828fc424c21ad2",
+    "results/cifar10/hyperopt.txt": "2e83b27e6858d2264bc1477c653443c072ebebfc02c264680c7f702d14be524f",
+    "results/cifar10/lr-sched.txt": "904fc12791a791fc595e0e51a3de17f1de9ff980f823008e29a61ccacd4f012d",
+    "results/cifar10/no-lr-sched.txt": "c44428f609fc831f5aa2d767e418e06843ed87401796df01e26aac33c6082b86",
+    "results/cifar10/opentuner.txt": "da066cd8dcc4293e63b98c9348962f82c5317b7c1e3d31c39cfed27907b7f40a",
+    "results/cifar10/random.txt": "89d9ade53b8692bdb416b417acf0fcd503f9023b4d1f7c58fea1871c73d76ff0",
+    "results/cifar10/stcvx.txt": "522b202a5943f1edac6636c5a58ceb47bfed4d43944f0718ad5715c3513eb327",
+    "results/cifar10/stcvx_search_5344.csv": "943e3ece6f47b067336d8ad25a8455e01b2299f03abf3e34daed12431fcbf6e3",
+    "results/cifar100/random.txt": "3b0424d82a0dbc27686c7434c8c297136bc9af3d4ced9bf6001d856bb39c39d9",
+    "results/cifar100/stcvx.txt": "966a19a1bbd5020f0e58f8d363fd5306c39b491fce08075d6739fa6222e48576"
+  },
+  "installed_loader_sha256": {
+    "<ORIGINAL_CHECKOUT>/.venv/lib/python3.12/site-packages/keras/src/datasets/cifar.py": "9e7bf41902b2a63ebcaa72bc80c1234d8e21ea8ae43b583bd21b8a42a7499804",
+    "<ORIGINAL_CHECKOUT>/.venv/lib/python3.12/site-packages/keras/src/datasets/cifar10.py": "85c9059a36d811944d5c03174a34d867c9738ed7fe127758b5286fe7fc5b5d48",
+    "<ORIGINAL_CHECKOUT>/.venv/lib/python3.12/site-packages/keras/src/datasets/cifar100.py": "1d270af590f6cc409fa51560020ce79b65d8a592601db24c7da5b0c46a3b9c6b"
+  },
+  "recovered_cloud_evidence": {
+    "phase": "start_failed_capacity_stopped",
+    "observed_running": false,
+    "downloaded_artifacts": [],
+    "final_status": "TERMINATED"
+  },
+  "cloud_history_limit": "Original VM disks remain uninspected; no new cloud read or mutation in this audit.",
+  "cifar10_1_optional": {
+    "status": "read-only assessment only; not added to primary study or downloaded",
+    "official_repo": "https://github.com/modestyachts/CIFAR-10.1",
+    "recommended_release": "v6",
+    "examples": 2000,
+    "classes": 10,
+    "license_scope": "Repository MIT covers code and explicitly excludes image/label data; README refers dataset usage to TinyImages terms.",
+    "search_command": [
+      "rg",
+      "-l",
+      "-i",
+      "--hidden",
+      "--no-ignore",
+      "-g",
+      "!**/.git/**",
+      "-g",
+      "!**/.venv/**",
+      "-g",
+      "!**/source/**",
+      "-g",
+      "!**/sources/**",
+      "-g",
+      "!**/before/**",
+      "-g",
+      "!**/upstream/**",
+      "-g",
+      "!**/prospective-image-study/**",
+      "cifar[-_ ]?10[._ -]1|modestyachts|cifar10\\.1",
+      ".",
+      "<ORIGINAL_CHECKOUT>"
+    ],
+    "search_exit_code": 1,
+    "search_matches": [],
+    "search_stderr": "",
+    "history_limit": "No named match in recovered local evidence does not establish absence of unrecorded use; no CIFAR100 implication"
+  },
+  "dataset_arrays_deserialized": false,
+  "official_test_arrays_inspected": false,
+  "new_model_outcomes": false,
+  "training_or_inference": false,
+  "new_downloads": false,
+  "cloud_mutations": false
+}

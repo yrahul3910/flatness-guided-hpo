@@ -1,0 +1,1307 @@
+@article{shalev2010equivalence,
+  title={On the equivalence of weak learnability and linear separability: New relaxations and efficient boosting algorithms},
+  author={Shalev-Shwartz, Shai and Singer, Yoram},
+  journal={Machine learning},
+  volume={80},
+  pages={141--163},
+  year={2010},
+  publisher={Springer}
+}
+@article{yedida2021lipschitzlr,
+  title={Lipschitzlr: Using theoretically computed adaptive learning rates for fast convergence},
+  author={Yedida, Rahul and Saha, Snehanshu and Prashanth, Tejas},
+  journal={Applied Intelligence},
+  volume={51},
+  pages={1460--1478},
+  year={2021},
+  publisher={Springer}
+}
+@article{fu2016tuning,
+  title={Tuning for software analytics: Is it really necessary?},
+  author={Fu, Wei and Menzies, Tim and Shen, Xipeng},
+  journal={Information and Software Technology},
+  volume={76},
+  pages={135--146},
+  year={2016},
+  publisher={Elsevier}
+}
+@article{agrawal2019dodge,
+  title={How to “dodge” complex software analytics},
+  author={Agrawal, Amritanshu and Fu, Wei and Chen, Di and Shen, Xipeng and Menzies, Tim},
+  journal={IEEE Transactions on Software Engineering},
+  volume={47},
+  number={10},
+  pages={2182--2194},
+  year={2019},
+  publisher={IEEE}
+}
+
+@article{bentley75,
+author = {Bentley, Jon Louis},
+title = {Multidimensional Binary Search Trees Used for Associative Searching},
+year = {1975},
+issue_date = {Sept. 1975},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {18},
+number = {9},
+issn = {0001-0782},
+url = {https://doi.org/10.1145/361002.361007},
+doi = {10.1145/361002.361007},
+abstract = {This paper develops the multidimensional binary search tree (or k-d tree, where k is the dimensionality of the search space) as a data structure for storage of information to be retrieved by associative searches. The k-d tree is defined and examples are given. It is shown to be quite efficient in its storage requirements. A significant advantage of this structure is that a single data structure can handle many types of queries very efficiently. Various utility algorithms are developed; their proven average running times in an n record file are: insertion, O(log n); deletion of the root, O(n(k-1)/k); deletion of a random node, O(log n); and optimization (guarantees logarithmic performance of searches), O(n log n). Search algorithms are given for partial match queries with t keys specified [proven maximum running time of O(n(k-t)/k)] and for nearest neighbor queries [empirically observed average running time of O(log n).] These performances far surpass the best currently known algorithms for these tasks. An algorithm is presented to handle any general intersection query. The main focus of this paper is theoretical. It is felt, however, that k-d trees could be quite useful in many applications, and examples of potential uses are given.},
+journal = {Commun. ACM},
+month = {sep},
+pages = {509–517},
+numpages = {9},
+keywords = {attribute, key, partial match queries, information retrieval system, intersection queries, binary search trees, nearest neighbor queries, binary tree insertion, associative retrieval}
+}
+
+@inproceedings{rahul16fse,
+author = {Krishna, Rahul and Yu, Zhe and Agrawal, Amritanshu and Dominguez, Manuel and Wolf, David},
+title = {The "BigSE" Project: Lessons Learned from Validating Industrial Text Mining},
+year = {2016},
+isbn = {9781450341523},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2896825.2896836},
+doi = {10.1145/2896825.2896836},
+abstract = {As businesses become increasingly reliant on big data analytics, it becomes increasingly important to test the choices made within the data miners. This paper reports lessons learned from the BigSE Lab, an industrial/university collaboration that augments industrial activity with low-cost testing of data miners (by graduate students).BigSE is an experiment in academic/ industrial collaboration. Funded by a gift from LexisNexis, BigSE has no specific deliverables. Rather, it is fueled by a research question "what can industry and academia learn from each other?". Based on open source data and tools, the output of this work is (a) more exposure by commercial engineers to state-of-the-art methods and (b) more exposure by students to industrial text mining methods (plus research papers that comment on methods on how to improve those methods).The results so far are encouraging. Students at BigSE Lab have found numerous "standard" choices for text mining that could be replaced by simpler and less resource intensive methods. Further, that work also found additional text mining choices that could significantly improve the performance of industrial data miners.},
+booktitle = {Proceedings of the 2nd International Workshop on BIG Data Software Engineering},
+pages = {65–71},
+numpages = {7},
+keywords = {testing, software engineering, e-discovery},
+location = {Austin, Texas},
+series = {BIGDSE '16}
+}
+
+@INPROCEEDINGS{Tantithamthavorn16,
+  author={Tantithamthavorn, Chakkrit and McIntosh, Shane and Hassan, Ahmed E. and Matsumoto, Kenichi},
+  booktitle={2016 IEEE/ACM 38th International Conference on Software Engineering (ICSE)}, 
+  title={Automated Parameter Optimization of Classification Techniques for Defect Prediction Models}, 
+  year={2016},
+  volume={},
+  number={},
+  pages={321-332},
+  doi={10.1145/2884781.2884857}}
+
+
+
+@inproceedings{xu15fse,
+author = {Xu, Tianyin and Jin, Long and Fan, Xuepeng and Zhou, Yuanyuan and Pasupathy, Shankar and Talwadker, Rukma},
+title = {Hey, You Have given Me Too Many Knobs!: Understanding and Dealing with over-Designed Configuration in System Software},
+year = {2015},
+isbn = {9781450336758},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2786805.2786852},
+doi = {10.1145/2786805.2786852},
+abstract = {Configuration problems are not only prevalent, but also severely impair the reliability of today's system software. One fundamental reason is the ever-increasing complexity of configuration, reflected by the large number of configuration parameters ("knobs"). With hundreds of knobs, configuring system software to ensure high reliability and performance becomes a daunting, error-prone task. This paper makes a first step in understanding a fundamental question of configuration design: "do users really need so many knobs?" To provide the quantitatively answer, we study the configuration settings of real-world users, including thousands of customers of a commercial storage system (Storage-A), and hundreds of users of two widely-used open-source system software projects. Our study reveals a series of interesting findings to motivate software architects and developers to be more cautious and disciplined in configuration design. Motivated by these findings, we provide a few concrete, practical guidelines which can significantly reduce the configuration space. Take Storage-A as an example, the guidelines can remove 51.9\% of its parameters and simplify 19.7\% of the remaining ones with little impact on existing users. Also, we study the existing configuration navigation methods in the context of "too many knobs" to understand their effectiveness in dealing with the over-designed configuration, and to provide practices for building navigation support in system software.},
+booktitle = {Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering},
+pages = {307–319},
+numpages = {13},
+keywords = {Simplification, Error, Complexity, Configuration, Navigation, Parameter, Difficulty},
+location = {Bergamo, Italy},
+series = {ESEC/FSE 2015}
+}
+
+@article{aha91,
+author = {Aha, W. and Kibler, Dennis and Albert, Marc},
+year = {1991},
+month = {01},
+pages = {37-66},
+title = {Instance-Based Learning Algorithms},
+volume = {6},
+journal = {Machine Learning},
+doi = {10.1023/A:1022689900470}
+}
+@article{dablain2022deepsmote,
+  title={DeepSMOTE: Fusing deep learning and SMOTE for imbalanced data},
+  author={Dablain, Damien and Krawczyk, Bartosz and Chawla, Nitesh V},
+  journal={IEEE Transactions on Neural Networks and Learning Systems},
+  year={2022},
+  publisher={IEEE}
+}
+@article{buda2018systematic,
+  title={A systematic study of the class imbalance problem in convolutional neural networks},
+  author={Buda, Mateusz and Maki, Atsuto and Mazurowski, Maciej A},
+  journal={Neural networks},
+  volume={106},
+  pages={249--259},
+  year={2018},
+  publisher={Elsevier}
+}
+@inproceedings{movckus1975bayesian,
+  title={On Bayesian methods for seeking the extremum},
+  author={Mo{\v{c}}kus, Jonas},
+  booktitle={Optimization Techniques IFIP Technical Conference: Novosibirsk, July 1--7, 1974},
+  pages={400--404},
+  year={1975},
+  organization={Springer}
+}
+
+
+@InProceedings{ansel:pact:2014,
+  author    = "Jason Ansel and Shoaib Kamil and Kalyan Veeramachaneni and Jonathan Ragan-Kelley and Jeffrey Bosboom and Una-May O'Reilly and Saman Amarasinghe",
+  title     = "OpenTuner: An Extensible Framework for Program Autotuning",
+  url       = "http://groups.csail.mit.edu/commit/papers/2014/ansel-pact14-opentuner.pdf",
+  slides    = "http://groups.csail.mit.edu/commit/papers/2014/ansel-pact14-opentuner-slides.pdf",
+  keywords  = "OpenTuner",
+  month     = "Aug",
+  year      = "2014",
+  address   = "Edmonton, Canada",
+  booktitle = "International Conference on Parallel Architectures and Compilation Techniques (PACT)",
+}
+
+
+@inproceedings{turner2021bayesian,
+  title={Bayesian optimization is superior to random search for machine learning hyperparameter tuning: Analysis of the black-box optimization challenge 2020},
+  author={Turner, Ryan and Eriksson, David and McCourt, Michael and Kiili, Juha and Laaksonen, Eero and Xu, Zhen and Guyon, Isabelle},
+  booktitle={NeurIPS 2020 Competition and Demonstration Track},
+  pages={3--26},
+  year={2021},
+  organization={PMLR}
+}
+@article{cowen2022hebo,
+  title={HEBO: pushing the limits of sample-efficient hyper-parameter optimisation},
+  author={Cowen-Rivers, Alexander I and Lyu, Wenlong and Tutunov, Rasul and Wang, Zhi and Grosnit, Antoine and Griffiths, Ryan Rhys and Maraval, Alexandre Max and Jianye, Hao and Wang, Jun and Peters, Jan and others},
+  journal={Journal of Artificial Intelligence Research},
+  volume={74},
+  pages={1269--1349},
+  year={2022}
+}
+@article{bergstra2012random,
+  title={Random search for hyper-parameter optimization.},
+  author={Bergstra, James and Bengio, Yoshua},
+  journal={Journal of machine learning research},
+  volume={13},
+  number={2},
+  year={2012}
+}
+@article{bergstra2011algorithms,
+  title={Algorithms for hyper-parameter optimization},
+  author={Bergstra, James and Bardenet, R{\'e}mi and Bengio, Yoshua and K{\'e}gl, Bal{\'a}zs},
+  journal={Advances in neural information processing systems},
+  volume={24},
+  year={2011}
+}
+@inproceedings{falkner2018bohb,
+  title={BOHB: Robust and efficient hyperparameter optimization at scale},
+  author={Falkner, Stefan and Klein, Aaron and Hutter, Frank},
+  booktitle={International Conference on Machine Learning},
+  pages={1437--1446},
+  year={2018},
+  organization={PMLR}
+}
+@inproceedings{mani2019deeptriage,
+  title={Deeptriage: Exploring the effectiveness of deep learning for bug triaging},
+  author={Mani, Senthil and Sankaran, Anush and Aralikatte, Rahul},
+  booktitle={Proceedings of the ACM India joint international conference on data science and management of data},
+  pages={171--179},
+  year={2019}
+}
+@article{lee2020continual,
+  title={Continual prediction of bug-fix time using deep learning-based activity stream embedding},
+  author={Lee, Youngseok and Lee, Suin and Lee, Chan-Gun and Yeom, Ikjun and Woo, Honguk},
+  journal={IEEE Access},
+  volume={8},
+  pages={10503--10515},
+  year={2020},
+  publisher={IEEE}
+}
+@article{yedida2021value,
+  title={On the value of oversampling for deep learning in software defect prediction},
+  author={Yedida, Rahul and Menzies, Tim},
+  journal={IEEE Transactions on Software Engineering},
+  volume={48},
+  number={8},
+  pages={3103--3116},
+  year={2021},
+  publisher={IEEE}
+}
+
+@article{agrawal2020better,
+  title={Better software analytics via “DUO”: Data mining algorithms using/used-by optimizers},
+  author={Agrawal, Amritanshu and Menzies, Tim and Minku, Leandro L and Wagner, Markus and Yu, Zhe},
+  journal={Empirical Software Engineering},
+  volume={25},
+  pages={2099--2136},
+  year={2020},
+  publisher={Springer}
+}
+
+@book{boyd2004convex,
+  title={Convex optimization},
+  author={Boyd, Stephen and Boyd, Stephen P and Vandenberghe, Lieven},
+  year={2004},
+  publisher={Cambridge university press}
+}
+@article{yedida2023find,
+  title={How to Find Actionable Static Analysis Warnings: A Case Study With FindBugs},
+  author={Yedida, Rahul and Kang, Hong Jin and Tu, Huy and Yang, Xueqi and Lo, David and Menzies, Tim},
+  journal={IEEE Transactions on Software Engineering},
+  year={2023},
+  publisher={IEEE}
+}
+@article{Fu16ist,
+title = {Tuning for software analytics: Is it really necessary?},
+journal = {Information and Software Technology},
+volume = {76},
+pages = {135-146},
+year = {2016},
+issn = {0950-5849},
+doi = {https://doi.org/10.1016/j.infsof.2016.04.017},
+url = {https://www.sciencedirect.com/science/article/pii/S0950584916300738},
+author = {Wei Fu and Tim Menzies and Xipeng Shen},
+keywords = {Defect prediction, CART, Random forest, Differential evolution, Search-based software engineering},
+abstract = {Context: Data miners have been widely used in software engineering to, say, generate defect predictors from static code measures. Such static code defect predictors perform well compared to manual methods, and they are easy to use and useful to use. But one of the “black arts” of data mining is setting the tunings that control the miner. Objective: We seek simple, automatic, and very effective method for finding those tunings. Method: For each experiment with different data sets (from open source JAVA systems), we ran differential evolution as an optimizer to explore the tuning space (as a first step) then tested the tunings using hold-out data. Results: Contrary to our prior expectations, we found these tunings were remarkably simple: it only required tens, not thousands, of attempts to obtain very good results. For example, when learning software defect predictors, this method can quickly find tunings that alter detection precision from 0% to 60%. Conclusion: Since (1) the improvements are so large, and (2) the tuning is so simple, we need to change standard methods in software analytics. At least for defect prediction, it is no longer enough to just run a data miner and present the result without conducting a tuning optimization study. The implication for other kinds of analytics is now an open and pressing issue.}
+}
+
+@article{chawla2002smote,
+  title={SMOTE: synthetic minority over-sampling technique},
+  author={Chawla, Nitesh V and Bowyer, Kevin W and Hall, Lawrence O and Kegelmeyer, W Philip},
+  journal={Journal of artificial intelligence research},
+  volume={16},
+  pages={321--357},
+  year={2002}
+}
+@inproceedings{aggarwal2001surprising,
+  title={On the surprising behavior of distance metrics in high dimensional space},
+  author={Aggarwal, Charu C and Hinneburg, Alexander and Keim, Daniel A},
+  booktitle={Database Theory—ICDT 2001: 8th International Conference London, UK, January 4--6, 2001 Proceedings 8},
+  pages={420--434},
+  year={2001},
+  organization={Springer}
+}
+@article{eriksson2019scalable,
+  title={Scalable global optimization via local bayesian optimization},
+  author={Eriksson, David and Pearce, Michael and Gardner, Jacob and Turner, Ryan D and Poloczek, Matthias},
+  journal={Advances in neural information processing systems},
+  volume={32},
+  year={2019}
+}
+@inproceedings{bergstra2013hyperopt,
+  title={Hyperopt: A python library for optimizing the hyperparameters of machine learning algorithms},
+  author={Bergstra, James and Yamins, Dan and Cox, David D and others},
+  booktitle={Proceedings of the 12th Python in science conference},
+  volume={13},
+  pages={20},
+  year={2013},
+  organization={Citeseer}
+}
+@inproceedings{ansel2014opentuner,
+  title={Opentuner: An extensible framework for program autotuning},
+  author={Ansel, Jason and Kamil, Shoaib and Veeramachaneni, Kalyan and Ragan-Kelley, Jonathan and Bosboom, Jeffrey and O'Reilly, Una-May and Amarasinghe, Saman},
+  booktitle={Proceedings of the 23rd international conference on Parallel architectures and compilation},
+  pages={303--316},
+  year={2014}
+}
+@article{AGRAWAL18ist,
+title = {What is wrong with topic modeling? And how to fix it using search-based software engineering},
+journal = {Information and Software Technology},
+volume = {98},
+pages = {74-88},
+year = {2018},
+issn = {0950-5849},
+doi = {https://doi.org/10.1016/j.infsof.2018.02.005},
+url = {https://www.sciencedirect.com/science/article/pii/S0950584917300861},
+author = {Amritanshu Agrawal and Wei Fu and Tim Menzies},
+keywords = {Topic modeling, Stability, LDA, Tuning, Differential evolution},
+}
+
+
+@article{li2018visualizing,
+  title={Visualizing the loss landscape of neural nets},
+  author={Li, Hao and Xu, Zheng and Taylor, Gavin and Studer, Christoph and Goldstein, Tom},
+  journal={Advances in neural information processing systems},
+  volume={31},
+  year={2018}
+}
+@article{santurkar2018does,
+  title={How does batch normalization help optimization?},
+  author={Santurkar, Shibani and Tsipras, Dimitris and Ilyas, Andrew and Madry, Aleksander},
+  journal={Advances in neural information processing systems},
+  volume={31},
+  year={2018}
+}
+@book{williams2006gaussian,
+  title={Gaussian processes for machine learning},
+  author={Williams, Christopher KI and Rasmussen, Carl Edward},
+  volume={2},
+  number={3},
+  year={2006},
+  publisher={MIT press Cambridge, MA}
+}
+@article{jones1998efficient,
+  title={Efficient global optimization of expensive black-box functions},
+  author={Jones, Donald R and Schonlau, Matthias and Welch, William J},
+  journal={Journal of Global optimization},
+  volume={13},
+  number={4},
+  pages={455},
+  year={1998},
+  publisher={Springer}
+}
+@article{lai1985asymptotically,
+  title={Asymptotically efficient adaptive allocation rules},
+  author={Lai, Tze Leung and Robbins, Herbert and others},
+  journal={Advances in applied mathematics},
+  volume={6},
+  number={1},
+  pages={4--22},
+  year={1985}
+}
+@article{hernandez2014predictive,
+  title={Predictive entropy search for efficient global optimization of black-box functions},
+  author={Hern{\'a}ndez-Lobato, Jos{\'e} Miguel and Hoffman, Matthew W and Ghahramani, Zoubin},
+  journal={Advances in neural information processing systems},
+  volume={27},
+  year={2014}
+}
+@book{papakroni2013data,
+  title={Data carving: Identifying and removing irrelevancies in the data},
+  author={Papakroni, Vasil},
+  year={2013},
+  publisher={West Virginia University}
+}
+@article{yu2020hyper,
+  title={Hyper-parameter optimization: A review of algorithms and applications},
+  author={Yu, Tong and Zhu, Hong},
+  journal={arXiv preprint arXiv:2003.05689},
+  year={2020}
+}
+@inproceedings{pacula2012hyperparameter,
+  title={Hyperparameter tuning in bandit-based adaptive operator selection},
+  author={Pacula, Maciej and Ansel, Jason and Amarasinghe, Saman and O’Reilly, Una-May},
+  booktitle={Applications of Evolutionary Computation: EvoApplications 2012: EvoCOMNET, EvoCOMPLEX, EvoFIN, EvoGAMES, EvoHOT, EvoIASP, EvoNUM, EvoPAR, EvoRISK, EvoSTIM, and EvoSTOC, M{\'a}laga, Spain, April 11-13, 2012, Proceedings},
+  pages={73--82},
+  year={2012},
+  organization={Springer}
+}
+@inproceedings{fialho2010comparison,
+  title={Comparison-based adaptive strategy selection with bandits in differential evolution},
+  author={Fialho, Alvaro and Ros, Raymond and Schoenauer, Marc and Sebag, Michele},
+  booktitle={Parallel Problem Solving from Nature, PPSN XI: 11th International Conference, Krak{\'o}w, Poland, September 11-15, 2010, Proceedings, Part I 11},
+  pages={194--203},
+  year={2010},
+  organization={Springer}
+}
+@article{li2017hyperband,
+  title={Hyperband: A novel bandit-based approach to hyperparameter optimization},
+  author={Li, Lisha and Jamieson, Kevin and DeSalvo, Giulia and Rostamizadeh, Afshin and Talwalkar, Ameet},
+  journal={The Journal of Machine Learning Research},
+  volume={18},
+  number={1},
+  pages={6765--6816},
+  year={2017},
+  publisher={JMLR. org}
+}
+@article{boetticher2007promise,
+  title={The PROMISE repository of empirical software engineering data},
+  author={Boetticher, G},
+  journal={http://promisedata. org/repository},
+  year={2007}
+}
+@article{chidamber1994metrics,
+  title={A metrics suite for object oriented design},
+  author={Chidamber, Shyam R and Kemerer, Chris F},
+  journal={IEEE Transactions on software engineering},
+  volume={20},
+  number={6},
+  pages={476--493},
+  year={1994},
+  publisher={IEEE}
+}
+@article{mccabe1976complexity,
+  title={A complexity measure},
+  author={McCabe, Thomas J},
+  journal={IEEE Transactions on software Engineering},
+  number={4},
+  pages={308--320},
+  year={1976},
+  publisher={IEEE}
+}
+@article{kingma2014adam,
+  title={Adam: A method for stochastic optimization},
+  author={Kingma, Diederik P and Ba, Jimmy},
+  journal={arXiv preprint arXiv:1412.6980},
+  year={2014}
+}
+@article{kim2023repairing,
+  title={Repairing DNN Architecture: Are We There Yet?},
+  author={Kim, Jinhan and Humbatova, Nargiz and Jahangirova, Gunel and Tonella, Paolo and Yoo, Shin},
+  journal={arXiv preprint arXiv:2301.11568},
+  year={2023}
+}
+@inproceedings{jamieson2016non,
+  title={Non-stochastic best arm identification and hyperparameter optimization},
+  author={Jamieson, Kevin and Talwalkar, Ameet},
+  booktitle={Artificial intelligence and statistics},
+  pages={240--248},
+  year={2016},
+  organization={PMLR}
+}
+@article{wan2018perceptions,
+  title={Perceptions, expectations, and challenges in defect prediction},
+  author={Wan, Zhiyuan and Xia, Xin and Hassan, Ahmed E and Lo, David and Yin, Jianwei and Yang, Xiaohu},
+  journal={IEEE Transactions on Software Engineering},
+  volume={46},
+  number={11},
+  pages={1241--1266},
+  year={2018},
+  publisher={IEEE}
+}
+@article{agrawal2021simpler,
+  title={Simpler hyperparameter optimization for software analytics: Why, how, when?},
+  author={Agrawal, Amritanshu and Yang, Xueqi and Agrawal, Rishabh and Yedida, Rahul and Shen, Xipeng and Menzies, Tim},
+  journal={IEEE Transactions on Software Engineering},
+  volume={48},
+  number={8},
+  pages={2939--2954},
+  year={2021},
+  publisher={IEEE}
+}
+@article{yang2021learning,
+  title={Learning to recognize actionable static code warnings (is intrinsically easy)},
+  author={Yang, Xueqi and Chen, Jianfeng and Yedida, Rahul and Yu, Zhe and Menzies, Tim},
+  journal={Empirical Software Engineering},
+  volume={26},
+  pages={1--24},
+  year={2021},
+  publisher={Springer}
+}
+@inproceedings{seong2018towards,
+  title={Towards Flatter Loss Surface via Nonmonotonic Learning Rate Scheduling.},
+  author={Seong, Sihyeon and Lee, Yegang and Kee, Youngwook and Han, Dongyoon and Kim, Junmo},
+  booktitle={UAI},
+  pages={1020--1030},
+  year={2018}
+}
+@article{kaddour2022flat,
+  title={When do flat minima optimizers work?},
+  author={Kaddour, Jean and Liu, Linqing and Silva, Ricardo and Kusner, Matt J},
+  journal={Advances in Neural Information Processing Systems},
+  volume={35},
+  pages={16577--16595},
+  year={2022}
+}
+@inproceedings{tomassi2021real,
+  title={On the Real-World Effectiveness of Static Bug Detectors at Finding Null Pointer Exceptions},
+  author={Tomassi, David A and Rubio-Gonz{\'a}lez, Cindy},
+  booktitle={2021 36th IEEE/ACM International Conference on Automated Software Engineering (ASE)},
+  pages={292--303},
+  year={2021},
+  organization={IEEE}
+}
+@inproceedings{wang2018there,
+  title={Is there a" golden" feature set for static warning identification? an experimental evaluation},
+  author={Wang, Junjie and Wang, Song and Wang, Qing},
+  booktitle={Proceedings of the 12th ACM/IEEE international symposium on empirical software engineering and measurement},
+  pages={1--10},
+  year={2018}
+}
+@article{yang2021understanding,
+  title={Understanding static code warnings: An incremental AI approach},
+  author={Yang, Xueqi and Yu, Zhe and Wang, Junjie and Menzies, Tim},
+  journal={Expert Systems with Applications},
+  volume={167},
+  pages={114134},
+  year={2021},
+  publisher={Elsevier}
+}
+@article{kang2022detecting,
+  title={Detecting False Alarms from Automatic Static Analysis Tools: How Far are We?},
+  author={Kang, Hong Jin and Aw, Khai Loong and Lo, David},
+  journal={arXiv preprint arXiv:2202.05982},
+  year={2022}
+}
+@article{mann1947test,
+  title={On a test of whether one of two random variables is stochastically larger than the other},
+  author={Mann, Henry B and Whitney, Donald R},
+  journal={The annals of mathematical statistics},
+  pages={50--60},
+  year={1947},
+  publisher={JSTOR}
+}
+@inproceedings{gopal2022peer,
+  title={Peer instruction in online software testing and continuous integration: A replication study},
+  author={Gopal, Bhuvaneswari and Cooper, Stephen},
+  booktitle={Proceedings of the ACM/IEEE 44th International Conference on Software Engineering: Software Engineering Education and Training},
+  pages={199--204},
+  year={2022}
+}
+@article{napier2023empirical,
+  title={An empirical study of text-based machine learning models for vulnerability detection},
+  author={Napier, Kollin and Bhowmik, Tanmay and Wang, Shaowei},
+  journal={Empirical Software Engineering},
+  volume={28},
+  number={2},
+  pages={38},
+  year={2023},
+  publisher={Springer}
+}
+@misc{menzies2012promise,
+  title={The promise repository of empirical software engineering data},
+  author={Menzies, Tim and Caglayan, Bora and Kocaguneli, Ekrem and Krall, Joe and Peters, Fayola and Turhan, Burak},
+  year={2012},
+  publisher={June}
+}
+@article{hovemeyer2004finding,
+  title={Finding bugs is easy},
+  author={Hovemeyer, David and Pugh, William},
+  journal={Acm sigplan notices},
+  volume={39},
+  number={12},
+  pages={92--106},
+  year={2004},
+  publisher={ACM New York, NY, USA}
+}
+@inproceedings{wohlin2014guidelines,
+  title={Guidelines for snowballing in systematic literature studies and a replication in software engineering},
+  author={Wohlin, Claes},
+  booktitle={Proceedings of the 18th international conference on evaluation and assessment in software engineering},
+  pages={1--10},
+  year={2014}
+}
+@article{dasgupta1992power,
+  title={The power of approximating: a comparison of activation functions},
+  author={DasGupta, Bhaskar and Schnitger, Georg},
+  journal={Advances in neural information processing systems},
+  volume={5},
+  year={1992}
+}
+@inproceedings{nair2010rectified,
+  title={Rectified linear units improve restricted boltzmann machines},
+  author={Nair, Vinod and Hinton, Geoffrey E},
+  booktitle={Icml},
+  year={2010}
+}
+@article{leshno1993multilayer,
+  title={Multilayer feedforward networks with a nonpolynomial activation function can approximate any function},
+  author={Leshno, Moshe and Lin, Vladimir Ya and Pinkus, Allan and Schocken, Shimon},
+  journal={Neural networks},
+  volume={6},
+  number={6},
+  pages={861--867},
+  year={1993},
+  publisher={Elsevier}
+}
+@article{hornik1989multilayer,
+  title={Multilayer feedforward networks are universal approximators},
+  author={Hornik, Kurt and Stinchcombe, Maxwell and White, Halbert},
+  journal={Neural networks},
+  volume={2},
+  number={5},
+  pages={359--366},
+  year={1989},
+  publisher={Elsevier}
+}
+@article{hornik1991approximation,
+  title={Approximation capabilities of multilayer feedforward networks},
+  author={Hornik, Kurt},
+  journal={Neural networks},
+  volume={4},
+  number={2},
+  pages={251--257},
+  year={1991},
+  publisher={Elsevier}
+}
+@article{cybenko1989approximation,
+  title={Approximation by superpositions of a sigmoidal function},
+  author={Cybenko, George},
+  journal={Mathematics of control, signals and systems},
+  volume={2},
+  number={4},
+  pages={303--314},
+  year={1989},
+  publisher={Springer}
+}
+@article{montufar2014number,
+  title={On the number of linear regions of deep neural networks},
+  author={Montufar, Guido F and Pascanu, Razvan and Cho, Kyunghyun and Bengio, Yoshua},
+  journal={Advances in neural information processing systems},
+  volume={27},
+  year={2014}
+}
+@inproceedings{he2016deep,
+  title={Deep residual learning for image recognition},
+  author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={770--778},
+  year={2016}
+}
+@article{smith2018disciplined,
+  title={A disciplined approach to neural network hyper-parameters: Part 1--learning rate, batch size, momentum, and weight decay},
+  author={Smith, Leslie N},
+  journal={arXiv preprint arXiv:1803.09820},
+  year={2018}
+}
+@article{baker2016designing,
+  title={Designing neural network architectures using reinforcement learning},
+  author={Baker, Bowen and Gupta, Otkrist and Naik, Nikhil and Raskar, Ramesh},
+  journal={arXiv preprint arXiv:1611.02167},
+  year={2016}
+}
+@article{liu2017hierarchical,
+  title={Hierarchical representations for efficient architecture search},
+  author={Liu, Hanxiao and Simonyan, Karen and Vinyals, Oriol and Fernando, Chrisantha and Kavukcuoglu, Koray},
+  journal={arXiv preprint arXiv:1711.00436},
+  year={2017}
+}
+@article{elsken2017simple,
+  title={Simple and efficient architecture search for convolutional neural networks},
+  author={Elsken, Thomas and Metzen, Jan-Hendrik and Hutter, Frank},
+  journal={arXiv preprint arXiv:1711.04528},
+  year={2017}
+}
+@article{liu2018darts,
+  title={Darts: Differentiable architecture search},
+  author={Liu, Hanxiao and Simonyan, Karen and Yang, Yiming},
+  journal={arXiv preprint arXiv:1806.09055},
+  year={2018}
+}
+@inproceedings{zoph2018learning,
+  title={Learning transferable architectures for scalable image recognition},
+  author={Zoph, Barret and Vasudevan, Vijay and Shlens, Jonathon and Le, Quoc V},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={8697--8710},
+  year={2018}
+}
+@article{xie2018snas,
+  title={SNAS: stochastic neural architecture search},
+  author={Xie, Sirui and Zheng, Hehui and Liu, Chunxiao and Lin, Liang},
+  journal={arXiv preprint arXiv:1812.09926},
+  year={2018}
+}
+@inproceedings{real2019regularized,
+  title={Regularized evolution for image classifier architecture search},
+  author={Real, Esteban and Aggarwal, Alok and Huang, Yanping and Le, Quoc V},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={33},
+  pages={4780--4789},
+  year={2019}
+}
+@article{elsken2019neural,
+  title={Neural architecture search: A survey},
+  author={Elsken, Thomas and Metzen, Jan Hendrik and Hutter, Frank},
+  journal={The Journal of Machine Learning Research},
+  volume={20},
+  number={1},
+  pages={1997--2017},
+  year={2019},
+  publisher={JMLR. org}
+}
+@article{snoek2012practical,
+  title={Practical bayesian optimization of machine learning algorithms},
+  author={Snoek, Jasper and Larochelle, Hugo and Adams, Ryan P},
+  journal={Advances in neural information processing systems},
+  volume={25},
+  year={2012}
+}
+@article{swersky2014freeze,
+  title={Freeze-thaw Bayesian optimization},
+  author={Swersky, Kevin and Snoek, Jasper and Adams, Ryan Prescott},
+  journal={arXiv preprint arXiv:1406.3896},
+  year={2014}
+}
+@inproceedings{snoek2015scalable,
+  title={Scalable bayesian optimization using deep neural networks},
+  author={Snoek, Jasper and Rippel, Oren and Swersky, Kevin and Kiros, Ryan and Satish, Nadathur and Sundaram, Narayanan and Patwary, Mostofa and Prabhat, Mr and Adams, Ryan},
+  booktitle={International conference on machine learning},
+  pages={2171--2180},
+  year={2015},
+  organization={PMLR}
+}
+@inproceedings{bergstra2013making,
+  title={Making a science of model search: Hyperparameter optimization in hundreds of dimensions for vision architectures},
+  author={Bergstra, James and Yamins, Daniel and Cox, David},
+  booktitle={International conference on machine learning},
+  pages={115--123},
+  year={2013},
+  organization={PMLR}
+}
+@inproceedings{domhan2015speeding,
+  title={Speeding up automatic hyperparameter optimization of deep neural networks by extrapolation of learning curves},
+  author={Domhan, Tobias and Springenberg, Jost Tobias and Hutter, Frank},
+  booktitle={Twenty-Fourth International Joint Conference on Artificial Intelligence},
+  year={2015}
+}
+@article{shahriari2015taking,
+  title={Taking the human out of the loop: A review of Bayesian optimization},
+  author={Shahriari, Bobak and Swersky, Kevin and Wang, Ziyu and Adams, Ryan P and De Freitas, Nando},
+  journal={Proceedings of the IEEE},
+  volume={104},
+  number={1},
+  pages={148--175},
+  year={2015},
+  publisher={IEEE}
+}
+@incollection{feurer2019hyperparameter,
+  title={Hyperparameter optimization},
+  author={Feurer, Matthias and Hutter, Frank},
+  booktitle={Automated machine learning},
+  pages={3--33},
+  year={2019},
+  publisher={Springer, Cham}
+}
+@article{stanley2002evolving,
+  title={Evolving neural networks through augmenting topologies},
+  author={Stanley, Kenneth O and Miikkulainen, Risto},
+  journal={Evolutionary computation},
+  volume={10},
+  number={2},
+  pages={99--127},
+  year={2002},
+  publisher={MIT Press}
+}
+@book{shalev2014understanding,
+  title={Understanding machine learning: From theory to algorithms},
+  author={Shalev-Shwartz, Shai and Ben-David, Shai},
+  year={2014},
+  publisher={Cambridge university press}
+}
+@article{kakade2009duality,
+  title={On the duality of strong convexity and strong smoothness: Learning applications and matrix regularization},
+  author={Kakade, Sham and Shalev-Shwartz, Shai and Tewari, Ambuj and others},
+  journal={Unpublished Manuscript, http://ttic. uchicago. edu/shai/papers/KakadeShalevTewari09. pdf},
+  volume={2},
+  number={1},
+  pages={35},
+  year={2009},
+  publisher={Citeseer}
+}
+@article{shalev2007primal,
+  title={A primal-dual perspective of online learning algorithms},
+  author={Shalev-Shwartz, Shai and Singer, Yoram},
+  journal={Machine Learning},
+  volume={69},
+  pages={115--142},
+  year={2007},
+  publisher={Springer}
+}
+@article{hochreiter1994simplifying,
+  title={Simplifying neural nets by discovering flat minima},
+  author={Hochreiter, Sepp and Schmidhuber, J{\"u}rgen},
+  journal={Advances in neural information processing systems},
+  volume={7},
+  year={1994}
+}
+@article{hochreiter1997flat,
+  title={Flat minima},
+  author={Hochreiter, Sepp and Schmidhuber, J{\"u}rgen},
+  journal={Neural computation},
+  volume={9},
+  number={1},
+  pages={1--42},
+  year={1997},
+  publisher={MIT Press One Rogers Street, Cambridge, MA 02142-1209, USA journals-info~…}
+}
+@article{chaudhari2019entropy,
+  title={Entropy-sgd: Biasing gradient descent into wide valleys},
+  author={Chaudhari, Pratik and Choromanska, Anna and Soatto, Stefano and LeCun, Yann and Baldassi, Carlo and Borgs, Christian and Chayes, Jennifer and Sagun, Levent and Zecchina, Riccardo},
+  journal={Journal of Statistical Mechanics: Theory and Experiment},
+  volume={2019},
+  number={12},
+  pages={124018},
+  year={2019},
+  publisher={IOP Publishing}
+}
+@inproceedings{welling2011bayesian,
+  title={Bayesian learning via stochastic gradient Langevin dynamics},
+  author={Welling, Max and Teh, Yee W},
+  booktitle={Proceedings of the 28th international conference on machine learning (ICML-11)},
+  pages={681--688},
+  year={2011}
+}
+@article{keskar2016large,
+  title={On large-batch training for deep learning: Generalization gap and sharp minima},
+  author={Keskar, Nitish Shirish and Mudigere, Dheevatsa and Nocedal, Jorge and Smelyanskiy, Mikhail and Tang, Ping Tak Peter},
+  journal={arXiv preprint arXiv:1609.04836},
+  year={2016}
+}
+@article{baldassi2015subdominant,
+  title={Subdominant dense clusters allow for simple learning and high computational performance in neural networks with discrete synapses},
+  author={Baldassi, Carlo and Ingrosso, Alessandro and Lucibello, Carlo and Saglietti, Luca and Zecchina, Riccardo},
+  journal={Physical review letters},
+  volume={115},
+  number={12},
+  pages={128101},
+  year={2015},
+  publisher={APS}
+}
+@article{baldassi2016unreasonable,
+  title={Unreasonable effectiveness of learning neural networks: From accessible states and robust ensembles to basic algorithmic schemes},
+  author={Baldassi, Carlo and Borgs, Christian and Chayes, Jennifer T and Ingrosso, Alessandro and Lucibello, Carlo and Saglietti, Luca and Zecchina, Riccardo},
+  journal={Proceedings of the National Academy of Sciences},
+  volume={113},
+  number={48},
+  pages={E7655--E7662},
+  year={2016},
+  publisher={National Acad Sciences}
+}
+@inproceedings{hinton1993keeping,
+  title={Keeping the neural networks simple by minimizing the description length of the weights},
+  author={Hinton, Geoffrey E and Van Camp, Drew},
+  booktitle={Proceedings of the sixth annual conference on Computational learning theory},
+  pages={5--13},
+  year={1993}
+}
+@article{rissanen1983universal,
+  title={A universal prior for integers and estimation by minimum description length},
+  author={Rissanen, Jorma},
+  journal={The Annals of statistics},
+  volume={11},
+  number={2},
+  pages={416--431},
+  year={1983},
+  publisher={Institute of Mathematical Statistics}
+}
+@book{grunwald2007minimum,
+  title={The minimum description length principle},
+  author={Gr{\"u}nwald, Peter D},
+  year={2007},
+  publisher={MIT press}
+}
+@article{dziugaite2017computing,
+  title={Computing nonvacuous generalization bounds for deep (stochastic) neural networks with many more parameters than training data},
+  author={Dziugaite, Gintare Karolina and Roy, Daniel M},
+  journal={arXiv preprint arXiv:1703.11008},
+  year={2017}
+}
+@inproceedings{mcallester1999pac,
+  title={PAC-Bayesian model averaging},
+  author={McAllester, David A},
+  booktitle={Proceedings of the twelfth annual conference on Computational learning theory},
+  pages={164--170},
+  year={1999}
+}
+@article{zhang2021understanding,
+  title={Understanding deep learning (still) requires rethinking generalization},
+  author={Zhang, Chiyuan and Bengio, Samy and Hardt, Moritz and Recht, Benjamin and Vinyals, Oriol},
+  journal={Communications of the ACM},
+  volume={64},
+  number={3},
+  pages={107--115},
+  year={2021},
+  publisher={ACM New York, NY, USA}
+}
+@article{neyshabur2014search,
+  title={In search of the real inductive bias: On the role of implicit regularization in deep learning},
+  author={Neyshabur, Behnam and Tomioka, Ryota and Srebro, Nathan},
+  journal={arXiv preprint arXiv:1412.6614},
+  year={2014}
+}
+@article{bartlett2019nearly,
+  title={Nearly-tight VC-dimension and pseudodimension bounds for piecewise linear neural networks},
+  author={Bartlett, Peter L and Harvey, Nick and Liaw, Christopher and Mehrabian, Abbas},
+  journal={The Journal of Machine Learning Research},
+  volume={20},
+  number={1},
+  pages={2285--2301},
+  year={2019},
+  publisher={JMLR. org}
+}
+@inproceedings{harvey2017nearly,
+  title={Nearly-tight VC-dimension bounds for piecewise linear neural networks},
+  author={Harvey, Nick and Liaw, Christopher and Mehrabian, Abbas},
+  booktitle={Conference on learning theory},
+  pages={1064--1068},
+  year={2017},
+  organization={PMLR}
+}
+@article{byrd1995limited,
+  title={A limited memory algorithm for bound constrained optimization},
+  author={Byrd, Richard H and Lu, Peihuang and Nocedal, Jorge and Zhu, Ciyou},
+  journal={SIAM Journal on scientific computing},
+  volume={16},
+  number={5},
+  pages={1190--1208},
+  year={1995},
+  publisher={SIAM}
+}
+@article{neyshabur2017exploring,
+  title={Exploring generalization in deep learning},
+  author={Neyshabur, Behnam and Bhojanapalli, Srinadh and McAllester, David and Srebro, Nati},
+  journal={Advances in neural information processing systems},
+  volume={30},
+  year={2017}
+}
+@inproceedings{hardt2016train,
+  title={Train faster, generalize better: Stability of stochastic gradient descent},
+  author={Hardt, Moritz and Recht, Ben and Singer, Yoram},
+  booktitle={International conference on machine learning},
+  pages={1225--1234},
+  year={2016},
+  organization={PMLR}
+}
+@article{bousquet2002stability,
+  title={Stability and generalization},
+  author={Bousquet, Olivier and Elisseeff, Andr{\'e}},
+  journal={The Journal of Machine Learning Research},
+  volume={2},
+  pages={499--526},
+  year={2002},
+  publisher={JMLR. org}
+}
+@inproceedings{choromanska2015loss,
+  title={The loss surfaces of multilayer networks},
+  author={Choromanska, Anna and Henaff, Mikael and Mathieu, Michael and Arous, G{\'e}rard Ben and LeCun, Yann},
+  booktitle={Artificial intelligence and statistics},
+  pages={192--204},
+  year={2015},
+  organization={PMLR}
+}
+@article{dauphin2014identifying,
+  title={Identifying and attacking the saddle point problem in high-dimensional non-convex optimization},
+  author={Dauphin, Yann N and Pascanu, Razvan and Gulcehre, Caglar and Cho, Kyunghyun and Ganguli, Surya and Bengio, Yoshua},
+  journal={Advances in neural information processing systems},
+  volume={27},
+  year={2014}
+}
+@article{bray2007statistics,
+  title={Statistics of critical points of Gaussian fields on large-dimensional spaces},
+  author={Bray, Alan J and Dean, David S},
+  journal={Physical review letters},
+  volume={98},
+  number={15},
+  pages={150201},
+  year={2007},
+  publisher={APS}
+}
+@article{wigner1958distribution,
+  title={On the distribution of the roots of certain symmetric matrices},
+  author={Wigner, Eugene P},
+  journal={Annals of Mathematics},
+  volume={67},
+  number={2},
+  pages={325--327},
+  year={1958},
+  publisher={JSTOR}
+}
+@article{saxe2013exact,
+  title={Exact solutions to the nonlinear dynamics of learning in deep linear neural networks},
+  author={Saxe, Andrew M and McClelland, James L and Ganguli, Surya},
+  journal={arXiv preprint arXiv:1312.6120},
+  year={2013}
+}
+@article{lecun1998mnist,
+  title={The MNIST database of handwritten digits},
+  author={LeCun, Yann},
+  journal={http://yann. lecun. com/exdb/mnist/},
+  year={1998}
+}
+@inproceedings{netzer2011reading,
+  title={Reading digits in natural images with unsupervised feature learning},
+  author={Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Baolin and Ng, Andrew Y and others},
+  booktitle={NIPS workshop on deep learning and unsupervised feature learning},
+  volume={2011},
+  pages={4},
+  year={2011},
+  organization={Granada}
+}
+@article{duchi2023,
+  title={Lecture Notes on Statistics and Information Theory},
+  author={Duchi, John},
+  year={2023},
+  journal="https://web.stanford.edu/class/stats311/lecture-notes.pdf"
+}
+@book{wellner2013weak,
+  title={Weak convergence and empirical processes: with applications to statistics},
+  author={Wellner, Jon and others},
+  year={2013},
+  publisher={Springer Science \& Business Media}
+}
+@book{ammar2004multi,
+  title={Multi-heuristic theory assessment with iterative selection},
+  author={Ammar, Kareem},
+  year={2004},
+  publisher={West Virginia University}
+}
+@article{bischl2023hyperparameter,
+  title={Hyperparameter optimization: Foundations, algorithms, best practices, and open challenges},
+  author={Bischl, Bernd and Binder, Martin and Lang, Michel and Pielok, Tobias and Richter, Jakob and Coors, Stefan and Thomas, Janek and Ullmann, Theresa and Becker, Marc and Boulesteix, Anne-Laure and others},
+  journal={Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery},
+  volume={13},
+  number={2},
+  pages={e1484},
+  year={2023},
+  publisher={Wiley Online Library}
+}
+@inproceedings{pfisterer2022yahpo,
+  title={Yahpo gym-an efficient multi-objective multi-fidelity benchmark for hyperparameter optimization},
+  author={Pfisterer, Florian and Schneider, Lennart and Moosbauer, Julia and Binder, Martin and Bischl, Bernd},
+  booktitle={International Conference on Automated Machine Learning},
+  pages={3--1},
+  year={2022},
+  organization={PMLR}
+}
+@inproceedings{arango2021hpo,
+  title={HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML},
+  author={Arango, Sebastian Pineda and Jomaa, Hadi Samer and Wistuba, Martin and Grabocka, Josif},
+  booktitle={Thirty-fifth Conference on Neural Information Processing Systems Datasets and Benchmarks Track (Round 2)},
+  year={2021}
+}
+@inproceedings{eggensperger2021hpobench,
+  title={HPOBench: A Collection of Reproducible Multi-Fidelity Benchmark Problems for HPO},
+  author={Eggensperger, Katharina and M{\"u}ller, Philipp and Mallik, Neeratyoy and Feurer, Matthias and Sass, Rene and Klein, Aaron and Awad, Noor and Lindauer, Marius and Hutter, Frank},
+  booktitle={Thirty-fifth Conference on Neural Information Processing Systems Datasets and Benchmarks Track (Round 2)},
+  year={2021}
+}
+@inproceedings{wen2023sharpness,
+  title={Sharpness Minimization Algorithms Do Not Only Minimize Sharpness To Achieve Better Generalization},
+  author={Wen, Kaiyue and Li, Zhiyuan and Ma, Tengyu},
+  booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
+  year={2023}
+}
+@article{jastrzkebski2017three,
+  title={Three factors influencing minima in sgd},
+  author={Jastrzebski, Stanis{\l}aw and Kenton, Zachary and Arpit, Devansh and Ballas, Nicolas and Fischer, Asja and Bengio, Yoshua and Storkey, Amos},
+  journal={arXiv preprint arXiv:1711.04623},
+  year={2017}
+}
+,
+@article{kunstner2019limitations,
+  title={Limitations of the empirical fisher approximation for natural gradient descent},
+  author={Kunstner, Frederik and Hennig, Philipp and Balles, Lukas},
+  journal={Advances in neural information processing systems},
+  volume={32},
+  year={2019}
+}
+@article{jiang2019fantastic,
+  title={Fantastic generalization measures and where to find them},
+  author={Jiang, Yiding and Neyshabur, Behnam and Mobahi, Hossein and Krishnan, Dilip and Bengio, Samy},
+  journal={arXiv preprint arXiv:1912.02178},
+  year={2019}
+}
+@book{reed2012methods,
+  title={Methods of modern mathematical physics: Functional analysis},
+  author={Reed, Michael},
+  year={2012},
+  publisher={Elsevier}
+}
+@article{farcomeni2008review,
+  title={A review of modern multiple hypothesis testing, with particular attention to the false discovery proportion},
+  author={Farcomeni, Alessio},
+  journal={Statistical methods in medical research},
+  volume={17},
+  number={4},
+  pages={347--388},
+  year={2008},
+  publisher={SAGE Publications Sage UK: London, England}
+}
+@article{agrawal2020better,
+  title={Better software analytics via “DUO”: Data mining algorithms using/used-by optimizers},
+  author={Agrawal, Amritanshu and Menzies, Tim and Minku, Leandro L and Wagner, Markus and Yu, Zhe},
+  journal={Empirical Software Engineering},
+  volume={25},
+  pages={2099--2136},
+  year={2020},
+  publisher={Springer}
+}
+@inproceedings{majumder2018500+,
+  title={500+ times faster than deep learning},
+  author={Majumder, Suvodeep and Balaji, Nikhila and Brey, Katie and Fu, Wei and Menzies, Tim},
+  booktitle={Proceedings of the 15th International Conference on Mining Software Repositories. ACM},
+  year={2018}
+}
+@article{tran2020hyper,
+  title={Hyper-parameter optimization in classification: To-do or not-to-do},
+  author={Tran, Ngoc and Schneider, Jean-Guy and Weber, Ingo and Qin, A Kai},
+  journal={Pattern Recognition},
+  volume={103},
+  pages={107245},
+  year={2020},
+  publisher={Elsevier}
+}
+@article{lacoste2019quantifying,
+  title={Quantifying the carbon emissions of machine learning},
+  author={Lacoste, Alexandre and Luccioni, Alexandra and Schmidt, Victor and Dandres, Thomas},
+  journal={arXiv preprint arXiv:1910.09700},
+  year={2019}
+}
+@article{dou2023turbo,
+  title={TurBO: A cost-efficient configuration-based auto-tuning approach for cluster-based big data frameworks},
+  author={Dou, Hui and Zhang, Lei and Zhang, Yiwen and Chen, Pengfei and Zheng, Zibin},
+  journal={Journal of Parallel and Distributed Computing},
+  volume={177},
+  pages={89--105},
+  year={2023},
+  publisher={Elsevier}
+}
+@article{box1964analysis,
+  title={An analysis of transformations},
+  author={Box, George EP and Cox, David R},
+  journal={Journal of the Royal Statistical Society Series B: Statistical Methodology},
+  volume={26},
+  number={2},
+  pages={211--243},
+  year={1964},
+  publisher={Oxford University Press}
+}
+@article{yeo2000new,
+  title={A new family of power transformations to improve normality or symmetry},
+  author={Yeo, In-Kwon and Johnson, Richard A},
+  journal={Biometrika},
+  volume={87},
+  number={4},
+  pages={954--959},
+  year={2000},
+  publisher={Oxford University Press}
+}
+@article{kumaraswamy1980generalized,
+  title={A generalized probability density function for double-bounded random processes},
+  author={Kumaraswamy, Ponnambalam},
+  journal={Journal of hydrology},
+  volume={46},
+  number={1-2},
+  pages={79--88},
+  year={1980},
+  publisher={Elsevier}
+}
+@article{kuzborskij2019efron,
+  title={Efron-stein pac-bayesian inequalities},
+  author={Kuzborskij, Ilja and Szepesv{\'a}ri, Csaba},
+  journal={arXiv preprint arXiv:1909.01931},
+  year={2019}
+}
+@MISC {108007,
+    TITLE = {When do maximum and expectation commute?},
+    AUTHOR = {Dan},
+    HOWPUBLISHED = {MathOverflow},
+    NOTE = {URL:https://mathoverflow.net/q/108007 (version: 2023-01-13)},
+    EPRINT = {https://mathoverflow.net/q/108007},
+    URL = {https://mathoverflow.net/q/108007},
+    year = {2023}
+}
+@inproceedings{dinh2017sharp,
+  title={Sharp minima can generalize for deep nets},
+  author={Dinh, Laurent and Pascanu, Razvan and Bengio, Samy and Bengio, Yoshua},
+  booktitle={International Conference on Machine Learning},
+  pages={1019--1028},
+  year={2017},
+  organization={PMLR}
+}
+@article{awad2021dehb,
+  title={Dehb: Evolutionary hyperband for scalable, robust and efficient hyperparameter optimization},
+  author={Awad, Noor and Mallik, Neeratyoy and Hutter, Frank},
+  journal={arXiv preprint arXiv:2105.09821},
+  year={2021}
+}
+@misc{van1996weak,
+  title={Weak convergence and empirical processes: with applications to statistics},
+  author={Van Der Vaart, Aad W and Wellner, Jon A},
+  year={1996},
+  publisher={Springer}
+}
+@article{mallik2023priorband,
+  title={PriorBand: Practical Hyperparameter Optimization in the Age of Deep Learning},
+  author={Mallik, Neeratyoy and Bergman, Edward and Hvarfner, Carl and Stoll, Danny and Janowski, Maciej and Lindauer, Marius and Nardi, Luigi and Hutter, Frank},
+  journal={arXiv preprint arXiv:2306.12370},
+  year={2023}
+}
+@article{white2023neural,
+  title={Neural architecture search: Insights from 1000 papers},
+  author={White, Colin and Safari, Mahmoud and Sukthanker, Rhea and Ru, Binxin and Elsken, Thomas and Zela, Arber and Dey, Debadeepta and Hutter, Frank},
+  journal={arXiv preprint arXiv:2301.08727},
+  year={2023}
+}
+@book{nocedal1999numerical,
+  title={Numerical optimization},
+  author={Nocedal, Jorge and Wright, Stephen J},
+  year={1999},
+  publisher={Springer}
+}
+@inproceedings{yao2020negative,
+  title={Negative log likelihood ratio loss for deep neural network classification},
+  author={Yao, Hengshuai and Zhu, Dong-lai and Jiang, Bei and Yu, Peng},
+  booktitle={Proceedings of the Future Technologies Conference (FTC) 2019: Volume 1},
+  pages={276--282},
+  year={2020},
+  organization={Springer}
+}
+@inproceedings{wu2023implicit,
+  title={The implicit regularization of dynamical stability in stochastic gradient descent},
+  author={Wu, Lei and Su, Weijie J},
+  booktitle={International Conference on Machine Learning},
+  pages={37656--37684},
+  year={2023},
+  organization={PMLR}
+}
+@article{foret2020sharpness,
+  title={Sharpness-aware minimization for efficiently improving generalization},
+  author={Foret, Pierre and Kleiner, Ariel and Mobahi, Hossein and Neyshabur, Behnam},
+  journal={arXiv preprint arXiv:2010.01412},
+  year={2020}
+}
+@article{paul2019fast,
+  title={Fast efficient hyperparameter tuning for policy gradient methods},
+  author={Paul, Supratik and Kurin, Vitaly and Whiteson, Shimon},
+  journal={Advances in Neural Information Processing Systems},
+  volume={32},
+  year={2019}
+}
+@inproceedings{jastrzebskiRelationSharpestDirections2019,
+  title = {On the {{Relation Between}} the {{Sharpest Directions}} of {{DNN Loss}} and the {{SGD Step Length}}},
+  booktitle = {International {{Conference}} on {{Learning Representations}}},
+  author = {Jastrzebski, Stanis{\l}aw and Kenton, Zachary and Ballas, Nicolas and Fischer, Asja and Bengio, Yoshua and Storkey, Amos},
+  year = {2019}
+}
+@inproceedings{jastrzebskiBreakEvenPointOptimization2020,
+  title = {The {{Break-Even Point}} on {{Optimization Trajectories}} of {{Deep Neural Networks}}},
+  booktitle = {International {{Conference}} on {{Learning Representations}}},
+  author = {Jastrzebski, Stanislaw and Szymczak, Maciej and Fort, Stanislav and Arpit, Devansh and Tabor, Jacek and Cho, Kyunghyun and Geras, Krzysztof},
+  year = {2020}
+}
+@inproceedings{cohenGradientDescentNeural2021,
+  title = {Gradient {{Descent}} on {{Neural Networks Typically Occurs}} at the {{Edge}} of {{Stability}}},
+  booktitle = {International {{Conference}} on {{Learning Representations}}},
+  author = {Cohen, Jeremy and Kaur, Simran and Li, Yuanzhi and Kolter, J. Zico and Talwalkar, Ameet},
+  year = {2021}
+}
+
+@inproceedings{ye_sharpness-aware_2025,
+	title = {Sharpness-{Aware} {Black}-{Box} {Optimization}},
+	url = {https://openreview.net/forum?id=h7EwIfjxgn},
+	urldate = {2025-08-06},
+	booktitle = {The {Thirteenth} {International} {Conference} on {Learning} {Representations}},
+	author = {Ye, Feiyang and Lyu, Yueming and Wang, Xuehao and Sugiyama, Masashi and Zhang, Yu and Tsang, Ivor},
+	year = {2025},
+}
+
+@inproceedings{sagun_empirical_2018,
+	title = {Empirical {Analysis} of the {Hessian} of {Over}-{Parametrized} {Neural} {Networks}},
+	url = {http://arxiv.org/abs/1706.04454},
+	doi = {10.48550/arXiv.1706.04454},
+	language = {en},
+	urldate = {2025-02-28},
+	booktitle = {International {Conference} on {Learning} {Representations} {Workshop} {Track}},
+	author = {Sagun, Levent and Evci, Utku and Guney, V. Ugur and Dauphin, Yann and Bottou, Leon},
+	month = may,
+	year = {2018},
+	note = {arXiv:1706.04454 [cs]},
+	keywords = {Computer Science - Machine Learning},
+	annote = {Show that the Hessian spectra of MLP and CNNs consist of a “bulk” of near-zero eigenvalues and a few (approximately equal to \$k - 1\$ where \$k\$ is the number of classes) “outliers”. Further, they show that even at the minima attained by GD or SGD, there are a few (low-magnitude) negative eigenvalues of the Hessian, showing that training has not completed, even though the steps made are very small. They discuss how it may be better to discuss flatness via level sets rather than basins of attraction, which may be misleading.
+Another (relatively minor) result is that the Hessian of deep networks is empirically observed to be low-rank.
+Some of the observations are refined by “An Investigation into Neural Net Optimization via Hessian Eigenvalue Density”
+},
+}
+
+
+@inproceedings{ghorbani_investigation_2019,
+	title = {An investigation into neural net optimization via hessian eigenvalue density},
+	url = {https://proceedings.mlr.press/v97/ghorbani19b},
+	urldate = {2025-05-26},
+	booktitle = {International {Conference} on {Machine} {Learning}},
+	publisher = {PMLR},
+	author = {Ghorbani, Behrooz and Krishnan, Shankar and Xiao, Ying},
+	year = {2019},
+	pages = {2232--2241},
+	annote = {Refines some empirical observations by Sagun et al. “Empirical Analysis of the Hessian of Over-Parameterized Neural Networks”.
+},
+}
+
+@inproceedings{ioffe_batch_2015,
+	title = {Batch {Normalization}: {Accelerating} {Deep} {Network} {Training} by {Reducing} {Internal} {Covariate} {Shift}},
+	author = {Ioffe, Sergey and Szegedy, Christian},
+	year = {2015},
+	pages = {448--456},
+}

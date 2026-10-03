@@ -1,0 +1,59 @@
+\section{Background}
+\label{sec:app:background}
+
+% \begin{definition}[Sub-differential]
+%     For a convex function $f: \mathcal{X} \to \mathbb{R}^*$, the sub-differential $\partial f(x)$ is defined as 
+%     $$
+%     \partial f(x) = \{ y \in \mathcal{X}: \forall z, f(x + z) \geq f(x) + \langle y, z \rangle \}
+%     $$
+% \end{definition}
+
+% \begin{definition}[Fenchel conjugate]
+%     The Fenchel conjugate, $f^*: \mathcal{X} \to \mathbb{R}^*$ for a convex function $f: \mathcal{X} \to \mathbb{R}^*$ is defined as $f^*(y) = \sup\limits_{x \in \mathcal{X}} \langle x, y \rangle - f(x)$
+% \end{definition}
+
+% \begin{definition}[Dual norm]
+%     Given a norm $\lVert \cdot \rVert$ on $\mathcal{X}$, the dual norm $\lVert \cdot \rVert_*$ is defined as 
+%     $$
+%     \lVert y \rVert_* = \sup \{ \langle x, y \rangle: \lVert x \rVert \leq 1 \}
+%     $$
+% \end{definition}
+
+% Note that the Fenchel conjugate of $\frac{1}{2} \lVert x \rVert$ is $\frac{1}{2} \lVert y \rVert_*$.
+
+\begin{definition}[Strong convexity]
+    A function $f: \mathcal{X} \to \mathbb{R}^*$ is $\mu-$strongly convex with respect to $\lVert \cdot \rVert$ if $\forall x, y$ in the relative interior of $\text{dom } f$ and $\alpha \in (0, 1)$,
+    $$
+    f(\alpha x + (1 - \alpha) y) \leq \alpha f(x) + (1 - \alpha) f(y) - \frac{1}{2} \mu \alpha (1 - \alpha) \lVert x - y \rVert^2
+    $$
+\end{definition}
+
+\begin{definition}[Smoothness]
+    A function $f: \mathcal{X} \to \mathbb{R}$ is $\beta-$smooth with respect to $\lVert \cdot \rVert$ if $f \in C^1$ and if $\forall x, y \in \text{dom } f$,
+    $$
+    f(x + y) \leq f(x) + \langle \nabla f(x), y \rangle + \frac{1}{2} \beta \lVert y \rVert^2
+    $$
+\end{definition}
+
+\subsection{The standard covering number guarantee}
+\label{sec:covering}
+
+We reiterate the standard bound under the covering argument from \cite{duchi2023} here. This bounds the deviation of the mini-batch approximation of the supremum from the true value.
+
+\input{bound}
+
+% \begin{definition}[Dense set]
+%     A subset $A$ of a topological space $X$ is said to be \textit{dense} in $X$ if every item in $X$ is present in or is arbitrarily close to some point in $A$.
+% \end{definition}
+
+% \begin{definition}(Lebesgue integral)
+%     The Lebesgue integral is a generalization of the Riemann integral. It is defined in terms of the Lebesgue sum
+%     \[
+%         \sum_i \alpha_i \mu(S_i)
+%     \]
+%     where $\alpha_i$ is the value of the function in the subinterval $i$, and $\mu(S_i)$ is the Lebesgue measure of the interval $S_i$ of points for which the value of the function is approximately $\alpha_i$. A function is \textit{Lebesgue integrable} if its Lebesgue integral is finite.
+% \end{definition}
+
+% \begin{definition}[$L^p$ space]
+%     An $L^p$ space is a space of measurable functions for which the $p$th power is Lebesgue integrable.
+% \end{definition}

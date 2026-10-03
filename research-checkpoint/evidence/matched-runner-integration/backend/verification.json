@@ -1,0 +1,56 @@
+{
+  "status": "PASS: bounded synthetic engineering validation only",
+  "protocol_sha256": "b5e63c5e730eadfb9a7137a3eb08345d0c2975d1c69c35c88d243be7a217ece7",
+  "run_directory": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/matched-runner-integration/backend/run-20261002T223958949122Z",
+  "test_results": {
+    "tests": 2,
+    "passed": 2,
+    "test_seconds": 3.784,
+    "returncode": 0,
+    "elapsed_seconds": 18.42027958401013,
+    "timeout": false
+  },
+  "phase_statuses": {
+    "probe-first": "complete",
+    "final": "complete",
+    "probe-replay": "complete"
+  },
+  "optimizer_updates": [
+    2,
+    4,
+    2
+  ],
+  "checkpoint_sha256": {
+    "probe-first": "b558b6c753e91cbf08a4194e4cb34b5fe7e8de5dad43752dfe449caa79532d52",
+    "final": "3267bd5b082c905a6553e07699acb46406e002c289bc049df00e9d6fc4db64a1",
+    "probe-replay": "c39a31769f5adf794bd5598b2896a803ef0f02952b91e5581f7b199e4788c298"
+  },
+  "source_hashes_match": true,
+  "checkpoint_file_hashes_match": true,
+  "replay_exact": {
+    "initial_weights_sha256": true,
+    "weights_sha256": true,
+    "initial_augmentation_state": true,
+    "augmentation_state": true,
+    "shuffle_rng_state": true
+  },
+  "static_checks": {
+    "ruff": "pass",
+    "formatter": "pass",
+    "compile": "pass",
+    "no_sloppy": "clean",
+    "basedpyright": {
+      "errors": 0,
+      "warnings": 31,
+      "returncode": 1,
+      "scope": "backend and tests; warnings from dynamic Keras API types; not claimed fully clean"
+    }
+  },
+  "limits": [
+    "No benchmark data, official-test access, downloads, paid compute or empirical efficacy inference",
+    "Two final epochs do not test patience25 stopping",
+    "RNG state sidecars required; checkpoint alone not a continuation API",
+    "Timeout/checkpoint-save-error paths source-reviewed but not exercised by this eight-update fixture"
+  ],
+  "independent_review": "PASS: ../independent-review/backend-verification.json and review.md; raw/source/data/checkpoint/hash/shuffle/RMS/callback audit, no duplicate model execution."
+}

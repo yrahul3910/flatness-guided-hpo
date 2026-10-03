@@ -1,0 +1,2866 @@
+[
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "last_executed_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 95,
+    "n_validation": 375,
+    "validation_accuracy": 0.7466666666666667,
+    "validation_ce": 0.9296790361404419,
+    "probe_metrics": {
+      "proxy": 1.721964630126987,
+      "validation_loss": 1.8464010953903198,
+      "early_validation_error": 0.6293333333333333
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "last_executed_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 95,
+    "n_validation": 375,
+    "validation_accuracy": 0.7466666666666667,
+    "validation_ce": 0.9296984076499939,
+    "probe_metrics": {
+      "proxy": 1.7219541233312492,
+      "validation_loss": 1.846400260925293,
+      "early_validation_error": 0.6293333333333333
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "last_executed_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 43,
+    "n_validation": 375,
+    "validation_accuracy": 0.8853333333333333,
+    "validation_ce": 0.38566854596138,
+    "probe_metrics": {
+      "proxy": 2.565252224779641,
+      "validation_loss": 0.950661301612854,
+      "early_validation_error": 0.25066666666666665
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "last_executed_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 44,
+    "n_validation": 375,
+    "validation_accuracy": 0.8826666666666667,
+    "validation_ce": 0.38550886511802673,
+    "probe_metrics": {
+      "proxy": 2.5656052068690154,
+      "validation_loss": 0.9502013921737671,
+      "early_validation_error": 0.25066666666666665
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "last_executed_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.21993106603622437,
+    "probe_metrics": {
+      "proxy": 3.912581248629117,
+      "validation_loss": 0.523237943649292,
+      "early_validation_error": 0.13866666666666666
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "last_executed_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.22006827592849731,
+    "probe_metrics": {
+      "proxy": 3.912458936232877,
+      "validation_loss": 0.5232523679733276,
+      "early_validation_error": 0.13866666666666666
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "last_executed_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.18585292994976044,
+    "probe_metrics": {
+      "proxy": 3.928821666859824,
+      "validation_loss": 0.5023550987243652,
+      "early_validation_error": 0.16266666666666665
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "last_executed_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.1847812682390213,
+    "probe_metrics": {
+      "proxy": 3.931266591664283,
+      "validation_loss": 0.501695454120636,
+      "early_validation_error": 0.16266666666666665
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 95,
+    "n_validation": 375,
+    "validation_accuracy": 0.7466666666666667,
+    "validation_ce": 0.9296790361404419,
+    "probe_metrics": {
+      "proxy": 1.721964630126987,
+      "validation_loss": 1.8464010953903198,
+      "early_validation_error": 0.6293333333333333
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 95,
+    "n_validation": 375,
+    "validation_accuracy": 0.7466666666666667,
+    "validation_ce": 0.9296984076499939,
+    "probe_metrics": {
+      "proxy": 1.7219541233312492,
+      "validation_loss": 1.846400260925293,
+      "early_validation_error": 0.6293333333333333
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 43,
+    "n_validation": 375,
+    "validation_accuracy": 0.8853333333333333,
+    "validation_ce": 0.38566854596138,
+    "probe_metrics": {
+      "proxy": 2.565252224779641,
+      "validation_loss": 0.950661301612854,
+      "early_validation_error": 0.25066666666666665
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 44,
+    "n_validation": 375,
+    "validation_accuracy": 0.8826666666666667,
+    "validation_ce": 0.38550886511802673,
+    "probe_metrics": {
+      "proxy": 2.5656052068690154,
+      "validation_loss": 0.9502013921737671,
+      "early_validation_error": 0.25066666666666665
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 4,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.2146638184785843,
+    "probe_metrics": {
+      "proxy": 3.912581248629117,
+      "validation_loss": 0.523237943649292,
+      "early_validation_error": 0.13866666666666666
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 4,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.21516887843608856,
+    "probe_metrics": {
+      "proxy": 3.912458936232877,
+      "validation_loss": 0.5232523679733276,
+      "early_validation_error": 0.13866666666666666
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 4,
+    "validation_errors": 16,
+    "n_validation": 375,
+    "validation_accuracy": 0.9573333333333334,
+    "validation_ce": 0.17943371832370758,
+    "probe_metrics": {
+      "proxy": 3.928821666859824,
+      "validation_loss": 0.5023550987243652,
+      "early_validation_error": 0.16266666666666665
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 31,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 4,
+    "validation_errors": 16,
+    "n_validation": 375,
+    "validation_accuracy": 0.9573333333333334,
+    "validation_ce": 0.17836110293865204,
+    "probe_metrics": {
+      "proxy": 3.931266591664283,
+      "validation_loss": 0.501695454120636,
+      "early_validation_error": 0.16266666666666665
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "last_executed_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 81,
+    "n_validation": 375,
+    "validation_accuracy": 0.784,
+    "validation_ce": 0.7108417749404907,
+    "probe_metrics": {
+      "proxy": 2.7993337390475115,
+      "validation_loss": 1.4224586486816406,
+      "early_validation_error": 0.44533333333333336
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "last_executed_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 81,
+    "n_validation": 375,
+    "validation_accuracy": 0.784,
+    "validation_ce": 0.7108484506607056,
+    "probe_metrics": {
+      "proxy": 2.799309917123433,
+      "validation_loss": 1.4224594831466675,
+      "early_validation_error": 0.44533333333333336
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "last_executed_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 45,
+    "n_validation": 375,
+    "validation_accuracy": 0.88,
+    "validation_ce": 0.38614681363105774,
+    "probe_metrics": {
+      "proxy": 3.9852768584717304,
+      "validation_loss": 0.7263056635856628,
+      "early_validation_error": 0.21333333333333335
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "last_executed_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 44,
+    "n_validation": 375,
+    "validation_accuracy": 0.8826666666666667,
+    "validation_ce": 0.38637101650238037,
+    "probe_metrics": {
+      "proxy": 3.985202985159406,
+      "validation_loss": 0.7263091802597046,
+      "early_validation_error": 0.21333333333333335
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "last_executed_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 26,
+    "n_validation": 375,
+    "validation_accuracy": 0.9306666666666666,
+    "validation_ce": 0.26747027039527893,
+    "probe_metrics": {
+      "proxy": 4.521965538254124,
+      "validation_loss": 0.5270997285842896,
+      "early_validation_error": 0.168
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "last_executed_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 26,
+    "n_validation": 375,
+    "validation_accuracy": 0.9306666666666666,
+    "validation_ce": 0.26748865842819214,
+    "probe_metrics": {
+      "proxy": 4.5218012364298845,
+      "validation_loss": 0.5271029472351074,
+      "early_validation_error": 0.168
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "last_executed_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 26,
+    "n_validation": 375,
+    "validation_accuracy": 0.9306666666666666,
+    "validation_ce": 0.2650749385356903,
+    "probe_metrics": {
+      "proxy": 0.8770549547624449,
+      "validation_loss": 1.2253390550613403,
+      "early_validation_error": 0.2906666666666667
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "last_executed_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 26,
+    "n_validation": 375,
+    "validation_accuracy": 0.9306666666666666,
+    "validation_ce": 0.26532357931137085,
+    "probe_metrics": {
+      "proxy": 0.8777469982083571,
+      "validation_loss": 1.225285291671753,
+      "early_validation_error": 0.2906666666666667
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 81,
+    "n_validation": 375,
+    "validation_accuracy": 0.784,
+    "validation_ce": 0.7108417749404907,
+    "probe_metrics": {
+      "proxy": 2.7993337390475115,
+      "validation_loss": 1.4224586486816406,
+      "early_validation_error": 0.44533333333333336
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 81,
+    "n_validation": 375,
+    "validation_accuracy": 0.784,
+    "validation_ce": 0.7108484506607056,
+    "probe_metrics": {
+      "proxy": 2.799309917123433,
+      "validation_loss": 1.4224594831466675,
+      "early_validation_error": 0.44533333333333336
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 4,
+    "validation_errors": 41,
+    "n_validation": 375,
+    "validation_accuracy": 0.8906666666666667,
+    "validation_ce": 0.38438302278518677,
+    "probe_metrics": {
+      "proxy": 3.9852768584717304,
+      "validation_loss": 0.7263056635856628,
+      "early_validation_error": 0.21333333333333335
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 4,
+    "validation_errors": 41,
+    "n_validation": 375,
+    "validation_accuracy": 0.8906666666666667,
+    "validation_ce": 0.38462769985198975,
+    "probe_metrics": {
+      "proxy": 3.985202985159406,
+      "validation_loss": 0.7263091802597046,
+      "early_validation_error": 0.21333333333333335
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 26,
+    "n_validation": 375,
+    "validation_accuracy": 0.9306666666666666,
+    "validation_ce": 0.26747027039527893,
+    "probe_metrics": {
+      "proxy": 4.521965538254124,
+      "validation_loss": 0.5270997285842896,
+      "early_validation_error": 0.168
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 26,
+    "n_validation": 375,
+    "validation_accuracy": 0.9306666666666666,
+    "validation_ce": 0.26748865842819214,
+    "probe_metrics": {
+      "proxy": 4.5218012364298845,
+      "validation_loss": 0.5271029472351074,
+      "early_validation_error": 0.168
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 26,
+    "n_validation": 375,
+    "validation_accuracy": 0.9306666666666666,
+    "validation_ce": 0.2650749385356903,
+    "probe_metrics": {
+      "proxy": 0.8770549547624449,
+      "validation_loss": 1.2253390550613403,
+      "early_validation_error": 0.2906666666666667
+    }
+  },
+  {
+    "pilot": "five_epoch",
+    "seed": 47,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 26,
+    "n_validation": 375,
+    "validation_accuracy": 0.9306666666666666,
+    "validation_ce": 0.26532357931137085,
+    "probe_metrics": {
+      "proxy": 0.8777469982083571,
+      "validation_loss": 1.225285291671753,
+      "early_validation_error": 0.2906666666666667
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "last_executed_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 100,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.20706590755919554,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.4547452356727621,
+      "validation_loss": 1.8179819516671316,
+      "early_validation_error": 0.5786666666666667,
+      "relative_head_trace_centered": 20.32345975411595,
+      "temperature_curvature": 0.6257297599756936
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "last_executed_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 100,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.20731512353390266,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.4547335278710434,
+      "validation_loss": 1.8179824325922194,
+      "early_validation_error": 0.5786666666666667,
+      "relative_head_trace_centered": 20.32314817751634,
+      "temperature_curvature": 0.6257231456052588
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "last_executed_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 100,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.22728662902971625,
+    "probe_metrics": {
+      "original_rms_ratio_max": 2.3299863971276222,
+      "validation_loss": 1.0348515231004785,
+      "early_validation_error": 0.29333333333333333,
+      "relative_head_trace_centered": 17.158630529638657,
+      "temperature_curvature": 1.0466799707444043
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "last_executed_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 100,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.22790626233230005,
+    "probe_metrics": {
+      "original_rms_ratio_max": 2.3299380117877595,
+      "validation_loss": 1.0348605079009952,
+      "early_validation_error": 0.29333333333333333,
+      "relative_head_trace_centered": 17.157973187757854,
+      "temperature_curvature": 1.0466732088049588
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "last_executed_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 100,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.24279305474092594,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.463456795716714,
+      "validation_loss": 0.4748550639533813,
+      "early_validation_error": 0.14666666666666667,
+      "relative_head_trace_centered": 13.16070615793184,
+      "temperature_curvature": 1.0292542573893901
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "last_executed_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 100,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.24262146744808985,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.4633371737326835,
+      "validation_loss": 0.4748712743097894,
+      "early_validation_error": 0.14666666666666667,
+      "relative_head_trace_centered": 13.159849628229901,
+      "temperature_curvature": 1.0293091293360654
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "last_executed_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 100,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.2766463954174647,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.920134524938498,
+      "validation_loss": 0.5213907849995966,
+      "early_validation_error": 0.15733333333333333,
+      "relative_head_trace_centered": 13.76371857129925,
+      "temperature_curvature": 0.8983774416270711
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "last_executed_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 100,
+    "validation_errors": 20,
+    "n_validation": 375,
+    "validation_accuracy": 0.9466666666666667,
+    "validation_ce": 0.27085212780616885,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.9163967189499798,
+      "validation_loss": 0.5211930825845037,
+      "early_validation_error": 0.15466666666666667,
+      "relative_head_trace_centered": 13.74306830461436,
+      "temperature_curvature": 0.8995029282389579
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 62,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.20583807975707452,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.4547452356727621,
+      "validation_loss": 1.8179819516671316,
+      "early_validation_error": 0.5786666666666667,
+      "relative_head_trace_centered": 20.32345975411595,
+      "temperature_curvature": 0.6257297599756936
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 62,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.2054665652172982,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.4547335278710434,
+      "validation_loss": 1.8179824325922194,
+      "early_validation_error": 0.5786666666666667,
+      "relative_head_trace_centered": 20.32314817751634,
+      "temperature_curvature": 0.6257231456052588
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 20,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.2055529090698893,
+    "probe_metrics": {
+      "original_rms_ratio_max": 2.3299863971276222,
+      "validation_loss": 1.0348515231004785,
+      "early_validation_error": 0.29333333333333333,
+      "relative_head_trace_centered": 17.158630529638657,
+      "temperature_curvature": 1.0466799707444043
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 15,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.2058261578534439,
+    "probe_metrics": {
+      "original_rms_ratio_max": 2.3299380117877595,
+      "validation_loss": 1.0348605079009952,
+      "early_validation_error": 0.29333333333333333,
+      "relative_head_trace_centered": 17.157973187757854,
+      "temperature_curvature": 1.0466732088049588
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 10,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.19238792502370125,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.463456795716714,
+      "validation_loss": 0.4748550639533813,
+      "early_validation_error": 0.14666666666666667,
+      "relative_head_trace_centered": 13.16070615793184,
+      "temperature_curvature": 1.0292542573893901
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 8,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.19105025674937695,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.4633371737326835,
+      "validation_loss": 0.4748712743097894,
+      "early_validation_error": 0.14666666666666667,
+      "relative_head_trace_centered": 13.159849628229901,
+      "temperature_curvature": 1.0293091293360654
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 20,
+    "n_validation": 375,
+    "validation_accuracy": 0.9466666666666667,
+    "validation_ce": 0.18535533241242513,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.920134524938498,
+      "validation_loss": 0.5213907849995966,
+      "early_validation_error": 0.15733333333333333,
+      "relative_head_trace_centered": 13.76371857129925,
+      "temperature_curvature": 0.8983774416270711
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 71,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 20,
+    "n_validation": 375,
+    "validation_accuracy": 0.9466666666666667,
+    "validation_ce": 0.19506677911876624,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.9163967189499798,
+      "validation_loss": 0.5211930825845037,
+      "early_validation_error": 0.15466666666666667,
+      "relative_head_trace_centered": 13.74306830461436,
+      "temperature_curvature": 0.8995029282389579
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "last_executed_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 100,
+    "validation_errors": 21,
+    "n_validation": 375,
+    "validation_accuracy": 0.944,
+    "validation_ce": 0.16543956713681815,
+    "probe_metrics": {
+      "original_rms_ratio_max": 2.290974272509949,
+      "validation_loss": 1.4513613824768292,
+      "early_validation_error": 0.5146666666666667,
+      "relative_head_trace_centered": 31.61822805297431,
+      "temperature_curvature": 0.8356341784298538
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "last_executed_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 100,
+    "validation_errors": 21,
+    "n_validation": 375,
+    "validation_accuracy": 0.944,
+    "validation_ce": 0.16661645766846273,
+    "probe_metrics": {
+      "original_rms_ratio_max": 2.2909547218784656,
+      "validation_loss": 1.4513631495102948,
+      "early_validation_error": 0.5146666666666667,
+      "relative_head_trace_centered": 31.617768050572533,
+      "temperature_curvature": 0.8356290630475876
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "last_executed_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 100,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.18346419737385614,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.7405702469510795,
+      "validation_loss": 0.6570145750263925,
+      "early_validation_error": 0.19733333333333333,
+      "relative_head_trace_centered": 22.920049583054745,
+      "temperature_curvature": 1.1231811769697044
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "last_executed_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 100,
+    "validation_errors": 20,
+    "n_validation": 375,
+    "validation_accuracy": 0.9466666666666667,
+    "validation_ce": 0.18506751939477684,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.740501895714368,
+      "validation_loss": 0.6570200933913048,
+      "early_validation_error": 0.19733333333333333,
+      "relative_head_trace_centered": 22.91937276449181,
+      "temperature_curvature": 1.123192448598402
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "last_executed_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 100,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.19341204861470035,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.238106051966451,
+      "validation_loss": 0.3603667253390322,
+      "early_validation_error": 0.128,
+      "relative_head_trace_centered": 14.791845316597392,
+      "temperature_curvature": 0.6652074010794915
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "last_executed_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 100,
+    "validation_errors": 16,
+    "n_validation": 375,
+    "validation_accuracy": 0.9573333333333334,
+    "validation_ce": 0.19306930125151422,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.23791868891502,
+      "validation_loss": 0.3604314814538317,
+      "early_validation_error": 0.128,
+      "relative_head_trace_centered": 14.791427309200008,
+      "temperature_curvature": 0.6652928529859307
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "last_executed_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 100,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.22416711728409397,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.734523846960032,
+      "validation_loss": 0.36607146982078104,
+      "early_validation_error": 0.112,
+      "relative_head_trace_centered": 9.779148345800794,
+      "temperature_curvature": 0.5630625864516146
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "last_executed_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 100,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.21420804270663862,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.6658895106027956,
+      "validation_loss": 0.362217245252691,
+      "early_validation_error": 0.10666666666666667,
+      "relative_head_trace_centered": 9.314675410385089,
+      "temperature_curvature": 0.5679113326357591
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 59,
+    "validation_errors": 22,
+    "n_validation": 375,
+    "validation_accuracy": 0.9413333333333334,
+    "validation_ce": 0.16402073404181203,
+    "probe_metrics": {
+      "original_rms_ratio_max": 2.290974272509949,
+      "validation_loss": 1.4513613824768292,
+      "early_validation_error": 0.5146666666666667,
+      "relative_head_trace_centered": 31.61822805297431,
+      "temperature_curvature": 0.8356341784298538
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 59,
+    "validation_errors": 22,
+    "n_validation": 375,
+    "validation_accuracy": 0.9413333333333334,
+    "validation_ce": 0.16527916096856926,
+    "probe_metrics": {
+      "original_rms_ratio_max": 2.2909547218784656,
+      "validation_loss": 1.4513631495102948,
+      "early_validation_error": 0.5146666666666667,
+      "relative_head_trace_centered": 31.617768050572533,
+      "temperature_curvature": 0.8356290630475876
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 12,
+    "validation_errors": 21,
+    "n_validation": 375,
+    "validation_accuracy": 0.944,
+    "validation_ce": 0.1577536308628593,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.7405702469510795,
+      "validation_loss": 0.6570145750263925,
+      "early_validation_error": 0.19733333333333333,
+      "relative_head_trace_centered": 22.920049583054745,
+      "temperature_curvature": 1.1231811769697044
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 12,
+    "validation_errors": 21,
+    "n_validation": 375,
+    "validation_accuracy": 0.944,
+    "validation_ce": 0.15879645881897497,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.740501895714368,
+      "validation_loss": 0.6570200933913048,
+      "early_validation_error": 0.19733333333333333,
+      "relative_head_trace_centered": 22.91937276449181,
+      "temperature_curvature": 1.123192448598402
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 7,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.15377304809665335,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.238106051966451,
+      "validation_loss": 0.3603667253390322,
+      "early_validation_error": 0.128,
+      "relative_head_trace_centered": 14.791845316597392,
+      "temperature_curvature": 0.6652074010794915
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 9,
+    "validation_errors": 21,
+    "n_validation": 375,
+    "validation_accuracy": 0.944,
+    "validation_ce": 0.15200428749264458,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.23791868891502,
+      "validation_loss": 0.3604314814538317,
+      "early_validation_error": 0.128,
+      "relative_head_trace_centered": 14.791427309200008,
+      "temperature_curvature": 0.6652928529859307
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 5,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.17892481948987157,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.734523846960032,
+      "validation_loss": 0.36607146982078104,
+      "early_validation_error": 0.112,
+      "relative_head_trace_centered": 9.779148345800794,
+      "temperature_curvature": 0.5630625864516146
+    }
+  },
+  {
+    "pilot": "hundred_epoch",
+    "seed": 89,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 5,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.15417557190402834,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.6658895106027956,
+      "validation_loss": 0.362217245252691,
+      "early_validation_error": 0.10666666666666667,
+      "relative_head_trace_centered": 9.314675410385089,
+      "temperature_curvature": 0.5679113326357591
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "last_executed_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 100,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.17482878267765045,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.9722553491592407,
+      "keras_validation_ce": 1.621340274810791,
+      "early_validation_error": 0.5546666666666666
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "last_executed_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 100,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.17407555878162384,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.9722496271133423,
+      "keras_validation_ce": 1.6213375329971313,
+      "early_validation_error": 0.5546666666666666
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "last_executed_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 51,
+    "validation_errors": 15,
+    "n_validation": 375,
+    "validation_accuracy": 0.96,
+    "validation_ce": 0.1633637547492981,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.0684902667999268,
+      "keras_validation_ce": 0.7722893953323364,
+      "early_validation_error": 0.21866666666666668
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "last_executed_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 51,
+    "validation_errors": 16,
+    "n_validation": 375,
+    "validation_accuracy": 0.9573333333333334,
+    "validation_ce": 0.1650291085243225,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.068425178527832,
+      "keras_validation_ce": 0.7722988128662109,
+      "early_validation_error": 0.21866666666666668
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "last_executed_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 41,
+    "validation_errors": 14,
+    "n_validation": 375,
+    "validation_accuracy": 0.9626666666666667,
+    "validation_ce": 0.15495678782463074,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.969856262207031,
+      "keras_validation_ce": 0.3912634253501892,
+      "early_validation_error": 0.10133333333333333
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "last_executed_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 41,
+    "validation_errors": 14,
+    "n_validation": 375,
+    "validation_accuracy": 0.9626666666666667,
+    "validation_ce": 0.15409491956233978,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.9699931144714355,
+      "keras_validation_ce": 0.39127641916275024,
+      "early_validation_error": 0.10133333333333333
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "last_executed_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 32,
+    "validation_errors": 15,
+    "n_validation": 375,
+    "validation_accuracy": 0.96,
+    "validation_ce": 0.17890852689743042,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.119656085968018,
+      "keras_validation_ce": 0.37099242210388184,
+      "early_validation_error": 0.10933333333333334
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "last_executed_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 32,
+    "validation_errors": 14,
+    "n_validation": 375,
+    "validation_accuracy": 0.9626666666666667,
+    "validation_ce": 0.1771276891231537,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.11907958984375,
+      "keras_validation_ce": 0.37096354365348816,
+      "early_validation_error": 0.10933333333333334
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 81,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.17456889152526855,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.9722553491592407,
+      "keras_validation_ce": 1.621340274810791,
+      "early_validation_error": 0.5546666666666666
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 81,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.17383180558681488,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.9722496271133423,
+      "keras_validation_ce": 1.6213375329971313,
+      "early_validation_error": 0.5546666666666666
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 26,
+    "validation_errors": 14,
+    "n_validation": 375,
+    "validation_accuracy": 0.9626666666666667,
+    "validation_ce": 0.15957127511501312,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.0684902667999268,
+      "keras_validation_ce": 0.7722893953323364,
+      "early_validation_error": 0.21866666666666668
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 26,
+    "validation_errors": 15,
+    "n_validation": 375,
+    "validation_accuracy": 0.96,
+    "validation_ce": 0.15946580469608307,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.068425178527832,
+      "keras_validation_ce": 0.7722988128662109,
+      "early_validation_error": 0.21866666666666668
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 16,
+    "validation_errors": 12,
+    "n_validation": 375,
+    "validation_accuracy": 0.968,
+    "validation_ce": 0.14032156765460968,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.969856262207031,
+      "keras_validation_ce": 0.3912634253501892,
+      "early_validation_error": 0.10133333333333333
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 16,
+    "validation_errors": 11,
+    "n_validation": 375,
+    "validation_accuracy": 0.9706666666666667,
+    "validation_ce": 0.13837681710720062,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.9699931144714355,
+      "keras_validation_ce": 0.39127641916275024,
+      "early_validation_error": 0.10133333333333333
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 7,
+    "validation_errors": 15,
+    "n_validation": 375,
+    "validation_accuracy": 0.96,
+    "validation_ce": 0.14447084069252014,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.119656085968018,
+      "keras_validation_ce": 0.37099242210388184,
+      "early_validation_error": 0.10933333333333334
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 7,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.1481098085641861,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.11907958984375,
+      "keras_validation_ce": 0.37096354365348816,
+      "early_validation_error": 0.10933333333333334
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 81,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.17456889152526855,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.9722553491592407,
+      "keras_validation_ce": 1.621340274810791,
+      "early_validation_error": 0.5546666666666666
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 81,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.17383180558681488,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.9722496271133423,
+      "keras_validation_ce": 1.6213375329971313,
+      "early_validation_error": 0.5546666666666666
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 26,
+    "validation_errors": 14,
+    "n_validation": 375,
+    "validation_accuracy": 0.9626666666666667,
+    "validation_ce": 0.15957127511501312,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.0684902667999268,
+      "keras_validation_ce": 0.7722893953323364,
+      "early_validation_error": 0.21866666666666668
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 26,
+    "validation_errors": 15,
+    "n_validation": 375,
+    "validation_accuracy": 0.96,
+    "validation_ce": 0.15946580469608307,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.068425178527832,
+      "keras_validation_ce": 0.7722988128662109,
+      "early_validation_error": 0.21866666666666668
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 16,
+    "validation_errors": 12,
+    "n_validation": 375,
+    "validation_accuracy": 0.968,
+    "validation_ce": 0.14032156765460968,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.969856262207031,
+      "keras_validation_ce": 0.3912634253501892,
+      "early_validation_error": 0.10133333333333333
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 16,
+    "validation_errors": 11,
+    "n_validation": 375,
+    "validation_accuracy": 0.9706666666666667,
+    "validation_ce": 0.13837681710720062,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.9699931144714355,
+      "keras_validation_ce": 0.39127641916275024,
+      "early_validation_error": 0.10133333333333333
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 7,
+    "validation_errors": 15,
+    "n_validation": 375,
+    "validation_accuracy": 0.96,
+    "validation_ce": 0.14447084069252014,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.119656085968018,
+      "keras_validation_ce": 0.37099242210388184,
+      "early_validation_error": 0.10933333333333334
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 307,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 7,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.1481098085641861,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.11907958984375,
+      "keras_validation_ce": 0.37096354365348816,
+      "early_validation_error": 0.10933333333333334
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "last_executed_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 76,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.1857813447713852,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.8799912929534912,
+      "keras_validation_ce": 1.5662648677825928,
+      "early_validation_error": 0.49066666666666664
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "last_executed_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 76,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.18580801784992218,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.8799751996994019,
+      "keras_validation_ce": 1.5662667751312256,
+      "early_validation_error": 0.49066666666666664
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "last_executed_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 42,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.18541821837425232,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.24967622756958,
+      "keras_validation_ce": 0.8051526546478271,
+      "early_validation_error": 0.264
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "last_executed_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 42,
+    "validation_errors": 17,
+    "n_validation": 375,
+    "validation_accuracy": 0.9546666666666667,
+    "validation_ce": 0.18617293238639832,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.2496111392974854,
+      "keras_validation_ce": 0.8051594495773315,
+      "early_validation_error": 0.264
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "last_executed_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 35,
+    "validation_errors": 14,
+    "n_validation": 375,
+    "validation_accuracy": 0.9626666666666667,
+    "validation_ce": 0.19165357947349548,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.2134833335876465,
+      "keras_validation_ce": 0.4605265259742737,
+      "early_validation_error": 0.17866666666666667
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "last_executed_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 35,
+    "validation_errors": 16,
+    "n_validation": 375,
+    "validation_accuracy": 0.9573333333333334,
+    "validation_ce": 0.19519244134426117,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.2142558097839355,
+      "keras_validation_ce": 0.46058201789855957,
+      "early_validation_error": 0.17866666666666667
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "last_executed_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 31,
+    "validation_errors": 18,
+    "n_validation": 375,
+    "validation_accuracy": 0.952,
+    "validation_ce": 0.1920589804649353,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.491623878479004,
+      "keras_validation_ce": 0.46649327874183655,
+      "early_validation_error": 0.16533333333333333
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "last_executed_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 31,
+    "validation_errors": 20,
+    "n_validation": 375,
+    "validation_accuracy": 0.9466666666666667,
+    "validation_ce": 0.18589520454406738,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.491687297821045,
+      "keras_validation_ce": 0.4673168957233429,
+      "early_validation_error": 0.16533333333333333
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 51,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.184160515666008,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.8799912929534912,
+      "keras_validation_ce": 1.5662648677825928,
+      "early_validation_error": 0.49066666666666664
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 51,
+    "validation_errors": 20,
+    "n_validation": 375,
+    "validation_accuracy": 0.9466666666666667,
+    "validation_ce": 0.18416039645671844,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.8799751996994019,
+      "keras_validation_ce": 1.5662667751312256,
+      "early_validation_error": 0.49066666666666664
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 17,
+    "validation_errors": 15,
+    "n_validation": 375,
+    "validation_accuracy": 0.96,
+    "validation_ce": 0.17220552265644073,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.24967622756958,
+      "keras_validation_ce": 0.8051526546478271,
+      "early_validation_error": 0.264
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 17,
+    "validation_errors": 16,
+    "n_validation": 375,
+    "validation_accuracy": 0.9573333333333334,
+    "validation_ce": 0.17205241322517395,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.2496111392974854,
+      "keras_validation_ce": 0.8051594495773315,
+      "early_validation_error": 0.264
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 10,
+    "validation_errors": 14,
+    "n_validation": 375,
+    "validation_accuracy": 0.9626666666666667,
+    "validation_ce": 0.1609443724155426,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.2134833335876465,
+      "keras_validation_ce": 0.4605265259742737,
+      "early_validation_error": 0.17866666666666667
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 10,
+    "validation_errors": 15,
+    "n_validation": 375,
+    "validation_accuracy": 0.96,
+    "validation_ce": 0.16336461901664734,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.2142558097839355,
+      "keras_validation_ce": 0.46058201789855957,
+      "early_validation_error": 0.17866666666666667
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 6,
+    "validation_errors": 22,
+    "n_validation": 375,
+    "validation_accuracy": 0.9413333333333334,
+    "validation_ce": 0.16311702132225037,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.491623878479004,
+      "keras_validation_ce": 0.46649327874183655,
+      "early_validation_error": 0.16533333333333333
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "minimum_validation_ce_epoch",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 6,
+    "validation_errors": 21,
+    "n_validation": 375,
+    "validation_accuracy": 0.944,
+    "validation_ce": 0.15834875404834747,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.491687297821045,
+      "keras_validation_ce": 0.4673168957233429,
+      "early_validation_error": 0.16533333333333333
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 0,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 51,
+    "validation_errors": 19,
+    "n_validation": 375,
+    "validation_accuracy": 0.9493333333333334,
+    "validation_ce": 0.184160515666008,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.8799912929534912,
+      "keras_validation_ce": 1.5662648677825928,
+      "early_validation_error": 0.49066666666666664
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 1,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "epoch": 51,
+    "validation_errors": 20,
+    "n_validation": 375,
+    "validation_accuracy": 0.9466666666666667,
+    "validation_ce": 0.18416039645671844,
+    "probe_metrics": {
+      "original_rms_ratio_max": 1.8799751996994019,
+      "keras_validation_ce": 1.5662667751312256,
+      "early_validation_error": 0.49066666666666664
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 2,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 17,
+    "validation_errors": 15,
+    "n_validation": 375,
+    "validation_accuracy": 0.96,
+    "validation_ce": 0.17220552265644073,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.24967622756958,
+      "keras_validation_ce": 0.8051526546478271,
+      "early_validation_error": 0.264
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 3,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "epoch": 17,
+    "validation_errors": 16,
+    "n_validation": 375,
+    "validation_accuracy": 0.9573333333333334,
+    "validation_ce": 0.17205241322517395,
+    "probe_metrics": {
+      "original_rms_ratio_max": 3.2496111392974854,
+      "keras_validation_ce": 0.8051594495773315,
+      "early_validation_error": 0.264
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 4,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "epoch": 10,
+    "validation_errors": 14,
+    "n_validation": 375,
+    "validation_accuracy": 0.9626666666666667,
+    "validation_ce": 0.1609443724155426,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.2134833335876465,
+      "keras_validation_ce": 0.4605265259742737,
+      "early_validation_error": 0.17866666666666667
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 5,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "epoch": 10,
+    "validation_errors": 15,
+    "n_validation": 375,
+    "validation_accuracy": 0.96,
+    "validation_ce": 0.16336461901664734,
+    "probe_metrics": {
+      "original_rms_ratio_max": 5.2142558097839355,
+      "keras_validation_ce": 0.46058201789855957,
+      "early_validation_error": 0.17866666666666667
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 6,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "epoch": 6,
+    "validation_errors": 22,
+    "n_validation": 375,
+    "validation_accuracy": 0.9413333333333334,
+    "validation_ce": 0.16311702132225037,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.491623878479004,
+      "keras_validation_ce": 0.46649327874183655,
+      "early_validation_error": 0.16533333333333333
+    }
+  },
+  {
+    "pilot": "cold_retrain",
+    "seed": 331,
+    "target": "restored_minimum_validation_ce_checkpoint",
+    "config_id": 7,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    },
+    "epoch": 6,
+    "validation_errors": 21,
+    "n_validation": 375,
+    "validation_accuracy": 0.944,
+    "validation_ce": 0.15834875404834747,
+    "probe_metrics": {
+      "original_rms_ratio_max": 4.491687297821045,
+      "keras_validation_ce": 0.4673168957233429,
+      "early_validation_error": 0.16533333333333333
+    }
+  }
+]

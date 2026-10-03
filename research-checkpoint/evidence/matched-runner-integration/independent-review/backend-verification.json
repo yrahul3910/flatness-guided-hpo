@@ -1,0 +1,47 @@
+{
+  "status": "pass",
+  "input_directory": "sweep-results/research-audit-20261002/matched-runner-integration/backend/run-20261002T223958949122Z",
+  "protocol_sha256": "b5e63c5e730eadfb9a7137a3eb08345d0c2975d1c69c35c88d243be7a217ece7",
+  "source_sha256": {
+    "image/src/matched_training.py": "1dd1a156c03f8b6d04bf1f5f37034eeea8245adb8e309b038bd3853376e2d236",
+    "image/src/util.py": "0265e474b930fc19c2a210e095e38f48a19a5e38021a9bb532f7ba3c47530e76",
+    "image/src/config.py": "1e87a606e1bf54127f955cbfdcebdb48ab78d40d76d6aa200cdfc2ffc68131e9",
+    "tests/test_matched_training.py": "ea96ca23f2efac0ec8ed668e8a6d49aba89e8c7b6f358fcbb7e310004ac6f38a"
+  },
+  "data_reconstruction": "exact from saved seed and arrays",
+  "phase_rows": [
+    {
+      "phase": "probe-first",
+      "epochs": 1,
+      "steps": 2,
+      "checkpoint_sha256": "b558b6c753e91cbf08a4194e4cb34b5fe7e8de5dad43752dfe449caa79532d52",
+      "validation_ce": 5.962891101837158,
+      "validation_accuracy": 0.0923076942563057,
+      "rms": 3.211597442626953
+    },
+    {
+      "phase": "final",
+      "epochs": 2,
+      "steps": 4,
+      "checkpoint_sha256": "3267bd5b082c905a6553e07699acb46406e002c289bc049df00e9d6fc4db64a1",
+      "validation_ce": 5.762886047363281,
+      "validation_accuracy": 0.13846154510974884,
+      "rms": null
+    },
+    {
+      "phase": "probe-replay",
+      "epochs": 1,
+      "steps": 2,
+      "checkpoint_sha256": "c39a31769f5adf794bd5598b2896a803ef0f02952b91e5581f7b199e4788c298",
+      "validation_ce": 5.962891101837158,
+      "validation_accuracy": 0.0923076942563057,
+      "rms": 3.211597442626953
+    }
+  ],
+  "completed_phases": 3,
+  "completed_epoch_rows": 4,
+  "optimizer_updates": 8,
+  "checkpoint_file_hashes": 3,
+  "probe_replay_metrics_weights_rng": "exact",
+  "scope": "Read-only source/raw/hash/arithmetic checks; no model deserialization, inference, training, or official test access. Author owns three checkpoint reload metric checks. Two final epochs do not test patience25 termination."
+}

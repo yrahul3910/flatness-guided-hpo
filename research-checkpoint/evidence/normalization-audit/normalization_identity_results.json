@@ -1,0 +1,416 @@
+{
+  "status": "deterministic analytical fixtures, not checkpoint performance evidence",
+  "protocol_sha256": "0f9364f9d435483dfc3cbe282483b65ceea1686094b6428da85a255acb57b44d",
+  "source_sha256": "fdcf8ec3c4e393c5598351e2d53679d13e8c3d64bf40896de17c32fbd6889c18",
+  "seed": 20261002,
+  "fixture": {
+    "h": [
+      [
+        0.2191144416726545,
+        0.9291070817976369,
+        0.6219556477387431,
+        0.3501861536396528
+      ],
+      [
+        0.9900320247460571,
+        0.7442174623125462,
+        0.8207319768717435,
+        0.910826494803939
+      ],
+      [
+        2.6932378066905036,
+        0.11851440391486645,
+        0.908380326476469,
+        0.6025968046515756
+      ],
+      [
+        0.054846642480818636,
+        0.9745982925794211,
+        0.45686845972883566,
+        0.6863007252218696
+      ],
+      [
+        0.2533923741520532,
+        2.5124034376444846,
+        0.2293679380923576,
+        0.9760776931291542
+      ],
+      [
+        1.1629950143741261,
+        1.9786828697137673,
+        0.07695971949156126,
+        0.7202127011623913
+      ]
+    ],
+    "W": [
+      [
+        -1.6825957233796676,
+        -0.32364471632212644,
+        1.686274807607451
+      ],
+      [
+        1.290462414013466,
+        -0.8079465545029482,
+        1.71731164969291
+      ],
+      [
+        -1.101642956527334,
+        -0.008562754964750813,
+        1.2820733476920625
+      ],
+      [
+        -1.5533722058013937,
+        1.962936934930341,
+        -0.9052505267870908
+      ]
+    ],
+    "b": [
+      -1.7010109866210974,
+      1.142266325698761,
+      -0.21717348308596204
+    ]
+  },
+  "baseline": {
+    "relative_head_trace_centered": 3.020147492524158,
+    "temperature_curvature": 0.3377831232875332,
+    "unweighted_exact_head_trace": 0.6572123342581113,
+    "original_rms_ratio": 0.4080154989041611,
+    "diagnostic_only_centered_denominator_ratio": 0.42604560778592643
+  },
+  "all_transformations": [
+    {
+      "transformation": "uniform_gauge_shift_-100",
+      "scores": {
+        "relative_head_trace_centered": 3.0201474925241025,
+        "temperature_curvature": 0.33778312328753407,
+        "unweighted_exact_head_trace": 0.6572123342581013,
+        "original_rms_ratio": 0.0054027375485252455,
+        "diagnostic_only_centered_denominator_ratio": 0.42604560778592765
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 0.9999999999999816,
+        "temperature_curvature": 1.0000000000000027,
+        "unweighted_exact_head_trace": 0.9999999999999848,
+        "original_rms_ratio": 0.013241500783758943,
+        "diagnostic_only_centered_denominator_ratio": 1.0000000000000029
+      },
+      "max_probability_difference": 8.881784197001252e-15,
+      "expected_C1_factor": 1,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": true
+    },
+    {
+      "transformation": "uniform_gauge_shift_-1",
+      "scores": {
+        "relative_head_trace_centered": 3.0201474925241585,
+        "temperature_curvature": 0.3377831232875348,
+        "unweighted_exact_head_trace": 0.6572123342581114,
+        "original_rms_ratio": 0.34198456650299053,
+        "diagnostic_only_centered_denominator_ratio": 0.42604560778592643
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 1.0000000000000002,
+        "temperature_curvature": 1.0000000000000047,
+        "unweighted_exact_head_trace": 1.0000000000000002,
+        "original_rms_ratio": 0.838165627093787,
+        "diagnostic_only_centered_denominator_ratio": 1.0
+      },
+      "max_probability_difference": 1.1102230246251565e-16,
+      "expected_C1_factor": 1,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": true
+    },
+    {
+      "transformation": "uniform_gauge_shift_0",
+      "scores": {
+        "relative_head_trace_centered": 3.020147492524158,
+        "temperature_curvature": 0.3377831232875332,
+        "unweighted_exact_head_trace": 0.6572123342581113,
+        "original_rms_ratio": 0.4080154989041611,
+        "diagnostic_only_centered_denominator_ratio": 0.42604560778592643
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 1.0,
+        "temperature_curvature": 1.0,
+        "unweighted_exact_head_trace": 1.0,
+        "original_rms_ratio": 1.0,
+        "diagnostic_only_centered_denominator_ratio": 1.0
+      },
+      "max_probability_difference": 0.0,
+      "expected_C1_factor": 1,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": true
+    },
+    {
+      "transformation": "uniform_gauge_shift_1",
+      "scores": {
+        "relative_head_trace_centered": 3.020147492524156,
+        "temperature_curvature": 0.33778312328753274,
+        "unweighted_exact_head_trace": 0.6572123342581109,
+        "original_rms_ratio": 0.31111071485087954,
+        "diagnostic_only_centered_denominator_ratio": 0.42604560778592643
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 0.9999999999999992,
+        "temperature_curvature": 0.9999999999999987,
+        "unweighted_exact_head_trace": 0.9999999999999993,
+        "original_rms_ratio": 0.7624972965155827,
+        "diagnostic_only_centered_denominator_ratio": 1.0
+      },
+      "max_probability_difference": 2.220446049250313e-16,
+      "expected_C1_factor": 1,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": true
+    },
+    {
+      "transformation": "uniform_gauge_shift_100",
+      "scores": {
+        "relative_head_trace_centered": 3.020147492524071,
+        "temperature_curvature": 0.33778312328753035,
+        "unweighted_exact_head_trace": 0.6572123342580926,
+        "original_rms_ratio": 0.005388746621266103,
+        "diagnostic_only_centered_denominator_ratio": 0.4260456077859277
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 0.9999999999999711,
+        "temperature_curvature": 0.9999999999999917,
+        "unweighted_exact_head_trace": 0.9999999999999715,
+        "original_rms_ratio": 0.013207210597977474,
+        "diagnostic_only_centered_denominator_ratio": 1.0000000000000029
+      },
+      "max_probability_difference": 1.354472090042691e-14,
+      "expected_C1_factor": 1,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": true
+    },
+    {
+      "transformation": "nonuniform_common_row_shift",
+      "scores": {
+        "relative_head_trace_centered": 3.020147492524158,
+        "temperature_curvature": 0.33778312328753435,
+        "unweighted_exact_head_trace": 0.6572123342581113,
+        "original_rms_ratio": 0.28101197482391643,
+        "diagnostic_only_centered_denominator_ratio": 0.4260456077859263
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 1.0,
+        "temperature_curvature": 1.0000000000000036,
+        "unweighted_exact_head_trace": 1.0,
+        "original_rms_ratio": 0.688728677167049,
+        "diagnostic_only_centered_denominator_ratio": 0.9999999999999998
+      },
+      "max_probability_difference": 2.220446049250313e-16,
+      "expected_C1_factor": 1,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": true
+    },
+    {
+      "transformation": "global_positive_scale_0.1",
+      "scores": {
+        "relative_head_trace_centered": 3.0201474925241576,
+        "temperature_curvature": 0.33778312328753524,
+        "unweighted_exact_head_trace": 65.72123342581112,
+        "original_rms_ratio": 40.80154989041611,
+        "diagnostic_only_centered_denominator_ratio": 42.60456077859264
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 0.9999999999999999,
+        "temperature_curvature": 1.000000000000006,
+        "unweighted_exact_head_trace": 99.99999999999999,
+        "original_rms_ratio": 100.0,
+        "diagnostic_only_centered_denominator_ratio": 100.0
+      },
+      "max_probability_difference": 2.0816681711721685e-17,
+      "expected_C1_factor": 1,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": true
+    },
+    {
+      "transformation": "global_positive_scale_1",
+      "scores": {
+        "relative_head_trace_centered": 3.020147492524158,
+        "temperature_curvature": 0.3377831232875332,
+        "unweighted_exact_head_trace": 0.6572123342581113,
+        "original_rms_ratio": 0.4080154989041611,
+        "diagnostic_only_centered_denominator_ratio": 0.42604560778592643
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 1.0,
+        "temperature_curvature": 1.0,
+        "unweighted_exact_head_trace": 1.0,
+        "original_rms_ratio": 1.0,
+        "diagnostic_only_centered_denominator_ratio": 1.0
+      },
+      "max_probability_difference": 0.0,
+      "expected_C1_factor": 1,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": true
+    },
+    {
+      "transformation": "global_positive_scale_10",
+      "scores": {
+        "relative_head_trace_centered": 3.0201474925241585,
+        "temperature_curvature": 0.33778312328753496,
+        "unweighted_exact_head_trace": 0.006572123342581115,
+        "original_rms_ratio": 0.004080154989041611,
+        "diagnostic_only_centered_denominator_ratio": 0.0042604560778592634
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 1.0000000000000002,
+        "temperature_curvature": 1.0000000000000053,
+        "unweighted_exact_head_trace": 0.010000000000000004,
+        "original_rms_ratio": 0.009999999999999998,
+        "diagnostic_only_centered_denominator_ratio": 0.009999999999999998
+      },
+      "max_probability_difference": 6.245004513516506e-17,
+      "expected_C1_factor": 1,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": true
+    },
+    {
+      "transformation": "positive_diagonal_rescale",
+      "scores": {
+        "relative_head_trace_centered": 3.020147492524158,
+        "temperature_curvature": 0.3377831232875332,
+        "unweighted_exact_head_trace": 14.464690637455519,
+        "original_rms_ratio": 0.42359279621183327,
+        "diagnostic_only_centered_denominator_ratio": 0.4261298911247605
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 1.0,
+        "temperature_curvature": 1.0,
+        "unweighted_exact_head_trace": 22.00915881133586,
+        "original_rms_ratio": 1.0381781999691417,
+        "diagnostic_only_centered_denominator_ratio": 1.0001978270337584
+      },
+      "max_probability_difference": 1.3877787807814457e-17,
+      "expected_C1_factor": 1,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": true
+    },
+    {
+      "transformation": "hidden_permutation",
+      "scores": {
+        "relative_head_trace_centered": 3.0201474925241576,
+        "temperature_curvature": 0.33778312328753507,
+        "unweighted_exact_head_trace": 0.6572123342581112,
+        "original_rms_ratio": 0.4080154989041611,
+        "diagnostic_only_centered_denominator_ratio": 0.4260456077859263
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 0.9999999999999999,
+        "temperature_curvature": 1.0000000000000056,
+        "unweighted_exact_head_trace": 0.9999999999999998,
+        "original_rms_ratio": 1.0,
+        "diagnostic_only_centered_denominator_ratio": 0.9999999999999998
+      },
+      "max_probability_difference": 2.220446049250313e-16,
+      "expected_C1_factor": 1,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": true
+    },
+    {
+      "transformation": "uniform_neuron_duplication_2",
+      "scores": {
+        "relative_head_trace_centered": 1.5100737462620788,
+        "temperature_curvature": 0.33778312328753585,
+        "unweighted_exact_head_trace": 1.3144246685162224,
+        "original_rms_ratio": 0.8160309978083222,
+        "diagnostic_only_centered_denominator_ratio": 0.8520912155718526
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 0.49999999999999994,
+        "temperature_curvature": 1.000000000000008,
+        "unweighted_exact_head_trace": 1.9999999999999996,
+        "original_rms_ratio": 2.0,
+        "diagnostic_only_centered_denominator_ratio": 1.9999999999999996
+      },
+      "max_probability_difference": 3.3306690738754696e-16,
+      "expected_C1_factor": 0.5,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": false
+    },
+    {
+      "transformation": "uniform_neuron_duplication_4",
+      "scores": {
+        "relative_head_trace_centered": 0.7550368731310395,
+        "temperature_curvature": 0.3377831232875348,
+        "unweighted_exact_head_trace": 2.6288493370324453,
+        "original_rms_ratio": 1.632061995616644,
+        "diagnostic_only_centered_denominator_ratio": 1.704182431143705
+      },
+      "ratios_to_baseline": {
+        "relative_head_trace_centered": 0.25,
+        "temperature_curvature": 1.0000000000000047,
+        "unweighted_exact_head_trace": 4.0,
+        "original_rms_ratio": 3.999999999999999,
+        "diagnostic_only_centered_denominator_ratio": 3.9999999999999982
+      },
+      "max_probability_difference": 1.1102230246251565e-16,
+      "expected_C1_factor": 0.25,
+      "expected_C2_factor": 1,
+      "weighted_kernel_expected_invariant": false
+    }
+  ],
+  "exact_C1_trace_check": {
+    "trace_of_explicit_relative_hessian": 3.0201474925241567,
+    "formula": 3.020147492524158,
+    "relative_hessian_frobenius": 2.399406636660198
+  },
+  "exact_C2_temperature_check": {
+    "second_central_difference": 0.3377829571604707,
+    "formula": 0.3377831232875332,
+    "step": 0.0001
+  },
+  "fixed_label_loss_ordering_counterexample": [
+    {
+      "fixed_label": 0,
+      "probabilities": [
+        0.99,
+        0.01
+      ],
+      "cross_entropy": 0.01005033585350145,
+      "accuracy": 1,
+      "scores": {
+        "relative_head_trace_centered": 0.20903975172729966,
+        "temperature_curvature": 0.20903975172729794,
+        "unweighted_exact_head_trace": 0.01980000000000004,
+        "original_rms_ratio": 0.3047021395565909,
+        "diagnostic_only_centered_denominator_ratio": 0.3047021395565909
+      }
+    },
+    {
+      "fixed_label": 0,
+      "probabilities": [
+        0.01,
+        0.99
+      ],
+      "cross_entropy": 4.605170185988091,
+      "accuracy": 0,
+      "scores": {
+        "relative_head_trace_centered": 0.20903975172729966,
+        "temperature_curvature": 0.20903975172729794,
+        "unweighted_exact_head_trace": 0.01980000000000004,
+        "original_rms_ratio": 0.3047021395565909,
+        "diagnostic_only_centered_denominator_ratio": 0.3047021395565909
+      }
+    }
+  ],
+  "already_centered_original_bound_counterexample": {
+    "W": [
+      [
+        0.1,
+        -0.1
+      ]
+    ],
+    "hidden": [
+      1
+    ],
+    "claimed_lower_bound": 5.024772903208064,
+    "exact_head_hessian_frobenius": 0.49503314542371996,
+    "class_centering_leaves_W_unchanged": true,
+    "conclusion": "Output-gauge centering alone does not repair the original lower bound."
+  },
+  "conclusion": "C1 removes gauge and positive diagonal rescaling but fails duplication. C2 removes all tested representation symmetries but neither score guarantees loss/accuracy ordering. No repair of the published lower bound follows.",
+  "all_assertions_passed": true
+}

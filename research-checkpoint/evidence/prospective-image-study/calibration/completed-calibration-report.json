@@ -1,0 +1,50 @@
+{
+  "recorded_utc": "2026-10-03T02:06:28.668306+00:00",
+  "purpose": "Outcome-blind timing/memory calibration; not a model-quality experiment.",
+  "result": "All nine cases complete, 18 updates each, 162 total, one remote attempt.",
+  "remote_subprocess_seconds": 74.15969395637512,
+  "whole_controller_seconds": 152.9556399580033,
+  "peak_gpu_allocation_bytes": 4577014272,
+  "gpu": "Tesla T4",
+  "app_id": "<PROVIDER_ID>",
+  "provider_terminal_state": "stopped, zero running tasks at01:57UTC",
+  "implementation_caveat": "Historical controller ended nonzero because it expected display-label keys in Modal JSON. Calibration returncode was0 and artifact verified; subsequent independent API read proves stopped/zero tasks. Executed source and failed ledger preserved; corrected launcher prepared separately.",
+  "reported_metered_account_delta_usd": 0.02,
+  "reported_billed_account_delta_usd": 0.0,
+  "cost_qualification": "Current account-wide report after credits, subject to billing lag and unrelated activity; no settled per-app charge claimed.",
+  "reserved_total_usd": 4,
+  "budget_cap_usd": 50,
+  "frozen_forecast_decision": "stop_after_calibration",
+  "prefix_forecasts": [
+    {
+      "repetitions_per_dataset": 2,
+      "candidates": 32,
+      "backend_seconds_with_2x_margin": 2173400.3968152776,
+      "paid_startup_idle_shutdown_seconds": 15616,
+      "scientific_worker_usd": 494.10478108914447,
+      "other_usd": 4.0,
+      "total_usd": 498.10478108914447,
+      "gate_pass": false
+    },
+    {
+      "repetitions_per_dataset": 4,
+      "candidates": 64,
+      "backend_seconds_with_2x_margin": 4531852.962504429,
+      "paid_startup_idle_shutdown_seconds": 15616,
+      "scientific_worker_usd": 1026.4546942164998,
+      "other_usd": 4.0,
+      "total_usd": 1030.4546942164998,
+      "gate_pass": false
+    }
+  ],
+  "forecast_interpretation": "These are conservative planning estimates from the frozen maximum seconds-per-MAC extrapolation with2x margin and all candidates100epochs, not measured full-study costs. No scientific training was authorized by the failed gate.",
+  "next_local_work": "Diagnose extrapolation and prepare a complete32-candidate timing-only proposal using direct per-candidate timings. No additional paid action without applicable authorization.",
+  "scientific_training_or_evaluation_completed": false,
+  "data_boundary": "Training/tuning calibration subsets only. Evaluation arrays remained local and were never used by this run.",
+  "evidence_paths": {
+    "independent_review": ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/independent-records-review.json",
+    "verified_launch": ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/post-run-verification.json",
+    "forecast": "sweep-results/research-audit-20261002/prospective-image-study/calibration/modal-cost-forecast-20261003.json",
+    "billing": ".cloudexp/research-audit-20261002/prospective-image-study/modal-access-audit/after-run-verification-20261003T015700003185Z.json"
+  }
+}

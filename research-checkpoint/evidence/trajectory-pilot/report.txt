@@ -1,0 +1,34 @@
+Exploratory MNIST epochwise across-run correlation diagnostic
+
+Status: complete. All 16 preregistered candidates succeeded; 80 epoch records, zero failed or excluded candidates. Local CPU training and checkpoint loop took 26.93 seconds. Incremental cloud cost: $0. Checkpoints occupy 40,228,296 bytes. No official test arrays were loaded or evaluated.
+
+Question: reviewer 6ZG2 requested correlations across runs at each epoch against the same runs' final validation losses, with current validation loss as the competing predictor. This diagnostic implements that pairing but uses only a five-epoch endpoint. It does not resolve the reviewer's converged-performance or cross-dataset request.
+
+Protocol: cached MNIST official training examples [0,1500) train and [1500,1875) validation. Normalize float32 images by (pixel/255 - 0.1307)/0.3081. Eight configurations combine learning rates {0.0001,0.0003,0.001,0.003} and weight decays {0.00001,0.001}. Initialization seeds {31,47}; all configurations within a seed share initial weights and per-epoch shuffle order. Repository MNIST model: 32 filters, kernel 2, same padding, two blocks, hardcoded 128 hidden units. Five epochs, batch size 64, Adam and repository cosine decay over 120 updates, no early stopping. CPU-only deterministic TensorFlow execution, two intra-op threads and one inter-op thread.
+
+Measurements: after each epoch, evaluate the CURRENT trained model in inference mode. Over the full ordered training subset in 24 batches (23 of 64 and one of 28), record every batch's probability RMS, hidden-activation RMS, final-kernel RMS, p*h/W ratio, RMS h/W ratio, and literal Frobenius h/W ratio. Each scalar proxy is its batch maximum. The current validation loss uses categorical cross entropy of the current model's probabilities; accuracy uses argmax. No call to get_convexity and no fresh proxy-model training occurs.
+
+Spearman rho against epoch-5 validation loss, across the eight configurations within each seed:
+seed epoch    p*h/W    RMS h/W  Frobenius h/W  validation loss
+31   1       -1.0000  -0.7857   -0.7857         0.9762
+31   2       -1.0000  -1.0000   -1.0000         0.9762
+31   3       -1.0000  -0.9762   -0.9762         0.9762
+31   4       -0.9524  -0.9524   -0.9524         1.0000
+31   5       -0.9524  -0.9524   -0.9524         1.0000
+47   1        0.1667   0.3571    0.3571         0.4048
+47   2       -1.0000  -0.7857   -0.7857         0.7857
+47   3       -0.9762  -0.7857   -0.7857         0.7857
+47   4       -0.9762  -0.8095   -0.8095         0.9762
+47   5       -0.9762  -0.8095   -0.8095         1.0000
+
+Interpretation: positive rho is the direction consistent with choosing smaller proxy values to obtain smaller final loss. Current validation loss has higher rho at every measured epoch in both seeds. The epoch-1 proxy relationship changes sharply across initializations. From epoch 2 onward, proxy and learning-rate ranks have rho +0.9759 within both seeds. Learning rate largely separates these short-run outcomes; tiny weight-decay differences can determine ranks within each learning-rate pair. These are exploratory observations, not significance tests or evidence about a 100-epoch endpoint. Do not select a proxy sign, dataset, seed, or hyperparameter range from this pilot and present it as a preregistered final result.
+
+RMS versus Frobenius note: h_rms/W_rms = sqrt(K/B) * ||h||_F/||W||_F for hidden activations B x D and head weights D x K. Here K=10 and B is 64 or 28. Both batch-max variants were retained because the partial batch changes that factor. Their configuration rankings happened to agree in this pilot. Neither ratio is being asserted to bound Hessian curvature.
+
+Verification: 112 JSONL events consist of 16 starts, 80 epochs and 16 completions. Verified the full candidate set, all optimizer-step counts, matching initialization hashes and shuffle hashes within seed, all 24 ordered proxy batches covering exactly 1500 examples, recomputed batch maxima, all 16 checkpoint hashes, source snapshot hashes and dataset hash. Reloading all 16 checkpoints reproduced final validation loss and accuracy exactly, with optimizer iteration count 120. Ruff and Python compilation passed. no-sloppy's CLI excludes ignored files even when explicitly named, so its run_ruff/run_rules API checked this file directly: zero errors, one advisory dense-statements warning. The executed script is retained unchanged, with its exact source snapshot. The PNG was visually inspected.
+
+Files: command.txt is the executed shell command (working directory is the repository clone). metadata.json records data/source hashes, package versions and full protocol. events.jsonl is the raw append-only evidence. epoch-vectors.csv exposes all 80 candidate/epoch measurements with the paired final loss. correlations.json contains per-seed results and explicitly dependent supplementary pooled values. correlations.png and correlations.pdf show per-seed trajectories. integrity-check.json and checkpoint-verification.json record verification results. Sixteen seed*-config*.keras files preserve final checkpoints. sources/ preserves executed source files.
+
+Scope: only this ignored trajectory-pilot directory was written. No production code, paper, NOTES, cloud resources or budget settings changed. No additional experiment was launched after the fixed diagnostic completed.
+
+Plot-only revision: render_plot.py reads correlations.json, combines the matching RMS and Frobenius h/W rank curves, and places the legend outside the axes. It does not run training or alter measurements. correlations-original.png/.pdf preserve the first rendering; correlations.png/.pdf contain the revised plot. The training script and executed source snapshot remain unchanged.

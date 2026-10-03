@@ -1,0 +1,94 @@
+{
+  "archive_sha256": "c859feff2651fed9a61fc88b5da678b4d21ed28a86a16a3a99e01e0d5e47307e",
+  "attempt_id": "085d13b0-f5a3-4d81-8edc-491bee18095f",
+  "returncode": 0,
+  "completion": {
+    "complete": true,
+    "cases": 9,
+    "calibration_only": true
+  },
+  "cases": [
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2003,
+      "candidate_id": "c000005",
+      "status": "complete",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 110388736,
+      "timing_total_seconds": 10.643901072999991
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000001",
+      "status": "complete",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 393280000,
+      "timing_total_seconds": 4.118143925000002
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2003,
+      "candidate_id": "c000003",
+      "status": "complete",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 4577014272,
+      "timing_total_seconds": 17.484810041000006
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000007",
+      "status": "complete",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 853596928,
+      "timing_total_seconds": 3.7263900230000004
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000003",
+      "status": "complete",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1067863808,
+      "timing_total_seconds": 4.392421913999975
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2002,
+      "candidate_id": "c000000",
+      "status": "complete",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1675777536,
+      "timing_total_seconds": 5.995311219999998
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000003",
+      "status": "complete",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1201838080,
+      "timing_total_seconds": 5.445557614000002
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2002,
+      "candidate_id": "c000004",
+      "status": "complete",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2953136384,
+      "timing_total_seconds": 8.139215628999978
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2003,
+      "candidate_id": "c000002",
+      "status": "complete",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1496892160,
+      "timing_total_seconds": 4.326344804000016
+    }
+  ],
+  "status": "artifact_verified_and_extracted_pending_independent_review_and_terminal_status"
+}

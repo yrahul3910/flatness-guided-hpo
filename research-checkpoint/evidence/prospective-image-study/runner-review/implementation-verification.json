@@ -1,0 +1,122 @@
+{
+  "status": "focused_checks_passed_with_documented_static_warnings",
+  "changed_files": {
+    "image/matched_hpo.py": {
+      "added": 25,
+      "removed": 2,
+      "source_lines": 369,
+      "sha256": "a7dd2e840d12b8fd86cd95970b2ddbae1c32de4dec74963becd8632c178a8eb6"
+    },
+    "image/src/matched_training.py": {
+      "added": 55,
+      "removed": 6,
+      "source_lines": 438,
+      "sha256": "b38eaa656f4b8bfa73d646cdd6a38dbd1c0fc2a736f1b70deb12731a9aeb8af9"
+    },
+    "image/src/matched_contract.py": {
+      "added": 19,
+      "removed": 9,
+      "source_lines": 184,
+      "sha256": "95d50b098a227129cad48feec3f84147c1c34be7cea84966720c75215f46c862"
+    },
+    "image/finalize_matched.py": {
+      "added": 296,
+      "removed": 0,
+      "source_lines": 296,
+      "sha256": "cfae21a8da2eff53fd23dea7b4e87dc92c7bb7798077f0c58884e2c6005be705"
+    },
+    "tests/test_matched_hpo.py": {
+      "added": 15,
+      "removed": 4,
+      "source_lines": 144,
+      "sha256": "f9919b73316a01f218620334177cbd786973eeff0fbae72c17b967913942e5af"
+    },
+    "tests/test_matched_training.py": {
+      "added": 61,
+      "removed": 3,
+      "source_lines": 184,
+      "sha256": "5bc296535695c98cd93fb6f20071913f9e3af5401a6fe0852ed401f8126898eb"
+    },
+    "tests/test_matched_contract.py": {
+      "added": 18,
+      "removed": 5,
+      "source_lines": 137,
+      "sha256": "f7b11edd8ddd5b14d999a78cb84b008c5b504e5721a0e4b16cfcdd8555f4dea8"
+    },
+    "tests/test_finalize_matched.py": {
+      "added": 191,
+      "removed": 0,
+      "source_lines": 191,
+      "sha256": "de95362b4db7ffab84424f4d09834c1726af3c586e6501387f4ed64799f6f088"
+    }
+  },
+  "diff": {
+    "added": 680,
+    "removed": 29,
+    "changed_total": 709,
+    "initial_estimate": 290,
+    "overrun_reported_to_parent": true
+  },
+  "unit_tests": {
+    "count": 9,
+    "mode": "pure_arrays_and_mocked_inference_only",
+    "report": "unit-tests-final.txt",
+    "passed": true,
+    "elapsed_test_seconds": 0.216
+  },
+  "ruff": "passed",
+  "format": "passed",
+  "no_sloppy": {
+    "errors": 0,
+    "advisory_warnings": 17,
+    "report": "no-sloppy-final.txt"
+  },
+  "typecheck": {
+    "errors": 0,
+    "warnings": 79,
+    "fully_clean": false,
+    "report": "typecheck-final.txt"
+  },
+  "tests_not_run": [
+    "test_probe_final_probe_replay_and_saved_metrics (real optimizer updates excluded by task scope)"
+  ],
+  "research_data_loaded": false,
+  "real_models_created_or_loaded": false,
+  "optimizer_updates": 0,
+  "cloud_actions": 0,
+  "preservation": {
+    "before_files_and_hashes": "before-four-arm-extension/manifest.json",
+    "util_and_config_unchanged": true,
+    "frozen_KMNIST_runner_unchanged": true,
+    "older_executed_snapshots_edited": false,
+    "main_manuscript_edited": false
+  },
+  "finalizer_api": {
+    "seal": "seal_suite(run_dirs, directory, assignment_path)",
+    "finalize": "finalize_suite(lock_path, evaluation_archives)",
+    "assignment": "runs:[{dataset,repetition_id,manifest_sha256,settings_sha256}], evaluation_archives:{dataset:{path:absolute,sha256}}",
+    "training_archive_keys": [
+      "fit_x",
+      "fit_y",
+      "validation_x",
+      "validation_y"
+    ],
+    "evaluation_archive_keys": [
+      "evaluation_x",
+      "evaluation_y"
+    ],
+    "canonical_run_hashes": "SHA256 of UTF-8 json.dumps(record,sort_keys=True,separators=(comma,colon),allow_nan=False), no newline",
+    "artifact_layout": "Run from project root with a relative output directory; preserve exactly that relative layout on local download and evaluate from local project root. Frozen evaluation archive paths are absolute local paths."
+  },
+  "remaining_execution_work": [
+    "Root prospective assignment/protocol freeze",
+    "Root outcome-blind hardware calibration and compute bounds",
+    "Scientific experiment execution and selected-checkpoint heldout inference"
+  ],
+  "review_fixes": [
+    "Expected full manifest/settings digests are checked before phase sealing",
+    "Incumbent is recomputed by accuracy then candidate ID",
+    "Missing required metadata/probe records fail sealing",
+    "Cloud/local archive layout uses unchanged relative checkpoint paths; no record rewriting"
+  ]
+}

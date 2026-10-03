@@ -1,0 +1,146 @@
+{
+  "created_utc": "2026-10-03T00:14:44.213584+00:00",
+  "scope": "holdout provenance and row membership only; not a complete experiment protocol",
+  "recommendation": "KMNIST fresh to recovered available evidence; history outside recovered evidence is unknown",
+  "mnist_project_freshness": "rejected: inherited full-train fits and official-test outcomes",
+  "mnist_october_2_used_training_rows_half_open": [
+    0,
+    1875
+  ],
+  "mnist_october_2_official_test_evaluations": 0,
+  "mnist_october_2_official_test_transient_loading": true,
+  "digits_project_freshness": "rejected: Bayesmark digits reported in manuscript and stats file",
+  "kmnist_source": "https://github.com/rois-codh/kmnist",
+  "kmnist_license": "https://github.com/rois-codh/kmnist/blob/master/LICENSE",
+  "kmnist_license_name": "CC BY-SA 4.0",
+  "kmnist_paper": "https://arxiv.org/abs/1812.01718",
+  "kmnist_data_attribution_doi": "10.20676/00000341",
+  "index_recipe": {
+    "bit_generator": "PCG64",
+    "numpy": "1.26.4",
+    "train_seed": 987031,
+    "train_population": 60000,
+    "fit_positions_half_open": [
+      0,
+      1500
+    ],
+    "tuning_positions_half_open": [
+      1500,
+      1875
+    ],
+    "test_seed": 987037,
+    "test_population": 10000,
+    "evaluation_positions_half_open": [
+      0,
+      1000
+    ],
+    "label_or_outcome_conditioning": false
+  },
+  "indices": {
+    "fit": {
+      "file": "kmnist-fit-indices.npy",
+      "count": 1500,
+      "dtype": "int64",
+      "array_sha256": "f2a681d294ebcd8d24fd1f05ed65970faec768d7abd264ce7550ec0064863f73",
+      "file_sha256": "29348eb60faad24faaee54fb66cba8eead3e425a2529ce86358c2c5721bb34f5",
+      "official_partition": "train"
+    },
+    "tuning": {
+      "file": "kmnist-tuning-indices.npy",
+      "count": 375,
+      "dtype": "int64",
+      "array_sha256": "bf4ccee40256fbb1671448cf638701eba59b305b4ce2275edcb809d3a0930278",
+      "file_sha256": "d00fd946d13785401aa72dbad28c2e050862376a22e24d252dc3495cdb3bfde9",
+      "official_partition": "train"
+    },
+    "evaluation": {
+      "file": "kmnist-evaluation-indices.npy",
+      "count": 1000,
+      "dtype": "int64",
+      "array_sha256": "2677dc8719ad47c8d917814b310026514d5384c5a2046801d494aa83e02f4d28",
+      "file_sha256": "f2101719e4f8545dbbccf31c6d265a9f4fec0b13770d6ca61410dcc8c06e66f4",
+      "official_partition": "test"
+    }
+  },
+  "fit_tuning_disjoint": true,
+  "primary_metric_recommendation": "held-out classification error count/rate; accuracy is complementary",
+  "checkpoint_rule": "must be predeclared independently of held-out task outcomes",
+  "dataset_arrays_loaded_by_this_audit": false,
+  "new_labels_or_predictions_inspected": false,
+  "new_training": false,
+  "kmnist_search": {
+    "command": [
+      "rg",
+      "-l",
+      "-i",
+      "--hidden",
+      "--no-ignore",
+      "-g",
+      "!**/.git/**",
+      "-g",
+      "!**/.venv/**",
+      "-g",
+      "!**/source/**",
+      "-g",
+      "!**/sources/**",
+      "-g",
+      "!**/before/**",
+      "-g",
+      "!**/upstream/**",
+      "-g",
+      "!**/four-arm-pilot-preparation/**",
+      "kmnist|kuzushiji",
+      "."
+    ],
+    "exit_code": 1,
+    "matches": [],
+    "stderr": "",
+    "original_command": [
+      "rg",
+      "-l",
+      "-i",
+      "--hidden",
+      "--no-ignore",
+      "-g",
+      "!**/.git/**",
+      "-g",
+      "!**/.venv/**",
+      "-g",
+      "!**/source/**",
+      "-g",
+      "!**/sources/**",
+      "-g",
+      "!**/before/**",
+      "-g",
+      "!**/upstream/**",
+      "-g",
+      "!**/four-arm-pilot-preparation/**",
+      "kmnist|kuzushiji",
+      "<ORIGINAL_CHECKOUT>"
+    ],
+    "original_exit_code": 1,
+    "original_matches": [],
+    "original_stderr": ""
+  },
+  "source_sha256": {
+    "NOTES.md": "01d2730dfd46453bcefbd051a3e5c5613617cb3147916ff21c8a7b13508d5a7e",
+    "image/mnist.log": "801c7428e3166e2798774510afacf91f5cfbd04d7a61e24d0636848373f297b2",
+    "paper/results/main.tex": "b4fe2537d0716cb41d0ff26ddc1f5e37ad6734ed761d6ea16a01e6e77fa475d9",
+    "bbo_challenge/stats/digits.py": "597c79376f4a5f07dcb2d9e7d062e0c26f79fc284de878fc132029c3f3f76b3f",
+    "sweep-results/local-20260711-120536/j0-mnist/stdout.log": "bd514e33e598eec419fc73f14464d4bb62f7573dd828a74fbdd2c2a504877561",
+    "sweep-results/cached-mnist-smoke-mnist-seed31-20261002T153753448247Z/metadata.json": "ed231418a7b9e8fb64d2f376008dd7f0ba932c206a297535a743bb73ecb17c31",
+    "sweep-results/cached-mnist-smoke-mnist-seed31-20261002T154204096257Z/metadata.json": "1e61df6d2ad452fb8fca02c5300d133123138c31064588452648d80bfa6ad9fe",
+    "sweep-results/research-audit-20261002/local_smoke.py": "e835413677c95eef64996f8535cba55d0ad3325377a3c4f664f0ed72243a3a88",
+    "sweep-results/research-audit-20261002/trajectory-pilot/run_pilot.py": "ba6e78a8a7135bb9cef6251a3f47e7adddba1dd0bc7faca54155bce8200c186a",
+    "sweep-results/research-audit-20261002/trajectory-pilot/metadata.json": "a37a523c5772c14a0709ab89796e14e83c6c67e250ac4812fc089307b6589d66",
+    "sweep-results/research-audit-20261002/long-endpoint-pilot/run-prepared-20261002-v1/run_pilot.py": "ed1fb3811111af6b4274d0761f5975875c2c32729877acfefd9a4b5d298de22a",
+    "sweep-results/research-audit-20261002/long-endpoint-pilot/run-prepared-20261002-v1/protocol.json": "78e227916bbcd03d0b71f76cd19739cc5f02906185c19609ce0972221565251a",
+    "sweep-results/research-audit-20261002/lifecycle-pilot/run-prepared-20261002-v1/run_pilot.py": "36168984699eba72876ce55b6362b3c6928e57a92401d91805b32721117f6c39",
+    "sweep-results/research-audit-20261002/lifecycle-pilot/run-prepared-20261002-v1/protocol.json": "cb579865478345bdb4ce0098e17b322da1c177803e78cda5250d1deb97b94435",
+    "sweep-results/research-audit-20261002/mnist_head_symmetry.py": "679da1d29d002ae9b5a0bc7909e204ef39832ed53378c983d57e6a8e309708e6",
+    "sweep-results/research-audit-20261002/normalization-audit/check_saved_models.py": "4080c42e33706b96da2164ecab6a375fbd9400332380f7ffe52215cf3988a6df",
+    "sweep-results/research-audit-20261002/practical-gauge-followup/analyze.py": "f42ff037d235d25f86f8418bf2b422d48831433f7d01568eec2ffcc997ea7831",
+    "sweep-results/research-audit-20261002/endpoint-metric-followup/report.md": "8b58295a09877b5fbd81a7aec84a74714a505c044ec839ebe44130a6d4b8c7b0"
+  },
+  "report_sha256": "cbafbed9ad595706eb4e0c9d0cde59cec40e0fc89486d9899cf5142237eb9fc5"
+}

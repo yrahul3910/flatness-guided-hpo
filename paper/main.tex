@@ -1,0 +1,661 @@
+\newif\ifanon
+\anonfalse
+\PassOptionsToPackage{numbers,sort&compress}{natbib}
+\documentclass[preprint,12pt]{elsarticle}
+\journal{Neurocomputing}
+
+\usepackage[colorlinks,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+
+\usepackage{microtype}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsthm, amssymb, amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{adjustbox}
+\usepackage{subcaption}
+\usepackage{subcaption}
+\usepackage{tabularx}
+\usepackage{svg}
+\usepackage{algorithmic, algorithm}
+% \usepackage[numbers, sort&compress]{natbib}
+\usepackage{xcolor}
+%\usepackage[shortlabels]{enumitem}
+\usepackage{soul}
+
+%% Response text prefix
+\newcommand{\respto}[1]{
+\fcolorbox{black}{black!15}{%
+\label{resp:#1}%
+\bf\scriptsize R{#1}}}
+\newcommand{\BLUE}{\color{blue}}
+\newcommand{\BLACK}{\color{black}}
+%\newcommand{\changed}[2]{\BLUE \respto{#1} {#2} \BLACK}
+\newcommand{\changed}[2]{{#2}}
+
+%\usepackage[linesnumbered, ruled]{algorithm2e}
+
+\newcommand{\IT}{FGHPO}
+\newcommand{\gray}[1]{\cellcolor{gray!20}\textbf{#1}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator*{\lb}{lb}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+\newcommand{\convexity}{Sharpness}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+
+
+%\author{Rahul Yedida and Snehanshu Saha
+%\thanks{R. Yedida is with LexisNexis. S. Saha is with the Department of CSIS and APPCAIR, BITS Pilani, K.K. Birla Goa Campus. \protect\\ Email: rahul@ryedida.me, snehanshus@goa.bits-pilani.ac.in}}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \affiliation for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+\title{Flatness-Guided Hyper-Parameter Optimization}
+
+\author{Rahul Yedida\corref{cor1}\fnref{label1}}
+\ead{rahul.yedida@lexisnexis.com}
+\fntext[label1]{Work performed while at North Carolina State University.}
+\cortext[cor1]{Corresponding author.}
+\affiliation{organization={LexisNexis},
+            city={Raleigh},
+            state={NC},
+            country={USA}}
+            
+\author{Snehanshu Saha}
+\ead{snehanshus@goa.bits-pilani.ac.in}
+\affiliation{organization={Department of CSIS and APPCAIR},
+            addressline={BITS Pilani, K.K. Birla Goa Campus},
+            city={Goa},
+            country={India}}
+
+
+
+\begin{abstract}
+    We propose a novel white-box approach to hyper-parameter optimization. Motivated by recent work establishing a relationship between flat minima and generalization, we first establish a relationship between the Hessian norm and established sharpness metrics. Based on this, we seek to find hyper-parameter configurations that improve flatness by minimizing the upper bound on the sharpness of the loss. By using the structure of the underlying neural network, we derive semi-empirical estimates for the sharpness of the loss, and attempt to find hyper-parameters that minimize it in a randomized fashion. Through experiments on 14 classification datasets, we show that our method achieves strong performance at a fraction of the runtime.
+\end{abstract}
+
+\begin{highlights}
+    \item Hyper-parameter optimization (HPO) is an important method for improving the performance of a learning system.
+    \item However, researchers and practitioners are often reluctant to use HPO because of its computational cost.
+    \item This paper exploits recent work showing a relationship between flat minima and generalization to devise a fast HPO method that achieves state-of-the-art performance.
+    \item Across 14 datasets, our method either outperforms or ties with five other methods 85.7\% of the time, while the next-best method wins or ties 50\% of the time.
+\end{highlights}
+
+\begin{keyword}
+hyper-parameter optimization, sharpness, flat minima
+\end{keyword}
+\end{frontmatter}
+
+\section{Introduction}
+
+A typical machine learning pipeline involves using a combination of processes that have hyper-parameters that the analyst sets. There is significant interest in automatically computing a Pareto-optimal set of hyper-parameters tailored to the problem \cite{agrawal2019dodge, cowen2022hebo, li2017hyperband, bergstra2011algorithms, bergstra2012random, falkner2018bohb, eriksson2019scalable, ansel:pact:2014, snoek2012practical, hernandez2014predictive, swersky2014freeze, snoek2015scalable, bergstra2013making}. In parallel, there is a venerable line of work studying the loss landscapes of neural networks \cite{hochreiter1994simplifying, hochreiter1997flat, hinton1993keeping, chaudhari2019entropy, keskar2016large, dziugaite2017computing, mcallester1999pac, neyshabur2014search, neyshabur2017exploring, li2018visualizing, seong2018towards, dauphin2014identifying, choromanska2015loss, zhang2021understanding}. Notably, prior work has shown the effectiveness of improving the smoothness of loss surfaces via batch normalization \cite{santurkar2018does} and filter normalization \cite{li2018visualizing}.
+
+Hyper-parameter optimization (HPO) is well-studied, with the most popular approaches being based on Bayesian optimization \cite{snoek2012practical, hernandez2014predictive, swersky2014freeze, bergstra2013making}, while other work suggests alternative approaches such as random search \cite{bergstra2012random} and tabu search \cite{agrawal2019dodge}. \citet{smith2018disciplined} discusses empirical methods to manually tune hyper-parameters based on the performance of the current system. Formally, hyper-parameter optimization can be framed as a bi-level optimization problem:
+
+\begin{equation}
+\begin{aligned}
+    \min\limits_{h \in H} \text{ } & \mathcal{L}_{\text{val}}(w^*(h); h) \\
+    \text{subject to } & w^*(h) = \argmin\limits_{w \in \Theta} \mathcal{L}_{\text{train}}(\theta, h)
+\end{aligned}
+\end{equation}
+
+where $H$ is the set of hyper-parameter options and $\Theta$ is the parameter space.
+
+However, although HPO has repeatedly been shown to improve learner performance \cite{Tantithamthavorn16,majumder2018500+}, much applied machine learning research either does not use it or uses inefficient methods such as grid search. Some of this reluctance to use HPO stems from the general view that it is computationally expensive. For example, \citet{tran2020hyper} comment, ``\textit{Regardless of which hyper-parameter optimization method is used, this task is generally very expensive computationally.}'' Moreover, there is a growing concern to reduce the carbon emissions from ML experiments \cite{lacoste2019quantifying}.
+
+\begin{figure*}
+    \centering
+    \begin{subfigure}{0.3\textwidth}
+        \includesvg[width=\linewidth]{landscapes/australian_low_stcvx.svg}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+        \includesvg[width=\linewidth]{landscapes/australian_high_stcvx.svg}
+    \end{subfigure}  
+    \begin{subfigure}{0.35\textwidth}
+        \includegraphics[width=\linewidth]{img/metrics.png}
+    \end{subfigure}  
+    \caption{Landscapes (plotted using the method of \citet{li2018visualizing}) with their corresponding metrics, on the Australian (binary classification, imbalanced) dataset. \textbf{Left:} a landscape with lower sharpness (0.112) and a wider minima. \textbf{Middle:} a landscape with higher sharpness (1.133). The sharpness values are computed using the result of Theorem \ref{th:ff}. \textbf{Right:} Test metrics and generalization error for the two hyper-parameter configurations. Although the sharper configuration converged faster to a training error of 0, it generalizes poorly and performs worse on the test set.}
+    \label{fig:landscape}
+\end{figure*}
+
+Motivated by the need for computationally cheaper HPO methods, we pose the following question: \textit{can we directly improve the desirable properties of loss landscapes by exploiting the structure of the learning algorithm?} Specifically, recent work has repeatedly shown a relationship between the \textit{flatness} of local minima and the generalization ability of networks \cite{keskar2016large, jiang2019fantastic, neyshabur2017exploring, dziugaite2017computing, li2018visualizing, jastrzkebski2017three}. We use four major advances in the theoretical understanding of loss landscapes: (i) \citet{wu2023implicit} show that SGD can escape from low-loss, sharp minima (measured by the Frobenius norm of the Hessian) exponentially fast; (ii) \citet{dauphin2014identifying} used the line of work starting with \citet{bray2007statistics} to show that saddle points are exponentially more likely than local minima; (iii) gradient descent dynamics repel from saddle points; (iv) the sharpness measure proposed by \citet{keskar2016large} has been repeatedly shown to correlate well with generalization \cite{jiang2019fantastic}. We use these advances to develop a novel, computationally inexpensive HPO method that demonstrates strong performance. This continues a line of work studying efficient methods for HPO \cite{paul2019fast}. Through this work, we encourage researchers to adopt hyper-parameter optimization in their applied ML work and avoid expensive and ineffective strategies such as random search and grid search.
+
+We make the following connection between hyper-parameters and the sharpness of the loss surface. The loss function of any neural network depends on the data, the weights, and the hyper-parameters, so that for a fixed dataset, choosing a set of hyper-parameters materializes a subset of the possible loss functions. Our method attempts to compute the lower bound on the sharpness for each subset, and materializes the neural networks corresponding to the 10 lowest values of sharpness.
+
+In this work, we show that minimizing the supremum of the sharpness is equivalent in formulation to computing a lower bound on the Hessian norm of the loss in a mini-batch fashion. Next, we demonstrate a semi-empirical method of computing the sharpness of a loss function parameterized by the hyper-parameters of the model. The result we obtain is general enough to cover a wide range of network topologies. We use this result to motivate a hyper-parameter optimization method that uses the sharpness as a heuristic for search. Our method requires fewer full-length training runs of the learning algorithm, instead relying on one-epoch cycles to compute the sharpness, and discarding hyper-parameter configurations that are not promising. 
+
+Figure \ref{fig:landscape} illustrates the motivation for our approach. The left side shows a landscape with lower sharpness as computed by our method (and a flatter minimum), which in turn has much lower generalization error for both accuracy and AUC\footnote{These are computed as $\text{metric}_{\text{train}} - \text{metric}_{\text{test}}$}; the middle shows a landscape with a higher sharpness value, which led to much higher generalization error for both metrics. Note that for the latter case, training stopped early since both training AUC and accuracy reached 1; however, the model generalized poorly and performed worse on the test set. Similar plots and their corresponding performances on additional datasets are shown in Appendix \ref{sec:app:landscapes}.
+
+Our contributions are as follows:
+\begin{itemize}
+    \item We propose a novel white-box hyper-parameter optimization algorithm based on minimizing the sharpness of the loss, which has been shown to correlate negatively with generalization performance (Section \ref{sec:stcvx}).
+    \item We derive semi-empirical estimates of the infimum of the Hessian norm as a method of computing the sharpness. Crucially, this does not rely on materializing the exact Hessian at runtime, which is computationally prohibitive (Section \ref{sec:computation}).
+    \item We show that our algorithm achieves strong performance in HPO across 14 datasets at a fraction of the computational cost. Compared to the fastest baseline algorithm, our method is approximately 200\% faster (Section \ref{sec:runtime}).
+\end{itemize}
+
+To allow others to reproduce our work, our code is available online\footnote{
+\ifanon
+\url{https://anonymous.4open.science/r/ahsc-hpo/}
+\else 
+\url{https://github.com/yrahul3910/strong-convexity}
+\fi
+}.
+
+\section{Related Work}
+
+% This section briefly discusses related work; for a more comprehensive discussion, please see Appendix \ref{sec:app:lit}.
+
+\textbf{Hyper-parameter optimization.} In its general form, hyper-parameter optimization (HPO) solves the problem of finding a non-dominated hyper-parameter configuration under some budget. 
+Early works \cite{bergstra2012random, bergstra2011algorithms} showed that random search can perform surprisingly well. However, more recent work has predominantly used Bayesian Optimization. For example, the Tree of Parzen Estimators (TPE) algorithm models $p(x|y)$ using two kernel density estimates depending on whether $y$ is below or above some quantile, and optimizes the Expected Improvement (EI). 
+
+HyperBand (HB) \cite{li2017hyperband} uses a procedure called ``successive halving", which starts by randomly sampling a set of configurations and testing them under a limited budget, retaining only the best-performing ones and allocating them greater resources. Algorithms such as BOHB \cite{falkner2018bohb} and DEHB \cite{awad2021dehb} improve upon these in different ways: DEHB uses a distributed computing approach and combines differential evolution with HB, while BOHB combines a slightly modified version of the BO-based TPE with HB.
+
+HEBO \cite{cowen2022hebo} use a combination of input and output transformations along with NSGA-II to optimize a multi-objective acquisition function. TuRBO \cite{dou2023turbo} assumes the hyper-parameter to performance mapping is Lipschitz, and uses an ensemble of learners to predict performance, using the prediction to update its Gaussian Process model instead if that prediction is poor.
+
+\textbf{Flat minima and generalization.} The connection between ``flat minima'' and generalization has been repeatedly established. The flatness of minima has been defined in various ways, such as the volume of hypercuboids such that the loss is within a tolerance \cite{hochreiter1997flat} and as robustness to adversarial perturbations in weight space \cite{keskar2016large}. The specific formulation of \citet{keskar2016large} is
+
+\begin{equation}
+\zeta(\boldsymbol w; \epsilon) = \frac{\max\limits_{\boldsymbol v \in \mathcal{B}(\epsilon, \boldsymbol w)} f(\boldsymbol v) - f(\boldsymbol w)}{1 + f(\boldsymbol w)} \label{eq:keskar}
+\end{equation}
+
+where $\zeta$ represents the sharpness. This notion of sharpness was also supported by a large-scale study of complexity measures by \citet{jiang2019fantastic}. Several papers \cite{neyshabur2017exploring, li2018visualizing, wu2023implicit} have since corroborated the relationship between flatness and generalization. Flat minima are not a \textit{necessary} condition for good generalization performance \cite{wen2023sharpness, dinh2017sharp}; however, \citet{jiang2019fantastic} show a strong causal relationship between sharpness and generalization performance, which motivates our method. 
+
+\citet{sagun_empirical_2018} provided additional insights through Hessian analysis, showing that the loss landscapes of over-parameterized networks are characterized by most eigenvalues near zero (the ``bulk'') except for a small number of larger ones. This finding was refined by \citet{ghorbani_investigation_2019}, who additionally showed that very early in training ($< 1\%$ of the total number of steps), the Hessian spectrum stabilizes; moreover, the vast majority ($> 99.99\%$) of eigenvalues are close to zero. \citet{sagun_empirical_2018} also showed that in the case of $K-$class classification with two-layer feedforward networks, the Hessian spectrum contains roughly $K-1$ outliers which are orders of magnitude larger than the others. \citet{ghorbani_investigation_2019} showed that on ImageNet using a ResNet-32, this depends on whether or not batch normalization \cite{ioffe_batch_2015} is used. In its presence, the largest Hessian eigenvalue does not deviate much from the bulk; however, without batch normalization, the outliers grow much larger.
+
+%We defer the reader to Appendix \ref{sec:app:lit} for a more detailed review. 
+
+At this point, we also distinguish this work from Sharpness-Aware Minimization (SAM) \cite{foret2020sharpness}. The latter attempts to find flat minima \textit{during optimization}, i.e., once hyper-parameters have been chosen. As such, SAM can be used in conjunction with our method, and we do not compare against it.
+
+Our work is closest to Sharpness-Aware Black-Box Optimization \cite{ye_sharpness-aware_2025}, with two key differences: (a) their method relies on stochastic gradient approximation, while we derive semi-empirical estimates of sharpness; (b) we explicitly focus on the problem of hyper-parameter optimization, framing it as a bi-level objective instead of a single black-box objective.
+
+\section{Method}
+
+\subsection{Notation and Assumptions}
+
+For any learner, $X \in \mathcal{X}$ will represent the independent variables and $y$ will represent the labels; $W$ represents the weights of a neural network. We use $m$ to denote the number of training samples, $n$ to denote the number of features, $k$ to denote the number of classes, and $E$ to denote the loss function. When we wish to express the loss function as parameterized by a set of hyper-parameters $H$, we will denote it as $E(\cdot; H)$.
+
+For a feedforward network, $L$ represents the number of layers, and at each layer, the following computation is performed:
+       $ z^{[l]} = W^{[l]T}a^{[l-1]} + b^{[l]} \label{eq:zl}$
+       and
+        $a^{[l]}  = g^{[l]}(z^{[l]})$ where
+        $a^{[0]} = X$.
+Here, $b^{[l]}$ is the bias vector at layer $l$, $W^{[l]}$ is the weight matrix at layer $l$, and $g^{[l]}$ is the activation function used at layer $l$. 
+
+We use $\nabla_W \cdot$ to denote the first gradient of $\cdot$, with respect to $W$. $\nabla^2_W \cdot$ denotes the Hessian, which is a rank-4 tensor obtained by computing the gradient of $E$ with respect to $W$ twice. Finally, $\mathcal{B}(\epsilon, w)$ denotes an $\epsilon-$ball centered at $w$. Whenever unspecified, the matrix norm is the Frobenius norm. We use $\mathbb{S}^n$ to denote the set of $n\times n$ real, symmetric matrices. 
+%We defer to Appendix \ref{sec:app:background} for background definitions in convex optimization.
+
+For notational convenience, we will use $\lb f$ to denote \textit{some lower bound} on a function $f$. Our method is based on obtaining lower bounds on sharpness for a chosen set of hyper-parameters, but it cannot be guaranteed that these lower bounds are the \textit{greatest} lower bounds (i.e., the infimum). With some abuse of notation, when we write $\lb f(x) = g$ for some expression $g$, it is equivalent to $f(x) \geq g \forall x \in \text{dom } f$.
+
+\textbf{Assumption 1.} We assume the space $\mathcal{X}$ is Polish\footnote{A Polish space is a complete, separable, metrizable space.}. We use the Frobenius norm of the Hessian to define the sharpness of a loss landscape. In this context, completeness of the underlying metric space is necessary. Moreover, completeness is an important assumption in gradient descent, since it guarantees the existence of limits for Cauchy sequences.  Finally, separability helps avoid issues with measurability when we use a covering argument in the next section. 
+
+\textbf{Assumption 2.} We also assume the activation functions used in every layer satisfy $\frac{dg^{[l]}}{dx} \leq 1$. Most commonly used activations such as sigmoid, softmax, ReLU, and GELU satisfy this property.
+%Measurability and other useful properties may not hold for non-separable spaces such as Skorokhod spaces (see \cite{van1996weak}).
+
+% \begin{definition}
+% 	A function $f(x)$ is $\mu-$strongly convex if for $\mu > 0, \forall x \in \text{dom } f$, 
+% 	$$
+% 	f(x) - \frac{\mu}{2} \lVert x \rVert^2
+% 	$$
+% 	is convex.
+% \end{definition}
+
+% Strong convexity provides a lower bound for the function’s curvature. 
+
+\subsection{{\IT}: Flatness-guided HPO}
+\label{sec:stcvx}
+
+Based on the relationship between flat minima and generalization, we develop a hyper-parameter optimization method that in a randomized fashion, explicitly searches for flatter losses. Specifically, we are interested in the problem:
+$$
+    \inf\limits_{h \in \mathcal{H}} \zeta_h(w; \epsilon)
+$$
+where $\zeta$ is the sharpness measure in \eqref{eq:keskar} and the subscript denotes that the loss is parameterized by the hyper-parameter set $h$.
+
+% We first prove a lemma that will let us make inferences about norms given semi-definiteness.
+
+% \begin{lemma}
+%     Let $A, B \in \mathbb{S}^n$ and suppose $A \succeq B$. Then $\norm{A}_2 \geq \norm{B}_2$
+%     \label{lemma:positivedef}
+% \end{lemma}
+% \begin{proof}
+%     We have $\norm{A}_2 = \sqrt{\lambda_{max}(A^T A)} = \abs{\lambda_{max}(A)}$ since $A$ is symmetric. 
+%     Since $A \succeq B$, we have by definition $x^T A x \geq x^T Bx$ for an arbitrary $x \in \mathbb{R}^n$. From the min-max theorem, we have $\forall k \in \{1, \ldots, n\}$,
+%     \begin{equation*}
+%     \scalebox{0.83}{$
+%     \lambda_k(A) = \min\limits_{\substack{\mathcal{M} \subset \mathbb{S}^n \\ \dim \mathcal{M} = k}} \max\limits_{x \in \mathcal{M} \backslash \{0\}} \frac{x^T A x}{x^T x} \geq \min\limits_{\substack{\mathcal{M} \subset \mathbb{S}^n \\ \dim \mathcal{M} = k}} \max\limits_{x \in \mathcal{M} \backslash \{0\}} \frac{x^T B x}{x^T x} = \lambda_k(B)
+%     $}
+%     \end{equation*}
+%     where $\lambda_k$ is the $k$th eigenvalue in the spectrum ordered in non-increasing order.
+%     Using the above with $k=1$ completes the proof.
+% \end{proof}
+
+% We start by writing the definition of strong convexity in terms of positive-semidefiniteness as
+% $$
+% \nabla^2 f(x) \succeq \mu I
+% $$
+% From Lemma \ref{lemma:positivedef}, we can rewrite this as
+% $$
+% \lVert \nabla^2 f(x) \rVert_2 \geq \mu \Rightarrow \norm{\nabla^2 f(x)}_F \geq \mu
+% $$
+% and so we redefine $\mu-$strong convexity as 
+% $$
+% \mu = \inf \lVert \nabla^2 f(x) \rVert_F
+% $$
+% A key motivation for minimizing the strong convexity is to relate it to the flatness of minima. Since $\nabla^2 f$ is symmetric (by Schwarz's theorem), we have
+% $$
+% \abs{\lambda_{max}(\nabla^2 f)} = \norm{\nabla^2 f}_2 \leq \norm{\nabla^2 f}_F
+% $$
+% so that $\abs{\lambda_{max}(\nabla^2 f)} = \inf \norm{\nabla^2 f}_F$ which directly relates the sharpness of the landscape with the definition of strong convexity above. 
+In this paper, we derive a lower bound on the norm of the Hessian to compute the sharpness of the loss landscapes. Specifically, we solve the problem: 
+$$
+	\lb\limits_{h \in \mathcal{H}}\sup\limits_{x \subset X} \lVert \nabla^2 E(x; h) \rVert
+$$
+This mini-batch version accounts for large datasets for which a mini-batch approach is necessary. Note that it is necessary to use an upper bound approximation at the mini-batch level: using a lower bound instead yields 0 the majority of the time, making the search ineffective. We can relate this to the sharpness measure from \citet{keskar2016large}: this formulation corresponds to minimizing the upper bound on the sharpness over the entire $\epsilon-$ball. The standard covering argument \cite{duchi2023} bounds the deviation of this mini-batch approximation of the supremum from the true supremum.
+
+We first show that this lower bound is directly related to the sharpness measure established by \citet{keskar2016large}:
+
+%We first relate the norm of the Hessian to the sharpness measure $\zeta$ established by \citet{keskar2016large}:
+\begin{align*}
+    \zeta(w) &= \frac{\max\limits_{w^\prime \in \mathcal{B}(\epsilon, w)} f(w^\prime) - f(w)}{1 + f(w)} \\
+    &\overset{(i)}{\approxeq} \max\limits_{w^\prime \in \mathcal{B}(\epsilon, w)} f(w^\prime) - f(w) \\
+    &\overset{(ii)}{\approxeq} \frac{\epsilon^2}{2} \norm{\nabla^2 f(w)}_2 \leq \frac{\epsilon^2}{2} \norm{\nabla^2 f(w)}_F
+\end{align*}
+where (i) is because the training error is typically small in practice \cite{neyshabur2017exploring} and (ii) follows from a second-order Taylor expansion of $f$ around $w$, as done by  \citet{dinh2017sharp}.  Therefore, we wish to minimize the sharpness, which is equivalent to the formulation above. Equivalently, we have (with $r$ denoting the rank of the Hessian)
+\begin{equation*}
+\scalebox{0.85}{$
+    \zeta(w) \approxeq \frac{\epsilon^2}{2} \norm{\nabla^2 f(w)}_2 \geq \frac{\epsilon^2}{2\sqrt{r}} \norm{\nabla^2 f(w)}_F \geq \frac{\epsilon^2}{2\sqrt{n}} \norm{\nabla^2 f(w)}_F
+$}
+\end{equation*}
+% so that the sharpness is a lower bound on the sharpness, and a higher strong convexity implies a higher sharpness, which is correlated with a higher generalization error\footnote{Assuming the network has sufficient capacity.}. 
+Therefore, we have:
+$$
+\frac{\epsilon^2}{2\sqrt{n}}\norm{\nabla^2 f(w)}_F \leq \zeta(w) \leq \frac{\epsilon^2}{2}\norm{\nabla^2 f(w)}_F
+$$
+so that the sharpness and a scaled version thereof provide bounds on the sharpness, and minimizing the Hessian norm implies both the lower and upper bounds on the sharpness are lowered.
+%\textcolor{red}{Precisely, if $\mu$ is larger then generalization error is high}
+
+% Motivated by the above relationship, we seek to find hyper-parameters that minimize this sharpness. For a learner parameterized by $H \in \mathcal{H}$, denote its loss function as $E(x; H)$. Then, we would like to solve the problem
+% $$
+% 	\lb\limits_{H \in \mathcal{H}}\sup\limits_{x \subset X} \lVert \nabla^2 E(x; H) \rVert
+% $$
+% This mini-batch version accounts for large datasets for which a mini-batch approach is necessary. Note that it is necessary to use an upper bound approximation at the mini-batch level: using a lower bound instead yields 0 a majority of the time, making the search ineffective. Indeed, we can relate this to the sharpness measure from \citet{keskar2016large}: this formulation corresponds to minimizing the upper bound on the sharpness over the entire $\epsilon-$ball. In Appendix \ref{sec:covering}, we note that the standard covering argument bounds the deviation of this mini-batch approximation of the supremum from the true supremum.
+
+Algorithm \ref{alg:stcvx} shows our overall approach. We first sample $N_1$ random configurations (line 2). For each of these configurations, we first train the model for one epoch to bring the weights closer to their final values (line 6). Training for a single epoch provides a balance between the cost associated with training fully (which would provide a more accurate estimate for the sharpness) and not training at all (which provides a poor estimate). We discuss this further in Section \ref{sec:tradeoff}. We then compute the sharpness of the loss in a mini-batch fashion (lines 8-10). This sharpness is computed using the result of Theorem \ref{th:ff} below. Since we wish to minimize the sharpness, it is important that we (a) at the mini-batch level, compute a \textit{lower bound} on the sharpness to obtain an estimate for the best-case scenario (line 9); (b) overall, look at the \textit{highest} value across mini-batches, since that represents a best-effort estimate of the lower bound globally (also line 9). We aim to minimize that upper bound (line 15). Importantly, if the lower bound is 0 (implying there is no information), we discard that configuration (lines 11-13). We pick the configurations corresponding to the $N_2$ lowest values of sharpness as computed above and train those models fully (lines 15-17). Finally, we return the best-performing configuration. 
+
+In Appendix \ref{sec:proofs}, Theorem \ref{lemma:smoothgd}, we show that if the loss is smooth and $\mu-$strongly convex\footnote{Note that strong convexity can be defined as the lower bound on the Hessian norm, which is what we use to compute sharpness.}, then 
+$$
+f(x_t) - f(x^*) \leq ( 1 - \alpha \mu )^t \left( f(x_0) - f(x^*) \right)
+$$
+where $\alpha$ is the learning rate. Since we have $\forall t, f(x_t) - f(x^*) \geq 0$,
+\begin{equation*}
+        \begin{aligned}
+            f(x_{t+1}) - f(x_t) &\leq (1 - \alpha \mu)^{t+1} \left( f(x_0) - f(x^*) \right) \\
+                &\leq \exp(-\alpha \mu (t+1)) \left( f(x_0) - f(x^*) \right)
+        \end{aligned}
+\end{equation*}
+which implies exponentially decaying benefit as the number of epochs increases. On the other hand, Theorem \ref{lemma:smoothgd} also implies that for vanilla gradient descent, the number of steps required for convergence is inversely proportional to the strong convexity, so that minimizing the latter implies a greater number of steps is required to converge (which increases the runtime). To reduce the impact of this, we use the Adam \cite{kingma2014adam} optimizer. We leave it to future work to explore additional strategies, such as large adaptive learning rates, which can also lead to flatter losses \cite{jastrzkebski2017three}.
+
+    \begin{algorithm}[ht]
+        \caption{{\IT}}
+        \label{alg:stcvx}
+        \begin{algorithmic}[1]
+            \STATE {\bfseries Input:} Number of configurations to sample $N_1$, number of configurations to run $N_2$. Defaults: $N_1 = 50, N_2 = 10$.
+    
+            \STATE $\mathcal{H}_0 \gets$ \textsc{Random}($\mathcal{H}, N_1$)
+            \STATE $S \gets \phi$  \COMMENT{Sharpness values}
+            \STATE $P \gets \phi$ \COMMENT{Performance scores}
+    
+            \FOR{config $h$ in $\mathcal{H}_0$}
+                \STATE Train for one epoch using $h$
+                \STATE $\mu_{max} = -\infty$
+                \FOR{mini-batch $x \subset X$}
+                    \STATE $\mu_{max} = \max(\mu_{max}, \lb \norm{\nabla^2 E(x; h)})$
+                \ENDFOR
+                \IF{$\mu_{max} > 0$}
+                    \STATE S[h] $\gets \mu_{max}$ 
+                \ENDIF
+            \ENDFOR
+    
+            \FOR{config $h$ in \textsc{Lowest}(S, $N_2$)}
+                \STATE P[h] $\gets$ \textsc{Run}(h)
+            \ENDFOR
+    
+            \RETURN $\argmax P$
+        \end{algorithmic}
+    \end{algorithm}
+
+%\subsection{Classification Settings}
+
+\subsection{Computing the sharpness}
+\label{sec:computation}
+
+We now derive a semi-empirical expression for the sharpness ($\lb \norm{\nabla^2 E(x; h)}$) used in Line 9 of Algorithm \ref{alg:stcvx}. Our main result (Theorem \ref{th:ff}) is that in the general multi-class classification setting with a softmax activation at the last layer,
+\[
+    \lb \left\lVert \nabla^2_W E \right\rVert = \frac{\lVert a^{[L-1]} \norm{a^{[L-1]}} \rVert}{\lVert W^{[L]} \rVert}
+\]
+%We consider the general multi-class classification problem, where the cross-entropy loss is used, and the last layer of the neural network uses a softmax activation. Below, we show that the sharpness of a feedforward network with a softmax activation in the last layer, trained on the cross-entropy loss, is given by
+Importantly, the proof does not rely on the architecture of the network beyond the last two layers. That is, as long as the last two layers of the network are fully-connected, this theorem applies. We first prove some auxiliary results that will be used in the proof for Theorem \ref{th:ff}.
+
+% \begin{lemma}
+%     \label{lemma:partial}
+%     For a neural network with ReLU activations in the hidden layers and a softmax activation at the last layer, 
+%     \[
+%         \frac{\partial E}{\partial z^{[L]}_j} = \frac{1}{m} \left( \sum\limits_{i=1}^m [y^{(i)} = j] \right) \left( \sum\limits_{h=1}^k a^{[L]}_j - \delta_{hj} \right)
+%     \]
+%     under the cross-entropy loss.
+% \end{lemma}
+
+% \begin{proof}
+%     We will use the chain rule, as follows:
+%     \begin{align}
+%     	\frac{\partial E}{\partial z^{[L]}_{j}} &= \frac{\partial E}{\partial a^{[L]}_j}\cdot \frac{\partial a^{[L]}_j}{\partial z^{[L]}_j} \label{eq:int:5}
+%     \end{align}
+%     Consider the Iverson notation version of the general cross-entropy loss:
+%     $$
+%     E(a^{[L]}) = -\frac{1}{m} \sum\limits_{i=1}^m \sum\limits_{h=1}^k [y^{(i)} = h] \log a_h^{[L]}
+%     $$
+%     Then the first part of \eqref{eq:int:5} is trivial to compute:
+%     \begin{equation}
+%         \frac{\partial E}{\partial a_j^{[L]}} = -\frac{1}{m} \sum\limits_{i=1}^m \frac{[y^{(i)}=j]}{a_j^{[L]}} \label{eq:mul:2}
+%     \end{equation}
+%     The second part is the derivative of the softmax and is equal to
+%     \begin{align} 
+%         \frac{\partial a^{[L]}_j}{\partial z^{[L]}_p} &= a^{[L]}_j([p=j]-a^{[L]}_p) \label{eq:mul:3}
+%     \end{align}
+
+%     Combining \eqref{eq:mul:2} and \eqref{eq:mul:3} in \eqref{eq:int:5} gives
+%     \begin{equation}
+%         \frac{\partial E}{\partial z^{[L]}_j} = \frac{1}{m} \left( \sum\limits_{i=1}^m [y^{(i)} = j] \right) \left( \sum\limits_{h=1}^k a^{[L]}_j - \delta_{hj} \right)
+%         \label{eq:mul:4}
+%     \end{equation}
+% \end{proof}
+
+% \begin{theorem}[{\convexity} for neural classifiers]
+%     For a neural network with ReLU activations in the hidden layers, a fully connected penultimate layer, and a softmax activation at the last layer, the {\convexity} of the cross-entropy loss is given by
+%     \begin{equation}
+%     \label{eq:beta-ff}
+%         \inf \left\lVert \nabla^2_W E \right\rVert \propto \frac{1}{m} \inf \frac{\lVert a_j^{[L-1]} \rVert}{\lVert W^{[L]} \rVert}
+%     \end{equation}
+%     \label{th:stcvx:ff}
+% \end{theorem}
+% \begin{proof}
+% For a neural network with ReLU activations, Lemma \ref{lemma:partial} gives us (using the chain rule one step further):
+% \[
+%     \nabla_{W^{[L]}_j} E = \frac{1}{m} \left( \sum\limits_{i=1}^m [y^{(i)} = j] \right) \left( \sum\limits_{h=1}^k a^{[L]}_j - \delta_{hj} \right) a_j^{[L-1]}
+% \]
+% Therefore,
+% \begin{equation*}
+% \scalebox{0.8}{$
+% \begin{aligned}
+%     \nabla^2_{W^{[L]}_j} E &= \frac{1}{m} \left( \sum\limits_{i=1}^m [y^{(i)} = j] \right) \left( \sum\limits_{h=1}^k a^{[L]}_j - \delta_{hj} \right) \nabla_{W^{[L]}_j} a_j^{[L-1]} \\
+%      &= \frac{1}{m} \left( \sum\limits_{i=1}^m [y^{(i)} = j] \right) \left( \sum\limits_{h=1}^k a^{[L]}_j - \delta_{hj} \right) \dfrac{\partial a_j^{[L-1]}}{\partial E} \dfrac{\partial E}{\partial W^{[L]}_{j}} & \\
+%      &= \frac{1}{m^2} \left( \sum\limits_{i=1}^m [y^{(i)} = j] \right)^2 \left( \sum\limits_{h=1}^k a_j^{[L]} - [h = j] \right)^2 \frac{\partial a_j^{[L-1]}}{\partial E} a_j^{[L-1]} \\ 
+%      &= \frac{1}{m^2} \left( \sum\limits_{i=1}^m [y^{(i)} = j] \right)^2 \left( \sum\limits_{h=1}^k a_j^{[L]} - [h = j] \right)^2 \frac{1}{\dfrac{\partial E}{\partial a_j^{[L-1]}}} a_j^{[L-1]}  & \\
+% \end{aligned}
+% $}
+% \end{equation*}
+
+% Using $z^{[l]} = W^{[l]T}a^{[l-1]} + b^{[l]}$ and Lemma \ref{lemma:partial} gives us:
+% \[
+% \begin{aligned}
+%     \dfrac{\partial E}{\partial a_j^{[L-1]}} &= \dfrac{\partial E}{\partial z_j^{[L]}} \dfrac{\partial z_j^{[L]}}{\partial a_j^{[L-1]}} \\
+%     &= \frac{1}{m} \left( \sum\limits_{i=1}^m [y^{(i)} = j] \right) \left( \sum\limits_{h=1}^k a_j^{[L]} - [h = j] \right) W_j^{[L]}
+% \end{aligned}
+% \]
+% The limiting case of this is when all softmax values are 0, so that the second summation term is -1. The first summation is a positive constant, which we drop as a proportionality constant. Now, \eqref{eq:beta-ff} immediately follows.
+% \end{proof}
+
+\begin{lemma}[Norm of Moore-Penrose pseudo-inverse]
+    Let $B$ be the left Moore-Penrose pseudo-inverse of some matrix $A$. Then 
+    \[
+        \norm{B}_2 = \frac{1}{\sigma_{min}(A)}
+    \]
+    where $\sigma_{min}(A)$ denotes the least singular value of $A$.
+    \label{lemma:mpinversenorm}
+\end{lemma}
+\begin{proof}
+    It is well-established that $AB$ is the orthogonal projection to the column space of $A$, so that for every vector $y$, $ABy \perp (I - AB)y$. Therefore:
+    \begin{align*}
+        \norm{B}_2 &= \max\limits_{y \neq 0} \frac{\norm{By}}{\norm{y}} \\
+            &= \max\limits_{y \neq 0} \frac{\norm{By}}{\norm{ABy + (I - AB)y}} \\
+            &= \max\limits_{By \neq 0} \frac{\norm{By}}{\norm{ABy + (I - AB)y}} \\
+            &\leq \max\limits_{By \neq 0} \frac{\norm{By}}{\norm{ABy}} \\
+            &\leq \max\limits_{x \neq 0} \frac{\norm{x}}{\norm{Ax}} \\
+            &= \left( \min\limits_{x \neq 0} \frac{\norm{Ax}}{\norm{x}} \right)^{-1} \\
+            &= \frac{1}{\sigma_{min}(A)}
+    \end{align*}
+\end{proof}
+
+\begin{lemma}
+    \label{lemma:partial:main:errata}
+    For a deep learner with activations satisfying Assumption 2 in the hidden layers, the last two layers being fully-connected, and a softmax activation at the last layer, 
+    \[
+        \dfrac{\partial E}{\partial z_h^{[L]}} = a_h^{[L]} - \frac{1}{m} \sum\limits_{i=1}^m [y^{(i)} = h]
+    \]
+    under the cross-entropy loss.
+\end{lemma}
+
+\begin{proof}
+    Consider the Iverson notation version of the general cross-entropy loss:
+    $$
+    E(\textbf{a}^{[L]}) = -\frac{1}{m} \sum\limits_{i=1}^m \sum\limits_{j=1}^k [y^{(i)} = j] \log a_j^{[L]}
+    $$
+
+    Then,
+    \begin{align}
+        \frac{\partial E}{\partial z_h^{[L]}} &= -\frac{1}{m} \sum\limits_{i=1}^m \sum\limits_{j=1}^k  \frac{[y^{(i)}=j]}{a_j^{[L]}} a_j^{[L]} \left( \delta_{hj} - a_h^{[L]} \right) \nonumber \\
+            &= -\frac{1}{m} \sum\limits_{i=1}^m \sum\limits_{j=1}^k [y^{(i)} = j] \left( \delta_{hj} - a_h^{[L]} \right) \nonumber \\
+            &= -\frac{1}{m} \sum\limits_{i=1}^m \sum\limits_{j=1}^k [y^{(i)} = j] \delta_{hj} + \frac{1}{m} \sum\limits_{i=1}^m \sum\limits_{j=1}^k [y^{(i)} = j] a_h^{[L]} \nonumber \\
+            &= -\frac{1}{m} \sum\limits_{i=1}^m [y^{(i)} = h] + \frac{a_h^{[L]}}{m} \sum\limits_{i=1}^m 1 \nonumber \\
+            &= a_h^{[L]} -\frac{1}{m} \sum\limits_{i=1}^m [y^{(i)} = h]
+        \label{eq:mul:2:main:errata}
+    \end{align}
+\end{proof}
+
+\begin{theorem}[Sharpness for feedforward networks]
+    For a deep learner with activations satisfying Assumption 2 in the hidden layers, the last two layers being fully-connected, and a softmax activation at the last layer, the sharpness of the cross-entropy loss is lower bounded by
+    \begin{equation}
+    \label{eq:beta-ff:main:errata}
+        \lb \lVert \nabla^2_{W^{[L]}} E \rVert = \frac{\norm{a^{[L]}}\norm{a^{[L-1]}}}{\norm{W^{[L]}}}
+    \end{equation}
+    \label{th:ff}
+\end{theorem}
+
+\begin{proof}
+From Lemma \ref{lemma:partial:main:errata} and $z^{[L]} = W^{[L]} a^{[L-1]} + b^{[L]}$,
+\[
+    \nabla_{W^{[L]}} E = a^{[L]} a^{[L-1]T}
+\]
+
+Now, we work toward the Hessian:
+
+\[
+    \frac{\partial^2 E}{\partial a^{[L]} \partial W^{L}} = I_{n^{[L]} \times n^{[L]}} \otimes a^{[L-1]T} + a^{[L]} \otimes \left( \frac{\partial a^{[L]}}{\partial a^{[L-1]T}} \right)^{-1}
+\]
+
+which is of shape $(n^{[L]}, n^{[L]}, n^{[L-1]})$. Note that because the derivative inside the inverse is not square, this inverse is the Moore-Penrose pseudo-inverse. We have:
+\begin{align*}
+    \frac{\partial a^{[L]}}{\partial a^{[L-1]}} &= \frac{\partial a^{[L]}}{\partial z^{[L]}} \frac{\partial z^{[L]}}{\partial a^{[L-1]}} \\
+        &= \left( \mathrm{diag }(a^{[L]}) - a^{[L]} a^{[L]T} \right) W^{[L]} I_{n^{[L-1]} \times n^{[L-1]}} \\
+    \frac{\partial a^{[L]}}{\partial a^{[L-1]T}} &= I_{n^{[L-1]} \times n^{[L-1]}} W^{[L]T} \left( \mathrm{diag }(a^{[L]}) - a^{[L]} a^{[L]T} \right)
+\end{align*}
+
+so that
+
+\[
+\begin{aligned}
+    \frac{\partial^2 E}{\partial a^{[L]} \partial W^{L}} =& I_{n^{[L]} \times n^{[L]}} \otimes a^{[L-1]T} + \\ &a^{[L]} \left( I_{n^{[L-1]} \times n^{[L-1]}} W^{[L]T} \left( \mathrm{diag }(a^{[L]}) - a^{[L]} a^{[L]T} \right) \right)^{-1}
+\end{aligned}
+\]
+
+Next,
+\begin{align*}
+    \frac{\partial a^{[L]}}{\partial W^{[L]}} &= \frac{\partial a^{[L]}}{\partial z^{[L]}} \frac{\partial z^{[L]}}{\partial W^{[L]}} \\
+        &= \left( \mathrm{diag }(a^{[L]}) - a^{[L]} a^{[L]T} \right) \otimes a^{[L-1]}
+\end{align*}
+
+which is of shape $(n^{[L]}, n^{[L]}, n^{[L-1]})$. This yields the Hessian
+\begin{align*}
+    \nabla^2_{W^{[L]}} E &= \scalebox{.85}{$\left( I_{n^{[L]} \times n^{[L]}} \otimes a^{[L-1]T} \right) \left( \left( \mathrm{diag }(a^{[L]}) - a^{[L]} a^{[L]T} \right) \otimes a^{[L-1]} \right)^T +$} \\
+        & \scalebox{.85}{$a^{[L]} \left( I_{n^{[L-1]} \times n^{[L]}} W^{[L]T} \left( \mathrm{diag }(a^{[L]}) - a^{[L]} a^{[L]T} \right) \right)^{-1}$} \\&  
+        \scalebox{.85}{$\left( \mathrm{diag }(a^{[L]}) - a^{[L]} a^{[L]T} \right) \otimes a^{[L-1]}$} \\
+        &\geq \frac{\norm{a^{[L]}}\norm{a^{[L-1]}}}{\norm{W^{[L]}}}
+\end{align*}
+where for the last step we used Lemma \ref{lemma:mpinversenorm}, dropped the first term to get a lower bound, and used $\sigma_{min} (X) \leq \sigma_{max} (X) = \norm{X}_2$.
+\end{proof}
+
+% \subsection{Regression Settings}
+
+% We use the $\log \cosh$ loss function in our regression experiments. The fundamental intuition behind using the $log-cosh$ as a plausible alternative to the MSE and MAE is due to the following observation. 
+% Consider: \\
+% \begin{align*}
+% \log(\cosh(x))&=\log(\frac{e^x+e^{-x}}{2}) \\
+%               &=\begin{cases}
+%       \mid x\mid-\log(2) & \text{x away from 0} \\
+%        \frac{x^2}{2} & \text{x in the neighborhood of 0}  \\
+%    \end{cases}
+% \end{align*}
+% Thus, the $log$-$cosh$ behaves like the MAE asymptotically, which is desirable in applications such as \emph{robust regression} where the influence exerted by outliers in response is limited. Additionally, around the origin, $\log-\cosh$ behaves like MSE, retaining the statistical efficiency when measurement errors follow the Normal distribution.
+
+% \begin{figure}[ht]
+%   \centering
+%   \begin{tabular}{cc}
+%     \includegraphics[width=.45\linewidth]{img/zoomedLoss.png} & \includegraphics[width=.45\linewidth]{img/zoomedOutLoss.png}\\[\abovecaptionskip]
+%     \small (a) MSE-like behaviour  & \small (b) MAE-like behaviour  \\
+%     \small of the $\log-\cosh$ & \small of the $\log-\cosh$
+%   \end{tabular}
+% \end{figure}
+% $log-cosh$ has the following properties that make it more appealing than Huber:
+% \begin{enumerate}
+%     \item The $log-cosh$ has a tractable and well-studied generating distribution--the \emph{hyperbolic secant distribution} -- which allows a very convenient extension of the $log-cosh$ to the non-parametric setting. Thus, adapting it for use in binary classification problems using neural networks becomes convenient.
+%     \item $log-cosh$ is arbitrarily differentiable \emph{globally} (unlike the limited second-order differentiability of the Huber in the '$\delta$-basin' of its definition). Hence, the application of methods exploiting higher-order differentiability is inevitably more stable for the $log-cosh$.
+%     \item $log-cosh$ is convex (cf. Theorem \ref{th:logcosh:cvx}). Convexity of the loss is an immediately desirable quality because of the standard property of convex functions having a unique global minima and being much more ``well-behaved'' (convexity implies local Lipschitzness). The latter is significant in ensuring a predictable, `smooth' trajectory of the optimizer while navigating through the generated loss landscape. 
+% \end{enumerate}
+
+\section{Experiments}
+\label{sec:experiments}
+
+\input{results/main}
+%\input{results/image}
+
+We compare our approach based on the sharpness (which we call {\IT}) with other popular hyper-parameter optimization algorithms. We randomly sample 50 configurations, compute their sharpness (computed by Theorem \ref{th:ff}), and run the top 10, reporting the best-performing one. We repeat all experiments 20 times, and compare results using pairwise Mann-Whitney tests \cite{mann1947test} with a Benjamini-Hochberg correction procedure for p-values (as endorsed by \citet{farcomeni2008review}), employing a 5\% significance level. For all baselines, we use default settings with a budget of 50 evaluations. In all cases, models are trained for 100 epochs. At test time, for the random and Bayesian Optimization (BO)-based methods\footnote{This is all the methods except ours and random.}, we use the most promising candidate produced by the 50 evaluations over the training set (based on validation set performance at training time). For our method, we use the best performing configuration (based on validation set performance) over the 10 with the lowest sharpness.
+
+For tabular datasets, we experiment on the Bayesmark datasets used in the NeurIPS 2020 Black-Box Optimization Challenge and the 8 datasets used in the MLP benchmarks in HPOBench \cite{eggensperger2021hpobench}. For convolutional networks, we run experiments on MNIST \cite{lecun1998mnist} and SVHN \cite{netzer2011reading}.
+
+We use the default train/test splits provided for all datasets to remain consistent with prior work. For the image datasets, we scale each feature to $[0, 1]$. For the OpenML datasets, we normalize samples to have an $l_2$ norm of 1. We do not perform any preprocessing for the Bayesmark datasets.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \caption{Summary of our results. Wins, ties, and losses are determined by the results of statistical significance tests.}
+    \label{tab:results:overall}
+    \begin{tabular}{lllll}
+        \toprule
+        \textbf{Algorithm} & \textbf{Wins} & \textbf{Ties} & \textbf{Losses} & \textbf{(Wins + Tie)\%} \\
+        \midrule
+        {\IT} & 4 & 8 & 2 & 85.7 \\
+        Hyperopt & 0 & 7 & 7 & 50.0 \\
+        Random & 1 & 1 & 12 & 14.3 \\
+        TuRBO & 0 & 4 & 10 & 28.6 \\
+        HEBO & 0 & 6 & 8 & 42.9 \\
+        BOHB & 0 & 6 & 8 & 42.9 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+For Bayesmark, we use the default set of hyper-parameters for MLPs, which has a size of 134M\footnote{\url{https://github.com/uber/bayesmark/blob/master/bayesmark/sklearn_funcs.py}}. For MNIST, we used Conv - MaxPooling blocks, followed by two fully-connected layers. For SVHN, we used Conv - BatchNorm - Conv - MaxPooling - Dropout layers, followed by a fully-connected layer, a dropout layer, and a final fully-connected layer. The range of hyper-parameters for all these models is shown in Table \ref{tab:hpo_space}.
+
+We use the metrics employed by prior work to ensure a fair and consistent evaluation. For Bayesmark datasets, we report the mean normalized score, which first calculates the performance gap between observations and the global optimum and divides it by the gap between random search and the optimum. For MNIST and SVHN, we use the accuracy score. For the OpenML datasets, we use the area under the ROC curve, since we found that many of them had notable class imbalances.
+
+\input{appendix/exp}
+
+Our results, shown in Table \ref{tab:results}, demonstrate that {\IT} achieves strong performance on most datasets. These results are summarized in Table~\ref{tab:results:overall}. We declare an algorithm as ``winning'' on a dataset if it outperforms every other algorithm; it ``ties'' if any other algorithm's performance is not statistically significantly different.
+
+We also checked that the final validation loss is more strongly correlated with the flatness than with the validation loss after one epoch. Using data from all of the OpenML datasets, we computed the Spearman correlation coefficient. As predicted, the sharpness that we computed was negatively correlated with the final validation loss ($\rho = -0.14, p < 0.05$); moreover, the validation loss after one epoch was not correlated with the final validation loss ($\rho = 0.08, p = 0.23$).
+
+%\input{results/main}
+
+\subsection{Runtime}
+\label{sec:runtime}
+
+In practice, computing the sharpness is inexpensive. In detail, we train the network with the given hyper-parameters for one epoch and then use the derived equations to compute the sharpness in mini-batches. One epoch of training moves the network weights closer to their final position, so that the measured loss criterion is more accurate than from a randomly initialized point. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.5\linewidth]{img/runtime.png}
+    \caption{Algorithm runtimes on the vehicle dataset.}
+    \label{fig:runtimes}
+\end{figure}
+
+On a machine with an Intel Cascade Lake CPU with 4 vCPUs and 23GB RAM and no GPU, where we ran our NeurIPS Black-Box Optimization Challenge experiments, we measured the cost of computing the sharpness over 15 runs with varying batch sizes. The median number of batches was 15.51 (442 samples), which took a median of 0.47 seconds. Therefore, it takes 0.03s/batch/config to compute the sharpness. For example, the breast cancer dataset has 569 samples. Using the mean batch size in the hyper-parameter space of 130, that evaluates to 4.38 batches, which we expect to take $0.03 \times 4.38 \times 50 = 6.57$s to compute the sharpness for 50 configurations.
+
+The above experiments suggest that computing the sharpness this way is computationally inexpensive, since we train for the full epochs only for the top 10 configurations. Figure \ref{fig:runtimes} shows the runtimes for each algorithm on the vehicle dataset, on a machine with an RTX 2060 Super. Our approach requires between 13\% and 33\% of the runtime compared to other algorithms.
+
+\subsection{The one-epoch heuristic}
+\label{sec:tradeoff}
+
+\begin{figure}
+    \centering
+    \includesvg[width=.5\textwidth]{img/iou.svg}
+    \caption{Intersection over Union (IoU) of the set of the 10 configurations corresponding to the lowest sharpness, after one epoch and after epoch $i, i \in \{1, \ldots, 10\}$.}
+    \label{fig:iou}
+\end{figure}
+
+In this section, we provide evidence that using the sharpness after one epoch is a reasonable choice (and more informative than the validation loss). First, note that we compute a \textit{lower bound} on the sharpness after one epoch. This is supported by recent work showing a ``progressive sharpening'' phenomenon when training deep neural networks with gradient descent \cite{jastrzebskiBreakEvenPointOptimization2020, jastrzebskiRelationSharpestDirections2019, cohenGradientDescentNeural2021}. When a learning rate of $\eta$ is used, the sharpness increases until it stabilizes around $2/\eta$, a regime called the \textit{edge of stability}.
+
+We additionally tested how much the configurations corresponding to the 10 lowest sharpness values changed as the epochs progressed (since those are the only ones trained fully and evaluated). To do this, we computed the sharpness after each epoch for 10 epochs on the HPOBench datasets used in our paper. We then computed the IoU (Intersection Over Union) metric between the configurations in the top 10 after 1 epoch and those in the top 10 after 2, 3, …, 10 epochs. As expected, this metric decreases gradually; after 10 epochs, this IoU has a mean of 47\% (see Figure~\ref{fig:iou}). This means that after 10 epochs, approximately half the configurations in the top 10 are the same as after epoch 1. We argue that this represents an exploration-exploitation tradeoff: by training for additional epochs, we obtain a more accurate estimate at additional computational expense. We maintain that the one-epoch training cycle balances the exploration-exploitation trade-off well, since it is not necessary for a landscape to have flat minima to generalize well \cite{wen2023sharpness, dinh2017sharp}.
+
+Moreover, we found that the IoU metric between the 10 lowest validation errors after one epoch with those after 10 epochs (the same experimental setup used in Figure \ref{fig:iou}) was significantly lower. This makes sense, since hyper-parameters influence training dynamics over epochs as well, which leads to validation loss being an unreliable predictor for future performance.
+
+\section{Limitations}
+
+In this paper, we developed a novel white-box hyper-parameter optimization algorithm that, after some inexpensive computation, requires only 10 full runs to find a good configuration. We demonstrated our results on 12 tabular and two image datasets.
+
+This method does not currently allow users to specify a preference for evaluation metrics such as recall or precision. We leave this as future work. In particular, we exploit the fact that the Pareto frontier is a subset of the convex hull of the hyper-parameter performance scores. To find configurations that do well on some metric, we traverse the Pareto frontier and compute quantized\footnote{This is only necessary if the space is not dense in $\mathbb{R}^d$; for example, $Z$ is nowhere dense in $\mathbb{R}$ so that for a space $\mathbb{R}^n \times \mathbb{Z}$, quantization would be necessary.} convex combinations of adjacent points and also test them. This is similar to the approach of \citet{ammar2004multi}. However, this approach adds additional computational cost.
+
+Our hyper-parameter optimization method has two key limitations: first, it is limited to learners for which a loss function can be defined. In some cases such as Naive Bayes, a surrogate such as the negative log-likelihood can be used, for which the sharpness can be computed. Even in cases where the loss is not twice-differentiable, one can use a finite difference approximation to compute the Hessian (see \citet{nocedal1999numerical}):
+\begin{equation*}
+\scalebox{0.85}{$
+\frac{\partial^2 f}{\partial x_i \partial x_j}(x) \approx \frac{1}{\epsilon^2}\left( f(x + \epsilon e_i + \epsilon e_j) - f(x + \epsilon e_i) - f(x + \epsilon e_j) + f(x) \right)
+$}
+\end{equation*}
+
+where the error is $\mathcal{O}(\epsilon)$. The second, potentially more important limitation is that the sharpness cannot be compared across learners, especially if different losses are used. For example, while algorithms such as TPE can be used on hyper-parameter spaces with multiple classes of learners, our approach cannot: the entire hyper-parameter space must have comparable sharpness values, for which the same class of learners (such as neural networks, Naive Bayes, logistic regression, etc.) must be used. However, this can be resolved by using the same loss function across learning algorithms. For example, a negative log-likelihood ratio loss has been proposed for neural classifiers \cite{yao2020negative}, which is compatible with other learners.
+
+\bibliographystyle{plainnat}
+\bibliography{main}
+
+\input{appendix/main}
+
+\end{document}

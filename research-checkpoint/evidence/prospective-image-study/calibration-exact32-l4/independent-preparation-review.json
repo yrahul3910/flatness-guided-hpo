@@ -1,0 +1,54 @@
+{
+  "status": "PASS: no remaining material preparation blocker; parent owns bounded launch and post-run eligibility",
+  "reviewed_utc": "2026-10-03T02:59:52.390333+00:00",
+  "reviewer": "/root/pilot_review",
+  "scope": "Independent local source, JSON, tar headers and raw-byte hashes only. No cloud calls, model execution, array loading, forecast execution or quality inspection.",
+  "frozen_files": {
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/calibrate.py": "b9d1d8ac356a0e795abd307aa4467cae6c531e15966aca94d9c1a35d9156268c",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/timing-protocol.json": "113b8af3c5e1596a39ea7395d3a08de94fb8458b65c157b66c388e9cf5ea51a9",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/modal_launch.py": "169c5dd0c9dcd97b494f302b245ac46d4acbd760feb09df70063a5d9a62724fc",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/direct_cost_forecast.py": "c0285c820df8a398b6bb05c0802546fb9715097accc5abbfcf64fe4869a89b1a",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/cases-and-seeds.json": "a9a06bd97f6a6f9917436707669ecc331ed4dad2a0ea655b3e4ee69c88d70c4d",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/direct-forecast-rule.json": "901f515c4c7ee1a2e6ec733a966d85e2afda99b5e58be606d45ae7d96ec6a1f7",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/eligibility-addendum.json": "4fa2019a69330d484a16446807c83bf543022daad794c4f8380b318f8fc61047",
+    ".cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/payload-manifest.json": "54263a6764c4eb04b3f7910552aa91a1e9b89d1e3dfd4fbb4b18edb56f63e18d",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/qa/verification.json": "e3f79b3b5078020aa4682863830ce0fc795245ec2c305ccace69a2541322fd18",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32-l4/direct-forecast-freeze.json": "b7cd893cd67cf05a431b5387fd7f5b9efbcc8b5af88f848c249fcab18550e0fe"
+  },
+  "archive": {
+    "sha256": "ef2c246211741aa0c0ff60026baa5fcbbe80ccc850673cbfbd16df4edf9fd13c",
+    "bytes": 22756663,
+    "safe_exact_regular_members": 28,
+    "all_member_sizes_and_hashes_verified": true,
+    "two_training_only_archives_bytes": 63142420,
+    "evaluation_credentials_or_checkpoints": false
+  },
+  "candidate_and_seed_review": {
+    "fixed_cases": 32,
+    "same_order_configs_and_MACs": true,
+    "new_roles_independently_rederived": 160,
+    "prior_unique_roles": 757,
+    "seed_overlap": 0
+  },
+  "precision": {
+    "resolved_material_issue": "Float32 dtype alone permitted default TF32 on L4. Explicit TF32 disable/query/identity check now precedes all case work, queried false is recorded, and calculator rejects missing/true/integer-zero values.",
+    "profile_helpers_AST_identical_to_T4": true,
+    "head_agreement_tolerance_unchanged": 1e-05,
+    "scientific_wrapper_must_use_identical_guard": true,
+    "primary_source": "https://www.tensorflow.org/api_docs/python/tf/config/experimental/enable_tensor_float_32_execution",
+    "hardware_source": "https://developer.nvidia.com/cuda/gpus",
+    "limitation": "TF32-off preserves the intended precision policy; it does not promise bitwise equality across different GPUs."
+  },
+  "launcher": "Exact T4 launcher after GPU/app/path/hash substitutions; same pinned image, one call, shared deadline, corrected lowercase app state and empty exact-app container proof, JSON/log-only100MiB return cap.",
+  "formula": "components() AST and prospectively declared per-candidate formula unchanged, same32 candidates,2x margin,14GiB gate; rate1.021392USD/hour,15616seconds overhead,holds6+science42+other2=50.",
+  "preservation": {
+    "every_unexecuted_draft_file_hash_verified": true,
+    "manifest_sha256": "56c8bc70086d62d1d720e8a3dba8634cbb410f15e27aa7a931787ed9edf96b54",
+    "prior_T4_sources_and_failed_forecast_retained": true
+  },
+  "remaining_actions": [
+    "Parent binds final launch resources and budget ledger to this package.",
+    "Verify all32 records,576 updates,single invocation,TF32false,archive hashes and terminal stopped/empty-container proof before applying the fixed calculator.",
+    "No scientific launch before the fixed cost gate passes and identical TF32 policy is bound."
+  ]
+}

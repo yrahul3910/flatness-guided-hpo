@@ -1,0 +1,120 @@
+MNIST saved-checkpoint head symmetry audit — smoke / exploratory only
+
+Scope and reproducibility
+-------------------------
+No training was performed. The original checkpoint was loaded without its
+optimizer; no weights or production source files were edited. Only indices
+0:128 of the cached official training arrays x_train/y_train were accessed.
+These examples are within the checkpoint's original training subset 0:409.
+Official test arrays were not accessed.
+
+The saved float32 model was evaluated once on CPU. All head transformations
+were then computed in float64 using its real hidden activations and saved
+affine output parameters. This controls floating-point cancellation while
+testing the exact symmetry. Results are not a new trained model, an estimate
+of generalization, or evidence about HPO ranking performance.
+
+results.json records all nine prespecified common-logit shifts and all five
+positive ReLU rescalings, with no exclusions. It also records checkpoint,
+data, source, metadata, and array hashes; training config/seed; architecture;
+selected data indices; preprocessing; package versions; and CPU policy.
+head_arrays.npz contains the frozen activations, kernel, bias, probabilities,
+labels and indices needed to reproduce every NumPy calculation. The original
+checkpoint and cached dataset remain unchanged.
+
+Run from repository root:
+  <ORIGINAL_CHECKOUT>/.venv/bin/python \
+    sweep-results/research-audit-20261002/mnist_head_symmetry.py
+Each execution creates a new timestamped output directory.
+
+Observed result
+---------------
+Checkpoint: cached-mnist-smoke-mnist-seed31-20261002T154204096257Z/incumbent.keras
+Selected trial seed: 33; learning rate: 0.003; one training epoch.
+Effective head: 128 hidden units, 10 classes.
+The proxy is max over two consecutive 64-example batches of
+RMS(p_batch)*RMS(h_batch)/RMS(W).
+
+Baseline proxy: 1.73274126
+Baseline mean categorical cross-entropy: 2.14729948
+Exact final-kernel Hessian Frobenius norm: 50.1639521
+Exact final-kernel Hessian trace: 125.003326
+
+Adding c to every output-kernel entry, W' = W + c*ones(D,K), adds
+c*sum(h_i) to every class logit for example i. Softmax therefore removes the
+shift exactly. With c=100 the proxy becomes 0.00206501937, about 839 times
+smaller, while the exact head Hessian, loss, and predictions are invariant.
+Across all nine shifts, maximum probability discrepancy is below 7.2e-13;
+no predicted class changes. Curvature relative discrepancy is below 3.3e-14.
+Full signed shifts and all metrics are retained in results.json.
+
+This concretely demonstrates on an existing neural checkpoint that the
+proxy is not determined by prediction behavior or even by exact final-head
+curvature. It is not an empirical lower-bound violation for this particular
+checkpoint (the original proxy is below its head Hessian norm); the separate
+theory_proxy_checks.json supplies valid analytical counterexamples to the
+claimed universal lower bound.
+
+ReLU rescaling control
+----------------------
+For s>0, divide both the penultimate affine kernel and bias by s, and multiply
+the output kernel by s. ReLU's positive homogeneity gives h'=h/s, leaving
+all logits unchanged. This control was evaluated algebraically on the saved
+activations for s in [0.1, 0.5, 1, 2, 10]. Both the ratio proxy and the exact
+output-kernel Hessian norm scale as 1/s^2. The checks passed for every scale.
+
+This is the type of coordinate dependence reviewer 6ZG2 described on
+2024-08-13. It shows that even exact head curvature can vary under a
+function-preserving reparameterization. The common-logit-shift example is
+stronger for this specific ratio: the proxy moves while head curvature
+does not. Neither result alone establishes or refutes useful correlation
+under a fixed training/search protocol.
+
+Correct exact-head identity and valid trace bounds
+-------------------------------------------------
+Let B examples have frozen hidden activations h_i in R^D and softmax
+probabilities p_i in R^K. Consider ONLY mean categorical cross-entropy as a
+function of the final affine kernel, excluding its bias, earlier weights,
+optimizer, and regularization. Define C_i = diag(p_i) - p_i p_i^T. With a
+consistent vectorization convention,
+
+  H = (1/B) sum_i C_i tensor (h_i h_i^T).
+
+The order of the Kronecker factors depends on vectorization; the following
+trace and Frobenius quantities do not. Since C_i and h_i h_i^T are PSD, H is
+PSD, and the exact identities are
+
+  tr(H) = (1/B) sum_i (1-||p_i||_2^2) ||h_i||_2^2,
+
+  ||H||_F^2 = (1/B^2) sum_ij tr(C_i C_j) (h_i^T h_j)^2,
+
+  tr(C_i C_j) = p_i^T p_j - p_i^T(p_j squared)
+                 - (p_i squared)^T p_j + (p_i^T p_j)^2.
+
+The pairwise formula was validated against an explicit Kronecker Hessian
+on a separate seeded B=4, D=3, K=3 fixture. The agreement assertion used
+relative/absolute tolerance 1e-12 and passed.
+
+Because rank(H) <= r_max = (K-1)*min(B,D), PSD eigenvalues imply
+
+  tr(H)/sqrt(r_max) <= ||H||_F <= tr(H)
+    <= (1-1/K) * (1/B) sum_i ||h_i||_2^2.
+
+The last inequality uses ||p_i||_2^2 >= 1/K. All three inequalities were
+checked on every transformed batch and passed. A tighter rank bound may
+use rank of the activation matrix, but was unnecessary here.
+
+These are exact identities and bounds for this limited head/loss setting.
+They do not establish a comparable curvature scale across parameterizations,
+a bound for all network weights, a validation-loss guarantee, the published
+activation/weight ratio bound, or an HPO ranking theorem. In particular,
+there is no positive activation-only lower bound uniform over probabilities:
+as softmax saturates, C_i can approach zero for fixed nonzero h_i.
+
+Reviewer request still requiring experiments
+-------------------------------------------
+The 2024-08-13 comment asks for correlations ACROSS configurations/runs at
+each epoch against their final validation losses, comparing proxy with
+early validation loss. A single checkpoint symmetry diagnostic does not
+answer that request. The complementary trajectory pilot is a distinct
+experiment and should be reported with its own split/seeds and limitations.

@@ -1,0 +1,14 @@
+{
+  "status": "Post-run read-only verification establishes eligibility despite original controller parser failure. Historical ledger remains unchanged.",
+  "terminal_app_list_path": ".cloudexp/research-audit-20261002/prospective-image-study/modal-access-audit/after-run-app-list-20261003T015700003185Z.json",
+  "terminal_app_list_sha256": "ad8703d66e8c000b0b00c92eb57793b5e6ebcd70ce94d255f6058d0ce59982d5",
+  "app_id": "<PROVIDER_ID>",
+  "source_parser_defect": "Expected display labels App ID/State/Tasks; CLI JSON uses app_id/state/tasks. Immediate task count1 was retained; later exact app stopped/tasks0 is verified.",
+  "calibration_returncode": 0,
+  "cases_completed": 9,
+  "optimizer_updates": 162,
+  "remote_subprocess_seconds": 74.15969395637512,
+  "controller_total_seconds": 152.9556399580033,
+  "eligibility_sha256": "ebd2186b891a0499cef4f11e3f658e3add6c387dab637d8705d5ad6e8162860d",
+  "scientific_final_training_or_evaluation_performed": false
+}

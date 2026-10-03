@@ -1,20 +1,19 @@
+"""Run random search with validation selection and one held-out test evaluation."""
+
+import traceback
+
 from image.src.config import hpo_space
-from image.src.data import Dataset
-from image.src.util import get_data, get_many_random_hyperparams, run_experiment
+from image.src.experiment import SearchRun
+from image.src.util import get_many_random_hyperparams
 
 if __name__ == "__main__":
-    DATASET = "cifar10"
-    N_CLASSES = 10
-    N_RANDOM = 50
+    with SearchRun("random") as run:
+        configs = get_many_random_hyperparams(hpo_space, 30)
 
-    configs = get_many_random_hyperparams(hpo_space, N_RANDOM)
-    data: Dataset = get_data(DATASET)
+        for config in configs:
+            try:
+                run.evaluate(config)
+            except (ValueError, RuntimeError):
+                traceback.print_exc()
 
-    scores = []
-    for config in configs:
-        try:
-            scores.append(float(run_experiment(data, config, N_CLASSES, DATASET)))
-        except:
-            continue
-
-    print(scores)
+        run.finish()

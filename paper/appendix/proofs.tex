@@ -1,0 +1,339 @@
+\section{Auxiliary Proofs}
+\label{sec:proofs}
+
+\begin{lemma}
+    Let $f: \mathbb{R}^d \to \mathbb{R}$ be a differentiable function. Then, $\mu-$strong convexity implies:
+    \begin{enumerate}[(i)]
+        \item (Polyak-Łojasiewicz (PL) inequality)
+        \[
+            \frac{1}{2} \norm{ \nabla f(x) }^2 \geq \mu (f(x) - f(x^*))
+        \]
+
+        \item 
+        \[
+            \norm{\nabla f(x) - \nabla f(y)} \geq \mu \norm{x - y}
+        \]
+
+        \item 
+        \[
+            \left( \nabla f(x) - \nabla f(y) \right)^T (x - y) \leq \frac{1}{\mu} \norm{\nabla f(x) - \nabla f(y)}^2
+        \]
+    \end{enumerate}
+    \label{lemma:stcvx}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item Strong convexity implies
+        $$
+        f(y) \geq f(x) + \nabla f(x)^T (y - x) + \frac{\mu}{2} \norm{y - x}^2
+        $$
+        Minimizing with respect to $y$ yields the result.
+
+        \item Strong convexity gives us:
+        \begin{equation}
+        \left( \nabla f(x) - \nabla f(y) \right)^T (x - y) \geq \mu \norm{x - y}^2 \label{eq:proof:l1}
+        \end{equation}
+
+        Applying Cauchy-Schwarz inequality gives us:
+        \begin{equation*}
+            \scalebox{0.9}{$
+                \begin{aligned}
+                    \norm{\nabla f(x) - \nabla f(y)}\norm{x - y} &\geq \left( \nabla f(x) - \nabla f(y) \right)^T (x - y) \\
+                    &\geq \mu \norm{x - y}^2
+                \end{aligned}
+            $}
+        \end{equation*}
+        where the last step comes from \eqref{eq:proof:l1}.
+
+        \item Set $\phi_x(z) = f(z) - \nabla f(x)^T z$. It is easy to see that $\phi_x$ is also $\mu-$strongly convex. Applying the Polyak-Łojasiewicz inequality to $\phi_x(z)$ with $z^* = x$,
+        \begin{equation}
+            \scalebox{0.8}{$
+                \begin{aligned}
+                    \left( f(y) - \nabla f(x)^T y \right) - \left( f(x) - \nabla f(x)^T x \right) &= \phi_x(y) - \phi_x(z^*) \nonumber \\
+                    &\leq \frac{1}{2\mu} \norm{\nabla \phi_x(y)}^2 \nonumber \\
+                    &\leq \frac{1}{2\mu} \norm{\nabla f(y) - \nabla f(x)}^2 \label{eq:proof:l2}
+                \end{aligned}
+            $}
+        \end{equation}
+        Swapping $x$ and $y$ in the above,
+        \begin{equation}
+            \scalebox{0.8}{$
+                \begin{aligned}
+                    \left( f(x) - \nabla f(y)^T x \right) - \left( f(y) - \nabla f(y)^T y \right) \leq \frac{1}{2\mu} \norm{\nabla f(x) - \nabla f(y)}^2 \label{eq:proof:l3}
+                \end{aligned}
+            $}
+        \end{equation}
+        Adding \eqref{eq:proof:l2} and \eqref{eq:proof:l3} yields the result.
+    \end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    If $f: \mathbb{R}^n \to \mathbb{R}$ is smooth and $\mu-$strongly convex, then
+    \[
+        \frac{1}{2\mu} \norm{\nabla f(x)}^2 \geq f(x) - f(x^*) \geq \frac{\mu}{2} \norm{x - x^*}^2
+    \]
+    \label{lemma:pl-conseq}
+\end{lemma}
+\begin{proof}
+    The first part is the Polyak-Łojasiewicz inequality. The second part follows from the definition of strong convexity and setting $y = x, x = x^*$ and using $f(x^*) \geq \min\limits_y f(y)$.
+\end{proof}
+
+\begin{theorem}[Smooth and strongly convex gradient descent]
+    Suppose $f: \mathbb{R}^n \to \mathbb{R}$ is $\beta-$smooth and $\mu-$strongly convex. Then with the gradient descent update rule
+    \[
+        x_{k+1} = x_k - \frac{1}{\beta} \nabla f(x_k)
+    \]
+    where $\frac{1}{\beta}$ is the learning rate, we have
+    \[
+        f(x_k) - f(x^*) \leq \left( 1 - \frac{\mu}{\beta} \right)^k (f(x_0) - f(x^*))
+    \]
+    Consequently, we require $\frac{\beta}{\mu}\log \frac{f(x_0) - f(x^*)}{\epsilon}$ iterations to find an $\epsilon-$optimal point.
+    \label{lemma:smoothgd}
+\end{theorem}
+\begin{proof}
+    From the above results,
+    \[
+        f(x_{k+1}) \leq f(x_k) - \frac{1}{2\beta} \norm{\nabla f(x_k)}^2
+    \]
+    and Lemma \ref{lemma:pl-conseq} gives us
+    \[
+        \norm{\nabla f(x_k)}^2 \geq 2\mu (f(x_k) - f(x^*))
+    \]
+    Therefore,
+    \begin{align*}
+        f(x_{k+1}) - f(x^*) &\leq f(x_k) - f(x^*) - \frac{1}{2\beta} \norm{\nabla f(x_k)}^2 \\
+        &\leq f(x_k) - f(x^*) - \frac{\mu}{\beta} (f(x_k) - f(x^*)) \\
+        &= \left( 1 - \frac{\mu}{\beta} \right) (f(x_k) - f(x^*)) \\
+        f(x_k) - f(x^*) &\leq \left( 1 - \frac{\mu}{\beta} \right)^k (f(x_k) - f(x^*)) \\
+        &\leq \exp\left(-\frac{\mu k}{\beta}\right) (f(x_0) - f(x^*)) 
+    \end{align*}
+    Therefore we need $k = \frac{\beta}{\mu}\log \frac{f(x_0) - f(x^*)}{\epsilon}$ iterations for $\epsilon-$optimality.
+\end{proof}
+
+Note that strong convexity guarantees optimality, while $\beta-$smoothness can only assure $\epsilon-$criticality. This implies the existence of global minima. 
+%Moreover, note that since $\log \cosh$ is strongly convex (see Theorem \ref{th:logcosh:stcvx}) and $\beta-$smooth (cf. Theorem \ref{th:logcosh:beta}), it is particularly useful in the regression setting.
+
+Strong convexity is a necessary condition for learnability; along with $\beta-$smoothness, it can be shown that such problems are learnable \cite{shalev2014understanding}. Additionally, strong convexity provides a quadratic lower bound on the growth of the loss function, which implies that the convexity condition will not be violated in the local domain of the function in the context of deep regression with regularization.
+
+% \begin{theorem}
+%     Suppose $f$ is a closed and convex function. Then $f$ is $\beta-$strongly convex with respect to a norm $\lVert \cdot \rVert$ iff $f^*$ is $\frac{1}{\beta}-$smooth with respect to the dual norm $\lVert \cdot \rVert_*$. That is, if $f^*$ is smooth, then $f$ is strongly convex.
+% \end{theorem}
+% \begin{proof}
+%     We defer the proofs to \citet{shalev2007primal}, Lemma 15 ($1 \Rightarrow 2$) and \citet{kakade2009duality}, Theorem 6 ($2 \Rightarrow 1$).
+    % Assume $\beta = 1$. We have,
+    % \begin{equation}
+    %     g(y) = f^*(x + y) - \left( f^*(x) + \langle \nabla f^*(x), y \rangle \right) \label{eq:gy}
+    % \end{equation}
+
+    % Since $f^*$ is smooth, this implies $g(y) \leq \frac{1}{2} \lVert y \rVert_*^2$, so that
+    % \begin{equation}
+    % g^*(a) \geq \frac{1}{2}\lVert a \rVert^2 \label{eq:ga:geq}
+    % \end{equation}
+    % (from \citet{shalev2010equivalence} Lemma 19 and using the fact that the conjugate of the half-squared norm is equal to half-squared of the dual norm).
+
+    % From the definition of the dual,
+    % \begin{align*}
+    %     g^*(a) &= \sup\limits_a \langle y, a \rangle - g(y) & \\
+    %     &= \sup\limits_y \langle y, a \rangle - \left( f^*(x + y) - \left( f^*(x) + \langle \nabla f^*(x), y \rangle \right) \right) & \text{from \eqref{eq:gy}} \\
+    %     &= \sup\limits_y \langle y, a + \nabla f^*(x) \rangle - f^*(x + y) + f^*(x) & \\
+    %     &= \sup\limits_z \langle z - x, a + \nabla f^*(x) \rangle - f^*(z) + f^*(x) & \text{letting $z = x + y$} \\
+    %     &= f(a + \nabla f^*(x)) + f^*(x) - \langle x, a + \nabla f^*(x) \rangle & \text{since $f^{**} = f$}
+    % \end{align*}
+    % Set $u = \nabla f^*(x)$ so that $\langle x, u \rangle  = f^*(x) + f(u)$. Therefore, $g^*(a) = f(a + u) - f(u) - \langle x, a \rangle$
+
+    % Combining with \eqref{eq:ga:geq},
+    % \begin{equation}
+    % f(a + u) - f(u) - \langle x, a \rangle \geq \frac{1}{2} \lVert a \rVert^2 \label{eq:fau}
+    % \end{equation}
+
+    % If $x \in \partial f(u^\prime)$, then $u^\prime = \nabla f^*(x)$. Let $u = \nabla f^*(x)$. Then we need to show that $u^\prime = u$. By the Fenchel-Young equality,
+    % $$
+    % \langle x, u^\prime \rangle = f^*(x) + f(u^\prime)
+    % $$
+    % and $f^{**} = f$ so that
+    % $$
+    % \langle x, u \rangle = f^*(x) + f(u)
+    % $$
+    % From \eqref{eq:fau}, 
+    % \begin{align*}
+    %     0 &= \langle x, u \rangle - f(u) - \left( \langle x, u^\prime \rangle - f(u^\prime) \right) \\
+    %     &= f(u^\prime) - f(u) - \langle x, u^\prime - u \rangle  \geq \frac{1}{2} \lVert u^\prime - u \rVert^2 \\
+    %     &\Rightarrow u^\prime = \nabla f^*(x)
+    % \end{align*}
+    % For $u_1, U_2 \in \text{int}(\text{dom } f)$, and $\alpha \in (0, 1)$, let $u = \alpha u_1 + (1 - \alpha) u_2$. Applying \eqref{eq:fau} with $a = u_1 - u$ and $a = u_2 - u$, we obtain
+    % \begin{align}
+    %     f(u_1) - f(u) - \langle x, u_1 - u \rangle &\geq \frac{1}{2} \lVert u_1 - u \rVert^2 \label{eq:fu1} \\
+    %     f(u_2) - f(u) - \langle x, u_2 - u \rangle &\geq \frac{1}{2} \lVert u_2 - u \rVert^2 \label{eq:fu2}
+    % \end{align}
+
+    % Combining $\alpha \times \eqref{eq:fu1} + (1 - \alpha) \times \eqref{eq:fu2}$ shows that $f$ is strongly convex.
+% \end{proof}
+% The above result has implications for the generalization bounds of various algorithms, such as lasso regression (which is a special case of the group lasso algorithm discussed in \cite{kakade2009duality}), kernel learning, and online control. For a detailed exposition, we refer the reader to \citet{kakade2009duality}.
+%$$
+%\begin{aligned}
+%f(x_{t+1}) - f(x_t) &\leq (1 - \alpha \mu)^{t + 1}\left( f(x_0) - f(x^*) \right) \\
+%	&\leq \exp(-\alpha \mu (t+1))\left( f(x_0) - f(x^*) \right)
+%\end{aligned}
+%$$
+
+
+% \begin{theorem}[Mini-batch computation error]
+%     Consider the notation set up in Section \ref{sec:covering}. Let $\mathcal{F}$ be a set of functions from $\mathcal{X}$ to $\mathbb{R}$. Define the metric $\rho$ over $\mathcal{F}$ to be $\norm{f - g}_\infty = \sup\limits_{x \in \mathcal{X}} \abs{f(x) - g(x)}$. Suppose $f$ satisfies the bounded difference property with bounds $b_i, i=1,\ldots,m$, where $m = \dim f$. Assume $\log N(t) \ll nt^2$. Then,
+%     \begin{equation}
+%         \mathbb{P}\left( \sup\limits_{f \in \mathcal{F}} \abs{P_n f - Pf} \geq t \right) \leq \exp\left( -\frac{2t^2}{9\sum_{i=1}^m b_i^2} + \log N \right)
+%         \label{eq:minibatch-bound}
+%     \end{equation}
+%     where $m = \dim f$.
+%     \label{th:minibatch-bound}
+% \end{theorem}
+% \begin{proof}
+%     Let $\{ f_i \}, i \in [N]$ be a minimal $t/3-$cover of $\mathcal{F}$ in $\norm{\cdot}_\infty$. Then, $\forall f \in \mathcal{F}$ and $f_i$ such that $\norm{f - f_i}_\infty \leq t/2$,
+%     \begin{align}
+%         \abs{P_n f - Pf} &\leq \abs{P_n f - P_n f_i} + \abs{P_n f_i - Pfi} + \abs{Pf_i - Pf} \nonumber \\ &\leq \abs{P_n f_i - Pf_i} + 2t/3
+%         \label{eq:minibatch-bound:tmp}
+%     \end{align}
+%     Now, McDiarmid's inequality guarantees (with a union bound), 
+%     \[
+%         \mathbb{P}\left( \sup\limits_{i \in [N]} \abs{P_n f_i - Pf_i} \geq t \right) \leq \exp\left( -\frac{2nt^2}{\sum_{i=1}^m b_i^2} + \log N \right)
+%     \]
+%     Using this with $t/3$ in \eqref{eq:minibatch-bound:tmp} gives us the result.
+% \end{proof}
+
+% \begin{theorem}[Smoothness for convolutional classifiers]
+%     For a convolutional neural network whose intermediate activations are ReLU, and the output layer uses a softmax over the flattened activations of the penultimate layer, the smoothness is given by
+%     $$
+%     \beta = \frac{\lVert P^{[L]} \rVert}{\lVert P^{[L]f} \rVert} \lVert w \rVert \lVert z^{[L-1]} \rVert
+%     $$
+%     for $w, P^{[L]}, P^{[L]f}$ as defined in Section \ref{sec:conv}.
+%     \label{th:conv:smoothness}
+% \end{theorem}
+% \begin{proof}
+%     We have,
+%     \begin{align*}
+%         \frac{\partial \mathcal{L}}{\partial k^{[L]}_{mnpq}} &= \sum\limits_u \sum\limits_v \frac{\partial \mathcal{L}}{\partial z^{[L-1]}_{muv}} P^{[L-1]}_{n, p+u, q+v} \\
+%         %
+%         \frac{\partial \mathcal{L}}{\partial z^{[L]}_{muv}} &= \frac{\partial \mathcal{L}}{\partial C^{[L]}_{muv}} \frac{\partial C^{[L]}_{muv}}{\partial z^{[L]}_{muv}} \\
+%         %
+%         \frac{\partial C^{[L]}}{\partial z^{[L]}_{muv}} &\leq 1 \\
+%         %
+%         \frac{\partial \mathcal{L}}{\partial C^{[L]}_{muv}} &= \frac{\partial \mathcal{L}}{\partial P^{[L]}_{mxy}}
+%     \end{align*}
+%     where in the last equation, we have $x = \lfloor u/2 \rfloor, y = \lfloor v /2 \rfloor$, where $C^{[L]}_{muv} = \max C^{[L]}$. Next, we have
+
+%     \begin{align*}
+%         \frac{\partial \mathcal{L}}{\partial P^{[L]}} &= \text{reshape}\left( \frac{\partial \mathcal{L}}{\partial P^{[L]f}} \right) \\
+%         &= \text{reshape}\left( w^T \frac{\partial \mathcal{L}}{\partial S} \right)
+%     \end{align*}
+
+%     It can be shown that 
+%     $$
+%     \frac{\partial \mathcal{L}}{\partial S_i} = \begin{cases}
+%         O_{label} - 1 & \text{if } i = label \\
+%         O_i & \text{otherwise}
+%     \end{cases}
+%     $$
+%     so that $\lVert \frac{\partial \mathcal{L}}{\partial S} \rVert \leq c$.
+
+%     for some constant $c$ that we will ignore. We will now compute the Hessian with respect to $k$. We start with the first derivative.
+%     \begin{align*}
+%         \frac{\partial \mathcal{L}}{\partial k^{[L]}_{mnpq}} &\leq \frac{\partial \mathcal{L}}{\partial P^{[L]}} \frac{\partial P^{[L]}}{\partial k^{[L]}_{mnpq}} \\
+%         &\leq \sum\limits_u \sum\limits_v w^T P^{[L-1]}_{n, p+u, q+v} \\
+%         %
+%         \frac{\partial^2 \mathcal{L}}{\partial k^{[L]2}_{mnpq}} &\leq \sum\limits_u \sum\limits_v \left( \frac{\partial w^T}{\partial k^{[L]}_{mnpq}} P^{[L-1]}_{n, p+u, q+v} + w^T \frac{\partial P^{[L-1]}_{n, p+u, q+v}}{\partial k^{[L]}_{mnpq}} \right)
+%     \end{align*}
+%     The latter term is zero since there is no forward dependence in the system. For brevity, we will, from now on, work in vectorized notation.
+%     \begin{align}
+%         \left\lVert \nabla^2_k \mathcal{L} \right\rVert &\leq \left\lVert \frac{\partial w^T}{\partial k^{[L]}} \right\rVert \left\lVert P^{[L-1]} \right\rVert \nonumber \\
+%         &\leq \left\lVert \frac{\partial w^T}{\partial k^{[L]}} \right\rVert \left\lVert C^{[L-1]} \right\rVert \nonumber \\
+%         &\leq \left\lVert \frac{\partial w^T}{\partial k^{[L]}} \right\rVert \left\lVert z^{[L-1]} \right\rVert \label{eq:conv:hess}
+%     \end{align}
+%     We have,
+%     \begin{align*}
+%         \frac{\partial w}{\partial k^{[L]}} &= \frac{\partial w}{\partial S} \frac{\partial S}{\partial z^{[L]}} \frac{\partial z^{[L]}}{\partial k^{[L]}} \\
+%         &= \frac{1}{\frac{\partial S}{\partial w}} \frac{\partial S}{\partial z^{[L]}} P^{[L]}
+%     \end{align*}
+%     Note that we ignore the transpose since $\lVert w^T \rVert = \lVert w \rVert$. Applying the norm on both sides,
+%     \begin{align*}
+%         \frac{\partial w}{\partial k^{[L]}} &= \frac{1}{\left \lVert P^{[L]f} \right\rVert} \left\lVert \frac{\partial S}{\partial z^{[L]}} \right\rVert \left\lVert P^{[L]} \right\rVert \\
+%         &= \frac{\left\lVert P^{[L]} \right\rVert}{\left\lVert P^{[L]f} \right\rVert} \left\lVert \frac{\partial S}{\partial P^{[L]}} \frac{\partial P^{[L]}}{\partial C^{[L]}} \frac{\partial C^{[L]}}{\partial z^{[L]}} \right\rVert
+%     \end{align*}
+%     The last two terms are bounded by 1, and $\left\lVert \frac{\partial S}{\partial P^{[L]}} \right\rVert = \lVert w \rVert$. Combining with \eqref{eq:conv:hess} yields our final result.
+% \end{proof}
+
+% \begin{theorem}[Convexity of log-cosh]
+%     The loss function $J=\sum\limits_{i=1}^m\log\cosh(y_i-\theta^Tx_i)$ is convex. \label{th:logcosh:cvx}
+% \end{theorem}
+% \begin{proof}
+%     Consider $J=\sum\limits_{i=1}^m\log\cosh(y_i-\theta^Tx_i)$
+%     \begin{align*}
+%         J&=\sum\limits_{i=1}^m\log\cosh(y_i-\theta^Tx_i)\\
+%         \frac{\partial J}{\partial\theta_{\alpha}}&=-\sum\limits_{i=1}^{m}\tanh(y^{(i)}-\theta^Tx^{(i)})x_{\alpha}^{(i)}\\
+%         \frac{\partial^2 J}{\partial\theta_{\alpha}\theta_{\beta}}&=\sum\limits_{i=1}^{m}\text{sech}^2(y^{(i)}-\theta^Tx^{(i)})x^{(i)}_{\alpha}x^{(i)}_{\beta}
+%     \end{align*}
+    
+%     We construct the Hessian as: $H=XDX^T$ (with $D\equiv diag(m\times m)$ and $D_{ii}=\text{sech}^2(y^{(i)}-\theta^Tx^{(i)}$)
+    
+%     Now, for some $u\in \mathbb{R}^d$, consider the expression:
+%     \begin{align*}
+%     u^THu&=u^TXDX^Tu\\
+%          &=\mid\mid D(X^Tu)\mid\mid^2
+%     \end{align*}
+%     Since $D_{ii}>0$, we have $u^THu>0$, and hence the constructed Hessian is positive definite implying the convexity of the $\log-\cosh$.
+% \end{proof}
+
+% \begin{theorem}[Strong convexity of log-cosh]
+%     The strong convexity of the log-cosh function $\log \cosh{(y - w^T x)}$ is given by
+%     $$
+%     \mu = \lVert w \rVert
+%     $$
+%     \label{th:logcosh:stcvx}
+% \end{theorem}
+% \begin{proof}
+%     Let $\theta = y - w^T x$ so that
+%     \begin{align}
+%         f(x) &= \log \left( \frac{e^{-\theta} + e^{\theta}}{2} \right) \nonumber \\
+%         f^\prime(x) &= \frac{2}{e^{\theta} + e^{-\theta}} \frac{1}{2} (e^{\theta} - e^{-\theta}) \theta^\prime \nonumber \\
+%         f^{\prime\prime}(x) &= \left( \frac{e^{\theta} + e^{-\theta}}{e^{\theta} + e^{-\theta}} - \frac{(e^{\theta} - e^{-\theta})^2}{(e^{\theta} + e^{-\theta})^2} \right) \theta^\prime + \frac{e^{\theta} - e^{-\theta}}{e^{\theta} + e^{-\theta}} \theta^{\prime\prime} \nonumber \\
+%         &= \left( \frac{(e^{\theta} + e^{-\theta})^2 - (e^{\theta} - e^{-\theta})^2}{(e^{\theta} + e^{-\theta})^2} \right) \theta^\prime + \frac{e^{\theta} - e^{-\theta}}{e^{\theta} + e^{-\theta}} \theta^{\prime\prime} \nonumber \\
+%         &= \frac{4\theta^\prime}{(e^{\theta} + e^{-\theta})^2} + \frac{e^{\theta} - e^{-\theta}}{e^{\theta} + e^{-\theta}} \theta^{\prime\prime} \label{eq:logcosh:hessian}
+%     \end{align}
+%     But $\theta = y - w^T x$ so that $\theta^\prime = -w^T$ and $\theta^{\prime\prime} = 0$. Therefore,
+%     $$
+%     f^{\prime\prime}(x) = \frac{-4w^T}{(e^{\theta} + e^{-\theta})^2}
+%     $$
+%     It is trivial to show that the denominator has a global minimum at $\theta = 0$, and this minimum is 4. This yields the result.
+% \end{proof}
+
+% \begin{theorem}[log-cosh satisfies PL inequality]
+%      $\log \cosh{(y - w^T x)}$ satisfies \[
+%             \frac{1}{2} \norm{ \nabla f(x) }^2 \geq \mu (f(x) - f(x^*))
+%         \]
+%     \label{th:logcosh:PL}
+% \end{theorem}
+% \begin{proof}
+% The result follows immediately from Theorem \ref{th:logcosh:stcvx} and Lemma \ref{lemma:stcvx} (i).
+% \end{proof}
+
+% \begin{theorem}[Smoothness of log-cosh]
+%     Consider a neural network under the log-cosh loss function with ReLU activations. Then 
+%     $$
+%     \norm{\nabla^2 \mathcal{L}}_2 \leq -(2K_w + 1) \sqrt{n}
+%     $$
+%     where $K_w = \sup \norm{W^{[L]}}_2$ and $n = \dim a^{[L]}$.
+%     \label{th:logcosh:beta}
+% \end{theorem}
+% \begin{proof}
+%     Setting $\theta = y - a^{[L]}$ in \eqref{eq:logcosh:hessian},
+%     \[
+%         \nabla^2 \mathcal{L} = -2 \sech^2 a^{[L]} \nabla a^{[L]} - \tanh a^{[L]} \nabla^2 a^{[L]}
+%     \]
+%     Next, we note that 
+%     \begin{align*}
+%         \nabla_{W^{[L]}} a^{[L]} &= \nabla z^{[L]} & \text{since $a^{[L]} = \max(0, z^{[L]})$} \\
+%         &= W^{[L]} \\
+%         \nabla^2_{W^{[L]}} a^{[L]} &= \mathcal{A}
+%     \end{align*}
+%     where $\mathcal{A}$ is the fourth-order identity tensor $\mathcal{A}_{ijkl} = \delta_{ik}\delta_{jl}$.
+%     Since the 2-norm is convex, Jensen's inequality, and noting that both $\sech x$ and $\tanh x$ are bounded by 1, yields the result.
+% \end{proof}
+% \textbf{Consequences:} By Lemma \ref{lemma:smoothgd}, it is established that $\beta-$smoothness and strong convexity of $\log \cosh$ facilities $\epsilon-$optimality instead of a more frequent $\epsilon-$ criticality. Consequently, Gradient descent with the loss function  $\log \cosh$ converges, in log-linear time, to an optima.

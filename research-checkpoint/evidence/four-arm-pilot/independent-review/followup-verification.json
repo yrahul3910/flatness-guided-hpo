@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "seed_manifest_covers_all_40_prespecified_roles": true,
+  "saved_prediction_labels_match_prepared_manifest_and_evaluation_event": true,
+  "legacy_threshold": {
+    "direction": "strict original_rms > 0.1",
+    "logged_not_applied": true,
+    "eligible": 16,
+    "total": 16,
+    "minimum": 0.6314702033996582,
+    "maximum": 3.9863176345825195,
+    "pool_would_change": false,
+    "production_source": "image/stcvx.py",
+    "production_source_sha256": "8fa1377151df0e78f2ade125654d1c2555b634772b274a273d34be5b70362094",
+    "source_line": 36
+  },
+  "model_calls": 0,
+  "training_updates": 0,
+  "prepared_dataset_arrays_loaded": false
+}

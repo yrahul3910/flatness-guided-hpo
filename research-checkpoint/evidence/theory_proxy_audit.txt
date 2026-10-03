@@ -1,0 +1,224 @@
+FGHPO theorem / image selection audit — 2026-10-02
+
+Scope: read-only audit of the local paper/main.tex, appendix, and image Python
+implementation. Reviews were unavailable; these are independently identified
+issues, NOT assertions about reviewer intent. No paper or production code was
+edited. Counterexamples are deterministic exploratory evidence, not benchmark
+results. Source hashes are in theory_proxy_checks.json.
+
+Reproduce from repository root:
+  python3 sweep-results/research-audit-20261002/theory_proxy_checks.py
+Uses Python stdlib only. All assertions passed; analytical Hessians agree with
+central differences of the exact gradient (step 1e-5; tolerance 1e-8).
+
+1. BLOCKER FOR THEORETICAL CLAIM: the stated lower bound is false.
+
+paper/main.tex:486-535 claims ||H_W||_F >= ||p||_2 ||h||_2 / ||W||_F
+for a softmax final layer and categorical cross-entropy. With one sample and
+fixed penultimate activation h, the exact final-weight Hessian is
+  H_W = (diag(p) - p p^T) tensor (h h^T).
+The sample-mean version is the mean of those per-sample matrices.
+
+Choose h=1, W=(0.1,-0.1), bias=0, and either class label. This is a valid
+two-class affine-softmax head; a fully connected penultimate layer realizes
+h=1. The proposed lower bound is 5.024773 and the actual Hessian norm is
+0.495033. As W approaches zero the proposed bound diverges, while the exact
+Hessian remains bounded. This disproves the theorem under its stated
+assumptions, independently of any empirical correlation.
+
+Specific proof problems:
+- main.tex:498 drops the label term: the one-sample gradient is (p-y) h^T.
+  This omission alone need not alter the output-weight Hessian because h is
+  constant with respect to final-layer weights, but the displayed gradient
+  is not correct.
+- main.tex:504 treats the penultimate activation as a function of output
+  activations through an inverse Jacobian. When differentiating with
+  respect to W[L], h does not depend on W[L]; this creates the spurious
+  inverse-weight contribution.
+- main.tex:439-457 states ||A^+||_2=1/sigma_min(A) without the full-rank /
+  smallest-positive-singular-value qualification. The softmax Jacobian is
+  singular (its all-ones direction is null), so an unrestricted inverse
+  argument cannot justify this step.
+- main.tex:535 drops a term to claim a lower bound without establishing a
+  valid positive-semidefinite comparison of the resulting Hessians.
+- main.tex:365 contains a different numerator from theorem :490; the former
+  uses a[L-1] twice, the latter uses p=a[L] and a[L-1].
+
+Experiment implication: call this score an empirical activation/weight proxy
+until a correct, separately checked result exists. More image training cannot
+validate the current theorem. A small calibration panel should compare proxy
+ranking with exact final-head Hessian summaries before investing in broad
+curvature-motivated claims.
+
+2. PROXY CAN CHANGE WHILE PREDICTIONS AND EXACT HEAD CURVATURE STAY FIXED.
+
+For h=1 and W=(0.5+c,-0.5+c), changing c shifts both logits equally.
+Softmax predictions, cross-entropy, and the exact final-weight Hessian are
+unchanged, yet the denominator ||W|| grows. c=0 gives proxy 1.101613; c=100
+gives 0.005508; the exact Hessian stays 0.393224. Thus the proxy can be made
+arbitrarily small under an exact softmax symmetry, even with no width change.
+This is stronger than ordinary curvature dependence on ReLU scaling.
+
+Experiment implication: include the cheap common-logit-shift invariance audit
+and explicit components (output RMS, hidden RMS, weight RMS) when interpreting
+proxy scores. Weight norm alone, hidden RMS alone, and prediction confidence
+are appropriate matched controls. Do not infer lower curvature from this
+proxy without measuring it.
+
+3. RMS VERSUS FROBENIUS: BATCH NORMALIZATION, NOT AN EXTRA WIDTH FACTOR.
+
+paper/main.tex:216 specifies Frobenius norms. image/src/util.py:153-171 uses
+RMS over every element. For output P of shape B x K, hidden A of shape B x D,
+and final kernel W of shape D x K,
+  RMS(P) RMS(A) / RMS(W) = ||P||_F ||A||_F / (B ||W||_F).
+The K and D factors cancel exactly. The implementation's score is therefore
+the batched Frobenius expression divided by batch size B; it is NOT an extra
+width normalization relative to that expression. It agrees with the
+single-sample norm expression when B=1. Deterministic checks cover widths
+1, 32 and 512, class counts 2, 10 and 100, and batch sizes 1, 28 and 64.
+
+For subset_size=1500 and BATCH_SIZE=64 there are 23 batches of 64 and one of
+28. Max raw Frobenius and max RMS scores can rank candidates differently
+because the final batch has a different scale. This is an actual method
+change that needs an explicit name and fixed aggregation definition.
+
+Width and class-count dependence still enter the proxy itself. In particular,
+RMS(p) ranges from 1/K for uniform predictions to 1/sqrt(K) for one-hot
+predictions. With roughly width-independent hidden RMS and He initialization,
+weight RMS is approximately sqrt(2/D), so the initial proxy depends on D and
+K. This last scaling is a heuristic expectation, not an empirical result.
+Duplicating hidden units and dividing their outgoing weights by the number
+of copies also changes the score while preserving the represented function.
+
+Experiment implication: log dimensions, batch sizes, all three components,
+and both raw and RMS scores. Use a fixed probe subset/partition shared across
+configurations within a replicate. Analyze within-width and within-dataset
+rankings in addition to pooled correlations.
+
+4. CONFIRMED SELECTION BUG: THE 0.1 FILTER IS ORDER-DEPENDENT.
+
+image/stcvx.py:52 accepts any positive finite score while filling the first
+10 slots, but thereafter accepts a better candidate only if mu > 0.1.
+Thus a low-scoring candidate can be kept when early and rejected when late.
+
+Same pool: 0.20, 0.21, ..., 0.29, 0.01, 0.02.
+- High values first => selected 0.20 through 0.29.
+- Low values first => selected 0.01, 0.02, 0.20 through 0.27.
+This is neither the global lowest-10 rule described at paper/main.tex:350 nor
+a consistent threshold rule. The CSV logs valid candidates, so existing
+search logs can be re-ranked retrospectively, but the corrected shortlist
+may contain models that were never fully trained.
+
+Experiment implication: use a single explicit eligibility rule applied to
+every candidate, separate invalid/nonfinite/degenerate states from score,
+and record the candidate order. A positive 0.1 cutoff has no theorem support
+here and depends on normalization and class count; if retained as a heuristic
+it needs a predeclared ablation, not post-hoc tuning on test results.
+
+5. BLOCKER FOR CLEAN HPO COMPARISON: TEST DATA ENTERS SELECTION.
+
+run_experiment (image/src/util.py:103-128) internally uses validation loss for
+early stopping, but RETURNS accuracy on data.x_test. The Hyperopt, HEBO,
+TuRBO and BOHB objective callbacks consume this return value directly:
+  image/hyperopt_hpo.py:16-20
+  image/hebo_hpo.py:42-46, 61
+  image/turbo_hpo.py:17-33
+  image/bohb_hpo.py:17-21
+These optimizers therefore optimize test accuracy, despite the internal
+validation-based early stopping. Fresh retraining of a chosen configuration
+does not remove the hyperparameter-level test exposure.
+
+FGHPO image/stcvx.py:69-74 fully trains up to 10 models and prints each test
+accuracy. image/parsers/parse.py:28-39 takes their maximum per run. If used for
+the reported score, this chooses among finalists on the test set. The current
+script does not implement a held-out-validation winner followed by one test
+evaluation. This contradicts the written protocol at paper/main.tex:572.
+
+The proxy itself also samples from all data.x_train at util.py:143, whereas
+final training reserves the last 20% through validation_split=0.20. Probe
+training therefore includes eventual validation examples; under uniform
+sampling the expected overlap is 300 of 1500 examples. This is not test-set
+leakage, but means the internal validation slice is not isolated from the
+overall search procedure.
+
+Experiment implication: define immutable train/validation/test indices before
+any proxy training; fit probes on train only, compare completed candidates
+on validation, and evaluate the selected winner on test only after selection
+is locked. Retain previous results as exploratory/provenance-bearing, rather
+than relabeling them as clean final estimates.
+
+6. THE APPENDIX CONVERGENCE RESULT DOES NOT JUSTIFY THIS IMAGE PROXY.
+
+paper/appendix/proofs.tex:81-110 is the usual gradient-descent rate under
+beta-smoothness AND mu-strong convexity, with step size 1/beta. Those hypotheses
+are not supplied by a positive Hessian Frobenius norm. main.tex:316's footnote
+equating strong convexity to a lower bound on the Hessian norm is false:
+strong convexity requires Hessian >= mu I, i.e. a positive minimum eigenvalue.
+Even a PSD softmax-head Hessian has common-logit null directions; a positive
+Frobenius norm does not remove them. Deep ReLU/Adam/weight-decay training adds
+further differences from the theorem's assumptions.
+
+main.tex:289-305 also omits the linear Taylor term in relating local loss
+increase to Hessian norm. That requires stationarity (or a controlled gradient
+term), which one subset epoch does not establish. The deterministic example
+f(w)=log(1+exp(w)), centered at 0 with epsilon=0.1, shows a large difference
+between exact normalized ball sharpness and the Hessian-only approximation.
+For indefinite Hessians away from minima, the spectral norm is the maximum
+absolute eigenvalue, not necessarily the maximizing positive curvature.
+The rank factor must refer to parameter/Hessian dimension, whereas n is
+defined as the number of input features at main.tex:207.
+
+Finally, minimizing a lower bound does not by itself minimize the quantity
+being bounded, even if the lower bound were valid. A maximum over sampled
+mini-batches of lower bounds is not automatically an upper bound on the
+global Hessian or on epsilon-ball sharpness. The prose switches between
+these at main.tex:280-314. An empirical ranking study is needed separately.
+
+7. CONFIGURATION / BUDGET DRIFT TO RECORD BEFORE FINAL RUNS.
+
+- util.py:150 says "3 epochs" but :151 executes 1, on 1500 examples. Paper
+  says one epoch over training data; these are different training budgets.
+- The proxy uses constant learning rate (get_model called without
+  decay_steps); full training uses a cosine schedule. It builds a fresh model
+  for final training, so the probe weights are not continued.
+- Probe scoring uses model.predict (inference-mode BatchNorm, augmentation
+  disabled), whereas probe fitting uses training behavior. State the score's
+  mode explicitly, especially after only 24 optimizer steps.
+- stcvx.py uses 100 valid configurations and 10 finalists. Current baseline
+  scripts generally use 30; paper/main.tex:572 describes 50/10 and baseline
+  budget 50. Failed candidates are not logged as rows and do not advance the
+  FGHPO valid-count budget, making total attempted work unbounded.
+- stcvx.py and util.py do not set or persist NumPy, Python, or framework seeds,
+  sampled probe indices, initialization IDs, training histories, or checkpoints.
+  A random filename is not a reproducibility seed.
+- util.py:328 fixes MNIST width to 128 while n_units remains a sampled space
+  dimension. Report the effective space, not merely the configuration dict.
+- main.tex:605 reports proxy/final-validation-loss Spearman rho=-0.14 but
+  describes it as supporting lower-proxy selection. As written, that sign
+  points in the opposite direction; raw correlation code/data must resolve
+  whether a metric/sign/wording mismatch exists.
+
+8. A SEPARATE LOCAL MANUSCRIPT HAS A DIFFERENT, VALIDLY SCOPED MOTIVATION.
+
+A_Generalisation_Signal_Need_Not_Be_a_Model_Selection_Signal/neurips_2026.tex
+:548-612 derives a final-layer Hessian for linear output with MSE, and
+:777-787 explicitly notes that pointwise bounds need not preserve rankings.
+:798-815 then defines a width-normalized activation-energy proxy and an
+all-layer empirical extension. This is a different loss, proxy, and claim
+from image/src/util.py. Do not silently transfer its proof to the current
+softmax cross-entropy ratio, or merge results from the two methods under the
+same label. The manuscript's historical relationship to the submitted paper
+needs confirmation from provenance, not inference from its presence.
+
+Recommended next experiments, in order:
+1. Repair and test split/selection semantics and establish a versioned
+   manifest of exact method, proxy, budgets, dimensions, seeds, and failures.
+2. Re-rank existing logged FGHPO pools under explicit uniform eligibility
+   rules; quantify changed finalist sets without inventing missing scores.
+3. On a small shared candidate pool, measure early proxy and its components,
+   early validation loss, simple architecture/weight-norm controls, and exact
+   final-head Hessian quantities. Measure final validation selection quality
+   using paired seeds/splits and account for total training/probe compute.
+4. Only after this diagnostic panel, launch bounded final image comparisons
+   with locked protocols and untouched test sets. Preserve all old runs and
+   label every retrospective decision as exploratory.

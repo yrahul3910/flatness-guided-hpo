@@ -1,0 +1,30 @@
+Frozen normalization audit on all saved MNIST heads
+
+Complete: 16 saved checkpoints, 14 transformations each, 224 retained cases. Every preregistered numerical check passed. Inference and audit loop: 8.268 seconds on local CPU; incremental paid compute: $0. All 16 checkpoint files retained their pre-audit hashes. No training, model selection, validation correlation, accuracy measurement, or paper changes occurred.
+
+Frozen protocol SHA256: 0f9364f9d435483dfc3cbe282483b65ceea1686094b6428da85a255acb57b44d. Formulas, transformation panel, aggregations, and numerical tolerances were frozen before any normalization checkpoint evaluation. The selected models are the complete earlier pilot panel, without exclusions. Only preprocessed official MNIST training inputs [0,1500) entered inference. The audit did not read labels, validation endpoints, or official test arrays.
+
+C1 is the gauge-centered relative head trace: mean_i [(1-sum_k p_ik^2) * sum_j h_ij^2 * sum_k Wc_jk^2], where Wc centers each weight row across classes. C2 is logit-temperature curvature: mean_i Var_{k~p_i}(z_centered_ik), including the saved output bias in z=hW+b. Both are arithmetic means across the 1500 examples. The original comparator is the repository's RMS(p)*RMS(h)/RMS(W) maximum across fixed consecutive batches of 64, including the final 28-example batch. The unweighted exact head trace is retained only as an explanatory diagnostic.
+
+All transformations preserve the output bias and predictions. Exact observed score ratios to each model's own baseline, with ranges across all 16 checkpoints:
+Transformation                   Original RMS proxy       C1        C2
+Common shift +100                0.00119216..0.00120495   1         1
+Rowwise linspace(-2,2,D) shift    0.10136758..0.10235788   1         1
+Global scale 0.1                 100                     1         1
+Global scale 10                  0.01                    1         1
+Per-unit geomspace(0.1,10,D)      0.92686293..1.16567173   1         1
+Reverse hidden permutation       1                       1         1
+Twofold exact duplication        2                       0.5       1
+Fourfold exact duplication       4                       0.25      1
+
+The complete panel also includes the baseline, common shifts -100, -1, 0, +1, and identity global scale 1. All are retained in aggregate_ratios.json and per-model cases.jsonl. Displayed exact ratios mean agreement within the frozen tolerances, not exact floating-point bit equality.
+
+Numerical evidence: maximum probability difference across all transformed float64 heads was 5.81879e-12; maximum centered-logit difference was 2.04445e-11. No transformed argmax changed. Saved float32 Keras outputs agreed with baseline float64 reconstruction within 5.85569e-7, under the preregistered 1e-5 tolerance. Maximum absolute analytic-score discrepancy was 3.55627e-12 for C1 and 9.37028e-14 for C2. All case checks used the frozen probability threshold 1e-9, centered-logit rtol=1e-8/atol=1e-9, and metric rtol=1e-8/atol=1e-10. No tolerance was adjusted. C1, C2, raw-head-trace contributions and centered weight row norms had no zero, near-zero (absolute <=1e-10), negative, or nonfinite values in any retained case.
+
+What this establishes: C1 removes the tested common-logit gauge and positive neuron-rescaling dependence of the original score, but exact duplication still divides it by r. It therefore fails a natural representation-comparability requirement. C2 is invariant across this fixed prediction-preserving panel, consistent with its function of predicted probabilities. The original score can change by orders of magnitude while the model's predictions stay fixed. Raw head curvature also changes under rescaling and duplication, so changing coordinates does not by itself make a head-curvature diagnostic invalid; it limits claims of representation-independent comparability.
+
+What this does not establish: neither candidate is a repaired lower bound for the original theorem, a full-network flatness measure, an early-selection predictor, or evidence of generalization. C2 has different scientific meaning: a label-independent output-confidence curvature. Uniform predictions give zero and saturated predictions approach zero, so C2 alone cannot distinguish confident correctness from confident errors. No metric was chosen, sign-flipped, correlated with validation outcomes, or substituted into historical results based on this audit.
+
+Evidence: metadata.json and input_hash.json record source, protocol, checkpoint, data and evaluated-input hashes. The executed script and exact protocol are copied into this run. Each seed*-config* directory contains baseline.npz (float64 hidden activations, W, b, saved Keras probabilities, reconstructed probabilities and centered logits), per_example_scores.npz (all case contributions and centered weight row norms), cases.jsonl (all batch components, transformed array hashes, scores, ratios, checks and failures), and summary.json. aggregate_ratios.json is emitted only after the complete panel succeeds. integrity-summary.json records independently collected maxima and post-audit checkpoint hashes. command.txt contains the launch command. source formatting, Ruff, Python compilation and direct no-sloppy checks passed.
+
+Runtime messages: Keras warned that a tensor input did not use the one-element list structure recorded in the Functional input signature; inference succeeded and its baseline reconstruction check passed for every model. The warning was retained rather than suppressed. No supported GPU was detected, as expected for this CPU-only run.

@@ -1,0 +1,68 @@
+{
+  "status": "PASS: no remaining source correctness blocker found in reviewed finalizer or retained-field alignment",
+  "reviewed_utc": "2026-10-03T01:20:41.762225+00:00",
+  "reviewer": "/root/pilot_review",
+  "scope": "Independent source review and retained QA-record verification. This command only reads source/JSON/text bytes and writes this new review artifact; it imports no project/model modules and opens no research dataset arrays.",
+  "sha256": {
+    "image/finalize_matched.py": "cfae21a8da2eff53fd23dea7b4e87dc92c7bb7798077f0c58884e2c6005be705",
+    "tests/test_finalize_matched.py": "de95362b4db7ffab84424f4d09834c1726af3c586e6501387f4ed64799f6f088",
+    "image/matched_hpo.py": "a7dd2e840d12b8fd86cd95970b2ddbae1c32de4dec74963becd8632c178a8eb6",
+    "image/src/matched_training.py": "b38eaa656f4b8bfa73d646cdd6a38dbd1c0fc2a736f1b70deb12731a9aeb8af9",
+    "image/src/matched_contract.py": "95d50b098a227129cad48feec3f84147c1c34be7cea84966720c75215f46c862",
+    "sweep-results/research-audit-20261002/prospective-image-study/protocol/design_protocol.json": "4a8cf834204f31bd86b48c401140d2001ec40ca3f58a63d559e14a554865a76d",
+    "sweep-results/research-audit-20261002/prospective-image-study/data-provenance/prepare_calibration.py": "b15779a83f7b4f022ea1110ba1b765609c038af14bd795bc870f8ec96d20b167",
+    "sweep-results/research-audit-20261002/prospective-image-study/runner-review/implementation-verification.json": "22f0712e809e2bd4fdc2250a7598caf29668cbab64eb5f374ae7bce2ca6a1ab3",
+    "sweep-results/research-audit-20261002/prospective-image-study/runner-review/unit-tests-final.txt": "d49c654d0b47870ab3a8442d76300c71c1485548dea1af629f6c826997b2d96f"
+  },
+  "checks": {
+    "assignment": "Source review PASS: exact nonempty distinct run set matches every assigned dataset/repetition exactly once; parsed manifest and settings use prospectively supplied canonical JSON SHA256 (sorted keys, compact separators, no newline, allow_nan=False).",
+    "all_selected_complete": "Source review PASS: all four method IDs required; run and every arm complete; selected list has declared K unique IDs, agrees with saved shortlist, and every selected final has a complete phase and verified model.keras bytes.",
+    "incumbent": "Source review PASS: candidate is recomputed as maximum saved validation accuracy, then ascending candidate ID; arm checkpoint/CE/accuracy agree exactly with its complete phase. CE does not break candidate ties.",
+    "seal": "Source review PASS: phase/checkpoint bytes, required run metadata/probes/decision files, existing source snapshots, assignment file and finalizer source are bound in suite.json; suite.sha256 and every artifact are checked before evaluation access.",
+    "evaluation_inputs": "Source review PASS: exact CIFAR dataset mapping and absolute assigned archive paths; all archive byte SHA256 values checked before first np.load; exact evaluation_x/evaluation_y keys and array validation; class count matches dataset.",
+    "one_shot": "Source review PASS: exclusive attempt markers in suite and every run precede evaluation archive hashing/loading and remain after failure. A later attempt fails before new archive access. Pre-attempt seal/artifact validation failures do not consume holdout access.",
+    "classification": "Source review PASS: only selected checkpoints are restored; saved model-weight hash and probabilities validated; one inference per distinct selected checkpoint; probabilities, predictions, truth and error counts saved. Shared winners reuse the same classification result.",
+    "schema_alignment": "Source review PASS: declared per-epoch train/validation CE and accuracy, optimizer steps, learning rate, shuffle hash, callback state, augmentation state and elapsed time are retained. Phase metadata retain parameter count, seeds/settings, initialization/source/data hashes. Completed final uses actual EarlyStopping restoration before post-phase metrics/checkpoint saving.",
+    "calibration_preparation": "Source review PASS only: pinned training manifest/NPZ hashes precede loading; four training keys only; independent dataset/split SHA256-PCG64 selections of 1500/40000 fit and 1024/10000 tuning rows; official offsets retained; exclusive output directory and saved equality checks; no evaluation/model path."
+  },
+  "resolved_findings": [
+    "Assignment originally bound only dataset/repetition; corrected with canonical full manifest/settings digests.",
+    "Incumbent identity originally checked without recomputing best accuracy; corrected with accuracy then candidate-ID recomputation.",
+    "Required metadata/probe artifact hashing now fails if the files are absent."
+  ],
+  "qa_evidence": {
+    "owner_ran_tests": 9,
+    "mode": "pure arrays and mocked inference only",
+    "passed": true,
+    "elapsed_test_seconds": 0.216,
+    "all_reported_source_hashes_match_current_files": true,
+    "ruff": "passed",
+    "format": "passed",
+    "typecheck": {
+      "errors": 0,
+      "warnings": 79,
+      "fully_clean": false,
+      "report": "typecheck-final.txt"
+    },
+    "no_sloppy": {
+      "errors": 0,
+      "advisory_warnings": 17,
+      "report": "no-sloppy-final.txt"
+    },
+    "independent_reexecution": false
+  },
+  "protocol_wording_note": "Frozen data.sources mentions the pinned Keras loader; actual preparation uses allowlisted official archive members directly, preserving batch order and preprocessing. Root notified to state the actual path in launch provenance without editing the frozen design.",
+  "remaining_launch_conditions": [
+    "Actual outcome-blind hardware calibration and conservative cost/memory gate are not provided by source review.",
+    "Executable launch assignment must freeze the exact cohort, full semantic manifest/settings hashes, source/environment/input identities, evaluation archive mapping and resource bounds before scientific training.",
+    "Finalizer binds retained source/input metadata and decisions; launch checks plus record audit must establish their agreement with the prospective execution freeze. It does not independently recompute every probe score or shortlist from raw model outputs."
+  ],
+  "actions": {
+    "research_dataset_arrays_read": false,
+    "model_modules_imported_by_reviewer": false,
+    "models_constructed_or_loaded": false,
+    "training_or_inference": false,
+    "cloud_actions": false,
+    "source_or_frozen_artifacts_modified": false
+  }
+}

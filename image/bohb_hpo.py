@@ -1,53 +1,130 @@
+"""Run a unit-coordinate BOHB adapter with validation selection and one held-out test evaluation.
+
+Numeric KDE coordinates stay in [0, 1]. Padding and dense-width coordinates retain BOHB's ordered-discrete treatment,
+using unit-bin centers for the shared conditional/logarithmic CIFAR decoder. This is a changed search-space adapter.
+"""
+
+import json
+import math
 import traceback
+from collections.abc import Mapping
+from importlib.metadata import version
+from itertools import count
+from typing import Literal, TypedDict
 
 import bohb.configspace as bohb_space
+import numpy as np
 from bohb import BOHB
 
-from image.src.config import hpo_space
-from image.src.data import Dataset
-from image.src.util import get_data, run_experiment
+from image.src.config import Config
+from image.src.experiment import SearchRun
+from image.src.matched_contract import N_COORDINATES, decode
+
+CATEGORY_CENTERS = {2: [0.25, 0.75], 4: [(index + 0.5) / 5 for index in range(5)]}
+
+
+class ProposalRecord(TypedDict):
+    event: Literal["start", "end"]
+    call_id: int
+    latent: list[float | str]
+    config: Config | None
+    raw_budget: float
+    epochs: int
+    selection_eligible: bool
+    loss: float | str | None
+    error: str | None
+
+
+def unit_space(seed: int) -> bohb_space.ConfigurationSpace:
+    """Keep numeric KDE units normalized and categorical values at decoder bin centers.
+
+    Parameter creation order is coordinate order: the installed Configuration sorts by each parameter's creation ID.
+    """
+    parameters = []
+
+    for index in range(N_COORDINATES):
+        name = f"x{index}"
+
+        if index in CATEGORY_CENTERS:
+            parameters.append(bohb_space.CategoricalHyperparameter(name, CATEGORY_CENTERS[index]))
+        else:
+            parameters.append(bohb_space.UniformHyperparameter(name, 0.0, 1.0))
+
+    return bohb_space.ConfigurationSpace(parameters, seed=seed)
+
 
 if __name__ == "__main__":
-    DATASET = "cifar10"
-    N_CLASSES = 10
+    with SearchRun("bohb-unit-coordinate") as run:
+        max_budget = 100
+        call_ids = count(1)
+        proposal_path = run.directory / "bohb-proposals.jsonl"
+        metadata = {
+            "adapter": "bohb-unit-coordinate",
+            "decoder": "image.src.matched_contract.decode",
+            "coordinate_names": [f"x{i}" for i in range(N_COORDINATES)],
+            "continuous_bounds": [0.0, 1.0],
+            "categorical_centers": CATEGORY_CENTERS,
+            "categorical_kde_type": "installed ordered-discrete; to_list uses category indices",
+            "fit_policy": "fresh model for every objective call, including repeated configurations and rungs",
+            "packages": {name: version(name) for name in ("bohb-hpo", "numpy", "scipy", "statsmodels")},
+        }
+        (run.directory / "adapter.json").write_text(json.dumps(metadata, indent=2, allow_nan=False) + "\n")
 
-    data: Dataset = get_data(DATASET)
+        def evaluate_bohb(config: Mapping[str, float], budget: float = 100) -> float:
+            """Record latent/decoded proposals and preserve the optimizer RNG across cold model fits.
 
-    def evaluate_bohb(config, budget=100, *args, **kwargs):
-        try:
-            acc = float(run_experiment(data, config, N_CLASSES, DATASET, epochs=int(budget)))
-            # BOHB minimizes, so we return negative accuracy or 1.0 - acc
-            return 1.0 - acc
-        except Exception:
-            traceback.print_exc()
-            return 100.0
+            Recoverable model errors retain loss 100. Every other exception is recorded and propagated.
+            """
+            # BOHB truncates some nominal 100-epoch rungs to 99 before invoking this callback.
+            epochs = max_budget if budget >= max_budget - 1 else round(budget)
+            coordinates = [float(config[f"x{i}"]) for i in range(N_COORDINATES)]
+            record = ProposalRecord(
+                event="start",
+                call_id=next(call_ids),
+                latent=[value if math.isfinite(value) else str(value) for value in coordinates],
+                config=None,
+                raw_budget=budget,
+                epochs=epochs,
+                selection_eligible=epochs >= max_budget,
+                loss=None,
+                error=None,
+            )
+            # BOHB and SciPy use the legacy global stream; SearchRun reseeds it for each model fit.
+            optimizer_rng_state = np.random.get_state()  # noqa: NPY002 - preserve the installed sampler's RNG.
 
-    # Convert the space to bohb format
-    space = []
-    for key, val in hpo_space.items():
-        if isinstance(val, list):
-            space.append(bohb_space.CategoricalHyperparameter(key, val))
-        elif isinstance(val, tuple):
-            if isinstance(val[0], int):
-                space.append(bohb_space.IntegerUniformHyperparameter(key, *val))
+            try:
+                decoded = decode(coordinates)
+                record["config"] = decoded
+
+                with proposal_path.open("a") as stream:
+                    stream.write(json.dumps(record, allow_nan=False) + "\n")
+
+                loss = 1.0 - run.evaluate(decoded, epochs=epochs, select=epochs >= max_budget)
+                record["loss"] = loss if math.isfinite(loss) else str(loss)
+            except BaseException as error:
+                record["error"] = repr(error)
+
+                if isinstance(error, (ValueError, RuntimeError)):
+                    traceback.print_exc()
+                    record["loss"] = 100.0
+
+                    return 100.0
+
+                raise
             else:
-                space.append(bohb_space.UniformHyperparameter(key, *val))
-        else:
-            msg = f"Key {key} must be a list or tuple"
-            raise ValueError(msg)
+                return loss
+            finally:
+                np.random.set_state(optimizer_rng_state)  # noqa: NPY002 - restore the installed sampler's RNG.
+                record["event"] = "end"
 
-    opt = BOHB(
-        configspace=bohb_space.ConfigurationSpace(space),
-        evaluate=evaluate_bohb,
-        min_budget=1,
-        max_budget=30,
-    )
-    logs = opt.optimize()
-    config = logs.best["hyperparameter"].to_dict()
-    
-    try:
-        score = float(run_experiment(data, config, N_CLASSES, DATASET))
-        print(f"Best config: {config}")
-        print(f"Best score: {score}")
-    except Exception:
-        traceback.print_exc()
+                with proposal_path.open("a") as stream:
+                    stream.write(json.dumps(record, allow_nan=False) + "\n")
+
+        opt = BOHB(
+            configspace=unit_space(run.seed),
+            evaluate=evaluate_bohb,
+            min_budget=1,
+            max_budget=max_budget,
+        )
+        opt.optimize()
+        run.finish()

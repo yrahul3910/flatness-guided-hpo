@@ -1,0 +1,241 @@
+{
+  "version": "kmnist-four-arm-exploratory-v1",
+  "status": "frozen_before_training_and_model_holdout_evaluation",
+  "created_utc": "2026-10-03T00:19:35.729253+00:00",
+  "dataset": "kmnist",
+  "dataset_path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/prepared-data/dataset.npz",
+  "dataset_sha256": "23e147a91f07fa3e7f2b717da1afdde7b8e52bc04fc762d620d392ce31eb6753",
+  "data_plan_sha256": "efee1dfaeaac860480b20323675b9e399fa56fd8589d820de5dc5f21ad3130ae",
+  "data_manifest_sha256": "2b945b1456250e8fdbc7e2388b9036139eb2c1f65871988886bb962cdec7839c",
+  "blocks": [
+    401,
+    419
+  ],
+  "configurations": {
+    "c000000": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-05
+    },
+    "c000001": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001
+    },
+    "c000002": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-05
+    },
+    "c000003": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001
+    },
+    "c000004": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05
+    },
+    "c000005": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001
+    },
+    "c000006": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05
+    },
+    "c000007": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 0.001
+    }
+  },
+  "candidate_pool": "Fixed factorial eight candidates per block; no proposals or range changes after outcomes; candidate occurrence IDs preserved.",
+  "batch_size": 64,
+  "max_epochs": 100,
+  "patience": 25,
+  "shortlist_size": 2,
+  "max_seconds": 870,
+  "hard_subprocess_seconds": 900,
+  "arms": {
+    "original_rms": "Minimize original float32 max_batch RMS(probability)*RMS(hidden)/RMS(kernel), including tail. Preserve as baseline; original threshold0.1 logged but not applied.",
+    "head_trace": "Minimize sample-weighted mean_i (1-||p_i||_2^2)||h_i||_2^2; p reconstructed in float64 from the affine head with numerical agreement checks. Exact kernel-only mean-CE Hessian trace, not full-network curvature.",
+    "early_tuning_ce": "Minimize actual compiled Keras CE on common tuning rows at one-epoch probe.",
+    "random": "Shuffle sorted common eligible candidate IDs with fixed selection seed, take first2; independent of scores and outcomes."
+  },
+  "geometry": {
+    "parameters": "Output kernel only in ordinary Euclidean/Frobenius coordinates; output bias and penultimate features fixed during perturbation interpretation.",
+    "noise_convention": "Fixed per-coordinate isotropic covariance sigma^2 I on head coordinates in the local sensitivity identity; no noise is sampled in this pilot and no radius or sigma is tuned. Architecture and head dimensions are fixed across candidates.",
+    "limitations": "Raw trace changes under compensating feature/kernel rescaling and neuron duplication. It does not bound full-network curvature, guarantee classification quality, or order eventual accuracy. Positive trace is not required; zero trace is recorded."
+  },
+  "eligibility": {
+    "common": "Every attempted probe retained. Select only complete candidates with finite positive original RMS, finite nonnegative trace and finite tuning CE. All arms use exactly this common subset.",
+    "failed_or_zero_rms": "Consumes candidate slot; excluded from every arm; no replacement/refill. Conclusions conditional on nondegenerate original-score candidates.",
+    "insufficient_pool": "Abort comparison before evaluation if fewer than2 eligible candidates per block.",
+    "final_failures": "Any shortlisted final not complete aborts the entire comparison before evaluation; all partial cost and checkpoints retained. No alternate finalist or incumbent chosen."
+  },
+  "lifecycle": {
+    "probe": "One epoch with constant candidate LR. Shared fitting sample and shared phase shuffle; scores measured on all1500 fit rows in shared seeded order.",
+    "final": "Fresh candidate-and-phase-keyed initialization, no probe state reused; Adam with candidate WD and cosine LR over100*ceil(1500/64)=2400 updates; at most100epochs.",
+    "checkpoint": "Actual Keras EarlyStopping monitor=val_loss,patience25,min_delta0,restore_best_weightsTrue. Lowest compiled tuningCE checkpoint restored. Terminal optimizer state retained, no resume claim.",
+    "arm_incumbent": "Among its two fully trained restored finalists, maximize tuning accuracy, then minimize tuning CE, then lexicographic candidateID. All four arms fixed before any heldout model evaluation.",
+    "union_reuse": "Train each unique shortlisted candidate once per block; reuse identical saved result for all arms selecting it."
+  },
+  "seeds": {
+    "recipe": "SHA256 compact JSON [fghpo-four-arm-v1,kmnist,block,candidate_id,phase,role], first4bytes big-endian masked0x7fffffff.",
+    "initialization": "CandidateID, phase probe/final, role initialization; independent of rank, arm or attempted order.",
+    "shared_roles": "candidate_id=shared; probe/subset, probe/shuffle, final/shuffle, selection/random.",
+    "augmentation": "None in fixed MNIST-shaped CNN builder."
+  },
+  "evaluation": {
+    "primary": "Heldout top1 classification error count out of1000, error rate and complementary accuracy; lower error preferred.",
+    "secondary": "No loss-based outcome interpretation; report tuning CE/accuracy only as selection/protocol evidence. No all-candidate heldout correlation or oracle regret.",
+    "lock": "Write complete probes,shortlists,finals,costs and all-block arm decisions, hash durable decisions file, then load evaluation arrays and verify lock unchanged.",
+    "evaluated_models": "Only distinct arm incumbent checkpoints, at most8; shared incumbents evaluated once. Save probabilities,predictions,labels and checkpoint hashes for record-only verification.",
+    "holdout_policy": "KMNIST official-test subset frozen independently; new to available project evidence. It becomes spent for adaptive follow-up once outcomes are inspected. No parameter, direction, checkpoint-policy or eligibility change after outcomes.",
+    "interpretation": "Two initialization blocks on one shared small-data split; descriptive exploratory evidence only. No statistical significance, method superiority or full-data KMNIST/CIFAR claim."
+  },
+  "cost": {
+    "provider": "Local Mac CPU only;2intra-op/1inter-op threads, no accelerator, no paid resource.",
+    "maximum_phase_counts": "16one-epoch probes and at most16union finalfits; at most1616epochs/38784optimizerupdates.",
+    "wall_bound": "870seconds cooperative measured after input loading;900seconds hard entire subprocess includingimports. On timeout retain incomplete evidence and do not launch another run automatically.",
+    "physical": "Shared16probes plus union finalfits and distinct-incumbent evaluation.",
+    "logical": "Each arm/block charged common8probes and its2finalfits; report seconds and epochcounts separately. Shared computation is not independent repeated-arm execution. Standalone random need not incur probe work.",
+    "paid_usd": 0
+  },
+  "sources": {
+    "image/src/__init__.py": {
+      "path": "<RESEARCH_WORKTREE>/image/src/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "image/src/config.py": {
+      "path": "<RESEARCH_WORKTREE>/image/src/config.py",
+      "sha256": "1e87a606e1bf54127f955cbfdcebdb48ab78d40d76d6aa200cdfc2ffc68131e9"
+    },
+    "image/src/data.py": {
+      "path": "<RESEARCH_WORKTREE>/image/src/data.py",
+      "sha256": "4b57ecfbae3565ac5f5eca38f9569d960516277519afe06baf21050ceb59e2d1"
+    },
+    "image/src/experiment.py": {
+      "path": "<RESEARCH_WORKTREE>/image/src/experiment.py",
+      "sha256": "e1f23d62214d931989f8d8bcde955fb476b4e222e53aeac2a506073513fc68de"
+    },
+    "image/src/matched_contract.py": {
+      "path": "<RESEARCH_WORKTREE>/image/src/matched_contract.py",
+      "sha256": "fbb58579d82a09eda23150fb63ff9fcc95a4fee0a431faccc40b09848b4519d5"
+    },
+    "image/src/matched_training.py": {
+      "path": "<RESEARCH_WORKTREE>/image/src/matched_training.py",
+      "sha256": "1dd1a156c03f8b6d04bf1f5f37034eeea8245adb8e309b038bd3853376e2d236"
+    },
+    "image/src/util.py": {
+      "path": "<RESEARCH_WORKTREE>/image/src/util.py",
+      "sha256": "0265e474b930fc19c2a210e095e38f48a19a5e38021a9bb532f7ba3c47530e76"
+    },
+    "pyproject.toml": {
+      "path": "<RESEARCH_WORKTREE>/pyproject.toml",
+      "sha256": "a9613ecf8fad8d69b9e5150524fda11b8852eabee9140e9d8ae21c7030c88f54"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/data-plan.json": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/data-plan.json",
+      "sha256": "efee1dfaeaac860480b20323675b9e399fa56fd8589d820de5dc5f21ad3130ae"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/holdout-provenance-verification.json": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/holdout-provenance-verification.json",
+      "sha256": "4ab94922c2bc693ff4144f7ffcb75a4af30d338a8ac47219ba8e81829cc4a328"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/holdout-provenance.json": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/holdout-provenance.json",
+      "sha256": "b664cd5beee1d8d410c1bd70a69acd568901aaa695ba010d75afb9fa42190fe2"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/holdout-provenance.txt": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/holdout-provenance.txt",
+      "sha256": "cbafbed9ad595706eb4e0c9d0cde59cec40e0fc89486d9899cf5142237eb9fc5"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/independent-review/final-delta-review.txt": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/independent-review/final-delta-review.txt",
+      "sha256": "ca8b24b7bfee8360a43e2e1f0de659a965ad9da9322d28f1c28d233bbc674c7f"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/independent-review/review.txt": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/independent-review/review.txt",
+      "sha256": "67503555b60de643363ef50dccb23c95ab07c99e7181dab3d6ccd11c93ea39d3"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/independent-review/score-math-check.json": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/independent-review/score-math-check.json",
+      "sha256": "626d75eb92ec435b86b4033991d53769b4fc4dc931942afa10d6ed618a69b90a"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/preflight-verification.json": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/preflight-verification.json",
+      "sha256": "50a709a0a793143f501de30d8dcab0de65b254bfddcb93d181746ff2840f8398"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/prepare_data.py": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/prepare_data.py",
+      "sha256": "0f5ef4a5631168308f10f4a70543f84280ba42c528f037edf29b74fbe865efd6"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/prepared-data/index-freeze.json": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/prepared-data/index-freeze.json",
+      "sha256": "b4289cdea32466d92d436cfd0b85908845ff6ae2f0ab736e796ed96fce24d8fa"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/prepared-data/indices.npz": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/prepared-data/indices.npz",
+      "sha256": "ea1f5220c006fce3410b0db0105ca67b1a05e75882764fffdf047ff81b4e1c96"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/prepared-data/manifest.json": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/prepared-data/manifest.json",
+      "sha256": "2b945b1456250e8fdbc7e2388b9036139eb2c1f65871988886bb962cdec7839c"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/run_pilot.py": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/run_pilot.py",
+      "sha256": "34e07bb29bfda0a32666a5c7b5973a9e2cd971ec1f2b301a7a91a86cbdfbb432"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/seed-preflight.json": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/seed-preflight.json",
+      "sha256": "df85d11b6c2608b18c769b3345a2efd4f194f81db0098cb1c07978cc2ed96f22"
+    },
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/verify_preflight.py": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/four-arm-pilot-preparation/verify_preflight.py",
+      "sha256": "e9800a2598abe821db7990950b143bd5d9c06bffe4c9fe645359be95e45ee8cd"
+    },
+    "uv.lock": {
+      "path": "<RESEARCH_WORKTREE>/uv.lock",
+      "sha256": "c7435dcd49775c94e5952e197d14b06a4feb0ad3614bee227b7b9494208a16ea"
+    }
+  },
+  "frozen_utc": "2026-10-03T00:30:25.952510+00:00",
+  "preparation_disclosure": "Mechanical data preparation read and copied the fixed official-test arrays and validated shapes/dtypes/label range. No models, predictions, outcome summaries, class counts, or sample plots were used before this freeze."
+}

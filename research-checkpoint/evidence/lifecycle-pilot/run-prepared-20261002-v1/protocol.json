@@ -1,0 +1,162 @@
+{
+  "version": "2-frozen-before-execution-review",
+  "prepared_utc": "2026-10-02T21:40:44.252308+00:00",
+  "question": "Does minimizing the unchanged original one-epoch RMS score select lower restored-checkpoint validation error than minimizing validation CE from the same probe state?",
+  "status": "Exploratory development on reused MNIST training/validation examples. Fresh seeds and a freeze before execution do not make this independent held-out-data confirmation or confirmatory evidence. Unthresholded metric/lifecycle comparison, not the production 100-eligible-to-10 HPO algorithm; no theory-repair claim.",
+  "data": {
+    "source": "cached MNIST npz, official-training x_train/y_train arrays only; never read official-test arrays",
+    "train_indices": [
+      0,
+      1500
+    ],
+    "validation_indices": [
+      1500,
+      1875
+    ],
+    "index_semantics": "half-open; no random split",
+    "preprocessing": "float32 channels_last (pixel/float32(255)-float32(0.1307))/float32(0.3081)"
+  },
+  "dataset_sha256": "731c5ac602752760c8e48fbffcf8c3b850d9dc2a2aedcf2cc48468fc17b673d1",
+  "architecture": {
+    "n_filters": 32,
+    "kernel_size": 2,
+    "padding": "same",
+    "n_blocks": 2,
+    "n_units": 128,
+    "implementation": "existing get_mnist_model, same as completed eight-configuration panel"
+  },
+  "configs": {
+    "learning_rates": [
+      0.0001,
+      0.0003,
+      0.001,
+      0.003
+    ],
+    "weight_decays": [
+      1e-05,
+      0.001
+    ],
+    "ordering": "product(LR,WD), LR outer, IDs0..7; no ranges changed after prior results"
+  },
+  "seed_blocks": [
+    307,
+    331
+  ],
+  "phase_seeds": {
+    "307": {
+      "probe_initialization": 307001,
+      "final_initialization": 307002,
+      "probe_subset_order": 307003,
+      "probe_shuffle": 307011,
+      "final_shuffle": 307012
+    },
+    "331": {
+      "probe_initialization": 331001,
+      "final_initialization": 331002,
+      "probe_subset_order": 331003,
+      "probe_shuffle": 331011,
+      "final_shuffle": 331012
+    }
+  },
+  "pairing": "Reset Keras seed before each phase model. Verify identical initial weights within block/phase across all8configs. Verify shared epoch shuffle prefixes within block/phase. Seeds do not depend on rank, method, configID or attempted order.",
+  "probe": {
+    "epochs": 1,
+    "optimizer": "existing Adam with constant per-configLR, no cosine schedule; configured WD retained",
+    "batch_size": 64,
+    "subset": "All1500 training examples, randomized into a shared per-block permutation; same membership, reordered measurement batches",
+    "training_order": "subset_order[default_rng(probe_shuffle_seed).permutation(1500)]",
+    "measurement_order": "fixed subset permutation, consecutive64 batches with final28; this differs from canonical data order and is recorded exactly",
+    "validation": "same current probe model, common375 validation examples, actual Keras compiled CE baseline"
+  },
+  "final_fit": {
+    "initialization": "fresh model; independent final-phase seed, no probe weights or optimizer state reused",
+    "optimizer": "same Adam with cosine decay over2400steps, maximum100epochs,24batches/epoch",
+    "shuffle": "canonical training order permuted independently each epoch with default_rng(final_shuffle_seed); paired prefixes across configs",
+    "early_stopping": {
+      "implementation": "actual installed keras.callbacks.EarlyStopping with monitor=val_loss,patience25,restore_best_weightsTrue; constructor defaults min_delta0,baselineNone,start_from_epoch0,modeauto",
+      "hooks": "set_model; on_train_begin; on_epoch_end(zero-based epoch, actual Keras validation loss); on_train_end restores minimum monitored-loss weights",
+      "monitor": "Reset model metrics before validation; model.test_on_batch all375 validation examples in consecutive64 batches(last55). Installed TF test_step accumulates compiled logits-aware CE with batch-size weighting. Stable float64 CE is separately logged and never used for stopping.",
+      "semantics_limit": "Manual deterministic paired training permutations instead of model.fit internal shuffle. Actual callback and compiled validation-monitor semantics retained; no assertion of bitwise equivalence to a separately randomized model.fit run."
+    },
+    "saved_optimizer_note": "Final weights are restored, but optimizer iteration/moments retain terminal-fit state as in the existing production callback. Do not claim optimizer restoration to best epoch."
+  },
+  "metrics": {
+    "original": "Original float32RMS arithmetic max finite batch score RMS(p)*RMS(h)/RMS(W); retain all raw components. Match get_convexity fallback to positive infinity if no positive finite maximum exists. Store JSONnull plus explicit status for nonfinite values, no hidden clipping.",
+    "baseline": "actual Keras validation CE at one-epoch probe",
+    "direction": "minimize both fixed scores",
+    "legacy_eligibility": "record finite score>0.1 but do not filter, resample, reverse score direction or modify formula",
+    "primary_target": "1 - restored-checkpoint validation accuracy from actual model class predictions",
+    "secondary_target": "actual Keras validation CE at the restored checkpoint",
+    "stable_ce_diagnostic": "float64 reconstructed-logit CE, separate from actual Keras monitored CE. Reuse frozen classification helper with absolute probability reconstruction tolerance1e-5.",
+    "restored_verification": "Retain restored-checkpoint weights/modelSHA and metrics; independent verification can reload every checkpoint. No official-test outcomes."
+  },
+  "analysis": {
+    "population": "all8 configs within each seed block separately; no pooled inferential claim",
+    "correlation": "Spearman fixed probe score vs each restored target; positive rho favors minimization; undefined constant ranks recordednull",
+    "selection": "top1 per score per block; ties lowerconfigID, unchanged regardless oftarget",
+    "regret": "selected target minus minimum target among all8 candidates in block",
+    "ties": "retain score-minimum and target-minimum tie counts; discrete validation accuracy ties do not establishequivalence",
+    "gate": "all16probes and16finalfits must complete; if any original score has infinity-fallback status, mark comparisonincomplete and do not compute finite-subset aggregates",
+    "learning_rate_associations": "Within each seed block, report Spearman LR versus each probe score and each restored target. Separately report the prespecified sensitivity averaging both WD candidates at each LR: four LR-mean score/target pairs, descriptive only. No correlation inference within two-point WD strata."
+  },
+  "resources": {
+    "device": "localCPU only,2intra/1interopthreads,deterministic TensorFlow",
+    "loop_cap_seconds": 900,
+    "bound_semantics": "check before phases and each epoch; one active epoch/restoration/checkpointIO may extend beyond bound; stop newepochs cleanly",
+    "maximum_compute": "16one-epochprobes plus16finalfits(max100epochs),1616epochs/38784optimizersteps if all reachmax; actual stopping mayreduce",
+    "cost": "no paidresources,downloads,or cloudcalls"
+  },
+  "failure_accounting": "Every fixed candidate/phase remains in manifest; retain failures, missing phases and partial checkpoints, do not refill. Continue remaining fixed phases after logged recoverable failures while budgetremains. No aggregate complete-panel claim if phase or metric validity is incomplete.",
+  "artifacts": "Unique directory, exact source/data/package/environmentprovenance, phase seedmanifest, explicit probe subsetorder.npy, per-epoch shufflehashes/optimizersteps/Keras monitor/stableCE, probe+restoredfinal checkpoints/hashes, all events and summary. Timeout finalfit retains last weights before restoration plus partialrestored weights, both selectionineligible.",
+  "prior_evidence": "Completed longpanel changed targetranking; preserve all earlierresults. New panel changes probe/final lifecycle, seeds and operationaltarget prospectively. It cannot establish full-network flatness, repair the invalid local lowerbound or prove broadHPOefficacy.",
+  "sources": {
+    "run_pilot.py": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/lifecycle-pilot/run-prepared-20261002-v1/run_pilot.py",
+      "sha256": "36168984699eba72876ce55b6362b3c6928e57a92401d91805b32721117f6c39"
+    },
+    "frozen_long_pilot_helpers.py": {
+      "path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/long-endpoint-pilot/run-prepared-20261002-v1/run_pilot.py",
+      "sha256": "ed1fb3811111af6b4274d0761f5975875c2c32729877acfefd9a4b5d298de22a"
+    },
+    "image/src/util.py": {
+      "path": "<RESEARCH_WORKTREE>/image/src/util.py",
+      "sha256": "a59437f085192fbc5df189684124e8de63196eef963be9c247aad14001295f52"
+    },
+    "image/src/config.py": {
+      "path": "<RESEARCH_WORKTREE>/image/src/config.py",
+      "sha256": "1e87a606e1bf54127f955cbfdcebdb48ab78d40d76d6aa200cdfc2ffc68131e9"
+    },
+    "pyproject.toml": {
+      "path": "<RESEARCH_WORKTREE>/pyproject.toml",
+      "sha256": "a9613ecf8fad8d69b9e5150524fda11b8852eabee9140e9d8ae21c7030c88f54"
+    },
+    "uv.lock": {
+      "path": "<RESEARCH_WORKTREE>/uv.lock",
+      "sha256": "c7435dcd49775c94e5952e197d14b06a4feb0ad3614bee227b7b9494208a16ea"
+    },
+    "installed_keras/early_stopping.py": {
+      "path": "<ORIGINAL_CHECKOUT>/.venv/lib/python3.12/site-packages/keras/src/callbacks/early_stopping.py",
+      "sha256": "cc9e95628575606add25fa4f220daad4c16f669aba78b16b5dbf8e2240ecde6b"
+    },
+    "installed_keras/monitor_callback.py": {
+      "path": "<ORIGINAL_CHECKOUT>/.venv/lib/python3.12/site-packages/keras/src/callbacks/monitor_callback.py",
+      "sha256": "f9004aaa4289ed183a2f8d10f34212729bf26e62e8a1d2d6709a008274defdce"
+    },
+    "installed_keras/tensorflow_trainer.py": {
+      "path": "<ORIGINAL_CHECKOUT>/.venv/lib/python3.12/site-packages/keras/src/backend/tensorflow/trainer.py",
+      "sha256": "a2d27809c892984dbe407d7b6c4ca368bfa84318820f979681b904825c63b78c"
+    }
+  },
+  "revision_note": "Before execution: add descriptive learning-rate associations/four-LR-mean sensitivity, imported-clone verification, finite-weight guard and primary-error-preserving checkpoint failures. Scientific phases, metric formulas, seeds and targets otherwise unchanged.",
+  "runtime_integrity": "Require imported image.src.util.__file__ to resolve to the frozen clone source, record the path; hash all model weights and require finite weights after each epoch. Checkpoint save/hash errors are logged; secondary checkpoint/logging errors cannot mask an active training failure. Do not overwrite prior runs.",
+  "launch_environment": {
+    "cwd": "<RESEARCH_WORKTREE>",
+    "KERAS_HOME": "/tmp/fghpo-preprocessing-keras",
+    "MPLCONFIGDIR": "/tmp/fghpo-mpl",
+    "XDG_CACHE_HOME": "/tmp/fghpo-cache",
+    "TF_NUM_INTRAOP_THREADS": "2",
+    "TF_NUM_INTEROP_THREADS": "1",
+    "PYTHONPATH": "<RESEARCH_WORKTREE>",
+    "python": "<ORIGINAL_CHECKOUT>/.venv/bin/python"
+  }
+}

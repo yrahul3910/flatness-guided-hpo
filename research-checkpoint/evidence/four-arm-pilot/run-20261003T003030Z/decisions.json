@@ -1,0 +1,430 @@
+{
+  "401": {
+    "original_rms": {
+      "shortlist": [
+        "c000000",
+        "c000001"
+      ],
+      "incumbent": "c000001",
+      "result": {
+        "block": 401,
+        "candidate": "c000001",
+        "phase": "final",
+        "config": {
+          "n_filters": 32,
+          "kernel_size": 2,
+          "padding": "same",
+          "n_blocks": 2,
+          "n_units": 128,
+          "learning_rate": 0.0001,
+          "weight_decay": 0.001
+        },
+        "status": "complete",
+        "initialization_seed": 2049967016,
+        "shuffle_seed": 1143066706,
+        "augmentation": null,
+        "initial_weights_sha256": "d1e6f6bf173537b1a0ead45715a4a12b6a2464ffafab7e7ffc2985f9156604c1",
+        "epochs": 88,
+        "optimizer_steps": 2112,
+        "best_epoch": 63,
+        "restored": true,
+        "tuning_ce": 0.3889607787132263,
+        "tuning_accuracy": 0.9013333320617676,
+        "early_tuning_ce": 0.3889607787132263,
+        "terminal_optimizer_state": true,
+        "shuffle_rng_state": {
+          "bit_generator": "PCG64",
+          "state": {
+            "state": 305058040847615342067452837189474122089,
+            "inc": 49438087649161949889872795438964770171
+          },
+          "has_uint32": 1,
+          "uinteger": 1825605898
+        },
+        "checkpoint": "block401/final/c000001/model-complete.keras",
+        "checkpoint_sha256": "57838fdd6795a15d5bdaa7f4c742721b31a2c2e957c484d917eaa3ce02df49cc",
+        "weights_sha256": "81f43ef4ff55a919e4eb4d05fd27758c8546a24072881abbc419b794be162a52",
+        "seconds": 15.897204499982763
+      },
+      "logical_probe_seconds": 6.163442458026111,
+      "logical_probe_epochs": 8,
+      "logical_final_epochs": 167,
+      "logical_probe_optimizer_steps": 192,
+      "logical_final_optimizer_steps": 4008,
+      "logical_final_seconds": 30.001602332980838
+    },
+    "head_trace": {
+      "shortlist": [
+        "c000000",
+        "c000002"
+      ],
+      "incumbent": "c000002",
+      "result": {
+        "block": 401,
+        "candidate": "c000002",
+        "phase": "final",
+        "config": {
+          "n_filters": 32,
+          "kernel_size": 2,
+          "padding": "same",
+          "n_blocks": 2,
+          "n_units": 128,
+          "learning_rate": 0.0003,
+          "weight_decay": 1e-05
+        },
+        "status": "complete",
+        "initialization_seed": 1628231843,
+        "shuffle_seed": 1143066706,
+        "augmentation": null,
+        "initial_weights_sha256": "1444257fbb919f830b91c6ce87440f1a02e7fb0e7c50cd9812ea3b37571593fa",
+        "epochs": 48,
+        "optimizer_steps": 1152,
+        "best_epoch": 23,
+        "restored": true,
+        "tuning_ce": 0.36427929997444153,
+        "tuning_accuracy": 0.909333348274231,
+        "early_tuning_ce": 0.36427929997444153,
+        "terminal_optimizer_state": true,
+        "shuffle_rng_state": {
+          "bit_generator": "PCG64",
+          "state": {
+            "state": 199675789777991483556716283635794973715,
+            "inc": 49438087649161949889872795438964770171
+          },
+          "has_uint32": 1,
+          "uinteger": 2997003326
+        },
+        "checkpoint": "block401/final/c000002/model-complete.keras",
+        "checkpoint_sha256": "9cc192169228db231e9450dbc1ed819f00a7154c4f7ba9347cf49ba8e1fda9b8",
+        "weights_sha256": "2257f42ec4faeaa59c386c4dc7bd8a29df8201cf0a8a3af2a954747eb7e1a2de",
+        "seconds": 8.951170290994924
+      },
+      "logical_probe_seconds": 6.163442458026111,
+      "logical_probe_epochs": 8,
+      "logical_final_epochs": 127,
+      "logical_probe_optimizer_steps": 192,
+      "logical_final_optimizer_steps": 3048,
+      "logical_final_seconds": 23.055568123992998
+    },
+    "early_tuning_ce": {
+      "shortlist": [
+        "c000006",
+        "c000007"
+      ],
+      "incumbent": "c000006",
+      "result": {
+        "block": 401,
+        "candidate": "c000006",
+        "phase": "final",
+        "config": {
+          "n_filters": 32,
+          "kernel_size": 2,
+          "padding": "same",
+          "n_blocks": 2,
+          "n_units": 128,
+          "learning_rate": 0.003,
+          "weight_decay": 1e-05
+        },
+        "status": "complete",
+        "initialization_seed": 1424842586,
+        "shuffle_seed": 1143066706,
+        "augmentation": null,
+        "initial_weights_sha256": "480f4c8d9a0685f3bbdf1253d82db355c6bf8f40ed4a8c4a5c93b976d9102dba",
+        "epochs": 31,
+        "optimizer_steps": 744,
+        "best_epoch": 6,
+        "restored": true,
+        "tuning_ce": 0.35894766449928284,
+        "tuning_accuracy": 0.8986666798591614,
+        "early_tuning_ce": 0.35894766449928284,
+        "terminal_optimizer_state": true,
+        "shuffle_rng_state": {
+          "bit_generator": "PCG64",
+          "state": {
+            "state": 40293547390266766339646578846773621972,
+            "inc": 49438087649161949889872795438964770171
+          },
+          "has_uint32": 0,
+          "uinteger": 3561248750
+        },
+        "checkpoint": "block401/final/c000006/model-complete.keras",
+        "checkpoint_sha256": "f5c4199138adb9ac08cd74b87ec03f1959fbe2f6e4d6dfcb13e96dfd58009dc4",
+        "weights_sha256": "292a5a13c85a734f70a95a6875d122016dced802aa6d17766eb9ecc71822f097",
+        "seconds": 5.948238416982349
+      },
+      "logical_probe_seconds": 6.163442458026111,
+      "logical_probe_epochs": 8,
+      "logical_final_epochs": 62,
+      "logical_probe_optimizer_steps": 192,
+      "logical_final_optimizer_steps": 1488,
+      "logical_final_seconds": 11.965180500992574
+    },
+    "random": {
+      "shortlist": [
+        "c000000",
+        "c000007"
+      ],
+      "incumbent": "c000000",
+      "result": {
+        "block": 401,
+        "candidate": "c000000",
+        "phase": "final",
+        "config": {
+          "n_filters": 32,
+          "kernel_size": 2,
+          "padding": "same",
+          "n_blocks": 2,
+          "n_units": 128,
+          "learning_rate": 0.0001,
+          "weight_decay": 1e-05
+        },
+        "status": "complete",
+        "initialization_seed": 72253386,
+        "shuffle_seed": 1143066706,
+        "augmentation": null,
+        "initial_weights_sha256": "02c104811da1d9fdc4f6db0af26b3a3c859d7881e96c3340250e45507b2eb7fe",
+        "epochs": 79,
+        "optimizer_steps": 1896,
+        "best_epoch": 54,
+        "restored": true,
+        "tuning_ce": 0.3930554986000061,
+        "tuning_accuracy": 0.8986666798591614,
+        "early_tuning_ce": 0.3930554986000061,
+        "terminal_optimizer_state": true,
+        "shuffle_rng_state": {
+          "bit_generator": "PCG64",
+          "state": {
+            "state": 193902886392840784532650085336857815874,
+            "inc": 49438087649161949889872795438964770171
+          },
+          "has_uint32": 0,
+          "uinteger": 2641623160
+        },
+        "checkpoint": "block401/final/c000000/model-complete.keras",
+        "checkpoint_sha256": "fc262d90c61066171944c13a00a2698879cfa20de92097fb5f8625ac09bcf3de",
+        "weights_sha256": "9bf8b2e33b2a9a8eb55ed5f85225b60bffedfe6784d3554998211334f7ccb5f7",
+        "seconds": 14.104397832998075
+      },
+      "logical_probe_seconds": 6.163442458026111,
+      "logical_probe_epochs": 8,
+      "logical_final_epochs": 110,
+      "logical_probe_optimizer_steps": 192,
+      "logical_final_optimizer_steps": 2640,
+      "logical_final_seconds": 20.1213399170083
+    }
+  },
+  "419": {
+    "original_rms": {
+      "shortlist": [
+        "c000000",
+        "c000001"
+      ],
+      "incumbent": "c000000",
+      "result": {
+        "block": 419,
+        "candidate": "c000000",
+        "phase": "final",
+        "config": {
+          "n_filters": 32,
+          "kernel_size": 2,
+          "padding": "same",
+          "n_blocks": 2,
+          "n_units": 128,
+          "learning_rate": 0.0001,
+          "weight_decay": 1e-05
+        },
+        "status": "complete",
+        "initialization_seed": 1247175987,
+        "shuffle_seed": 1271561809,
+        "augmentation": null,
+        "initial_weights_sha256": "21a948cf778435f5a5577cbfdf33acdac18ed735b90be5179c281d2e9172e693",
+        "epochs": 90,
+        "optimizer_steps": 2160,
+        "best_epoch": 65,
+        "restored": true,
+        "tuning_ce": 0.35578852891921997,
+        "tuning_accuracy": 0.890666663646698,
+        "early_tuning_ce": 0.35578852891921997,
+        "terminal_optimizer_state": true,
+        "shuffle_rng_state": {
+          "bit_generator": "PCG64",
+          "state": {
+            "state": 18294334850610162137270657504306292928,
+            "inc": 84710136106051097743625858020270336865
+          },
+          "has_uint32": 1,
+          "uinteger": 2198575864
+        },
+        "checkpoint": "block419/final/c000000/model-complete.keras",
+        "checkpoint_sha256": "7064f67c71557b01787fc072ddb7f85b706519c663555fa84ded562f4445f0a8",
+        "weights_sha256": "882e93cd9e523cb2baaae8760616d011d352d4963fec42b455c3e497faea05cd",
+        "seconds": 16.28735654099728
+      },
+      "logical_probe_seconds": 6.253145084017888,
+      "logical_probe_epochs": 8,
+      "logical_final_epochs": 168,
+      "logical_probe_optimizer_steps": 192,
+      "logical_final_optimizer_steps": 4032,
+      "logical_final_seconds": 30.469559416000266
+    },
+    "head_trace": {
+      "shortlist": [
+        "c000001",
+        "c000000"
+      ],
+      "incumbent": "c000000",
+      "result": {
+        "block": 419,
+        "candidate": "c000000",
+        "phase": "final",
+        "config": {
+          "n_filters": 32,
+          "kernel_size": 2,
+          "padding": "same",
+          "n_blocks": 2,
+          "n_units": 128,
+          "learning_rate": 0.0001,
+          "weight_decay": 1e-05
+        },
+        "status": "complete",
+        "initialization_seed": 1247175987,
+        "shuffle_seed": 1271561809,
+        "augmentation": null,
+        "initial_weights_sha256": "21a948cf778435f5a5577cbfdf33acdac18ed735b90be5179c281d2e9172e693",
+        "epochs": 90,
+        "optimizer_steps": 2160,
+        "best_epoch": 65,
+        "restored": true,
+        "tuning_ce": 0.35578852891921997,
+        "tuning_accuracy": 0.890666663646698,
+        "early_tuning_ce": 0.35578852891921997,
+        "terminal_optimizer_state": true,
+        "shuffle_rng_state": {
+          "bit_generator": "PCG64",
+          "state": {
+            "state": 18294334850610162137270657504306292928,
+            "inc": 84710136106051097743625858020270336865
+          },
+          "has_uint32": 1,
+          "uinteger": 2198575864
+        },
+        "checkpoint": "block419/final/c000000/model-complete.keras",
+        "checkpoint_sha256": "7064f67c71557b01787fc072ddb7f85b706519c663555fa84ded562f4445f0a8",
+        "weights_sha256": "882e93cd9e523cb2baaae8760616d011d352d4963fec42b455c3e497faea05cd",
+        "seconds": 16.28735654099728
+      },
+      "logical_probe_seconds": 6.253145084017888,
+      "logical_probe_epochs": 8,
+      "logical_final_epochs": 168,
+      "logical_probe_optimizer_steps": 192,
+      "logical_final_optimizer_steps": 4032,
+      "logical_final_seconds": 30.469559416000266
+    },
+    "early_tuning_ce": {
+      "shortlist": [
+        "c000006",
+        "c000004"
+      ],
+      "incumbent": "c000006",
+      "result": {
+        "block": 419,
+        "candidate": "c000006",
+        "phase": "final",
+        "config": {
+          "n_filters": 32,
+          "kernel_size": 2,
+          "padding": "same",
+          "n_blocks": 2,
+          "n_units": 128,
+          "learning_rate": 0.003,
+          "weight_decay": 1e-05
+        },
+        "status": "complete",
+        "initialization_seed": 385550416,
+        "shuffle_seed": 1271561809,
+        "augmentation": null,
+        "initial_weights_sha256": "fbd1d30da8b701ed090f90ce3f7f5aa5d3491e445596be09c19b7fcc66eee35e",
+        "epochs": 31,
+        "optimizer_steps": 744,
+        "best_epoch": 6,
+        "restored": true,
+        "tuning_ce": 0.3139745593070984,
+        "tuning_accuracy": 0.9146666526794434,
+        "early_tuning_ce": 0.3139745593070984,
+        "terminal_optimizer_state": true,
+        "shuffle_rng_state": {
+          "bit_generator": "PCG64",
+          "state": {
+            "state": 18581957729826313822063748382694550420,
+            "inc": 84710136106051097743625858020270336865
+          },
+          "has_uint32": 1,
+          "uinteger": 3755425199
+        },
+        "checkpoint": "block419/final/c000006/model-complete.keras",
+        "checkpoint_sha256": "67bea25795abdf881e07fd7578855d4b6de530b7ae51fab710337078a8558f33",
+        "weights_sha256": "cc2cac7039db131403dfd2948b4e6a3d7cf5512a7e15fb94958058659195cca8",
+        "seconds": 6.390614417003235
+      },
+      "logical_probe_seconds": 6.253145084017888,
+      "logical_probe_epochs": 8,
+      "logical_final_epochs": 64,
+      "logical_probe_optimizer_steps": 192,
+      "logical_final_optimizer_steps": 1536,
+      "logical_final_seconds": 12.889116167003522
+    },
+    "random": {
+      "shortlist": [
+        "c000006",
+        "c000003"
+      ],
+      "incumbent": "c000006",
+      "result": {
+        "block": 419,
+        "candidate": "c000006",
+        "phase": "final",
+        "config": {
+          "n_filters": 32,
+          "kernel_size": 2,
+          "padding": "same",
+          "n_blocks": 2,
+          "n_units": 128,
+          "learning_rate": 0.003,
+          "weight_decay": 1e-05
+        },
+        "status": "complete",
+        "initialization_seed": 385550416,
+        "shuffle_seed": 1271561809,
+        "augmentation": null,
+        "initial_weights_sha256": "fbd1d30da8b701ed090f90ce3f7f5aa5d3491e445596be09c19b7fcc66eee35e",
+        "epochs": 31,
+        "optimizer_steps": 744,
+        "best_epoch": 6,
+        "restored": true,
+        "tuning_ce": 0.3139745593070984,
+        "tuning_accuracy": 0.9146666526794434,
+        "early_tuning_ce": 0.3139745593070984,
+        "terminal_optimizer_state": true,
+        "shuffle_rng_state": {
+          "bit_generator": "PCG64",
+          "state": {
+            "state": 18581957729826313822063748382694550420,
+            "inc": 84710136106051097743625858020270336865
+          },
+          "has_uint32": 1,
+          "uinteger": 3755425199
+        },
+        "checkpoint": "block419/final/c000006/model-complete.keras",
+        "checkpoint_sha256": "67bea25795abdf881e07fd7578855d4b6de530b7ae51fab710337078a8558f33",
+        "weights_sha256": "cc2cac7039db131403dfd2948b4e6a3d7cf5512a7e15fb94958058659195cca8",
+        "seconds": 6.390614417003235
+      },
+      "logical_probe_seconds": 6.253145084017888,
+      "logical_probe_epochs": 8,
+      "logical_final_epochs": 72,
+      "logical_probe_optimizer_steps": 192,
+      "logical_final_optimizer_steps": 1728,
+      "logical_final_seconds": 14.358289208990755
+    }
+  }
+}

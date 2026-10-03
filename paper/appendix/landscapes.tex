@@ -1,0 +1,105 @@
+\section{Additional loss landscapes}
+\label{sec:app:landscapes}
+
+This section shows examples of loss landscapes with low and high strong convexity for additional datasets (as done in Figure \ref{fig:landscape}). For brevity, we use {\tt btsc} to denote the {\tt blood-transfusion-service-center} dataset.
+
+\begin{table*}[bh!]
+    \centering
+    \caption{Details of configurations and performance for landscapes of Figure \ref{fig:landscapes-all}. BS = batch size; $\alpha$ = $L_2$ regularization factor. Acc and AUC show training accuracy and AUC, and generalization error in parentheses. Datasets where the sharper landscapes outperformed the flatter minima are in red.}
+    \label{tab:landscapes}
+
+    \adjustbox{max width=\textwidth}{%
+    \begin{tabular}{lllllllll}
+        \toprule
+        \textbf{Dataset} & \textbf{Depth} & \textbf{Width} & \textbf{BS} & \textbf{$\alpha$} & \textbf{LR} & \textbf{$\mu$} & \textbf{Acc} & \textbf{AUC} \\
+        \midrule
+        \multirow{2}{*}{btsc} &  3 & 128 & 4 & $10^{-7}$ & $10^{-5}$ & 0.57 & 88.71 (10.05) & 91.55 (12.90) \\
+        & 3 & 1024 & 4 & $10^{-5}$ & $10^{-5}$ & 1.08 & 93.18 (21.56) & 98.10 (39.84) \\
+        \midrule
+        \multirow{2}{*}{\color{red}{car}} & 4 & 16 & 256 & $10^{-8}$ & 1.0 & 0.16 & 70.03 (0.09) & 85.70 (-0.43) \\
+        & 1 & 32 & 16 & $10^{-6}$ & $10^{-4}$ & 1.09 & 94.22 (1.78) & 99.68 (0.16) \\
+        \midrule
+        \multirow{2}{*}{\color{red}{credit-g}} & 2 & 32 & 32 & $10^{-5}$ & 1.0 & 0.03 & 70 (0) & 50.92 (0.92) \\
+        & 1 & 128 & 4 & $10^{-3}$ & $10^{-4}$ & 0.78 & 100 (32) & 100 (31.57) \\
+        \midrule
+        \multirow{2}{*}{kcl} & 4 & 32 & 32 & $10^{-3}$ & $10^{-5}$ & 0.13 & 96.10 (9.84) & 95.79 (13.18) \\
+        & 1 & 128 & 4 & $10^{-6}$ & $10^{-4}$ & 1.79 & 98.58 (15.25) & 99.59 (21.69) \\
+        \midrule
+        \multirow{2}{*}{phoneme} & 1 & 16 & 8 & 0.1 & $10^{-5}$ & 0.08 & 100 (26.99) & 100 (34.55) \\
+        & 1 & 64 & 4 & 0.1 & $10^{-3}$ & 0.97 & 100 (28.89) & 100 (45.23) \\
+        \midrule
+        \multirow{2}{*}{segment} & 3 & 128 & 4 & $10^{-3}$ & $10^{-5}$ & 0.03 & 99.42 (23.66) & 100 (4.85) \\
+        & 3 & 256 & 16 & 1.0 & $10^{-5}$ & 0.08 & 99.66 (27.37) & 100 (6.02) \\
+        \midrule
+        \multirow{2}{*}{vehicle} & 2 & 16 & 8 & $10^{-4}$ & $10^{-4}$ & 0.11 & 100 (40) & 100 (17.13) \\
+        & 1 & 16 & 64 & 0.01 & $10^{-4}$ & 0.33 & 92.52 (36.57) & 98.63 (12.04) \\ 
+        \bottomrule
+    \end{tabular}
+    }
+\end{table*}
+
+\begin{figure*}[b]
+    \centering
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/btsc-low.svg}
+        \caption{btsc (low)}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/btsc-high.svg}
+        \caption{btsc (high)}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/car-low.svg}
+        \caption{car (low)}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/car-high.svg}
+        \caption{car (high)}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/creditg-low.svg}
+        \caption{credit-g (low)}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/creditg-high.svg}
+        \caption{credit-g}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/kcl-low.svg}
+        \caption{kcl (low)}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/kcl-high.svg}
+        \caption{kcl (high)}
+    \end{subfigure}
+% \end{figure*}
+% \begin{figure*}
+%     \centering
+%     \ContinuedFloat
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/phoneme-low.svg}
+        \caption{phoneme (low)}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/phoneme-high.svg}
+        \caption{phoneme (high)}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/segment-low.svg}
+        \caption{segment (low)}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/segment-high.svg}
+        \caption{segment (high)}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/vehicle-low.svg}
+        \caption{vehicle (low)}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includesvg[width=\textwidth]{landscapes/vehicle-high.svg}
+        \caption{vehicle (high)}
+    \end{subfigure}
+    \caption{Additional loss landscapes with low and high strong convexity values.}
+    \label{fig:landscapes-all}
+\end{figure*}

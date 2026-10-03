@@ -1,0 +1,17 @@
+{
+  "command": [
+    "<ORIGINAL_CHECKOUT>/.venv/bin/python",
+    "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/verify_image_search_integrations.py"
+  ],
+  "exit_code": 0,
+  "harness_sha256": "e7025d586077647660fb397b35177cf40a2c1e0a504a95cd7610ab962f68374d",
+  "harness_changed": false,
+  "configuration_space_fake": "parameter(*args, **kwargs) already accepts seed keyword",
+  "python": "3.12.0 (main, Oct  2 2023, 20:56:14) [Clang 16.0.3 ]",
+  "packages": {
+    "bohb-hpo": "0.5.2",
+    "numpy": "1.26.4",
+    "scipy": "1.12.0",
+    "statsmodels": "0.14.6"
+  }
+}

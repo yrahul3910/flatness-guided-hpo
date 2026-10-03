@@ -1,0 +1,179 @@
+Normalization audit: what can be corrected, what remains unproved
+================================================================
+
+Status and protocol
+-------------------
+This is a mathematical comparability audit, not a new HPO efficacy result.
+Two separately named candidates were derived from symmetry requirements and
+local Hessian identities. Pilot correlations were not used to select either
+formula, aggregation, or transformation values. Original scores, corrections,
+known failures, and all negative evidence must remain separate.
+
+Frozen before checkpoint scoring:
+  normalization_protocol.json, version 1.1
+  SHA256 0f9364f9d435483dfc3cbe282483b65ceea1686094b6428da85a255acb57b44d
+The unevaluated v1 draft was retained when the panel was reduced to the
+parent-requested bounded set; formulas were unchanged. Another agent owns
+all-16-checkpoint empirical inference. This note and normalization_identities.py
+contain analytical work only: no training, test data, or pilot outcome fitting.
+
+Set-up
+------
+Let h_i in R^D be a frozen penultimate activation, W in R^(D x K) the Keras
+output kernel, b in R^K its bias, z_i = h_i W+b, and p_i=softmax(z_i).
+The final hidden activation is ReLU in the audited models.
+Let C_i=diag(p_i)-p_i p_i^T and P=I_K-11^T/K.
+Write W_c=W P and z_c,i=z_i P. The original final-kernel mean-CE Hessian is
+  H = (1/B) sum_i C_i tensor (h_i h_i^T)
+up to a vectorization permutation. Thus
+  trace(H) = mean_i (1-||p_i||^2)||h_i||^2.
+No labels occur in these Hessian identities, although loss and accuracy do
+depend on labels. Bias, earlier-layer weights, and regularizers are outside
+this particular H.
+
+1. Class-centering fixes an additive output gauge, not the theorem
+----------------------------------------------------------------
+For any v in R^D, W' = W + v 1^T adds h_i v to every class logit of example i.
+All predictions and the original head Hessian are unchanged. Since 1^T P=0,
+W'_c=W_c. Class-centering is the unique minimum-Frobenius-norm representative
+within each such output-kernel gauge class: each row's common mean is removed.
+The same centering can be applied to the bias for output-based quantities.
+
+Replacing ||W|| with ||W_c|| in the original activation/weight ratio therefore
+removes that specific arbitrary denominator effect. It does NOT remove
+adjacent-layer scaling. For s>0, h'=h/s and W'=sW preserve logits, while the
+centered ratio still changes by 1/s^2. Positive per-neuron diagonal scaling
+creates the corresponding nonuniform dependence.
+
+More decisively, the earlier false-lower-bound witness W=(0.1,-0.1), h=1 is
+ALREADY class-centered. Centering leaves it unchanged. Its claimed bound is
+5.024773 while its exact head Hessian Frobenius norm is 0.495033. Therefore
+gauge centering cannot repair the published theorem even in this tiny case.
+
+A canonical hidden-RMS normalization can remove positive per-neuron scaling:
+if a_j=sqrt(mean_i h_ij^2)>0, replace h_ij by h_ij/a_j and W_c[j,:] by
+a_j W_c[j,:]. This is invariant under h_j/s_j, s_j W_j for positive s_j.
+But zero/dead features require a convention, the representation depends on
+the reference sample, and uniform neuron duplication still changes the
+activation/weight ratio by the duplication factor. This intermediate idea
+was analyzed but is NOT a third empirically selectable candidate.
+
+2. Candidate C1: gauge-centered relative-head trace
+-------------------------------------------------
+Define fixed row scales r_j=||W_c[j,:]||_2, D_r=diag(r_j), and
+
+  T_rel = mean_i [(1-||p_i||_2^2) sum_j h_ij^2 r_j^2].
+
+This has a precise local meaning. Define perturbation coordinates theta by
+delta W[j,:] = r_j delta theta[j,:], holding r fixed at the current model.
+The pullback Hessian is
+  H_rel = (I_K tensor D_r) H (I_K tensor D_r),
+and trace(H_rel)=T_rel exactly. If a row scale is zero this is a singular
+coordinate map; no invertibility or full-metric claim is needed for the
+identity. Differentiating r as a function of theta would be a different
+quantity and is not proposed.
+
+The weighted hidden-feature kernel
+  K_rel(i,l) = sum_j h_ij h_lj r_j^2
+provides another useful way to see the invariance. Under positive diagonal
+rescaling h'_ij=h_ij/s_j, W'_j=s_j W_j, class-centering gives
+r'_j=s_j r_j, so every product h'_ij r'_j equals h_ij r_j. Therefore the
+entire K_rel and H_rel are unchanged. Common-output row shifts are removed
+by W_c; hidden permutations only relabel coordinates. T_rel is invariant to
+all these transformations.
+
+For completeness, the squared Frobenius norm of this same local Hessian is
+  ||H_rel||_F^2 = B^(-2) sum_i,l trace(C_i C_l) K_rel(i,l)^2.
+This identity explains the kernel construction; it is not an additional
+candidate selected for empirical scoring. Standard PSD inequalities apply
+to H_rel, for example T_rel/sqrt(r_max) <= ||H_rel||_F <= T_rel with
+r_max=(K-1)min(B,D). They do not bound the original ratio by original H.
+
+KNOWN FAILURE — neuron duplication:
+Duplicate every hidden neuron r times and divide each outgoing weight row
+by r. Predictions are unchanged. Every copy has row scale r_j/r, so
+K_rel' = K_rel/r and T_rel'=T_rel/r. Thus C1 still rewards an arbitrary
+redundant representation. The original RMS ratio instead grows by r, and
+the unweighted exact head trace/Frobenius norm also grow by r.
+An unweighted hidden-width division is not a principled universal repair:
+for unequal duplication or split weights alpha_q W_j with sum alpha_q=1,
+this C1 contribution changes by sum alpha_q^2, not a universal width factor.
+Adding cancelling hidden paths can likewise change C1 while preserving
+outputs, as can redistributing a constant feature's effect into output bias.
+
+The invariance correction is consequently partial and must be described that
+way. Raw H can still be made arbitrarily large or small by a global positive
+rescaling while T_rel stays fixed. No universal positive lower/upper bound
+on raw H follows from T_rel without additional scale restrictions.
+
+3. Candidate C2: temperature curvature in prediction space
+---------------------------------------------------------
+Define
+
+  T_temp = mean_i [sum_k p_ik z_c,ik^2 - (sum_k p_ik z_c,ik)^2]
+         = mean_i z_c,i^T C_i z_c,i
+         = mean_i Var_(k~p_i)(log p_ik).
+
+For any fixed label y_i, consider the artificial one-dimensional path
+  L(alpha)=mean_i CE(softmax(alpha*z_c,i),y_i).
+Then L''(1)=T_temp. The label-dependent term is linear in alpha, so the second
+derivative is label-independent. This is an exact identity, distinct from
+the original network's final-weight or full-network Hessian.
+
+Centered logits are determined by probabilities because
+log p_i=z_i-logsumexp(z_i)1. Thus T_temp is invariant to every exact
+representation change preserving predictions: common-logit shifts, positive
+adjacent-layer diagonal scaling, hidden permutation, uniform duplication,
+and even cancelling-path changes. It includes the centered output bias.
+It has no hidden-width dependence from redundant representations. Class
+count and probability distribution can still change its scale; no
+across-dataset comparability claim is proposed.
+
+KNOWN FAILURE — invariance does not imply selection quality:
+Uniform predictions have z_c=0 and T_temp=0, while binary predictions becoming
+fully saturated also yield T_temp tending to zero (gap^2*exp(-gap) behavior).
+Minimizing it need not favor learning. It cannot distinguish confident
+correct from confident wrong predictions.
+
+For fixed label y=0, compare p=(.99,.01) and p=(.01,.99). Both have
+T_temp=.0099*(log 99)^2 = 0.2090397517273, but CE is respectively
+0.0100503358535 and 4.6051701859881, and accuracies are 1 and 0.
+A one-hidden-unit realization gives equal C1 and equal unweighted head
+trace as well. Swapping output class probabilities here is deliberately NOT
+a symmetry of the supervised task with fixed labels: it is a counterexample
+to any score-to-loss/accuracy ordering implication.
+
+Consequently this candidate is a separately named output-confidence
+curvature control, not a corrected activation/weight bound. It may be
+empirically evaluated in a later locked ranking study, but that usefulness
+is an open question. The proposed invariance-only panel cannot answer it.
+
+4. What the bounded empirical panel can establish
+------------------------------------------------
+All sixteen existing final checkpoints should be scored on exactly the same
+1500 official-training inputs. No labels, validation losses, or test arrays
+are needed. Fourteen prespecified cases per checkpoint include baseline,
+common-row shifts, positive global and diagonal scaling, reversal of hidden
+neurons, and duplication factors 2 and 4. Check centered logits and all
+probabilities remain fixed within frozen numerical tolerances.
+
+Record original scores, both distinct candidates, and unweighted head trace
+for every transformation. Report C1's expected 1/r duplication change as a
+substantive limitation, not an implementation failure. Preserve numerical
+failures and all zero/near-zero components. Comparing transformed models
+tests symmetry behavior only; it does not show early selection improvement,
+causal generalization, or superiority over validation loss.
+
+5. Reproducible deterministic evidence
+-------------------------------------
+normalization_identities.py uses a seeded synthetic fixture and materializes
+its tiny head Hessian. The C1 trace identity agrees with this explicit
+pullback Hessian. C2 agrees with a central second difference of the artificial
+temperature path. Every frozen transformation, the fixed-label ordering
+counterexample, and the already-centered original-theorem counterexample
+are preserved in normalization_identity_results.json. All assertions passed.
+
+The source review in primary_sources.txt separately explains why published
+scale-invariant flatness/PAC-Bayes analyses do not imply this ratio bound or
+cross-configuration selection guarantees. No external theorem is imported
+to replace the explicit, restricted identities derived above.

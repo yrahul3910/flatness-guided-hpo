@@ -1,0 +1,18 @@
+{
+  "upstream_commit": "de0db39f481d9505bb3610b7b7aa0ebf7702e4a5",
+  "import_path": "<RESEARCH_WORKTREE>/sweep-results/research-audit-20261002/turbo-integration/upstream/turbo/__init__.py",
+  "source_sha256": "a4052bc799583b1cfb09f5583965bacda6ab638716d527bea29581abd3abe791",
+  "packages": {
+    "torch": "2.10.0",
+    "gpytorch": "1.15.1",
+    "numpy": "1.26.4",
+    "linear-operator": "0.6"
+  },
+  "runs": 3,
+  "evaluations_per_run": 8,
+  "n_init": 5,
+  "gp_guided_evaluations_per_run": 3,
+  "same_seed_exact_replay": true,
+  "different_seed_variation": true,
+  "wall_seconds": 0.6258652499818709
+}

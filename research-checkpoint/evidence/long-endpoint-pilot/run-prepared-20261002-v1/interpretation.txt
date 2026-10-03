@@ -1,0 +1,43 @@
+The original score's apparent utility depends strongly on the target definition in this exploratory panel. The primary epoch-100 target favors minimizing the original score; the separately prespecified best-across-100 validation target gives the opposite conclusion. Both results are retained, and neither changes the mathematical counterexamples to the original flatness claim.
+
+The frozen panel completed all 16 candidates and 1600 epoch records in 661.7416 seconds on local CPU, within the 900-second training-loop bound. There were no failures, exclusions, paid resources, downloads, or official-test evaluations. Each seed (71 and 89) compares eight configurations: four learning rates crossed with two weight decays, one fixed architecture, 1500 training examples and 375 validation examples, all from the official MNIST training partition. Every candidate trained for 100 epochs without early stopping.
+
+EPOCH-1 CORRELATIONS AND SELECTION REGRETS
+All metrics are minimized. Positive Spearman rho favors the declared direction. Regret is selected target CE minus the minimum target CE among all eight candidates in the same seed.
+
+Target                 Seed  Original rho  Validation rho  Original regret  Validation regret
+Primary epoch100        71      0.952381      -0.738095         0.000249          0.035727
+Primary epoch100        89      0.761905      -0.738095         0.001177          0.027972
+Secondary best-across100 71     -0.761905       0.690476         0.020111          0.007033
+Secondary best-across100 89     -0.619048       0.738095         0.013275          0.001769
+
+The same selected candidate can have different regrets because the two targets rank candidates differently. The original score selected configuration 1 at epoch 1 for both seeds (LR=0.0001, WD=0.001). Epoch-1 validation CE selected configuration 4 for both seeds (LR=0.001, WD=0.00001). The primary target remains primary; the secondary target is a separately reported validation-selected quantity that reuses validation measurements, not an unbiased test outcome or an exact reproduction of any early-stopping policy.
+
+CONTROLS AT EPOCH 1
+Target                 Seed  C1 rho     C2 rho     C1 regret  C2 regret
+Primary epoch100        71   -0.761905   0.142857    0.035556   0.000249
+Primary epoch100        89   -0.952381  -0.785714    0.048768   0.058728
+Secondary best-across100 71   0.761905   0.047619    0.005695   0.020111
+Secondary best-across100 89   0.333333   0.023810    0.002171   0.026921
+
+C1 and C2 retain their frozen formulas and direction; no sign was reversed after observing results. Their symmetries do not imply useful selection ranking. C1 is a local relative-coordinate head trace with known representation limitations; C2 is logit-scale curvature with confidence limitations. The original and both controls remain separately named methods.
+
+LEARNING RATE AND ENDPOINT DEPENDENCE
+Learning rate versus epoch-100 validation CE has rho=0.975900 in both seeds. Learning rate versus the original epoch-1 score has rho=0.975900 and 0.780720. Collapsing each pair of weight decays to four learning-rate means gives original epoch-1 primary-target rho=1.0 and 0.8. These four-point results are descriptive; two configurations within each learning rate cannot support within-LR correlation inference.
+
+LR          Best-epoch range, seed71   Best-epoch range, seed89
+0.0001                62-62                     59-59
+0.0003                15-20                     12-12
+0.001                  8-10                      7-9
+0.003                  5-5                       5-5
+
+Larger learning rates reach their best observed validation CE substantially earlier. A fixed endpoint and a validation-best checkpoint therefore ask different questions in these trajectories. The all-100-epoch losses, scores, correlations and all prescribed selection regrets remain in events.jsonl and analysis.json. best-epochs.json retains every candidate's best epoch and loss; correlations-both-targets.png/.pdf gives both target definitions equal visual prominence.
+
+REPRODUCIBILITY AND LIMITS
+The protocol SHA256 is 78e227916bbcd03d0b71f76cd19739cc5f02906185c19609ce0972221565251a. The executed training source SHA256 is ed1fb3811111af6b4274d0761f5975875c2c32729877acfefd9a4b5d298de22a. Earlier unexecuted protocol drafts are preserved. Source, dataset, package, seed, configuration, paired initialization/shuffle and checkpoint hashes are retained, with epoch-1 and epoch-100 optimizer-bearing checkpoints for every candidate.
+
+All 32 checkpoint reloads passed in 12.08 seconds without training. Original RMS scores, both accuracies, optimizer step counts, weight hashes and checkpoint file hashes matched exactly. Maximum absolute differences were 1.93e-9 for C1, 1.05e-10 for C2, 1.46e-10 for training CE, and 7.24e-9 for validation CE. Numerical tolerances were fixed before reloads at rtol=1e-5 and atol=1e-6, with exact accuracy/step/hash matching. The verification source and per-checkpoint results are separate from the executed pilot source.
+
+An independent agent recomputed all 1600 correlation records and 96 regrets, including learning-rate means, using average-rank/Pearson correlation without importing the runner or scipy.stats. It also checked all source/checkpoint hashes, paired initialization/shuffles, optimizer steps, cosine schedules, fixed batch boundaries and completeness; no substantive defect was found.
+
+Terminal full-training CE gradient L2 norms range from 0.0002949 to 0.0376859, excluding optimizer weight decay. The learning-rate schedule reaches zero, but that does not establish stationarity or convergence. This panel changes the endpoint, cosine schedule horizon, initialization seeds, and stable-logit loss definition together relative to the earlier five-epoch pilot; differences cannot be attributed to endpoint alone. Two seeds, eight configurations, one architecture and a small fixed data subset do not establish general HPO efficacy or repair the paper's curvature claim.

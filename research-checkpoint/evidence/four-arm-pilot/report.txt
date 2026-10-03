@@ -1,0 +1,70 @@
+Four-arm KMNIST exploratory pilot, 2026-10-03
+
+The pilot completed successfully in 118.337 seconds on the local Mac CPU, with no paid compute. In this fixed small-data comparison, exact head trace did not improve selected-model classification error over the original RMS score. Early tuning CE selected a model with fewer heldout errors in both blocks. Two initialization blocks on one shared split do not establish method superiority or a general accuracy-ordering result.
+
+Frozen protocol and provenance
+
+Protocol: ../four-arm-pilot-preparation/protocol.json
+Protocol SHA256: 2fc73082c79a4d0dad9d92da0bc41c7025d9359a068c98c2aa70920cc71dfdb4
+Freeze: 2026-10-03T00:30:25.952510+00:00, before model training or holdout model evaluation.
+Run: run-20261003T003030Z/
+Launch: 2026-10-03T00:30:57.706775+00:00; exit 0; no timeout.
+Runner SHA256: 34e07bb29bfda0a32666a5c7b5973a9e2cd971ec1f2b301a7a91a86cbdfbb432
+
+The protocol fixes 1,500 fitting rows and 375 tuning rows from the official KMNIST training set, and 1,000 rows from its official test set. Split permutations, independent seeds, raw downloads, preprocessing, dataset bytes, package versions, and 24 source/evidence files are retained. KMNIST was new to the available recovered project evidence; unrecorded prior use cannot be ruled out. MNIST and sklearn digits were rejected as fresh holdouts because recovered project evidence showed prior use.
+
+Mechanical preparation read and copied the fixed test arrays and checked shapes, dtypes and label range before the protocol freeze. It did not use models, predictions, outcome summaries, class counts, or sample plots. The model runner first loaded evaluation arrays after every arm decision was locked. These 1,000 rows are now spent for adaptive follow-up. No configuration, ranking direction, eligibility rule or checkpoint policy was changed after outcomes.
+
+Design
+
+Each block, 401 or 419, uses the same eight fixed configurations: learning rate in {0.0001, 0.0003, 0.001, 0.003}, crossed with weight decay in {0.00001, 0.001}. The CNN architecture is fixed at 32 filters, kernel size 2, same padding, two blocks, and a 128-unit hidden head. Inputs use float32 pixels/255; no augmentation is used. This is a fixed panel, not adaptive HPO or a sample from a declared full search prior.
+
+Four arms shortlist two candidates: minimum original float32 batch-maximum RMS ratio; minimum corrected exact mean-CE head trace; minimum one-epoch tuning CE; and a seeded random shortlist. All arms share the same complete, finite-score candidate pool. All 16 probes qualified; all also passed the legacy RMS > 0.1 rule. Although that rule was logged rather than imposed, imposing it would not change this candidate pool. Failed slots would not have been replaced; there were no failed phases.
+
+Initialization is keyed to block, candidate and phase, independent of arm, rank or attempt order. Each shortlisted candidate is retrained from fresh initialization, with candidate Adam settings, a 100-epoch cosine horizon, maximum 100 epochs, and the actual Keras patience-25 validation-CE callback. Its minimum tuning-CE weights are restored. Among the two restored finalists, each arm selects by highest tuning accuracy, then lowest tuning CE, then candidate ID. Shared finalists are trained once and reused. Checkpoint selection by CE is distinct from the primary heldout classification endpoint.
+
+Primary result: heldout top-1 errors out of the same 1,000 rows
+
+Arm                  Block 401             Block 419
+Original RMS         215 (21.5%), c000001   219 (21.9%), c000000
+Exact head trace     219 (21.9%), c000002   219 (21.9%), c000000
+Early tuning CE      212 (21.2%), c000006   202 (20.2%), c000006
+Random               221 (22.1%), c000000   202 (20.2%), c000006
+
+The primary endpoint is classification at each arm's locked, validation-selected checkpoint, under the predeclared CE-restoration policy. It is not terminal-epoch-100 accuracy, minimum heldout error over training, or a loss-based quality ranking. No heldout loss or all-candidate heldout correlation/oracle regret is used. The shared selections in block 419 are the same checkpoint, not independent confirmations. Predictions, probabilities, labels, checkpoints, and hashes are retained for all six distinct selected models.
+
+The original RMS shortlist is {c000000,c000001} in both blocks, both at LR 0.0001. Trace selects {c000000,c000002} in block 401 and {c000001,c000000} in block 419. Early CE selects {c000006,c000007} and {c000006,c000004}; random selects {c000000,c000007} and {c000006,c000003}. These observed panel choices are descriptive, not a new LR-selection rule.
+
+What the corrected quantity means
+
+T = mean_i [(1 - ||p_i||_2^2) ||h_i||_2^2] is the exact sample-mean cross-entropy Hessian trace for output-kernel entries in ordinary Euclidean/Frobenius coordinates, with penultimate features and output bias fixed. Probabilities for this identity are reconstructed in float64 from the saved affine head and checked against inference probabilities. The original RMS arm retains its original float32 batch arithmetic, including the tail batch.
+
+The local perturbation interpretation uses fixed per-coordinate isotropic covariance. No perturbation radius, noise level or metric was tuned or sampled in this pilot. The trace changes under compensating feature/kernel rescaling and neuron duplication, does not describe the full network Hessian, and does not guarantee accuracy or eventual post-optimization performance. A valid restricted head-sensitivity identity therefore does not itself repair the original RMS theorem or prove the fast-screening efficacy claim. This pilot supplies no empirical advantage for trace under the frozen choices.
+
+Cost and lifecycle evidence
+
+Physical work: 16 one-epoch probes, 10 distinct final fits, 566 total epochs, and 13,584 optimizer updates. All ten final fits stopped after 25 epochs without tuning-CE improvement and restored an earlier epoch. Final fit lengths range from 31 to 90 epochs; selected best epochs across all finalists range from 6 to 65. The 100-epoch maximum was a shared cap, not an equal realized update count.
+
+The common probes cost 12.417 seconds and final fits 102.244 seconds in phase records. End-to-end process time was 118.337 seconds, within the 900-second hard bound. Each arm/block is logically charged its eight shared probes and two final fits. Their total logical epochs/updates/seconds are:
+
+Block  Arm              Epochs  Updates  Phase seconds
+401    Original RMS     175     4200     36.165
+401    Exact trace      135     3240     29.219
+401    Early tuning CE   70     1680     18.129
+401    Random           118     2832     26.285
+419    Original RMS     176     4224     36.723
+419    Exact trace      176     4224     36.723
+419    Early tuning CE   72     1728     19.142
+419    Random            80     1920     20.611
+
+These logical costs overlap through shared work and are not additive physical usage or an equal-walltime HPO comparison. A standalone random selector would not need the shared score probes. No deployment speedup claim follows.
+
+Validation and remaining work
+
+Before execution, independent numerical checks matched the trace to an explicit head Hessian within 4.44e-16, checked original RMS arithmetic and a 64+1 tail, reproduced split indices, and demonstrated feature-rescaling sensitivity. Three model-free runner contract checks passed, including decision-lock enforcement and preservation of primary training errors when saving also fails. Ruff and formatting passed. Basedpyright still reports 22 missing-generic-argument errors and 173 dynamic-record warnings in the audit runner/checks; runtime-call and model-loader narrowing findings were corrected. This is not a clean package type check.
+
+Post-run independent records-only verification passed: all 24 live/frozen source pairs, 40 unique seeds, 26 checkpoint file/weight hashes and optimizer counters, 566 epoch records and shuffles, probe scores, shortlists, incumbents, costs, and decision-lock chronology agree. Six retained prediction files independently reproduce all eight arm error counts. Verification read checkpoint arrays directly without loading models, retraining, or repeating inference; restored CE was checked against saved history rather than recomputed. Exact frozen runner/check copies also pass no-sloppy with zero errors and four advisory documentation/density warnings. See independent-review/verification.json and the audit-script-maintenance/frozen-pilot-no-sloppy-final records.
+
+Raw run files and the executed protocol remain immutable. The audit-script maintenance work separately fixes the recorded Keras/Spearman and output-overwrite issues while preserving old executed scripts and all 69 historical evidence files. It reproduces 50 endpoint comparisons and 112 candidate-endpoint rows byte-for-byte without model work. Preservation checks also confirm the original checkout's HEAD, status and tracked diff, and the branch's main manuscript, match their recorded baselines; this is not a complete initial byte manifest for every original untracked file.
+
+This completes the authorized local exploratory comparison, not the requested final image benchmark. Remaining evidence includes broader prespecified tasks/seeds/candidate populations, reviewer-requested across-configuration trajectories, matched baseline search domains and effective budgets, real CIFAR row provenance and final-test policy, and a measured remote resource plan before any paid launch. Any next study must freeze its claim and protocol without treating these holdout outcomes as untouched validation. The exact reviewed manuscript revision also remains to be reconciled with the local score formula. No main-manuscript rewrite, cloud mutation, merge, submission, or external comment occurred.

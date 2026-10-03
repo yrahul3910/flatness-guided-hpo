@@ -1,0 +1,45 @@
+\section{On using one epoch as a heuristic}
+
+\begin{figure*}
+    \centering
+    \begin{subfigure}[t]{.48\textwidth}
+        \includesvg[width=\linewidth]{img/hpobench.svg}
+        \caption{HPOBench datasets}
+    \end{subfigure}
+    \begin{subfigure}[t]{.48\textwidth}
+        \includesvg[width=\linewidth]{img/image.svg}
+        \caption{Image datasets}
+    \end{subfigure}
+    \caption{Progression of validation loss and sharpness over epochs on HPOBench and image datasets}
+    \label{fig:sharpness-over-epochs}
+\end{figure*}
+
+% In this section, we show additional experimental verification that using the sharpness after one epoch is a reasonable choice (and more informative than the validation loss). Figure \ref{fig:sharpness-over-epochs} shows plots of our sharpness measure and the validation loss over epochs for the HPOBench and image datasets. 
+
+% Note that the goal of computing an estimate of the sharpness after one epoch is to obtain an upper bound on the sharpness across the entire space. Therefore, we expect that the sharpness $\zeta$, if expressed as a function of epochs $t$ (so that $\zeta(t)$ is the sharpness measured after epoch $t$), has the property that for some $t_0$, $\zeta(t) \leq \zeta(1) \forall t > t_0$.
+
+% This trend is observed in the plots of Figure \ref{fig:sharpness-over-epochs}. Across all plots, the red line indicates the validation loss, and the green line indicates the sharpness. With the exception of the vehicle, blood-transfusion-service-center, and segment datasets, all datasets show the property we described above. Moreover, we note that we {\it expect} the validation loss to go down over time, and as such it is not informative as a metric for choosing one hyper-parameter configuration over another. 
+
+In this section, we show additional evidence that using the sharpness after one epoch is a reasonable choice (and more informative than the validation loss). First, note that we compute a \textit{lower bound} on the sharpness after one epoch. This is supported by recent work showing a ``progressive sharpening'' phenomenon when training deep neural networks with gradient descent \cite{jastrzebskiBreakEvenPointOptimization2020, jastrzebskiRelationSharpestDirections2019, cohenGradientDescentNeural2021}. When a learning rate of $\eta$ is used, the sharpness increases until it stabilizes around $2/\eta$, a regime called the \textit{edge of stability}.
+
+Moreover, we found that the IoU metric between the 10 lowest validation errors after one epoch with those after 10 epochs (the same experimental setup used in Figure \ref{fig:iou}) was significantly lower. This makes sense, since hyper-parameters influence training dynamics over epochs as well, which leads to validation loss being an unreliable predictor for future performance.
+
+% \section{Approximating the full Hessian}
+
+% It is worth noting that when considering the full Hessian, our computation only considers the first element of the matrix. We argue here that this is acceptable since the \textit{trace} of the Hessian is also a measure of sharpness, and we empirically observe that the two are relatively close. 
+
+% To demonstrate this, we use Hutchinson's trace estimation to compute an estimate of the trace of the Hessian, and show it along with our estimate on our datasets in Table \ref{tab:trace}.
+
+% \begin{table}[ht]
+%     \caption{Comparison of {\IT} estimate with Hutchinson's trace estimate on our datasets}
+%     \label{tab:trace}
+%     \centering
+%     \begin{tabular}{lll}
+%     \toprule
+%         \textbf{Dataset} & \textbf{{\IT} estimate} & \textbf{Estimated trace} \\
+%     \midrule
+%          MNIST & 4057.98 & 2116.46 \\
+%          SVHN & 140,959.15 & 732,113.19 \\
+%     \bottomrule
+%     \end{tabular}
+% \end{table}

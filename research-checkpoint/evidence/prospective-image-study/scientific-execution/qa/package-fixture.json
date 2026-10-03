@@ -1,0 +1,24 @@
+{
+  "source_sha256": "78af67c2f76473cdff594dc62e259c511573160dd47e21eaa98f1d98e1ac9ff4",
+  "fixtures": [
+    {
+      "case": "valid",
+      "four_canonical_rows_verified": true,
+      "evaluation_excluded": true,
+      "exclusive_rerun_rejected": true
+    },
+    {
+      "case": "extra_npz_key",
+      "rejected": true,
+      "reason": "Training archive hash or four-member allowlist disagrees with its provenance."
+    },
+    {
+      "case": "wrong_cohort",
+      "rejected": true,
+      "reason": "Budget rows must match the exact ordered four-block cohort."
+    }
+  ],
+  "model_calls": 0,
+  "research_arrays_loaded": 0,
+  "cloud_calls": 0
+}

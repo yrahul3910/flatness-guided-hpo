@@ -1,0 +1,67 @@
+{
+  "unit-tests": {
+    "command": [
+      "<ORIGINAL_CHECKOUT>/.venv/bin/python",
+      "-m",
+      "unittest",
+      "tests.test_matched_contract",
+      "tests.test_matched_hpo",
+      "-v"
+    ],
+    "returncode": 0
+  },
+  "ruff": {
+    "command": [
+      "ruff",
+      "check",
+      "image/matched_hpo.py",
+      "image/src/matched_contract.py",
+      "tests/test_matched_hpo.py",
+      "tests/test_matched_contract.py"
+    ],
+    "returncode": 0
+  },
+  "format": {
+    "command": [
+      "ruff",
+      "format",
+      "--check",
+      "image/matched_hpo.py",
+      "image/src/matched_contract.py",
+      "tests/test_matched_hpo.py",
+      "tests/test_matched_contract.py"
+    ],
+    "returncode": 0
+  },
+  "typecheck": {
+    "command": [
+      "basedpyright",
+      "--pythonpath",
+      "<ORIGINAL_CHECKOUT>/.venv/bin/python",
+      "image/matched_hpo.py",
+      "image/src/matched_contract.py",
+      "tests/test_matched_hpo.py",
+      "tests/test_matched_contract.py"
+    ],
+    "returncode": 1
+  },
+  "no-sloppy": {
+    "command": [
+      "no-sloppy",
+      "--ruff-config",
+      "pyproject.toml",
+      "image/matched_hpo.py",
+      "image/src/matched_contract.py",
+      "tests/test_matched_hpo.py",
+      "tests/test_matched_contract.py"
+    ],
+    "returncode": 0
+  },
+  "source_sha256": {
+    "image/matched_hpo.py": "34543ebf279db38e2a3aae55124084c7135e8b8283543971d1f9187ee59902ff",
+    "image/src/matched_contract.py": "fbb58579d82a09eda23150fb63ff9fcc95a4fee0a431faccc40b09848b4519d5",
+    "tests/test_matched_hpo.py": "a55afa69fe609d6b5137b7039a9167db07b46ac4c65e49f23755c37dfa1f41ee",
+    "tests/test_matched_contract.py": "3b1609b9992e55592a15c78065a00b95fddcd6fb694dcd75e0db6ed5c149f2c9"
+  },
+  "scope": "Shared contract and mocked orchestration only; real backend fixture recorded separately."
+}

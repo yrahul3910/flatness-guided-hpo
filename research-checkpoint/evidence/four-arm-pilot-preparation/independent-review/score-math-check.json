@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "source_sha256": "3894b990ce562f4c6903c0808f49e132f68280867b6b8dc1d8c733303bd3e317",
+  "fixture": {
+    "rows": 65,
+    "feature_dimension": 3,
+    "classes": 4,
+    "rng_seed": 9743
+  },
+  "head_trace": 2.015715489476429,
+  "explicit_hessian_trace": 2.0157154894764293,
+  "absolute_difference": 4.440892098500626e-16,
+  "weighted_tail_trace": 2.015715489476429,
+  "unweighted_batch_trace": 2.3390942525489553,
+  "batch_sizes": [
+    64,
+    1
+  ],
+  "original_rms_exact_float32_match": true,
+  "feature_scaling_h2_Whalf_trace_factor": 4.0,
+  "model_calls": 0,
+  "training_updates": 0,
+  "dataset_arrays_read": false
+}

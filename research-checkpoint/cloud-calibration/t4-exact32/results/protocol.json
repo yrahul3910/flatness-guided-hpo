@@ -1,0 +1,856 @@
+{
+  "status": "prospective_followup_frozen_for_review_not_execution_authorization",
+  "prepared_utc": "2026-10-03T02:12:44.968779+00:00",
+  "purpose": "Outcome-blind exact-candidate GPU timing/memory calibration only, for the fixed two-repetition prefix after the preserved nine-case forecast rejected feasibility. No quality comparisons or scientific runs.",
+  "execution_directory": "repository root",
+  "source_sha256": {
+    "image/src/matched_training.py": "b38eaa656f4b8bfa73d646cdd6a38dbd1c0fc2a736f1b70deb12731a9aeb8af9",
+    "image/src/util.py": "0265e474b930fc19c2a210e095e38f48a19a5e38021a9bb532f7ba3c47530e76",
+    "image/src/config.py": "1e87a606e1bf54127f955cbfdcebdb48ab78d40d76d6aa200cdfc2ffc68131e9",
+    "image/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "image/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pyproject.toml": "a9613ecf8fad8d69b9e5150524fda11b8852eabee9140e9d8ae21c7030c88f54",
+    "uv.lock": "c7435dcd49775c94e5952e197d14b06a4feb0ad3614bee227b7b9494208a16ea",
+    "sweep-results/research-audit-20261002/prospective-image-study/protocol/calibration-coverage.json": "71d36fa69152c28fbd3a83818cef8bfdd00546db85c84dc2ad03afccb23db65d",
+    "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/plan.json": "dc4d2a1bd1107b6080f89656c782b9e35086d4015c2009c0871f9c2dbb79fc38",
+    "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/cifar10-2000.json": "93ac7e6551a7cf9671f3eebe8bb6248afb15bb5eec6fa31f8c47e8fc110c309b",
+    "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/cifar10-2001.json": "dfba4dbbf1d7798c35256b7a90b927b1336416350b2553e1fa7d92bdbc3c5dd2",
+    "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/cifar10-2002.json": "7591cdd56808c978539905a0c6be35703d3205f610ff095314bfaa0b85c623ad",
+    "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/cifar10-2003.json": "0a8af33160ffe3d655d9f20932955d619677667c6cb10f0b01339cee4fc6ed24",
+    "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/cifar100-2000.json": "1496638323a59e43971aabefdcf9f34bf75a2e4a2202b78e51939f01b129be41",
+    "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/cifar100-2001.json": "ee500ef2f4788fdfcd1a03a12f857f549372dc9c2b3ff7d9bef813735535fa11",
+    "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/cifar100-2002.json": "f35363f0daedd4776838bf311effe43e6f9ab8c64205f207dbaaf75dee5083a9",
+    "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/cifar100-2003.json": "649e317d16d9d30a486140bfd32cec72d53371e1a9bbbd0d24c2de4720802b4c",
+    "image/src/data.py": "4b57ecfbae3565ac5f5eca38f9569d960516277519afe06baf21050ceb59e2d1",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration/requirements-t4.txt": "8becc34f754294608ff8557d64bdc692b6fd342584eafb1c56e32133fd059435",
+    "sweep-results/research-audit-20261002/prospective-image-study/protocol/design_protocol.json": "4a8cf834204f31bd86b48c401140d2001ec40ca3f58a63d559e14a554865a76d",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-inputs/manifest.json": "824ce0b75a9196ef92047a4f447be03f2020e0c0f188b1138f90817bafca9ab4",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32/calibrate.py": "15cbd93843bae0daa3e15bc3eed9bcf4f92f080d08ed41e163b6f64de6cb3959",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration-exact32/cases-and-seeds.json": "0a86c08f1759fbdfa91a0e82bb3d39931bb9d99e12a1f690da7dd8b97b78f491",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration/exact32-direct-forecast-rule-20261003.json": "4e4c81d5806f52e06bb95e06189051540db41bde45d62753b371dcb8f915f025",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration/exact32-eligibility-addendum-20261003.json": "8159a15acc3dec3f692da2e5eb4134f7d3c09ca0c77e65d153d503da8975e194"
+  },
+  "input_sha256": {
+    "cifar10.npz": "0184c5baf3aa6aca2e6dfb69b37b2d664e94fc965351b2d5ef6170e1be834d57",
+    "cifar100.npz": "9f1bcdda7711b97ff4f4dc550cb930d4b7ac30bdb8d2e229b09926b7d7039ff6"
+  },
+  "input_contract": {
+    "filenames": [
+      "cifar10.npz",
+      "cifar100.npz"
+    ],
+    "keys": [
+      "fit_x",
+      "fit_y",
+      "validation_x",
+      "validation_y"
+    ],
+    "source": "Parent-prepared subsets of existing official-training-only archives. No official-test keys or reads.",
+    "fit_shape": [
+      1500,
+      32,
+      32,
+      3
+    ],
+    "validation_shape": [
+      1024,
+      32,
+      32,
+      3
+    ],
+    "labels": "float32 one-hot with 10 or 100 columns; all arrays finite float32",
+    "role": "Timing-only calibration examples; no calibration checkpoint/state reused in any scientific run."
+  },
+  "cases": [
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000000",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 111,
+        "kernel_size": 3,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 512,
+        "learning_rate": 0.00040086968405935597,
+        "weight_decay": 0.0007525148865968465
+      },
+      "initialization": 1126569532,
+      "shuffle": 1735247509,
+      "augmentation_root": 1689006910,
+      "translation": 970257076,
+      "flip": 443956336,
+      "forward_mac_per_image": 231084032
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000001",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 64,
+        "kernel_size": 5,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 64,
+        "learning_rate": 0.00018869522392081506,
+        "weight_decay": 1.861731022306899e-05
+      },
+      "initialization": 920967711,
+      "shuffle": 759836703,
+      "augmentation_root": 1676862486,
+      "translation": 865259659,
+      "flip": 412947694,
+      "forward_mac_per_image": 162333312
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000002",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 46,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 32,
+        "learning_rate": 0.0010205571801207825,
+        "weight_decay": 8.293927001208353e-05
+      },
+      "initialization": 1550615219,
+      "shuffle": 1929407690,
+      "augmentation_root": 2021620634,
+      "translation": 1881872922,
+      "flip": 283165159,
+      "forward_mac_per_image": 13419624
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000003",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 128,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.001390632684295068,
+        "weight_decay": 0.00022594954711523512
+      },
+      "initialization": 1179794777,
+      "shuffle": 137311439,
+      "augmentation_root": 896655635,
+      "translation": 1785213684,
+      "flip": 1676252515,
+      "forward_mac_per_image": 72881152
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000004",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 45,
+        "kernel_size": 6,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 256,
+        "learning_rate": 0.009111246375327632,
+        "weight_decay": 0.0003066691928615043
+      },
+      "initialization": 992764301,
+      "shuffle": 108018652,
+      "augmentation_root": 50309837,
+      "translation": 922724885,
+      "flip": 2042947594,
+      "forward_mac_per_image": 154462720
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000005",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 71,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 256,
+        "learning_rate": 0.0010012045743184228,
+        "weight_decay": 0.0003385282601772865
+      },
+      "initialization": 1760420996,
+      "shuffle": 289657474,
+      "augmentation_root": 1821821176,
+      "translation": 1143023305,
+      "flip": 2040193509,
+      "forward_mac_per_image": 29403092
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000006",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 109,
+        "kernel_size": 5,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 256,
+        "learning_rate": 0.00018132941240116697,
+        "weight_decay": 0.0009396766837613854
+      },
+      "initialization": 1191797213,
+      "shuffle": 917828444,
+      "augmentation_root": 1838801395,
+      "translation": 648222355,
+      "flip": 395212049,
+      "forward_mac_per_image": 617127424
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000007",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 57,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 32,
+        "learning_rate": 0.009881465019746717,
+        "weight_decay": 0.0003249624149227546
+      },
+      "initialization": 1429089212,
+      "shuffle": 1603821524,
+      "augmentation_root": 763380805,
+      "translation": 1020979247,
+      "flip": 623065869,
+      "forward_mac_per_image": 29651264
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000000",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 127,
+        "kernel_size": 4,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 512,
+        "learning_rate": 0.00022450176799146786,
+        "weight_decay": 0.0009258656993982532
+      },
+      "initialization": 552205919,
+      "shuffle": 372395830,
+      "augmentation_root": 889590503,
+      "translation": 731805520,
+      "flip": 390708681,
+      "forward_mac_per_image": 70834544
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000001",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 99,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.003938091389509153,
+        "weight_decay": 3.667747141003837e-05
+      },
+      "initialization": 1985025359,
+      "shuffle": 924414832,
+      "augmentation_root": 1180704287,
+      "translation": 912341605,
+      "flip": 360172486,
+      "forward_mac_per_image": 53160868
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000002",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 94,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.0009519829766126572,
+        "weight_decay": 0.00027981282816600284
+      },
+      "initialization": 780402798,
+      "shuffle": 1521454485,
+      "augmentation_root": 56775672,
+      "translation": 1179460144,
+      "flip": 989788153,
+      "forward_mac_per_image": 48503400
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000003",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 105,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.00036925970957836735,
+        "weight_decay": 4.199339862401904e-05
+      },
+      "initialization": 1254652281,
+      "shuffle": 618854905,
+      "augmentation_root": 1873601878,
+      "translation": 181951470,
+      "flip": 427261600,
+      "forward_mac_per_image": 59285740
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000004",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 81,
+        "kernel_size": 2,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 512,
+        "learning_rate": 0.000623953717086448,
+        "weight_decay": 0.0005991122555580765
+      },
+      "initialization": 1778229575,
+      "shuffle": 434315422,
+      "augmentation_root": 2006889,
+      "translation": 1226298616,
+      "flip": 1994928377,
+      "forward_mac_per_image": 15291116
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000005",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 107,
+        "kernel_size": 3,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.00017824541254548036,
+        "weight_decay": 0.0005363222681167106
+      },
+      "initialization": 319218785,
+      "shuffle": 122586762,
+      "augmentation_root": 1706369358,
+      "translation": 1106095077,
+      "flip": 756783382,
+      "forward_mac_per_image": 111983616
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000006",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 72,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 32,
+        "learning_rate": 0.0011595126162395357,
+        "weight_decay": 1.989358282477552e-05
+      },
+      "initialization": 2097127247,
+      "shuffle": 634733797,
+      "augmentation_root": 1762262050,
+      "translation": 614099929,
+      "flip": 1522915059,
+      "forward_mac_per_image": 32809280
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000007",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 92,
+        "kernel_size": 2,
+        "padding": "valid",
+        "n_blocks": 3,
+        "n_units": 64,
+        "learning_rate": 0.0004027936043190045,
+        "weight_decay": 2.2564560891352965e-05
+      },
+      "initialization": 1744678562,
+      "shuffle": 681232947,
+      "augmentation_root": 1747276002,
+      "translation": 837424482,
+      "flip": 887466482,
+      "forward_mac_per_image": 24295632
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000000",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 69,
+        "kernel_size": 3,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 32,
+        "learning_rate": 0.0062101660133610645,
+        "weight_decay": 0.0005986396549358242
+      },
+      "initialization": 1425812195,
+      "shuffle": 14926775,
+      "augmentation_root": 119391985,
+      "translation": 883780854,
+      "flip": 977832242,
+      "forward_mac_per_image": 16321838
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000001",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 103,
+        "kernel_size": 5,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.000605689273884374,
+        "weight_decay": 2.1776907423662374e-05
+      },
+      "initialization": 685490918,
+      "shuffle": 1157892853,
+      "augmentation_root": 1154398810,
+      "translation": 2045796690,
+      "flip": 562234440,
+      "forward_mac_per_image": 59773400
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000002",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 107,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.00017579470582105287,
+        "weight_decay": 0.00022642325345774317
+      },
+      "initialization": 692421844,
+      "shuffle": 357098071,
+      "augmentation_root": 649104339,
+      "translation": 827413142,
+      "flip": 1845270328,
+      "forward_mac_per_image": 196397056
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000003",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 116,
+        "kernel_size": 5,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.00022042840312995438,
+        "weight_decay": 0.000299288546720678
+      },
+      "initialization": 104533494,
+      "shuffle": 2146764978,
+      "augmentation_root": 866530271,
+      "translation": 1492931406,
+      "flip": 1102706619,
+      "forward_mac_per_image": 74478400
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000004",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 76,
+        "kernel_size": 4,
+        "padding": "valid",
+        "n_blocks": 3,
+        "n_units": 128,
+        "learning_rate": 0.00029358001543197974,
+        "weight_decay": 5.499981118001277e-05
+      },
+      "initialization": 1324072992,
+      "shuffle": 1934273658,
+      "augmentation_root": 1183040009,
+      "translation": 1958294728,
+      "flip": 2065785714,
+      "forward_mac_per_image": 28441664
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000005",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 48,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 32,
+        "learning_rate": 0.006069974113826313,
+        "weight_decay": 4.8164159168296654e-05
+      },
+      "initialization": 519465588,
+      "shuffle": 656998481,
+      "augmentation_root": 1407243019,
+      "translation": 590274551,
+      "flip": 1469693929,
+      "forward_mac_per_image": 14448320
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000006",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 61,
+        "kernel_size": 5,
+        "padding": "same",
+        "n_blocks": 4,
+        "n_units": 32,
+        "learning_rate": 0.0005700144272134912,
+        "weight_decay": 2.902496178640216e-05
+      },
+      "initialization": 1003949015,
+      "shuffle": 283080138,
+      "augmentation_root": 1730792651,
+      "translation": 1909708195,
+      "flip": 565238398,
+      "forward_mac_per_image": 147636864
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000007",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 35,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 64,
+        "learning_rate": 0.0007354465838307453,
+        "weight_decay": 0.00010352890381771012
+      },
+      "initialization": 1486926944,
+      "shuffle": 1388662455,
+      "augmentation_root": 387062922,
+      "translation": 1628736025,
+      "flip": 1154439014,
+      "forward_mac_per_image": 3232000
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000000",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 94,
+        "kernel_size": 2,
+        "padding": "valid",
+        "n_blocks": 3,
+        "n_units": 32,
+        "learning_rate": 0.0005543014317709776,
+        "weight_decay": 0.0005631610143842885
+      },
+      "initialization": 400161520,
+      "shuffle": 1072174869,
+      "augmentation_root": 148180816,
+      "translation": 553898,
+      "flip": 339095834,
+      "forward_mac_per_image": 25229416
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000001",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 86,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 256,
+        "learning_rate": 0.009100551973578421,
+        "weight_decay": 1.285183838397062e-05
+      },
+      "initialization": 1734198045,
+      "shuffle": 1766457369,
+      "augmentation_root": 1278467306,
+      "translation": 1118736874,
+      "flip": 1754358937,
+      "forward_mac_per_image": 67658752
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000002",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 69,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.00021539801092537844,
+        "weight_decay": 4.727239111076089e-05
+      },
+      "initialization": 1921978868,
+      "shuffle": 656562716,
+      "augmentation_root": 459982231,
+      "translation": 1213696646,
+      "flip": 661764825,
+      "forward_mac_per_image": 22661120
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000003",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 62,
+        "kernel_size": 4,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 512,
+        "learning_rate": 0.004335750812215345,
+        "weight_decay": 4.0621470943092266e-05
+      },
+      "initialization": 673166960,
+      "shuffle": 1939887130,
+      "augmentation_root": 500991674,
+      "translation": 1423783819,
+      "flip": 508105671,
+      "forward_mac_per_image": 38651904
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000004",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 90,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 5,
+        "n_units": 32,
+        "learning_rate": 0.009185634124745387,
+        "weight_decay": 0.00010678362101512943
+      },
+      "initialization": 716815329,
+      "shuffle": 269861742,
+      "augmentation_root": 1336024769,
+      "translation": 339383122,
+      "flip": 1717284487,
+      "forward_mac_per_image": 67510400
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000005",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 89,
+        "kernel_size": 4,
+        "padding": "valid",
+        "n_blocks": 3,
+        "n_units": 256,
+        "learning_rate": 0.0008120308983343481,
+        "weight_decay": 0.0001154236754122298
+      },
+      "initialization": 1925706504,
+      "shuffle": 1347554692,
+      "augmentation_root": 698724317,
+      "translation": 1481797014,
+      "flip": 880007133,
+      "forward_mac_per_image": 38435152
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000006",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 111,
+        "kernel_size": 3,
+        "padding": "valid",
+        "n_blocks": 3,
+        "n_units": 512,
+        "learning_rate": 0.00022575897233526903,
+        "weight_decay": 2.4669124879261443e-05
+      },
+      "initialization": 355011426,
+      "shuffle": 163706601,
+      "augmentation_root": 1378481733,
+      "translation": 1763467958,
+      "flip": 819621715,
+      "forward_mac_per_image": 55332086
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000007",
+      "purpose": "exact_candidate_in_minimum_frozen_two_repetition_prefix",
+      "config": {
+        "n_filters": 126,
+        "kernel_size": 6,
+        "padding": "valid",
+        "n_blocks": 2,
+        "n_units": 256,
+        "learning_rate": 0.0024048236993453416,
+        "weight_decay": 0.00012543231383218347
+      },
+      "initialization": 2049414306,
+      "shuffle": 1365640399,
+      "augmentation_root": 84652917,
+      "translation": 1872172527,
+      "flip": 1146485633,
+      "forward_mac_per_image": 84134632
+    }
+  ],
+  "seed_recipe": {
+    "algorithm": "First four SHA256 bytes, big-endian, masked with 0x7fffffff; compact JSON separators comma/colon.",
+    "parent_components": [
+      "fghpo-exact32-calibration-v1",
+      "dataset",
+      "repetition_id",
+      "candidate_id",
+      "role"
+    ],
+    "parent_roles": [
+      "initialization",
+      "shuffle",
+      "augmentation"
+    ],
+    "augmentation_child_components": [
+      "fghpo-exact32-calibration-augmentation-v1",
+      "augmentation_root",
+      "translation_or_flip"
+    ],
+    "checked_unique_calibration_roles": 160,
+    "checked_scientific_seed_roles": 552,
+    "checked_previous_calibration_seed_roles": 45,
+    "within_calibration_collisions": 0,
+    "calibration_scientific_overlap": 0,
+    "previous_calibration_overlap": 0
+  },
+  "runtime": {
+    "one_gpu_required": true,
+    "intended_gpu_family": "Modal one NVIDIA T4; same reviewed dependency image recipe as completed nine-case calibration",
+    "tensorflow_deterministic": true,
+    "tensorflow_synchronous_execution": true,
+    "intra_threads": 2,
+    "inter_threads": 1,
+    "dtype_policy": "float32",
+    "gpu_memory_growth": true,
+    "cooperative_seconds_from_main_start": 600,
+    "external_whole_process_cap_seconds": 900,
+    "cooperative_granularity": "Before and after each indivisible stage/batch/helper call; an operation can overrun. External launcher must enforce 900 seconds including imports.",
+    "required_versions": {
+      "python_major_minor": "3.12",
+      "keras": "3.13.2",
+      "tensorflow": "2.16.2",
+      "numpy": "1.26.4"
+    },
+    "remote_subprocess_seconds_including_imports": 600,
+    "function_timeout_seconds": 720,
+    "startup_timeout_seconds": 120,
+    "shared_absolute_deadline_seconds_from_local_start": 840,
+    "local_worker_including_build_seconds": 870,
+    "local_total_including_cleanup_seconds": 900,
+    "provider_preemption_policy": "No voluntary retry; reject cost eligibility if multiple distinct invocation markers or missing attempt evidence. Reattempts share the original absolute deadline."
+  },
+  "per_case_steps": {
+    "batch_size": 64,
+    "cold_initialization": "Existing CIFAR builder, candidate LR/WD, Adam clipnorm1, cosine horizon 62500 updates. Fresh calibration initialization/augmentation/shuffle seeds.",
+    "build_initialize_seconds": "Includes backend clear_session, initialization seeding, model construction/compile and build. First train compilation is separately captured in warmup timing.",
+    "training": "One PCG64 permutation of 1500 fit rows. First 2 disjoint full batches warm up; following 16 full batches are individually timed. At most 18 optimizer updates per case, 576 for 32 completed cases.",
+    "inference": "Compiled backend _metrics on all 1024 validation rows: 1 warmup pass, then 2 separately timed passes, 16 batches per pass. Returned CE/accuracy are discarded.",
+    "score": "One timed backend _probe_score over all 1500 fit rows in unchanged input order, 24 batches including tail28. Discard RMS, exact head trace and component arrays.",
+    "checkpoint": "Save calibration-only .keras solely to time checkpoint I/O and hashing; return byte counts/hashes, not checkpoint state. Checkpoints are ephemeral, never scientific outputs and never reused.",
+    "memory": "Reset GPU peak counter before each case; record allocator peak bytes on completion or error if available. No peak is represented as zero when unavailable.",
+    "failure": "Retain case status/error/completed timings; abort remaining cases without refill. Startup/source/input failures must also retain external launcher stdout/stderr. All 32 cases must complete with usable memory measurements before a positive resource gate. Actual optimizer iteration count is read in finally after any completed model build, including a deadline crossing immediately after a successful train step. Counter-read failures are retained explicitly."
+  },
+  "saved_outputs": "JSON/logs only: configs, seeds, source/input hashes, software/GPU inventory, stage timings, optimizer counts, completion/errors, peak memory, checkpoint bytes/hashes. No quality metrics, score values, predictions, shortlist outcomes or model checkpoints are downloaded.",
+  "forecast_rule_outside_calibrator": {
+    "path": "sweep-results/research-audit-20261002/prospective-image-study/calibration/exact32-direct-forecast-rule-20261003.json",
+    "sha256": "4e4c81d5806f52e06bb95e06189051540db41bde45d62753b371dcb8f915f025",
+    "rule": "Use this prospectively frozen direct per-candidate formula; no MAC extrapolation. All32 candidates must complete; no post-hoc cohort change."
+  },
+  "frozen_utc": "2026-10-03T02:15:17.198299+00:00",
+  "launch_provenance_clarification": "Official training archives are read directly using an allowlisted member parser, preserving Keras-compatible order and preprocessing; the Keras dataset loader is not invoked.",
+  "retention": {
+    "download": "Verified JSON/log-only tar and per-file hashes, at most100MiB; stdout/stderr tails up to16MiB each with original lengths.",
+    "calibration_checkpoints": "Ephemeral container files solely for timing; not returned or reused; terminate only this new app after retrieval.",
+    "scientific_or_existing_artifacts": "Never deleted or uploaded by this calibration."
+  },
+  "resource_plan": {
+    "provider": "Modal",
+    "app_name": "fghpo-cal-exact32-20261003",
+    "gpu": "T4:1",
+    "cpu_request_limit": [
+      2,
+      2
+    ],
+    "memory_request_limit_MiB": [
+      8192,
+      16384
+    ],
+    "max_containers": 1,
+    "minimum_containers": 0,
+    "buffer_containers": 0,
+    "scaledown_window_seconds": 2,
+    "retries": 0,
+    "local_total_seconds": 900,
+    "reservation_proposal_usd": 1,
+    "cumulative_authorized_cap_usd": 50,
+    "authorization": "Not authorized; parent approval required before any remote action. No scientific runs authorized.",
+    "volumes": [],
+    "secrets": [],
+    "deployment": false,
+    "schedule": null
+  },
+  "prior_run_preservation": {
+    "original_protocol_sha256": "6acf284ed91dbb1fa038fbb5810b829bf7432c8a180af82083afd47c886df641",
+    "original_failed_forecast_sha256": "e558714fbb3202a97a1dcfe74b4ed7a0293df61387d6201e3470f57c19caa263",
+    "unchanged": true
+  },
+  "prelaunch_duration_gate": {
+    "formula": "32*(maximum of the nine completed case stage sums + (prior subprocess duration - sum of nine stage sums)/9)",
+    "planning_seconds": 594.669824293,
+    "maximum_anticipated_subprocess_seconds": 600,
+    "headroom_seconds": 5.330175707,
+    "meaning": "Planning assumption only, not a runtime guarantee. Do not launch if anticipated time exceeds600; actual deadline failure aborts with no refills or restarts."
+  },
+  "forecast_eligibility_addendum": {
+    "path": "sweep-results/research-audit-20261002/prospective-image-study/calibration/exact32-eligibility-addendum-20261003.json",
+    "sha256": "8159a15acc3dec3f692da2e5eb4134f7d3c09ca0c77e65d153d503da8975e194"
+  }
+}

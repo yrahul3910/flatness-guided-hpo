@@ -1,77 +1,56 @@
-import json
+"""Run STCVX with validation selection and one held-out test evaluation."""
+
 import os
-import random
 import traceback
 
 import numpy as np
+from keras.utils import set_random_seed
 
 from image.src.config import Config, hpo_space
-from image.src.data import Dataset
-from image.src.util import (
-    get_convexity,
-    get_data,
-    get_random_hyperparams,
-    run_experiment,
-)
+from image.src.experiment import SearchRun
+from image.src.util import get_convexity, get_random_hyperparams
 
-# Identify this run for persistence
-file_number = os.getenv("SLURM_JOB_ID") or random.randint(1, 10000)
-results_log = f"stcvx_search_{file_number}.csv"
+if __name__ == "__main__":
+    with SearchRun("stcvx") as run:
+        best_configs: list[tuple[float, Config]] = []
+        keep_configs = 10
+        num_configs = 100
+        min_convexity = 0.1
+        max_attempts = int(os.getenv("FGHPO_MAX_PROBE_ATTEMPTS", "1000"))
+        valid_count = 0
 
-DATASET = "cifar100"
-N_CLASSES = 100
+        for attempt in range(1, max_attempts + 1):
+            probe_seed = run.seed + attempt
+            set_random_seed(probe_seed)
+            config = get_random_hyperparams(hpo_space)
+            set_random_seed(probe_seed)
 
-data: Dataset = get_data(DATASET)
+            try:
+                convexity = get_convexity(run.data, config, n_class=run.n_classes, dataset=run.dataset)
+            except (ValueError, RuntimeError) as error:
+                run.record_proxy(config, float("nan"), seed=probe_seed, error=repr(error))
+                traceback.print_exc()
+                continue
 
-# Run HPO search
-best_betas: list[float] = []
-best_configs: list[Config] = []
-keep_configs = 10
-num_configs = 100
+            run.record_proxy(config, convexity, seed=probe_seed)
+            if not np.isfinite(convexity) or convexity <= min_convexity:
+                continue
 
-# Write CSV header
-with open(results_log, "w") as f:
-    f.write("valid_count,mu," + ",".join(hpo_space.keys()) + "\n")
+            valid_count += 1
+            best_configs.append((convexity, config))
+            best_configs.sort(key=lambda pair: pair[0])
+            del best_configs[keep_configs:]
+            if valid_count == num_configs:
+                break
 
-valid_count = 0
-while valid_count < num_configs:
-    try:
-        config = get_random_hyperparams(hpo_space)
-        convexity = get_convexity(data, config, n_class=N_CLASSES, dataset=DATASET)
+        if valid_count < num_configs:
+            msg = f"Only {valid_count}/{num_configs} eligible probes completed within {max_attempts} attempts"
+            raise RuntimeError(msg)
 
-        if not np.isfinite(convexity) or convexity <= 0:
-            continue
+        for _, config in best_configs:
+            try:
+                run.evaluate(config)
+            except (ValueError, RuntimeError):
+                traceback.print_exc()
 
-        valid_count += 1
-        print(f"Config {valid_count}/{num_configs}: mu={convexity:.4f}")
-
-        # Log all explored configs
-        with open(results_log, "a") as f:
-            f.write(f"{valid_count},{convexity}," + ",".join(str(config.get(k, "")) for k in hpo_space.keys()) + "\n")
-
-        if len(best_betas) < keep_configs or (convexity < max(best_betas) and convexity > 0.1):
-            best_betas.append(convexity)
-            best_configs.append(config)
-
-            # Keep top K
-            sorted_pairs = sorted(zip(best_betas, best_configs, strict=False), key=lambda x: x[0])
-            best_betas, best_configs = zip(*sorted_pairs, strict=False)
-            best_betas = list(best_betas[:keep_configs])
-            best_configs = list(best_configs[:keep_configs])
-
-    except KeyboardInterrupt:
-        raise
-    except Exception:
-        traceback.print_exc()
-        continue
-
-print(f"\nEvaluating top {keep_configs} configurations...")
-for beta, config in zip(best_betas, best_configs, strict=False):
-    try:
-        acc = float(run_experiment(data, config, N_CLASSES, DATASET))
-        # This specific print format is REQUIRED by image/parsers/parse.py
-        print(f"Accuracy: {acc}")
-        print(json.dumps({"beta": float(beta), **config, "accuracy": acc}))
-    except Exception:
-        traceback.print_exc()
-
+        run.finish()

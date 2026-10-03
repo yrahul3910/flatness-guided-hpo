@@ -1,0 +1,224 @@
+{
+  "status": "completed_exploratory",
+  "primary_endpoint": "classification_error_at_locked_validation_selected_checkpoint",
+  "rows": [
+    {
+      "block": 401,
+      "arm": "original_rms",
+      "shortlist": [
+        "c000000",
+        "c000001"
+      ],
+      "incumbent": "c000001",
+      "config": {
+        "n_filters": 32,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.001
+      },
+      "checkpoint": "block401/final/c000001/model-complete.keras",
+      "checkpoint_sha256": "57838fdd6795a15d5bdaa7f4c742721b31a2c2e957c484d917eaa3ce02df49cc",
+      "errors": 215,
+      "count": 1000,
+      "error_rate": 0.215,
+      "logical_epochs": 175,
+      "logical_optimizer_updates": 4200,
+      "logical_phase_seconds": 36.16504479100695
+    },
+    {
+      "block": 401,
+      "arm": "head_trace",
+      "shortlist": [
+        "c000000",
+        "c000002"
+      ],
+      "incumbent": "c000002",
+      "config": {
+        "n_filters": 32,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.0003,
+        "weight_decay": 1e-05
+      },
+      "checkpoint": "block401/final/c000002/model-complete.keras",
+      "checkpoint_sha256": "9cc192169228db231e9450dbc1ed819f00a7154c4f7ba9347cf49ba8e1fda9b8",
+      "errors": 219,
+      "count": 1000,
+      "error_rate": 0.219,
+      "logical_epochs": 135,
+      "logical_optimizer_updates": 3240,
+      "logical_phase_seconds": 29.21901058201911
+    },
+    {
+      "block": 401,
+      "arm": "early_tuning_ce",
+      "shortlist": [
+        "c000006",
+        "c000007"
+      ],
+      "incumbent": "c000006",
+      "config": {
+        "n_filters": 32,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.003,
+        "weight_decay": 1e-05
+      },
+      "checkpoint": "block401/final/c000006/model-complete.keras",
+      "checkpoint_sha256": "f5c4199138adb9ac08cd74b87ec03f1959fbe2f6e4d6dfcb13e96dfd58009dc4",
+      "errors": 212,
+      "count": 1000,
+      "error_rate": 0.212,
+      "logical_epochs": 70,
+      "logical_optimizer_updates": 1680,
+      "logical_phase_seconds": 18.128622959018685
+    },
+    {
+      "block": 401,
+      "arm": "random",
+      "shortlist": [
+        "c000000",
+        "c000007"
+      ],
+      "incumbent": "c000000",
+      "config": {
+        "n_filters": 32,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.0001,
+        "weight_decay": 1e-05
+      },
+      "checkpoint": "block401/final/c000000/model-complete.keras",
+      "checkpoint_sha256": "fc262d90c61066171944c13a00a2698879cfa20de92097fb5f8625ac09bcf3de",
+      "errors": 221,
+      "count": 1000,
+      "error_rate": 0.221,
+      "logical_epochs": 118,
+      "logical_optimizer_updates": 2832,
+      "logical_phase_seconds": 26.28478237503441
+    },
+    {
+      "block": 419,
+      "arm": "original_rms",
+      "shortlist": [
+        "c000000",
+        "c000001"
+      ],
+      "incumbent": "c000000",
+      "config": {
+        "n_filters": 32,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.0001,
+        "weight_decay": 1e-05
+      },
+      "checkpoint": "block419/final/c000000/model-complete.keras",
+      "checkpoint_sha256": "7064f67c71557b01787fc072ddb7f85b706519c663555fa84ded562f4445f0a8",
+      "errors": 219,
+      "count": 1000,
+      "error_rate": 0.219,
+      "logical_epochs": 176,
+      "logical_optimizer_updates": 4224,
+      "logical_phase_seconds": 36.72270450001815
+    },
+    {
+      "block": 419,
+      "arm": "head_trace",
+      "shortlist": [
+        "c000001",
+        "c000000"
+      ],
+      "incumbent": "c000000",
+      "config": {
+        "n_filters": 32,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.0001,
+        "weight_decay": 1e-05
+      },
+      "checkpoint": "block419/final/c000000/model-complete.keras",
+      "checkpoint_sha256": "7064f67c71557b01787fc072ddb7f85b706519c663555fa84ded562f4445f0a8",
+      "errors": 219,
+      "count": 1000,
+      "error_rate": 0.219,
+      "logical_epochs": 176,
+      "logical_optimizer_updates": 4224,
+      "logical_phase_seconds": 36.72270450001815
+    },
+    {
+      "block": 419,
+      "arm": "early_tuning_ce",
+      "shortlist": [
+        "c000006",
+        "c000004"
+      ],
+      "incumbent": "c000006",
+      "config": {
+        "n_filters": 32,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.003,
+        "weight_decay": 1e-05
+      },
+      "checkpoint": "block419/final/c000006/model-complete.keras",
+      "checkpoint_sha256": "67bea25795abdf881e07fd7578855d4b6de530b7ae51fab710337078a8558f33",
+      "errors": 202,
+      "count": 1000,
+      "error_rate": 0.202,
+      "logical_epochs": 72,
+      "logical_optimizer_updates": 1728,
+      "logical_phase_seconds": 19.14226125102141
+    },
+    {
+      "block": 419,
+      "arm": "random",
+      "shortlist": [
+        "c000006",
+        "c000003"
+      ],
+      "incumbent": "c000006",
+      "config": {
+        "n_filters": 32,
+        "kernel_size": 2,
+        "padding": "same",
+        "n_blocks": 2,
+        "n_units": 128,
+        "learning_rate": 0.003,
+        "weight_decay": 1e-05
+      },
+      "checkpoint": "block419/final/c000006/model-complete.keras",
+      "checkpoint_sha256": "67bea25795abdf881e07fd7578855d4b6de530b7ae51fab710337078a8558f33",
+      "errors": 202,
+      "count": 1000,
+      "error_rate": 0.202,
+      "logical_epochs": 80,
+      "logical_optimizer_updates": 1920,
+      "logical_phase_seconds": 20.611434293008642
+    }
+  ],
+  "physical_cost": {
+    "physical_probe_phases": 16,
+    "physical_final_phases": 10,
+    "physical_probe_seconds": 12.416587542043999,
+    "physical_final_seconds": 102.24430349995964,
+    "logical_final_references": 16,
+    "epochs": 566,
+    "optimizer_steps": 13584
+  },
+  "scope": "Two initialization blocks; one shared1000row holdout; no superiority or equal-walltime claim; holdout spent for adaptive followup."
+}

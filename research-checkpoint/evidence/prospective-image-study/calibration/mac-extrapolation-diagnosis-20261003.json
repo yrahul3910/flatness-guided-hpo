@@ -1,0 +1,309 @@
+{
+  "recorded_utc": "2026-10-03T02:10:36.201493+00:00",
+  "status": "local_timing_only_diagnosis_original_stop_gate_preserved",
+  "independent_recomputation": "All64 candidate component records and both cohort totals recomputed directly from raw nine-case timings without importing the frozen calculator; agreement within1e-13 relative tolerance.",
+  "source_sha256": {
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration/modal-cost-forecast-20261003.json": "e558714fbb3202a97a1dcfe74b4ed7a0293df61387d6201e3470f57c19caa263",
+    "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/plan.json": "dc4d2a1bd1107b6080f89656c782b9e35086d4015c2009c0871f9c2dbb79fc38",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration/cost_forecast.py": "fc02abbedaac2672b3941f46e05d92caa4b9f7209d892166c9f2f40ac765133f",
+    "sweep-results/research-audit-20261002/prospective-image-study/calibration/forecast-freeze.json": "f893a424baea7b8c97e10c1c573685ab2afc823d7b1b771e71614a061bf43bb1",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/remote-status.json": "92fee4f41548498bbec52de6b2ef3c2041e6462aa0ab1a357770b56fe533c41f",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-00-cifar10-c000005/timing.json": "20834fe87124313aec7534468dabef3017052ab4ebfca229795cc37c90297c30",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-01-cifar10-c000001/timing.json": "f4fa45921342de83ed64fe4310be52ed0c297bfdefe711bbc5a336f00dc1fe55",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-02-cifar10-c000003/timing.json": "82b86b7291795765f65660cf80ae54918e4cf7c0a984201e7c04ebe7b97409e6",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-03-cifar100-c000007/timing.json": "bfc306e94ef6d90d611aa42040de00cab25d0be626688352f3d89c2c484fa0ec",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-04-cifar100-c000003/timing.json": "ca60a3b520dea129d960683a82dae1fcfa2f8c471abdae9f39ddef3c58e19502",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-05-cifar100-c000000/timing.json": "71faff69ba6eebc2123bcc5172bb5b7594f793a25dbe6ced17b8d38b6ee71833",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-06-cifar10-c000003/timing.json": "8ebd31d1b846199964e21d14266f806b17327445aec88c100c93286bb8a3d08f",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-07-cifar100-c000004/timing.json": "4355512f6158e1d25b0a60d209b30345914f151ba8d75d22ee189ea89ff3e006",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-08-cifar100-c000002/timing.json": "c155add91a3e40de8c107b87a553b26975db3c85d50393c204504e925a03cd49"
+  },
+  "slopes": {
+    "training": 4.6905139232666924e-09,
+    "inference": 1.380108717512386e-09,
+    "score": 1.1140454641089264e-07,
+    "source_for_all_three": "case-03-cifar100-c000007; 3,232,000 MAC/image"
+  },
+  "ratios_exclude_2x_safety_margin": true,
+  "cases": [
+    {
+      "case_directory": "case-00-cifar10-c000005",
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000005",
+      "forward_macs_per_image": 7398080,
+      "parameters": 970982,
+      "observed_train_batch_max_seconds": 0.01509870199999952,
+      "observed_train_batch_mean_seconds": 0.01429524724999931,
+      "mac_predicted_train_batch_seconds_before_2x": 0.034700797245440854,
+      "train_prediction_to_measured_max_ratio": 2.2982636020925478,
+      "observed_inference_batch_seconds_max_pass_divided_16": 0.004777963999999857,
+      "mac_predicted_inference_batch_seconds_before_2x": 0.010210154700854034,
+      "inference_prediction_to_measured_ratio": 2.1369258330230907,
+      "observed_score_1500_seconds": 0.38443203099999934,
+      "score_prediction_to_measured_ratio": 2.143889375106462,
+      "sum_of_measured_stages_seconds": 10.643901072999991,
+      "gpu_peak_bytes": 110388736
+    },
+    {
+      "case_directory": "case-01-cifar10-c000001",
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000001",
+      "forward_macs_per_image": 53160868,
+      "parameters": 921315,
+      "observed_train_batch_max_seconds": 0.02663883800000022,
+      "observed_train_batch_mean_seconds": 0.021129852375000313,
+      "mac_predicted_train_batch_seconds_before_2x": 0.24935179152694276,
+      "train_prediction_to_measured_max_ratio": 9.360460524852499,
+      "observed_inference_batch_seconds_max_pass_divided_16": 0.005574081812499854,
+      "mac_predicted_inference_batch_seconds_before_2x": 0.07336777735732525,
+      "inference_prediction_to_measured_ratio": 13.162307232878845,
+      "observed_score_1500_seconds": 0.3375844540000017,
+      "score_prediction_to_measured_ratio": 17.54335045993945,
+      "sum_of_measured_stages_seconds": 4.118143925000002,
+      "gpu_peak_bytes": 393280000
+    },
+    {
+      "case_directory": "case-02-cifar10-c000003",
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000003",
+      "forward_macs_per_image": 662050048,
+      "parameters": 54294972,
+      "observed_train_batch_max_seconds": 0.21273649700000163,
+      "observed_train_batch_mean_seconds": 0.20919270437500015,
+      "mac_predicted_train_batch_seconds_before_2x": 3.105354968043382,
+      "train_prediction_to_measured_max_ratio": 14.597189536515486,
+      "observed_inference_batch_seconds_max_pass_divided_16": 0.04713494699999998,
+      "mac_predicted_inference_batch_seconds_before_2x": 0.9137010426742936,
+      "inference_prediction_to_measured_ratio": 19.384789860361867,
+      "observed_score_1500_seconds": 1.2513096110000035,
+      "score_prediction_to_measured_ratio": 58.94255478450848,
+      "sum_of_measured_stages_seconds": 17.484810041000006,
+      "gpu_peak_bytes": 4577014272
+    },
+    {
+      "case_directory": "case-03-cifar100-c000007",
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000007",
+      "forward_macs_per_image": 3232000,
+      "parameters": 304029,
+      "observed_train_batch_max_seconds": 0.01515974099999795,
+      "observed_train_batch_mean_seconds": 0.014236543499999144,
+      "mac_predicted_train_batch_seconds_before_2x": 0.01515974099999795,
+      "train_prediction_to_measured_max_ratio": 1.0,
+      "observed_inference_batch_seconds_max_pass_divided_16": 0.004460511375000031,
+      "mac_predicted_inference_batch_seconds_before_2x": 0.004460511375000031,
+      "inference_prediction_to_measured_ratio": 1.0,
+      "observed_score_1500_seconds": 0.36005949400000503,
+      "score_prediction_to_measured_ratio": 1.0,
+      "sum_of_measured_stages_seconds": 3.7263900230000004,
+      "gpu_peak_bytes": 853596928
+    },
+    {
+      "case_directory": "case-04-cifar100-c000003",
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000003",
+      "forward_macs_per_image": 38651904,
+      "parameters": 4241958,
+      "observed_train_batch_max_seconds": 0.025763894999997206,
+      "observed_train_batch_mean_seconds": 0.021727435687498797,
+      "mac_predicted_train_batch_seconds_before_2x": 0.18129729387276755,
+      "train_prediction_to_measured_max_ratio": 7.036874427286216,
+      "observed_inference_batch_seconds_max_pass_divided_16": 0.005566268875000002,
+      "mac_predicted_inference_batch_seconds_before_2x": 0.053343829658851864,
+      "inference_prediction_to_measured_ratio": 9.58340871718164,
+      "observed_score_1500_seconds": 0.3255157749999995,
+      "score_prediction_to_measured_ratio": 13.228230899216399,
+      "sum_of_measured_stages_seconds": 4.392421913999975,
+      "gpu_peak_bytes": 1067863808
+    },
+    {
+      "case_directory": "case-05-cifar100-c000000",
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000000",
+      "forward_macs_per_image": 200001536,
+      "parameters": 5465960,
+      "observed_train_batch_max_seconds": 0.047864041000003965,
+      "observed_train_batch_mean_seconds": 0.046268184812499946,
+      "mac_predicted_train_batch_seconds_before_2x": 0.9381099892827246,
+      "train_prediction_to_measured_max_ratio": 19.599473209598973,
+      "observed_inference_batch_seconds_max_pass_divided_16": 0.010829899875000049,
+      "mac_predicted_inference_batch_seconds_before_2x": 0.2760238633494673,
+      "inference_prediction_to_measured_ratio": 25.487203624721054,
+      "observed_score_1500_seconds": 0.41800530599999774,
+      "score_prediction_to_measured_ratio": 53.30334347373556,
+      "sum_of_measured_stages_seconds": 5.995311219999998,
+      "gpu_peak_bytes": 1675777536
+    },
+    {
+      "case_directory": "case-06-cifar10-c000003",
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000003",
+      "forward_macs_per_image": 72881152,
+      "parameters": 4861322,
+      "observed_train_batch_max_seconds": 0.040688875000000735,
+      "observed_train_batch_mean_seconds": 0.03301485699999951,
+      "mac_predicted_train_batch_seconds_before_2x": 0.34185005819971614,
+      "train_prediction_to_measured_max_ratio": 8.401560824665463,
+      "observed_inference_batch_seconds_max_pass_divided_16": 0.00869191943750014,
+      "mac_predicted_inference_batch_seconds_before_2x": 0.10058391321754527,
+      "inference_prediction_to_measured_ratio": 11.57211752142907,
+      "observed_score_1500_seconds": 0.42882065799999936,
+      "score_prediction_to_measured_ratio": 18.934003129260002,
+      "sum_of_measured_stages_seconds": 5.445557614000002,
+      "gpu_peak_bytes": 1201838080
+    },
+    {
+      "case_directory": "case-07-cifar100-c000004",
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000004",
+      "forward_macs_per_image": 84406400,
+      "parameters": 6839082,
+      "observed_train_batch_max_seconds": 0.06918518599999857,
+      "observed_train_batch_mean_seconds": 0.06456643981249854,
+      "mac_predicted_train_batch_seconds_before_2x": 0.39590939441281775,
+      "train_prediction_to_measured_max_ratio": 5.722459059556853,
+      "observed_inference_batch_seconds_max_pass_divided_16": 0.009936726250000305,
+      "mac_predicted_inference_batch_seconds_before_2x": 0.11649000845383746,
+      "inference_prediction_to_measured_ratio": 11.723177787436168,
+      "observed_score_1500_seconds": 0.6492701450000027,
+      "score_prediction_to_measured_ratio": 14.482810858608524,
+      "sum_of_measured_stages_seconds": 8.139215628999978,
+      "gpu_peak_bytes": 2953136384
+    },
+    {
+      "case_directory": "case-08-cifar100-c000002",
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000002",
+      "forward_macs_per_image": 34566400,
+      "parameters": 1158939,
+      "observed_train_batch_max_seconds": 0.04006691500001125,
+      "observed_train_batch_mean_seconds": 0.027476905125000783,
+      "mac_predicted_train_batch_seconds_before_2x": 0.1621341804772058,
+      "train_prediction_to_measured_max_ratio": 4.046585080911776,
+      "observed_inference_batch_seconds_max_pass_divided_16": 0.00883184662500014,
+      "mac_predicted_inference_batch_seconds_before_2x": 0.04770538997302014,
+      "inference_prediction_to_measured_ratio": 5.40151929699293,
+      "observed_score_1500_seconds": 0.3390771509999979,
+      "score_prediction_to_measured_ratio": 11.35686701890893,
+      "sum_of_measured_stages_seconds": 4.326344804000016,
+      "gpu_peak_bytes": 1496892160
+    }
+  ],
+  "cohorts": [
+    {
+      "repetitions_per_dataset": 2,
+      "candidates": 32,
+      "backend_seconds_after_2x": 2173400.3968152776,
+      "components": {
+        "training": {
+          "seconds_after_2x": 1564224.1843022853,
+          "usd_at_frozen_rate": 353.0766828807118,
+          "percent_backend": 71.97128456378175
+        },
+        "inference": {
+          "seconds_after_2x": 579284.9574792226,
+          "usd_at_frozen_rate": 130.7562006022101,
+          "percent_backend": 26.65339337970395
+        },
+        "probe_score": {
+          "seconds_after_2x": 594.2028452679979,
+          "usd_at_frozen_rate": 0.13412346623389249,
+          "percent_backend": 0.027339778079487512
+        },
+        "two_phase_build_warmup_checkpoint_hash": {
+          "seconds_after_2x": 7032.127725365961,
+          "usd_at_frozen_rate": 1.5872918701696046,
+          "percent_backend": 0.32355417509218565
+        },
+        "epoch_weight_copy_check_and_restore": {
+          "seconds_after_2x": 22045.90338215952,
+          "usd_at_frozen_rate": 4.976201311421047,
+          "percent_backend": 1.0143507572034942
+        },
+        "data_io_validation_array_hash_proxy": {
+          "seconds_after_2x": 219.02108097622036,
+          "usd_at_frozen_rate": 0.04943743839795246,
+          "percent_backend": 0.010077346139126314
+        }
+      },
+      "paid_startup_idle_shutdown_usd": 3.52484352,
+      "scientific_worker_usd": 494.10478108914447,
+      "other_usd": 4.0,
+      "total_usd": 498.10478108914447,
+      "training_plus_inference_percent_backend": 98.62467794348571,
+      "original_forecast_reproduced": true
+    },
+    {
+      "repetitions_per_dataset": 4,
+      "candidates": 64,
+      "backend_seconds_after_2x": 4531852.962504429,
+      "components": {
+        "training": {
+          "seconds_after_2x": 3264271.9602162093,
+          "usd_at_frozen_rate": 736.8114668600027,
+          "percent_backend": 72.02952053440589
+        },
+        "inference": {
+          "seconds_after_2x": 1208869.9705905083,
+          "usd_at_frozen_rate": 272.86612976168954,
+          "percent_backend": 26.674960123208695
+        },
+        "probe_score": {
+          "seconds_after_2x": 1240.0010854928594,
+          "usd_at_frozen_rate": 0.2798930450174482,
+          "percent_backend": 0.027361900215041403
+        },
+        "two_phase_build_warmup_checkpoint_hash": {
+          "seconds_after_2x": 12872.986610301863,
+          "usd_at_frozen_rate": 2.9056905376773363,
+          "percent_backend": 0.2840556990001699
+        },
+        "epoch_weight_copy_check_and_restore": {
+          "seconds_after_2x": 44160.00183996441,
+          "usd_at_frozen_rate": 9.967795615316767,
+          "percent_backend": 0.9744358920144742
+        },
+        "data_io_validation_array_hash_proxy": {
+          "seconds_after_2x": 438.0421619524407,
+          "usd_at_frozen_rate": 0.09887487679590493,
+          "percent_backend": 0.009665851155734902
+        }
+      },
+      "paid_startup_idle_shutdown_usd": 3.52484352,
+      "scientific_worker_usd": 1026.4546942164995,
+      "other_usd": 4.0,
+      "total_usd": 1030.4546942164995,
+      "training_plus_inference_percent_backend": 98.7044806576146,
+      "original_forecast_reproduced": true
+    }
+  ],
+  "interpretation": "The smallest model supplies maximum seconds/MAC; scaling that ratio proportionally overpredicts already measured larger models. This is consistent with fixed per-call/host overhead and architecture-dependent throughput, but timings alone do not identify the mechanism. The498/1030USD figures are conservative planning estimates, not observed full-study spending. Existing calibration cannot establish actual32-candidate full-study cost. Original stop gate remains binding.",
+  "followup_runtime_planning": {
+    "observed_nine_case_stage_sum_seconds": 64.27209624299996,
+    "observed_max_case_stage_sum_seconds": 17.484810041000006,
+    "observed_remote_subprocess_seconds": 74.15969395637512,
+    "unallocated_remote_seconds": 9.887597713375158,
+    "formula": "32*(maximum observed case-stage sum + (prior remote subprocess seconds - sum of nine measured case stages)/9)",
+    "expected_seconds": 594.6698242928896,
+    "cooperative_limit_seconds": 600,
+    "headroom_seconds": 5.330175707110357,
+    "not_a_runtime_guarantee": true
+  },
+  "exact32_extrema": {
+    "candidate_count": 32,
+    "maximum_forward_macs_per_image": 617127424,
+    "maximum_total_parameters": 50968610,
+    "checkpoint_tensor_bytes_before_file_overhead": 1752452876
+  },
+  "no_model_or_data_array_access": true,
+  "new_cloud_execution": false
+}

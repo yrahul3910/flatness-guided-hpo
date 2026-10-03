@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "candidate_plan_sha256": "dc4d2a1bd1107b6080f89656c782b9e35086d4015c2009c0871f9c2dbb79fc38",
+  "candidate_manifests": 8,
+  "decoded_configurations_and_mac_parameter_estimates_verified": 64,
+  "seed_roles": 552,
+  "seed_collisions": 0,
+  "checkpoint_tensor_gib_both_phases_all_candidates": 5.872499205172062,
+  "limits": [
+    "Forward convolution/dense MACs exclude BN, activation, augmentation, backward pass, optimizer, compilation, input pipeline, inference and I/O overhead.",
+    "Three MAC-order representatives per task do not prove a runtime or peak-memory bound for every candidate.",
+    "Checkpoint estimate includes float32 model arrays and two Adam slots per trainable scalar; excludes metadata, scalar optimizer state, RNG, scratch files and retained calibration snapshots.",
+    "Largest single convolution output is a diagnostic, not a peak-training-memory estimate."
+  ],
+  "model_calls": 0,
+  "dataset_arrays_read": false,
+  "extreme_candidates_for_coverage_review": {
+    "cifar10": {
+      "trainable_parameters": {
+        "dataset": "cifar10",
+        "block": 2003,
+        "candidate_id": "c000003",
+        "trainable_parameters": 54289144
+      },
+      "largest_single_conv_output_bytes_batch64": {
+        "dataset": "cifar10",
+        "block": 2000,
+        "candidate_id": "c000003",
+        "largest_single_conv_output_bytes_batch64": 33554432
+      }
+    },
+    "cifar100": {
+      "trainable_parameters": {
+        "dataset": "cifar100",
+        "block": 2002,
+        "candidate_id": "c000004",
+        "trainable_parameters": 6835982
+      },
+      "largest_single_conv_output_bytes_batch64": {
+        "dataset": "cifar100",
+        "block": 2003,
+        "candidate_id": "c000002",
+        "largest_single_conv_output_bytes_batch64": 32768000
+      }
+    }
+  },
+  "not_in_initial_six_representatives": [
+    [
+      "cifar10",
+      2000,
+      "c000003"
+    ],
+    [
+      "cifar100",
+      2002,
+      "c000004"
+    ],
+    [
+      "cifar100",
+      2003,
+      "c000002"
+    ]
+  ],
+  "note": "CIFAR10 maximum-parameter candidate was already among the six; extrema list is a coverage review, not a claim that all listed candidates were absent."
+}

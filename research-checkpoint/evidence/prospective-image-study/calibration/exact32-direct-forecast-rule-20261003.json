@@ -1,0 +1,62 @@
+{
+  "status": "prospective_formula_frozen_before_followup_timings_not_execution_authorization",
+  "frozen_utc": "2026-10-03T02:10:36.202083+00:00",
+  "candidate_plan_sha256": "dc4d2a1bd1107b6080f89656c782b9e35086d4015c2009c0871f9c2dbb79fc38",
+  "cohort": {
+    "datasets": [
+      "cifar10",
+      "cifar100"
+    ],
+    "repetitions": [
+      2000,
+      2001
+    ],
+    "candidates_per_block": 8,
+    "total_candidates": 32,
+    "all_32_required": true,
+    "no_candidate_replacements": true,
+    "order": "dataset in [cifar10,cifar100], repetition ascending, candidate_id ascending"
+  },
+  "calibration_contract": {
+    "fresh_protocol_and_seed_namespace": "fghpo-exact32-calibration-v1; runner owns exact seeded protocol",
+    "same_frozen_training_only_inputs": true,
+    "batch_size": 64,
+    "training_warmup_batches": 2,
+    "training_timed_batches": 16,
+    "total_optimizer_updates_per_case": 18,
+    "inference_rows": 1024,
+    "inference_warmup_passes": 1,
+    "inference_timed_passes": 2,
+    "score_rows": 1500,
+    "no_quality_metrics_or_score_values_retained": true,
+    "no_calibration_state_reuse_for_science": true
+  },
+  "direct_per_candidate_formula": {
+    "train_batch_seconds": "max(train_timed_02,...,train_timed_17) for this exact candidate",
+    "inference_batch_seconds": "max(inference_timed_1,inference_timed_2)/16 for this exact candidate",
+    "training_seconds": "62524*train_batch_seconds",
+    "inference_seconds": "78695*inference_batch_seconds",
+    "probe_score_seconds": "this candidate probe_score_1500 duration",
+    "two_phase_build_warmup_checkpoint_hash_seconds": "2*sum(this candidate build_initialize,train_warmup_00,train_warmup_01,inference_warmup_0,initial_weight_hash,final_weight_hash,checkpoint_save,checkpoint_hash)",
+    "epoch_weight_copy_check_restore_seconds": "405*max(this candidate initial_weight_hash,final_weight_hash)",
+    "data_io_validation_input_hash_proxy_seconds": "3*this candidate load_validate_arrays*61500/2524",
+    "backend_seconds_with_margin": "2*sum(all above per-candidate components across all32 candidates)",
+    "maximum_final_epochs": 100,
+    "all_candidates_charged_one_probe_and_possible_final": true,
+    "no_early_stop_or_shortlist_overlap_saving": true,
+    "no_MAC_or_cross_candidate_runtime_extrapolation": true
+  },
+  "provider_cost_formula": {
+    "science_worker_usd": "(backend_seconds_with_margin + explicit quoted paid startup/idle/shutdown seconds)*explicit all-in worker_usd_per_hour/3600",
+    "scientific_cap_usd": 42,
+    "other_remaining_allocation_usd": 3,
+    "proposed_total_prior_and_calibration_holds_usd": 5,
+    "cumulative_authorized_cap_usd": 50,
+    "proposed_followup_reservation_usd": 1,
+    "followup_reservation_is_committed": false,
+    "cost_estimates_not_provider_hard_maxima": true
+  },
+  "gate": "All32 complete successfully with exactly18 updates each, finite usable timings/peak memory and approved launch-integrity evidence; memory feasible at unchanged batch64; science<=42USD, other<=3USD and cumulative<=50USD. If any condition fails, stop without scientific runs. No smaller post-hoc cohort or substituted candidates.",
+  "limits": "Direct short-batch measurements with2x margin remain a planning assumption, not observed100-epoch costs or a memory/runtime guarantee. Strict provider/controller bounds and independent artifact/attempt review remain mandatory.",
+  "authorization": "Proposal only. Parent must obtain permission for the concrete followup before any remote execution; no scientific launch is authorized."
+}

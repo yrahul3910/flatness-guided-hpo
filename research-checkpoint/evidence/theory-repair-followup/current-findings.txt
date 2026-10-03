@@ -1,0 +1,58 @@
+Research checkpoint: repairing the local theory while retaining fast screening
+
+The objective is a fast generalization-screening method with defensible theoretical grounding. A useful repair direction exists, but neither the old ratio theorem nor a future-accuracy guarantee has been recovered. No main manuscript or production method was changed in this follow-up. All empirical observations below are exploratory development evidence.
+
+1. Exact location of the invalid step
+
+In paper/main.tex:504 the proof differentiates the penultimate activation through an inverse output Jacobian while taking a partial derivative with respect to independent final-layer weights. Those earlier activations must be held fixed. Correct differentiation removes that term, which is the source of the proposed inverse-weight-norm factor. The displayed first gradient also omits the label term; that omission alone does not change this head block's Hessian. The previously saved stationary, class-centered counterexample remains valid independently of any extreme common-logit shift. See theory-assumptions-review/review.md and results.json for its exact assumptions and numerical verification.
+
+2. A restricted replacement that preserves inexpensive head-curvature screening
+
+Let h_i be fixed D-dimensional features, W a D-by-K kernel, b a fixed bias, z_i=W^T h_i+b, p_i=softmax(z_i), and L the unregularized sample-mean cross-entropy for B observations. All logits and features are finite. Put C_i=diag(p_i)-p_i p_i^T. Then, up to vectorization order,
+
+  H_W = (1/B) sum_i C_i tensor (h_i h_i^T),
+  T = trace(H_W) = (1/B) sum_i (1-||p_i||_2^2)||h_i||_2^2.
+
+T needs per-example probability and feature norms from one forward pass; no explicit Hessian, inverse, or backpropagated second derivative is needed. It is a changed score, not the old ratio with a repaired proof. The image RMS implementation's product of batch summaries is not this average of per-example products. With r=rank(H_W)>0, positivity gives T/sqrt(r) <= ||H_W||_F <= T. In exact arithmetic at finite logits, r=(K-1)rank([h_1,...,h_B]); using its upper bound (K-1)min(B,D) gives a valid, possibly weaker lower bound. If r=0 then H_W=T=0.
+
+There is also a finite local-perturbation result. For ||Delta||_F<=rho, define R=max_i||h_i||_2, a=sqrt(2)rho R, and g=gradient_W L. For a>0 put phi_plus(a)=(exp(a)-1-a)/a^2 and phi_minus(a)=(exp(-a)-1+a)/a^2; both equal 1/2 at a=0 by continuity. Then
+
+  phi_minus(a) vec(Delta)^T H_W vec(Delta)
+    <= L(W+Delta)-L(W)-<g,Delta>
+    <= phi_plus(a) vec(Delta)^T H_W vec(Delta).
+
+Proof: the middle term equals the sample mean KL(p_i(W) || p_i(W+Delta)) exactly. Along the segment, a logit change u_i=Delta^T h_i has max(u_i)-min(u_i)<=sqrt(2)rho R. Each softmax probability changes by a density ratio between exp(-ta) and exp(ta). Since v^T C(p) v=min_c sum_k p_k(v_k-c)^2, exp(-ta)C(p_i)<=C(p_i(t))<=exp(ta)C(p_i). Integrating the resulting Hessian inequalities with Taylor's (1-t) remainder gives phi_minus and phi_plus above.
+
+For any zero-mean head perturbation supported in this radius with covariance sigma^2 I, taking expectations cancels the gradient term and sandwiches expected CE increase between sigma^2 phi_minus(a) T and sigma^2 phi_plus(a) T. This is a precise local sensitivity interpretation even after only one epoch, without assuming a stationary point. Bounded support is essential to this stated finite-radius result; it does not directly cover an unbounded Gaussian. The full manuscript's model need not have frozen features during training: they are fixed only while defining this head perturbation.
+
+A direct task-metric statement is narrower. If a prediction's top-versus-runner-up logit margin exceeds sqrt(2)rho||h_i||, every allowed kernel perturbation preserves its predicted class. A correct prediction then stays correct on that same input. This stability condition uses margins; a small trace alone does not provide it. None of these statements orders accuracy after future training or after a fresh initialization.
+
+Bias perturbations require augmenting h_i with a constant 1 and including b in the parameter block. The corresponding trace is mean_i (1-||p_i||^2)(||h_i||^2+1). Kernel-only curvature is zero for a dead representation h=0 even if the bias-only classifier performs poorly. Conversely, confidence can make curvature small for a confidently wrong classifier. These cases are directly relevant to the tabular dynamics and require empirical fit or margin controls, not a curvature-only interpretation of learning success. The raw trace retains feature-scaling dependence. Previously derived relative-head coordinates offer only their explicitly proved symmetry class; no normalization or candidate formula has been selected by fitting these outcomes.
+
+The trace bounds the head block. Its upper bound is not an upper bound on the full network Hessian. The full Hessian's Frobenius norm is at least that of this block, but minimizing a lower bound does not generally minimize the bounded quantity. A future screening study must therefore test the useful early-to-endpoint relationship rather than asserting it from these inequalities. The fast one-epoch/forward-pass screening pipeline survives as a research idea; its scored quantity, perturbation geometry, eligibility rules, and endpoint policy must be made explicit.
+
+3. The practical common-mode objection
+
+The prior normalization panel added shifts to W, leaving b unchanged. W'=W+v1^T adds the same scalar h(x)^T v to every class logit on every input. It preserves all probabilities in exact arithmetic and changes the kernel RMS denominator. A bias-only common shift would leave that denominator unchanged and was not the executed experiment. Large constructed shifts demonstrate noninvariance; they do not show that ordinary training causes harmful variation. Details and source lines are in common-mode-dynamics.txt.
+
+The new practical-gauge-followup/results.json measures all 32 saved lifecycle checkpoints and four hash-matched reconstructed phase initializations. No new training occurred. Common-mode squared head-kernel norm is 9.10-10.79% initially, 9.96-11.45% after one-epoch probing, and 8.51-10.25% in restored final models. On the probes, centering raises the score by 5.39-6.27% but changes none of the within-block candidate rankings. Both eight-candidate rank lists and the selected endpoints remain identical. The corresponding validation common-logit RMS is 12.3-29.6% of the class-centered logit RMS at probing and 17.6-42.2% in restored final models; logit and parameter-norm ratios are different quantities. In these runs there is no evidence that common-mode variation is causing selection failures, and no evidence that centering improves selection. This supports the user's practical distinction while leaving the separate universal-bound defect intact.
+
+4. Endpoint classification, checkpoint selection, and retraining
+
+The five- and 100-epoch pilots measure the first epoch and then continue that same model. Their terminal checkpoint means the final executed epoch; these runs do not restore a minimum-loss state. Per-epoch records let us separately examine the classification accuracy at each candidate's minimum recorded validation-CE epoch, even when its model checkpoint file was not saved.
+
+The later lifecycle pilot discards the probe's model state. It trains a fresh final model with a separate phase seed, cosine schedule, patience 25, and maximum 100 epochs, then restores weights from the minimum compiled-validation-CE epoch. Classification error at those restored weights was its prespecified primary endpoint. The last executed state before restoration is a different diagnostic. Choosing a checkpoint by minimum CE does not mean choosing its minimum classification error, and restoration can lower CE while increasing classification error.
+
+The following are errors out of 375 shared development validation examples. Each pair represents two initialization blocks; both methods minimize their one-epoch screening quantity, and each block has eight fixed candidate configurations.
+
+  Target                                        Original RMS selection   Early-validation-CE selection
+  100-epoch continuation, final epoch            19, 21                   19, 17
+  Same runs, minimum-validation-CE epoch          19, 22                   17, 18
+  Cold retraining, restored checkpoint           17, 20                   18, 14
+  Cold retraining, terminal before restoration   17, 19                   14, 14
+
+These results do not show consistent superiority of the original score. They also do not establish that the whole production shortlist HPO method fails: top-one diagnostic selection from eight fixed configurations differs from its eligible-pool/finalist procedure. All endpoint counts, rank correlations, ties, source hashes, and early-accuracy controls are retained in endpoint-metric-followup/metric-summary.json and candidate-endpoints.json. Loss correlations cannot be substituted for these classification comparisons.
+
+All pilots reuse official-training rows 0:1500 for fitting and rows 1500:1875 for development validation. The latter rows have also influenced stopping and repeated analysis. They are a disjoint training/validation split, but not an untouched final evaluation set. No official-test data were read. The next empirical gate is a prospectively frozen corrected quantity and pipeline evaluated on separate tuning/stopping data and an untouched outer task-metric evaluation set. New seeds alone do not repair this data reuse.
+
+Current branch: research/reviewer-experiments-20261002. The original checkout's diff and status are unchanged; the isolated main manuscript matches the original byte-for-byte. No cloud operation, paid compute, new optimizer update, manuscript edit, merge, submission, or external comment occurred in this follow-up.

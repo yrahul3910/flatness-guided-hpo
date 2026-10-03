@@ -1,0 +1,370 @@
+{
+  "schema": "matched-cifar-decision-draft-v1",
+  "status": "UNEXECUTED AUTHOR-REVIEW DRAFT; no scientific, resource, or launch authorization",
+  "prepared_utc": "2026-10-02T22:16:39.964937+00:00",
+  "claim": "Compare three screening rules on shared score-valid probe candidates under a fixed probe/retrain/select lifecycle. This is an empirical screening ablation, not a curvature theorem or a compute-equal HPO benchmark.",
+  "no_outcome_tuning": "Domains and lifecycle retain current CIFAR code. Development size is an engineering minimum; publication repetition count follows the manuscript proposed 20, not observed pilot effects. Seeds derive from named IDs, not chosen numerical outcomes. No score reversal, new threshold, range narrowing, early outcome-driven stopping, or favorable run replacement.",
+  "arms": [
+    {
+      "id": "original_rms",
+      "rank": "original RMS ratio ascending; candidate ID ascending on exact ties"
+    },
+    {
+      "id": "probe_validation_ce",
+      "rank": "same trained probe Keras validation CE ascending; candidate ID ascending on exact ties"
+    },
+    {
+      "id": "random_shortlist",
+      "rank": "one frozen uniformly random permutation of sorted common-pool IDs; first K without replacement; independent of scores"
+    }
+  ],
+  "scales": {
+    "development": {
+      "datasets": [
+        "cifar10",
+        "cifar100"
+      ],
+      "repetition_ids": [
+        0
+      ],
+      "proposal_attempts_N": 8,
+      "finalist_attempts_per_arm_K": 2,
+      "max_unique_final_fits_per_block": 6,
+      "official_test_evaluation": false,
+      "use": "Smallest proposed end-to-end integration panel across both class counts; descriptive only. Same full split and stopping horizon as publication. At most 16 probes and 12 unique final fits across the two datasets; cost estimate still required before approval."
+    },
+    "publication_proposal": {
+      "datasets": [
+        "cifar10",
+        "cifar100"
+      ],
+      "repetition_ids": [
+        1000,
+        1001,
+        1002,
+        1003,
+        1004,
+        1005,
+        1006,
+        1007,
+        1008,
+        1009,
+        1010,
+        1011,
+        1012,
+        1013,
+        1014,
+        1015,
+        1016,
+        1017,
+        1018,
+        1019
+      ],
+      "proposal_attempts_N": 100,
+      "finalist_attempts_per_arm_K": 10,
+      "max_unique_final_fits_per_block": 30,
+      "official_test_evaluation": "Only after every method selection in the approved suite is sealed; exactly one inference pass per distinct selected checkpoint, attributed to each associated arm/search.",
+      "use": "Proposed 20 paired independent search randomizations per dataset, distinct from candidates and epochs. NOT affordable/authorized merely because these counts are written; publication scale and policy need author and resource approval."
+    }
+  },
+  "data": {
+    "sources": "Official CIFAR-10 and CIFAR-100 training order through pinned Keras loader; CIFAR-100 fine labels.",
+    "splits": {
+      "fit_official_train_rows": [
+        0,
+        40000
+      ],
+      "validation_official_train_rows": [
+        40000,
+        50000
+      ],
+      "intervals": "half-open",
+      "official_test_rows": [
+        0,
+        10000
+      ]
+    },
+    "split_randomization": "None; preserves current last-20-percent rule. Search repetitions vary algorithm/training randomness, not dataset identity.",
+    "preprocessing": {
+      "dtype": "float32",
+      "layout": "channels_last",
+      "shape": [
+        32,
+        32,
+        3
+      ],
+      "scale": "divide by 255 before channel normalization",
+      "cifar10_mean": [
+        0.4914,
+        0.4822,
+        0.4465
+      ],
+      "cifar10_std": [
+        0.247,
+        0.2435,
+        0.2616
+      ],
+      "cifar100_mean": [
+        0.5071,
+        0.4867,
+        0.4408
+      ],
+      "cifar100_std": [
+        0.2675,
+        0.2565,
+        0.2761
+      ],
+      "labels": "one-hot 10 or 100 with fixed label map"
+    },
+    "isolation": "Proposal, probe, validation, stopping and selection functions accept fit/validation arrays only. Test arrays are unavailable to those APIs. Separate finalizer evaluates sealed incumbents; test results cannot trigger another search or checkpoint choice.",
+    "hashes_required_before_execution": [
+      "cached raw archives/files and loader source/version",
+      "exact fit/validation row IDs and label maps",
+      "preprocessed fit/validation array shape/dtype/content",
+      "probe subset membership/order and epoch permutations"
+    ],
+    "historical_access": "Existing historical CIFAR results may already have used official tests for candidate selection. New procedure prevents new within-run leakage; it cannot make those benchmarks historically untouched or repair old estimates."
+  },
+  "search_space": {
+    "field_order": [
+      "n_filters",
+      "kernel_size",
+      "padding",
+      "n_blocks",
+      "n_units",
+      "learning_rate",
+      "weight_decay"
+    ],
+    "n_filters": {
+      "type": "integer",
+      "low": 32,
+      "high": 128,
+      "law": "discrete uniform inclusive"
+    },
+    "kernel_size": {
+      "type": "integer",
+      "low": 2,
+      "high": 6,
+      "law": "discrete uniform inclusive"
+    },
+    "padding": {
+      "type": "categorical",
+      "values": [
+        "valid",
+        "same"
+      ],
+      "law": "uniform"
+    },
+    "n_blocks": {
+      "type": "integer",
+      "low": 2,
+      "high": 5,
+      "law": "discrete uniform inclusive conditional on sampled kernel/padding",
+      "valid_padding_max_by_kernel": {
+        "2": 4,
+        "3": 3,
+        "4": 3,
+        "5": 2,
+        "6": 2
+      },
+      "same_padding_max": 5
+    },
+    "n_units": {
+      "type": "categorical",
+      "values": [
+        32,
+        64,
+        128,
+        256,
+        512
+      ],
+      "law": "uniform"
+    },
+    "learning_rate": {
+      "type": "float",
+      "low": 0.0001,
+      "high": 0.01,
+      "law": "log-uniform via unit coordinate u: 10**(-4+2*u)"
+    },
+    "weight_decay": {
+      "type": "float",
+      "low": 1e-05,
+      "high": 0.001,
+      "law": "log-uniform via unit coordinate u: 10**(-5+2*u)"
+    },
+    "geometry": "One convolution then 2x2 pooling per CIFAR block. For valid padding subtract kernel-1 then floor-divide by2 each block; require positive size. Conditional depth matches current CIFAR random sampler, not uniform over all globally valid architectures. No hidden padding fallback, repair, retry, or resampling; explicit malformed/invalid proposals remain failed records.",
+    "manifest": "Generate N explicit typed configurations once per dataset/repetition before any training; candidate IDs c000000 onward in occurrence order. Retain duplicate configurations with distinct occurrence IDs and phase seeds. Save canonical JSON, source, RNG version and SHA256; all arms consume this exact immutable list. No proposal depends on probe or final outcomes."
+  },
+  "seed_contract": {
+    "namespace": "matched-cifar-v1",
+    "algorithm": "SHA256 of UTF-8 compact JSON array [namespace,dataset,integer repetition_id,candidate_id,phase,role]; first4 digest bytes big-endian masked with0x7fffffff. Retain keys and derived integer; full digest is reproducible from those keys and may be added by evidence integration. Pure helper checks distinct-role collisions within each manifest. Final approved cohort also requires a suite-wide cross-block collision preflight before training; collisions require retained pre-execution protocol revision, never silent seed remapping.",
+    "shared_candidate_id": "shared",
+    "shared_phase_role_pairs": [
+      [
+        "proposal",
+        "rng"
+      ],
+      [
+        "probe",
+        "subset"
+      ],
+      [
+        "probe",
+        "shuffle"
+      ],
+      [
+        "final",
+        "shuffle"
+      ],
+      [
+        "selection",
+        "random"
+      ]
+    ],
+    "candidate_phase_role_pairs": [
+      [
+        "probe",
+        "init"
+      ],
+      [
+        "probe",
+        "augmentation"
+      ],
+      [
+        "final",
+        "init"
+      ],
+      [
+        "final",
+        "augmentation"
+      ]
+    ],
+    "rng": "Pinned Python random.Random (Mersenne Twister) for seven unit-coordinate proposal draws and random-shortlist shuffle, as in contract/shared_contract.py. NumPy Generator(PCG64) for subset/epoch permutation streams. Record Python/NumPy versions, actual coordinates and full permutation hashes; equal laws do not imply bitwise replay of the older sampler.",
+    "shuffle": "A shared frozen stream yields each epoch permutation in fit-row identity order; per-epoch array hashes retained. Probe subset order is separately frozen, and remains the score batch order. Final permutation prefixes remain paired even when early stopping differs.",
+    "initialization": "Probe/final init seeds independent by phase; same candidate has identical phase seeds across all arms, regardless of score/rank/method/worker/order. Different candidate IDs may have different weights, even when architectures match.",
+    "augmentation": "Explicit phase/candidate augmentation root seeds, distinct layer substreams for translation/flip; retain seed-generator state in checkpoints. Freeze exact layer seed derivation in final implementation review; never rely on global resets as proof of pairing.",
+    "optimizer_isolation": "Proposal/optimizer RNG state is separate from training resets. Test rank/permutation invariance of seeds and any shared saved final fit."
+  },
+  "probe": {
+    "subset": "One shared random permutation of fit rows per dataset/repetition; first1500 in that order. Same members/order for all candidates. This paired control differs from current candidate-specific subset sampling.",
+    "training": "Fresh model/optimizer, one epoch, batch64 (23 full batches plus28), constant configured LR, Adam configured WD and clipnorm1.0; augmentation active. Record explicit training permutation separately from subset score order.",
+    "model": "Current CIFAR model: reflect translation4/32 then horizontal flip; each block Conv2D(filters*2**block,kernel,padding,He-uniform), BatchNorm,ReLU,MaxPool2; flatten; dense n_units/ReLU/He-uniform; dense classes/softmax/He-uniform. Exact defaults/package versions/source frozen before launch.",
+    "score": "UNCHANGED get_convexity definition: float32 RMS(p_batch)*RMS(h_batch)/RMS(final Dense kernel), excluding bias; inference mode; maximum over finite batch ratios in frozen subset order. Include28-example tail. Return positive maximum; if none positive return+inf. Preserve all raw batch components and nonfinite flags. No new normalization, inversion, sign change or tuning.",
+    "validation_ce": "Inference on the complete same10000 validation rows using actual compiled Keras categorical CE, sample weighted across batches. From exactly the same post-epoch probe checkpoint as RMS. No extra training, best-epoch selection, official-test access or fresh-model score. Save accuracy descriptively.",
+    "save": "Every completed probe checkpoint including model/BN/optimizer/RNG state; raw score components, Keras CE/accuracy, initialization/source/data/order/weights/file hashes, runtime and failures."
+  },
+  "population_and_threshold_decision": {
+    "recommended_primary_name": "shared score-valid-pool screening ablation, without the0.1 threshold",
+    "common_pool": "Among the N fixed probe attempts: structurally valid completed probe, finite positive returned RMS score, finite nonnegative same-probe validation CE. Identical pool for every arm. Raw all-zero activation batches may make returned score+inf; record and exclude identically rather than silently treating zero as the original score.",
+    "conditioning_limit": "Even without0.1 filtering, all controls inherit original-score computability and CE validity. This estimates ranking within that shared pool, not the effect of rejecting score-invalid candidates or unfiltered random search. Publish attempted/common-pool/rejected counts and every reason.",
+    "no_refill": "N counts attempts, not successful/eligible candidates. No replacements for duplicate, failed, rejected or nonfinite attempts. If common pool<K, the whole paired block has insufficient-pool status; no unofficial reduced-K or successful-subset result.",
+    "legacy_policy": {
+      "current": "Collect100 finite q>0.1 probes within1000 attempts, then choose10 lowest q. This is current STCVX, not the recommended fixed100-attempt primary.",
+      "author_choice_required": "Approve empirical score ablation as primary or retain current production policy as primary with its different attempted-cost population. Do not silently call the ablation unchanged production FGHPO.",
+      "separate_sensitivity": "If approved before any suite results: all three arms rank the same first100 q>0.1 and CE-valid probes from a frozen1000-attempt manifest prefix; stop prefix at the100th eligible, count all failed/rejected probes. Label controls as threshold-conditioned. This isolates ranking within a proxy-filtered pool, not the benefit of the threshold. Applying0.1 only to RMS is a separate whole-policy comparison with unequal pools/costs, not a score-isolation claim.",
+      "threshold": "Exactly strict q>0.1; zero, nonfinite, exactly0.1 retained as rejected; no threshold tuning."
+    },
+    "record_before_selection": "Persist all N raw Probe rows, statuses, scalar/raw components, checkpoints if available, and measured costs BEFORE invoking shortlist. Insufficient pool raises before helper returns exclusions: caller records the exception plus all raw rows as a failed paired block. Typed pure helper is not an external JSON validator; integrated caller validates manifest/probe schema and all status values."
+  },
+  "final_fit_and_selection": {
+    "training": "Cold-start fresh weights and Adam state, independent probe/final phase seeds, same40k fit rows, batch64, max100epochs, CosineDecay(initial LR,62500 optimizer steps,alpha0), configured WD/clipnorm1.0. Do not warm-start from the probe.",
+    "stopping": "Actual installed Keras EarlyStopping(monitor=val_loss,mode=auto,min_delta=0,patience=25,baseline=None,restore_best_weights=True,start_from_epoch=0), observing actual compiled sample-weighted Keras validation CE each epoch. Log callback best/wait/stop decisions. No guarantee of convergence from duration or schedule.",
+    "checkpoint_objective": "Restore best monitored validation-CE weights within actual stopping horizon, with installed strict-improvement/tie behavior. Not epoch100 weights, best validation accuracy checkpoint, or retrospective best across100 when training already stopped.",
+    "candidate_objective": "Choose highest validation accuracy among successful restored finalist checkpoints; exact ties use ascending stable candidate ID. CE does not break candidate-accuracy ties. This intentionally separates CE checkpoint selection from accuracy candidate selection.",
+    "shortlists": "K fixed slots per arm from its common-pool rank. A final-fit failure consumes a slot; never refill. Retain successful available incumbent, mark degraded arm if any slot failed; no successful incumbent means failed arm with no test result.",
+    "shared_union": "Train each candidate in the union of the three shortlists once and reuse its identical phase outcome across arms; at most3K unique final fits. Count each selected fit fully in each arm logical ledger, while recording actual shared execution once. Cache reuse is an engineering saving, not an algorithmic speedup.",
+    "save": "All attempted finalist histories and successful restored checkpoints, init/optimizer/order/augmentation hashes, per-epoch train/validation CE and accuracy, actual steps/epochs, best/stop epoch, parameter count, failures and partial state. Independent reload verifies restored CE/accuracy and source hashes."
+  },
+  "outcomes_and_analysis": {
+    "development": "Validation-only integration and cost evidence; no official-test inference, superiority p-values, pool-best regret, or full-pool score/outcome correlations.",
+    "primary_publication": "Final official-test error of each validation-selected restored checkpoint; report paired original-minus-CE and original-minus-random differences separately by dataset, as well as each arm mean, median and per-block values. Negative difference favors original.",
+    "secondary": [
+      "Restored incumbent validation error and validation CE, with repeated-validation-use limitation.",
+      "Official-test CE recorded in the same sealed final inference pass; no alternative winner chosen from CE.",
+      "Completion/degraded/failed counts and rejection reasons; probe/final epochs, examples, updates, parameter counts and measured costs.",
+      "Descriptive LR associations with each probe score within the complete common pool. Final outcomes exist only for shortlist union; any union association is explicitly selection-conditioned."
+    ],
+    "uncertainty": "Independent paired search block is the repetition unit, not candidates, epochs, test examples or overlapping fits. Proposed20 blocks per dataset: retain all block rows; mean paired differences with95percent paired bootstrap intervals,10000 resamples using namespace-keyed analysis RNG fixed before finalization. Report both prespecified contrasts/datasets; no dataset pooling, post-hoc favorable subset or optional stopping. No hypothesis-test significance claim planned.",
+    "failure_reporting": "All assigned blocks stay in denominator. Report arm completion/degradation and conditional measured outcomes explicitly. If any arm lacks an incumbent or test result, do not headline a complete-case superiority claim: report paired effect bounds assigning each missing test error its mathematical range[0,1], alongside observed complete-pair values marked conditional. Never fabricate CE for failures, relabel retry as the original run, or replace a failed seed.",
+    "identifiability": "Shortlist-union outcomes do not identify full-pool rank correlation, pool oracle or selection regret. Those require a separately approved complete-pool final-training diagnostic, with all its extra cost; no selected-only substitution.",
+    "interpretation": "Empirical generalization limited to the frozen datasets/search prior/lifecycle/hardware. Prior MNIST diagnostics and historical CIFAR test access are disclosed. No experiment validates the falsified Hessian/strong-convexity theorem."
+  },
+  "cost_accounting": {
+    "primary_budget": "Matched N attempted probes and K finalist slots per arm. This matches opportunities, not compute across different architectures/early-stop horizons. Report actual candidate size, epochs/updates/examples and synchronized device-seconds.",
+    "logical_arm_cost": "Charge every shared attempted probe and both measured probe inference passes to each arm in this controlled ablation, including rejections/failures, plus its ranking overhead and own K final slots, validation/serialization and final test inference. Mark random probe/score work as experimental overhead it need not perform in deployment.",
+    "physical_cost": "Separate actual union execution ledger includes each shared probe/final fit once; additionally include preparation, data I/O, model compilation, checkpoint I/O, scoring, optimizer overhead, verification, retries, infrastructure idle time and billed startup/shutdown. Do not divide shared cost by arms and call it deployable HPO runtime.",
+    "timing": "Same fixed device type, memory, precision, backend versions and concurrency for arms; monotonic synchronized phase timings with explicit boundaries. Report serial reconstructed logical totals separately from physical end-to-end elapsed wall time and any parallel makespan; never add parallel durations and label wall time. Training batch size64 fixed; OOM is recorded, not silently changed batch size/range.",
+    "deployment_claim": "A random shortlist without probes and method-specific scoring overhead need separate operational timing if an efficiency claim is desired. Primary controlled-ablation timings cannot establish original screening faster than that control.",
+    "resource_gate": "Before even development execution: measured bounded calibration plan plus provider/hardware/hourly estimate, data upload list, storage retention, dollar/time/job caps and shutdown behavior reviewed against remaining authorized budget. This draft allocates no money or resources. Numerical time cap cannot be responsibly inferred from MNIST CPU timing."
+  },
+  "secondary_optimizer_extension": {
+    "status": "Separate deferred study, not part of the fixed-proposal three-arm primary.",
+    "counting_note": "Six currently integrated families, counting FGHPO/STCVX itself. Legacy OpenTuner is excluded; it has no common recorder/test-once contract and is not an extra active suite task.",
+    "common_contract": "Same domain support, inclusive endpoints, log coordinates for LR/WD, conditional geometry, objective/stopping/test boundary, phase seeds and failure ledger. Match uninformed initial sampling laws through explicit adapters. Adaptive suggestions are free to differ; do not force adaptive optimizers to consume the fixed primary proposal manifest. Report algorithm-specific surrogate/encoding choices.",
+    "latent_decoding": "For a uniform u in[0,1), categorical bin=floor(m*u), integer bin=low+floor((high-low+1)*u); clamp exact endpoint1 to last bin only. Log continuous map as above. Conditional block upper bound determined by decoded kernel/padding. Native categorical handling is preferred where supported; transformed/ordinal adapters must be named and their induced proposal laws tested.",
+    "budget": "Choose one prespecified measured compute/time cap per dataset on identical hardware after non-outcome calibration; cap includes probes, failures, optimizer and inference overhead. Retain censored/incomplete work and incumbent availability. Also provide evaluation-count and requested/actual-fidelity tables. Current30-call baselines versus complete BOHB199-call schedule are descriptive defaults, not matched budgets. Any alternative BOHB truncation/schedule is separately named and frozen before results.",
+    "current_settings": {
+      "random": "30 full-fit attempts; geometry-conditioned inclusive/log sampler.",
+      "HEBO": "Five batches of6; linear numeric coordinates now; inclusive integer bounds, native categorical; optimizer defaults/version and batch timing need freeze.",
+      "Hyperopt": "TPE30 evaluations; hp.uniform linear LR/WD; hp.randint excludes integer upper bound; common adapter must correct support and log prior.",
+      "TuRBO": "Current worktree now models7 coordinates, n_init15, max_evals30, batch1; rounded native integer coordinates and equal-width ordinal bins for padding/units, not a categorical kernel. Module absent locally/undeclared; current smoke status and exact revision must be checked at final freeze. Ordinal category distances are arbitrary and integer endpoints still have unequal initial mass unless adapter changes. Training global NumPy resets are isolated by save/restore in latest wrapper."
+    },
+    "BOHB_installed": {
+      "package": "bohb-hpo0.5.2",
+      "resources": {
+        "min": 1,
+        "max": 100,
+        "eta": 3
+      },
+      "mapped_epoch_call_counts": {
+        "1": 81,
+        "3": 61,
+        "11": 30,
+        "33": 16,
+        "100": 11
+      },
+      "objective_calls": 199,
+      "full_budget_calls": 11,
+      "summed_requested_cold_fit_epochs": 2222,
+      "mapping": "Installed loop truncates nominal100 rung to99; current wrapper maps budgets>=99 to100, otherwise round. Freeze actual emitted sequence, not textbook schedule arithmetic.",
+      "lifecycle": "Every objective callback is a cold fit with its own rung-length cosine horizon; no checkpoint continuation. Promotions may reuse configurations but retrain. Only100epoch fits eligible to supply final incumbent.",
+      "KDE": {
+        "best_percent": 0.15,
+        "random_percent": "1/3",
+        "n_samples": 64,
+        "bw_factor": 3,
+        "min_bandwidth": 0.001,
+        "n_proc": 1,
+        "estimator": "statsmodels KDEMultivariate normal_reference bandwidth, mixed continuous/ordered-discrete types from installed configspace",
+        "fit_condition": "ceil(0.15*rung_sample_count)>dimension+2; dimension7 means>9. Reset KDE at each bracket; retained within a bracket unless a new KDE fit is possible.",
+        "proposal": "Choose random/promotion branch when no KDE or probability1/3; consume retained promoted samples before new configuration-space draws. Otherwise choose minimum bad/good density ratio among64 perturbed good samples. This is not uniformly fresh random exploration at every1/3 branch."
+      },
+      "limitations": "Installed integer sampler rounds continuous uniforms (half mass at endpoint integers); LR/WD linear today. Explicit ConfigurationSpace seed fixes initial proposals, but full adaptive KDE/RNG replay is unverified. Preserve optimizer RNG separately from training resets. The numeric-coordinate mismatch is a separate blocker. Do not silently patch installed schedule/KDE and retain an inaccurate description of its old settings.",
+      "coordinate_mismatch": "Source-derived blocker: get_sample truncnorm bounds correspond to absolute numeric values[0,1], whereas UniformHyperparameter.value stores native unnormalized values and clamps to native bounds. For integer filter/kernel/block lower bounds>1, the resulting KDE-proposal setter necessarily clamps to the lower bound; LR/WD may also boundary-clamp. Initial random proposals do not exercise this branch. This is code-path inference, not a claim about a completed trained search; audited unit-coordinate adapter or separately named implementation correction required before publication."
+    },
+    "families_including_fghpo": [
+      "FGHPO/STCVX under approved threshold policy",
+      "Random full-fit search",
+      "HEBO",
+      "Hyperopt/TPE",
+      "BOHB",
+      "TuRBO"
+    ]
+  },
+  "before_implementation_and_launch": {
+    "author_choices": [
+      "Approve empirical screening claim and distinguish it from production FGHPO policy.",
+      "Approve recommended fixed-attempt/common-score-valid primary versus current100eligible/10/1000 policy; any threshold sensitivity is separate and prospective.",
+      "Approve development N8/K2/one block and proposed publication N100/K10/20 paired blocks per dataset, or revise once before results.",
+      "Approve primary test-error outcome, secondary CE, failure reporting and scope of any optimizer/time-efficiency claims.",
+      "Allocate provider/hardware/time/dollar/storage budget after calibration; full suite is not covered by this draft."
+    ],
+    "routine_required_work": [
+      "Implement pure manifest/seed/selection contract and review focused boundary/failure/tie/rank-invariance tests.",
+      "Integrate training-only data APIs, exact phase/augmentation/shuffle seeds and common checkpoint lifecycle; verify same-candidate outcomes independent of shortlist order.",
+      "Run bounded approved end-to-end development then checkpoint/statistical audit; resolve implementation defects with retained attempts and versioned protocol, never rewrite evidence.",
+      "Freeze code/dependency/source/data/proposal manifests, deterministic settings, analysis seed/tolerances, actual commands and all resource limits before publication. No source mismatch or import from another checkout.",
+      "For secondary optimizers, verify actual installed adapters/schedules/KDE and resource stopping; no untested missing dependency or legacy entrypoint in reported suite."
+    ]
+  }
+}

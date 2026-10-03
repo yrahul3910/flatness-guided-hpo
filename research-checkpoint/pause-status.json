@@ -1,0 +1,41 @@
+{
+  "verified_at_utc": "2026-10-03T03:31:09.383207+00:00",
+  "scientific_study_launched": false,
+  "research_paused": true,
+  "automatic_resume": false,
+  "modal_apps": {
+    "count": 3,
+    "all_stopped": true,
+    "active_tasks": 0
+  },
+  "gcp_instances": {
+    "count": 2,
+    "all_terminated": true
+  },
+  "original_gcp_disks": {
+    "count": 2,
+    "size_gib_each": 100,
+    "all_ready": true,
+    "all_attached": true,
+    "none_deleted": true
+  },
+  "new_persistent_storage_gib": 0,
+  "original_disk_contents_recovered": false,
+  "resource_evidence_sha256": {
+    "modal-apps-at-pause-20261003.json": "d8cd58af09205f8338807ba7e18f32e57edb71db4249b5cbc28b63ac08ede301",
+    "instances-at-pause-20261003.json": "1bc1fe9e82e07748b5d99314215c296c644432252eae049f508a828d7b09bd67",
+    "disks-at-pause-20261003.json": "c6dae060e75cca69b0c6b18ae388ff099b53959adb03413511d3165d2e7727f0"
+  },
+  "financial_status": {
+    "authorized_cap_usd": 50,
+    "conservative_reserved_usd": 6,
+    "holds_are_not_actual_charges": true,
+    "latest_account_snapshot_at_utc": "2026-10-03T03:09:54Z",
+    "metered_account_usd": 0.18159692,
+    "billed_account_usd": 0,
+    "settled_per_run_charges_usd": null,
+    "billing_caveat": "Account snapshots were nonmonotonic and may lag; they do not establish settled task cost. Existing preserved disks may continue pre-existing storage charges.",
+    "unexecuted_l4_worker_forecast_usd": 38.30517121828696,
+    "unexecuted_cumulative_forecast_usd": 46.30517121828696
+  }
+}

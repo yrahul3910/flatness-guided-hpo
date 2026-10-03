@@ -1,0 +1,39 @@
+{
+  "frozen_utc": "2026-10-03T02:56:44.415280+00:00",
+  "status": "l4_full_fp32_calculator_frozen_before_any_l4_execution_or_timing_inspection",
+  "source_sha256": "c0285c820df8a398b6bb05c0802546fb9715097accc5abbfcf64fe4869a89b1a",
+  "protocol_sha256": "113b8af3c5e1596a39ea7395d3a08de94fb8458b65c157b66c388e9cf5ea51a9",
+  "rule_sha256": "901f515c4c7ee1a2e6ec733a966d85e2afda99b5e58be606d45ae7d96ec6a1f7",
+  "addendum_sha256": "4fa2019a69330d484a16446807c83bf543022daad794c4f8380b318f8fc61047",
+  "source_lines": 200,
+  "command": "python direct_cost_forecast.py RESULTS_DIRECTORY LAUNCH_ELIGIBILITY NEW_OUTPUT",
+  "runtime_tensor_float_32_execution_enabled_required": false,
+  "literal_false_required": true,
+  "actual_l4_timing_records_inspected": 0,
+  "fixed_costs": {
+    "worker_usd_per_hour": 1.021392,
+    "startup_idle_shutdown_seconds": 15616,
+    "scientific_cap_usd": 42,
+    "other_reserve_usd": 2,
+    "prior_plus_calibration_holds_usd": 6
+  },
+  "checks": {
+    "precision_false_true_missing_zero_fixture": "pass",
+    "formula_ast_identical": "pass",
+    "ruff": "pass",
+    "no_sloppy_errors": 0,
+    "no_sloppy_advisory_warnings": 2,
+    "type_errors": 0,
+    "type_advisory_warnings": 7,
+    "type_exit_code": 1
+  },
+  "previous_unexecuted_l4_archive": "<RESEARCH_WORKTREE>/.cloudexp/research-audit-20261002/prospective-image-study/exact32-l4-calibration/unexecuted-tf32-default-draft",
+  "previous_freeze_sha256": "fad93eb8bfd7ae18d7c843b65f79d428fececf9fbca3060566f1c2e829b47ea9",
+  "evidence_sha256": {
+    "direct-calculator-precision-diff.patch": "f8cafc6e5f1b3f1687d625e278bdd6db98b48a5d947395139043416c7f2884f3",
+    "direct-calculator-copy-check.json": "6f8fb4c2cb4088afdc45ead2d40a881333a6bdee8d2ff4935dd190287e305854",
+    "qa/direct-forecast-precision-synthetic.json": "7a90bce2646c44e40555fec4a14f9decaa0098d697a118df7eb00ae3bc87e9de",
+    "qa/direct-forecast-precision-no-sloppy.txt": "8dc04252330a8a25a0e5d9150d4bf5dd4d2880561bb261aa91a96d1550625182",
+    "qa/direct-forecast-precision-basedpyright.json": "211b6fa9b4ab41420df6caecfa33f1641e2619d5108dc3038dfea5b9b18a26f2"
+  }
+}

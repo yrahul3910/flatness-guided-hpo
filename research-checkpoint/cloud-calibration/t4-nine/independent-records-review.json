@@ -1,0 +1,117 @@
+{
+  "status": "PASS: independently verified completed calibration and subsequent terminal proof; eligible for parent-verified forecast gate",
+  "reviewed_utc": "2026-10-03T02:00:47.120556+00:00",
+  "reviewer": "/root/pilot_review",
+  "scope": "Local records/JSON/log/source/raw-byte hashes only; no model execution, research-array load, cloud call, forecast or frozen-artifact edit.",
+  "evidence_sha256": "c859feff2651fed9a61fc88b5da678b4d21ed28a86a16a3a99e01e0d5e47307e",
+  "evidence_compressed_bytes": 14121,
+  "evidence_members": 18,
+  "evidence_uncompressed_bytes": 48831,
+  "all_member_hashes_and_extracted_bytes_match": true,
+  "protocol_sha256": "6acf284ed91dbb1fa038fbb5810b829bf7432c8a180af82083afd47c886df641",
+  "source_hashes_checked": 22,
+  "calibration_input_byte_hashes_checked": 2,
+  "launcher_sha256": "1f42869d3323f886d233d4b92a4225eb408378a5919049709a238cfa81d09d4a",
+  "payload_sha256": "4c895335fa9db03d2eaba3a04b0f53987ee6200444d76b6810f931d59cbd6f54",
+  "app_id": "<PROVIDER_ID>",
+  "single_observed_and_returned_attempt": "085d13b0-f5a3-4d81-8edc-491bee18095f",
+  "provider_task_id": "<PROVIDER_ID>",
+  "actual_start_utc": "2026-10-03T01:52:13.480114+00:00",
+  "controller_elapsed_seconds": 152.9556399580033,
+  "calibrator_elapsed_seconds": 74.15969395637512,
+  "case_identity_and_timing_schema_exact_match": true,
+  "cases": [
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2003,
+      "candidate_id": "c000005",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 110388736
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "candidate_id": "c000001",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 393280000
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2003,
+      "candidate_id": "c000003",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 4577014272
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "candidate_id": "c000007",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 853596928
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "candidate_id": "c000003",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1067863808
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2002,
+      "candidate_id": "c000000",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1675777536
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "candidate_id": "c000003",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1201838080
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2002,
+      "candidate_id": "c000004",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 2953136384
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2003,
+      "candidate_id": "c000002",
+      "optimizer_updates": 18,
+      "gpu_peak_bytes": 1496892160
+    }
+  ],
+  "total_optimizer_updates": 162,
+  "maximum_gpu_peak_bytes": 4577014272,
+  "retained_quality_values": "None in exact case-record schema; stdout/stderr contain no numeric metric lines matching reviewed metric patterns. Protocol prose/timing stage names are not quality values. No checkpoint, prediction or dataset-array files are returned.",
+  "stdout_bytes": 0,
+  "stderr_bytes": 4786,
+  "terminal_proof": {
+    "path": ".cloudexp/research-audit-20261002/prospective-image-study/modal-access-audit/after-run-verification-20261003T015700003185Z.json",
+    "sha256": "da4b954fa3ea46da6375967d54d1d2fb23eec16ff87e49c3cca4443e761e18f2",
+    "app_list_path": ".cloudexp/research-audit-20261002/prospective-image-study/modal-access-audit/after-run-app-list-20261003T015700003185Z.json",
+    "app_list_sha256": "ad8703d66e8c000b0b00c92eb57793b5e6ebcd70ce94d255f6058d0ce59982d5",
+    "observed_at_utc": "2026-10-03T01:57:00.958548+00:00",
+    "target": {
+      "app_id": "<PROVIDER_ID>",
+      "description": "fghpo-cal-t4-20261003",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-10-02 21:52:13-04:00",
+      "stopped_at": "2026-10-02 21:54:45-04:00"
+    }
+  },
+  "historical_cleanup_error": {
+    "controller_ledger_sha256": "e77f21e2a1fffd936212a4043a616484fb9389d5cae4786a158ce2e69955fe31",
+    "preserved_cleanup_verified": false,
+    "preserved_cost_gate_eligible": false,
+    "error": "'App ID'",
+    "cause": "SDK display_table converts labels to snake_case; launcher and mock fixture assumed display labels. Independent prelaunch review missed the JSON conversion too.",
+    "resolution": "Subsequent read-only exact-app state stopped and tasks0 verified from preserved provider output. This review does not rewrite the historical failed ledger or rerun calibration."
+  },
+  "billing": "No per-run settled charge inferred; parent/account-wide billing snapshot is separate from this eligibility review."
+}

@@ -1,0 +1,68 @@
+Purpose and boundary
+
+This calculator consumes only the frozen candidate plan, frozen calibration protocol, nine timing/memory records,
+cohort completion/GPU metadata, and explicit provider prices. It does not load dataset arrays, scientific results,
+calibration task metrics, scores, predictions, or model checkpoints. No paid execution is performed by the calculator.
+Freeze the calculator and this rule before the nine real timing records are inspected. Synthetic arithmetic is separate.
+
+Work per candidate, with batch64 and no early stopping or shortlist-overlap saving
+
+Probe: 24 training batches, 24 fit-metric batches, 157 tuning-metric batches, 157 post-phase tuning batches, and one
+separately timed full1500-row score extraction. Final: 100 epochs, each625 training plus625 fit-inference plus157
+tuning-inference batches, then157 post-phase tuning batches. Total: 62524 training and78695 inference batches plus score.
+Partial batches are charged as full batches. Every candidate in both tasks and each proposed repetition prefix can
+require a final fit, regardless of shortlist overlap. Four repetitions means64 candidates; two means32.
+
+For case j let M_j be frozen analytic forward MACs/image and P_j actual model parameter count. Training slope is the
+maximum individual timed training-batch seconds divided by M_j across all16 batches of all9 cases. Inference slope is
+the maximum of the two timed1024-row passes divided by16*M_j across all9 cases. Score slope is the maximum measured
+full1500-row score duration divided by M_j across all9 cases. All representatives contribute, including memory extrema.
+
+For a candidate with M MACs and P total parameters, training=62524*M*train_slope; inference=78695*M*inference_slope;
+score=M*score_slope. For each overhead stage define H(stage,P)=max(maximum observed stage seconds,
+P*maximum observed stage seconds/parameter). Sum build_initialize, train_warmup_00, train_warmup_01,
+inference_warmup_0, initial_weight_hash, final_weight_hash, checkpoint_save and checkpoint_hash; charge that sum twice.
+This deliberately charges full warmup durations in addition to the steady batch allowance.
+
+Unmeasured overhead proxies, approved before timing by the research-loop owner
+
+Charge (4*101+1)*max(H(initial_weight_hash,P),H(final_weight_hash,P)) for101 per-epoch weight finite checks/copies,
+possible best-weight snapshots and one terminal restore. Weight hashing includes a model.get_weights transfer plus
+CPU hashing, but it is still a proxy, not a measured bound for these other operations.
+Charge3*maximum(load_validate_arrays)*(11500+50000)/2524 for probe/final data load, validation, input-array hashes,
+source reads, permutations and logs. The calibration has1500+1024 rows; a scientific probe has1500+10000 and a final
+has40000+10000. Row scaling is valid here because each dataset's per-row representation is unchanged. The factor3 is
+an approved allowance for unmeasured I/O and metadata work, not a claim these operations were individually timed.
+
+Multiply the sum of every backend component above by2. This is a planning margin, not a mathematical runtime bound.
+Add quoted paid worker startup/idle/shutdown seconds after this margin and multiply total paid seconds by the explicit
+all-in worker hourly rate/3600. Storage, network, finalization and contingency are separately entered dollar estimates.
+The caller must quote retention duration, stored/uploaded bytes and finalization compute sufficient for that prefix;
+the calculator does not infer provider prices or silently assume free persistent storage, egress or finalization.
+Use quotes sufficient for the larger four-repetition prefix if one common price file covers both alternatives.
+
+Gate and limits
+
+All9 exact frozen cases must complete with18 optimizer updates each, no errors and nonzero usable GPU peak measurements.
+The complete cohort marker and recorded GPU identity/protocol hash must match; missing evidence blocks the gate.
+Parent-verified launch evidence must additionally certify single_attempt, runtime_finished and modal_app_stopped as
+literal true. It must contain valid verified_evidence_sha256, calibration_source_sha256 and payload_sha256 fields;
+the calibration-source hash must match the frozen protocol. The parent independently verifies attempt markers,
+provider/call success and retrieved artifacts before writing this eligibility record. Unknown/lost earlier attempts,
+missing attempt markers or multiple remote invocations are ineligible even if nine timing records later appear complete.
+The calculator records the eligibility file hash and relies on those parent-verified claims, not self-reported timings.
+Every measured peak must fit the explicit GPU-memory limit. Nine representative successes do not prove memory
+feasibility for unprofiled candidates, so launch review must separately establish that assumption and a hard spending cap.
+Choose4 repetitions/task if its scientific worker estimate is at most42USD and all other estimates sum to at most4USD.
+Otherwise choose2 only if it passes those same limits. If2 fails, stop after calibration; no scientific run is allowed.
+The decision never authorizes a launch by itself. Budget conservation remains the parent controller's responsibility.
+
+Invocation
+
+python cost_forecast.py PLAN PROTOCOL EXPECTED_PROTOCOL_SHA TIMING_DIRECTORY PRICING LAUNCH_ELIGIBILITY NEW_OUTPUT
+
+PRICING must contain worker_usd_per_hour, paid_startup_idle_shutdown_seconds, gpu_memory_limit_bytes,
+gpu_name_contains, quote_sources, and other_usd with exactly storage/network/finalization/contingency dollar fields.
+The worker rate must include all billable machine components. The substring must identify the quoted device family.
+The result records all input/source/timing hashes, component seconds for every candidate, both cohort estimates and gate.
+Output creation is exclusive. Existing evidence is never overwritten. Malformed or nonfinite inputs fail.

@@ -1,0 +1,153 @@
+\begin{table*}[ht!]
+{\scriptsize
+\centering
+\caption{Experimental results on various classification datasets. {\IT} is our method. Values shown are medians over 20 repeats. Statistically best results are highlighted in \textbf{bold} (see Section \ref{sec:experiments} for details).}
+\label{tab:results}
+    \begin{subtable}[t]{.45\linewidth}
+        \begin{tabular}[t]{llr}
+            \toprule
+            \multicolumn{3}{c}{\textbf{Image}} \\
+            \midrule
+            \textbf{Dataset}                 & \textbf{HPO method} & \multicolumn{1}{l}{\textbf{Accuracy}} \\
+            \midrule
+            \multirow{6}{*}{MNIST} & {\IT}                & \gray{98.7}                    \\
+                                    & Hyperopt            & 97.2                     \\
+                                    %& Opentuner           & \gray{99.02}                     \\
+                                    & Random       & \gray{98.9}                              \\
+                                    & TuRBO               & \gray{99.0}                              \\
+                                    & HEBO                & \gray{98.9}                              \\
+                                    & BOHB                & 98.8 \\
+            \midrule
+            \multirow{6}{*}{SVHN} & {\IT}                &  76.5                   \\
+                                    & Hyperopt            & 67.2                    \\
+                                    %& Opentuner           & 91.79                    \\
+                                    & Random       & \gray{91.9}                              \\
+                                    & TuRBO               &  80.4                             \\
+                                    & HEBO                & 92.9                              \\
+                                    & BOHB                & 79.7 \\
+            \midrule
+            \multicolumn{3}{c}{\textbf{Bayesmark}} \\
+            \midrule
+            \textbf{Dataset}                 & \textbf{HPO method} & \multicolumn{1}{l}{\textbf{Score}} \\
+            \midrule
+            \multirow{6}{*}{breast} & {\IT}          & \gray{94.0}                     \\
+                                    & Hyperopt            & \gray{92.7}                     \\
+                                    %& Opentuner           & \gray{92.40}                     \\
+                                    & Random       & 90.4                              \\
+                                    & TuRBO               & 89.0                              \\
+                                    & HEBO                & 90.8                              \\
+                                    & BOHB                & 92.4 \\
+            \midrule
+            \multirow{6}{*}{digits} & {\IT}          & 84.7                                  \\
+                                    & Hyperopt            & \gray{96.8}                     \\
+                                    %& Opentuner           & 75.76                              \\
+                                    & Random       & 87.4                              \\
+                                    & TuRBO               & 89.5                              \\
+                                    & HEBO                & \gray{95.2}                     \\
+                                    & BOHB                & 91.5 \\
+            \midrule
+            \multirow{6}{*}{iris}   & {\IT}          & \gray{91.0}                    \\
+                                    & Hyperopt            & 79.8                              \\
+                                    %& Opentuner           & 85.06                     \\
+                                    & Random       & 83.0                              \\
+                                    & TuRBO               & 83.5                              \\
+                                    & HEBO                & 78.3                              \\ 
+                                    & BOHB                & \gray{92.3} \\
+            \midrule
+            \multirow{6}{*}{wine}   & {\IT}          & \gray{92.3}                     \\
+                                    & Hyperopt            & 84.0                              \\
+                                    %& Opentuner           & 83.43                              \\
+                                    & Random       & 76.6                              \\
+                                    & TuRBO               & 81.1                              \\
+                                    & HEBO                & 74.9                              \\   
+                                    & BOHB                & 81.7
+                                            \\
+            % \midrule
+            % \multirow{7}{*}{diabetes**} & {\IT}        & \gray{98.79}                                                   \\
+            %                         & Hyperopt            & \gray{99.16}                              \\  
+            %                         & Opentuner           & \gray{99.04}                              \\            
+            %                         & Random       & 97.16                              \\                                      
+            %                         & TuRBO               & \gray{98.67}                              \\  
+            %                         & HEBO                & 98.09                              \\ 
+            %                         & BOHB                & 97.86
+            %                                 \\
+            \bottomrule
+        \end{tabular}
+    \end{subtable}
+    \hspace{.03\textwidth}
+    \begin{subtable}[t]{.45\textwidth}
+        \begin{tabular}[t]{llr}
+            \toprule
+            \multicolumn{3}{c}{\textbf{OpenML}} \\
+            \midrule
+            \textbf{Dataset}                 & \textbf{HPO method} & \multicolumn{1}{l}{\textbf{AUC}} \\
+            \midrule
+            \multirow{6}{*}{\href{https://openml.org/t/53}{vehicle}} & {\IT}                & \gray{88.9}               \\
+                                    & Hyperopt            &  \gray{88.3}                   \\
+                                    %& Opentuner           &                     \\
+                                    & Random       & 87.3                              \\
+                                    & TuRBO               & \gray{88.2}                                \\
+                                    & HEBO                & \gray{88.4}                              \\
+                                    & BOHB                & \gray{88.3} \\
+            \midrule
+            \multirow{6}{*}{\href{https://openml.org/t/10101}{blood-transf...}} & {\IT}                &  \gray{80.3}               \\
+                                    & Hyperopt            &  72.8                   \\
+                                    %& Opentuner           &                      \\
+                                    & Random       &  70.8                             \\
+                                    & TuRBO               &  72.0                            \\
+                                    & HEBO                & 71.8                              \\
+                                    & BOHB                & 72.5 \\
+            \midrule
+            \multirow{6}{*}{\href{https://openml.org/t/146818}{Australian}} & {\IT}                &  \gray{92.7}                  \\
+                                    & Hyperopt            &  \gray{93.2}                   \\
+                                    %& Opentuner           &                      \\
+                                    & Random       &  92.8                             \\
+                                    & TuRBO               &  \gray{93.2}                            \\
+                                    & HEBO                & \gray{93.5}                              \\
+                                    & BOHB                & \gray{92.8} \\
+            \midrule
+            \multirow{6}{*}{\href{https://openml.org/t/146821}{car}} & {\IT}                &  \gray{100}                  \\
+                                    & Hyperopt            &  \gray{100}                   \\
+                                    %& Opentuner           &                      \\
+                                    & Random       & 100                              \\
+                                    & TuRBO               & 100                              \\
+                                    & HEBO                & 100                              \\
+                                    & BOHB                & \gray{100} \\
+            \midrule
+            \multirow{6}{*}{\href{https://openml.org/t/9952}{phoneme}} & {\IT}                & \gray{56.4}                  \\
+                                    & Hyperopt            & \gray{56.4}                    \\
+                                    %& Opentuner           &                      \\
+                                    & Random       & 56.1                              \\
+                                    & TuRBO               & \gray{56.4}                              \\
+                                    & HEBO                & \gray{56.3}                              \\
+                                    & BOHB                & \gray{56.3} \\
+            \midrule
+            \multirow{6}{*}{\href{https://openml.org/t/146822}{segment}} & {\IT}                &  \gray{100}                 \\
+                                    & Hyperopt            & 96.0                    \\
+                                    %& Opentuner           &                      \\
+                                    & Random       &  95.5                             \\
+                                    & TuRBO               & 96.0                              \\
+                                    & HEBO                & 96.1                             \\
+                                    & BOHB                & 96.0 \\
+            \midrule
+            \multirow{6}{*}{\href{https://openml.org/t/31}{credit-g}} & {\IT}                & \gray{81.8}                  \\
+                                    & Hyperopt            &  78.2                   \\
+                                    %& Opentuner           &                      \\
+                                    & Random       &  76.6                             \\
+                                    & TuRBO               &  76.3                             \\
+                                    & HEBO                & 76.3                              \\
+                                    & BOHB                & 75.2 \\
+            \midrule
+            \multirow{6}{*}{\href{https://openml.org/t/3917}{kcl}} & {\IT}                & \gray{81.6}                  \\
+                                    & Hyperopt            &  \gray{81.7}                   \\
+                                    %& Opentuner           &                      \\
+                                    & Random       & 76.9                              \\
+                                    & TuRBO               & 77.5                              \\
+                                    & HEBO                & \gray{81.6}                              \\
+                                    & BOHB                & \gray{78.5} \\
+            \bottomrule
+            \end{tabular}
+    \end{subtable}
+    }
+\end{table*}
+%\vspace{-10pt}

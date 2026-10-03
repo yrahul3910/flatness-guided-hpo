@@ -1,0 +1,22 @@
+{
+  "status": "synthetic_engineering_fixture_frozen_before_execution",
+  "frozen_utc": "2026-10-03T01:10:02.641599+00:00",
+  "purpose": "Verify actualKerasprobe/final/replaypathincludingnewexacttrace,8optimizerupdates,193synthetic32x32RGBrowsseed20261002, no researchdataset or officialtest",
+  "source_sha256": {
+    "image/src/matched_training.py": "b38eaa656f4b8bfa73d646cdd6a38dbd1c0fc2a736f1b70deb12731a9aeb8af9",
+    "image/src/util.py": "0265e474b930fc19c2a210e095e38f48a19a5e38021a9bb532f7ba3c47530e76",
+    "image/src/config.py": "1e87a606e1bf54127f955cbfdcebdb48ab78d40d76d6aa200cdfc2ffc68131e9",
+    "tests/test_matched_training.py": "5bc296535695c98cd93fb6f20071913f9e3af5401a6fe0852ed401f8126898eb"
+  },
+  "command": [
+    "<ORIGINAL_CHECKOUT>/.venv/bin/python",
+    "-c",
+    "import tensorflow as tf; import unittest; tf.config.set_visible_devices([], 'GPU'); tf.config.experimental.enable_op_determinism(); tf.config.threading.set_intra_op_parallelism_threads(2); tf.config.threading.set_inter_op_parallelism_threads(1); suite=unittest.defaultTestLoader.loadTestsFromName('tests.test_matched_training.MatchedTrainingTests.test_probe_final_probe_replay_and_saved_metrics'); result=unittest.TextTestRunner(verbosity=2).run(suite); raise SystemExit(not result.wasSuccessful())"
+  ],
+  "hard_timeout_seconds": 120,
+  "thread_limits": [
+    2,
+    1
+  ],
+  "paid_compute_usd": 0
+}

@@ -1,0 +1,65 @@
+{
+  "status": "pass",
+  "input_directory": "sweep-results/research-audit-20261002/matched-runner-integration/orchestrator-fixture/run-20261002T224932530385Z",
+  "protocol_sha256": "008eed76dd62c9f0483038efefa1bae620583629eb6123f88398d1087cfc12ee",
+  "source_count": 29,
+  "source_sha256": {
+    "image/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "image/bohb_hpo.py": "90b8d39a0249eb2cbc346439576a76cf46c326b426ba215dcf65bfd8bc46cef6",
+    "image/common.py": "6a0232e1132bc49881d7d25c0f4a2521e19786b62f61200a99161d9fc3a1bf47",
+    "image/hebo_hpo.py": "d51578f8b81a9ef63d62be72fb522a086aadbb5b3562d1c7e8e7dae2ee8b7164",
+    "image/hess.py": "2c05d26d196bad1241f2028753096fd1c36e2afad25b6d1be417d331a0ac8967",
+    "image/hyperopt_hpo.py": "bcc417a1b4155a365c8e48e4e91af67253b5713817db25d1462fa9f45cc7faeb",
+    "image/matched_hpo.py": "34543ebf279db38e2a3aae55124084c7135e8b8283543971d1f9187ee59902ff",
+    "image/opentuner_hpo.py": "3e417ab6b0cf68832410f469a0e83f123e852db054f976f1c538897c98aee18e",
+    "image/parsers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "image/parsers/parse.py": "ca7f5475a9fc668e0216a15f59ef3707e61235f4418590b9d98a94b2f9863d44",
+    "image/parsers/parse_opentuner.py": "8b041b89eed889905a66fb4519870914e65ab0df28b806685ae5e1bb0cb95e1f",
+    "image/parsers/parse_random_svhn.py": "99f1c810cc9d85c3b41e2cc63114fb7658a819ac8dd07a0b03e461b0ec29815d",
+    "image/parsers/parse_turbo.py": "5b6e722613ce54237e55e59f3a277898b62d1eef109197a9d70be041d359e643",
+    "image/random_hpo.py": "5d09ac278e692412f776e2b988cf51ab5c9d9e6900e02941375216513fc54ac6",
+    "image/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "image/src/config.py": "1e87a606e1bf54127f955cbfdcebdb48ab78d40d76d6aa200cdfc2ffc68131e9",
+    "image/src/data.py": "4b57ecfbae3565ac5f5eca38f9569d960516277519afe06baf21050ceb59e2d1",
+    "image/src/experiment.py": "e1f23d62214d931989f8d8bcde955fb476b4e222e53aeac2a506073513fc68de",
+    "image/src/matched_contract.py": "fbb58579d82a09eda23150fb63ff9fcc95a4fee0a431faccc40b09848b4519d5",
+    "image/src/matched_training.py": "1dd1a156c03f8b6d04bf1f5f37034eeea8245adb8e309b038bd3853376e2d236",
+    "image/src/util.py": "0265e474b930fc19c2a210e095e38f48a19a5e38021a9bb532f7ba3c47530e76",
+    "image/stats.py": "409533bcbd7a7214696d01dfe8123cb48724b672e89b7cb3d3f0da34b1f3eba6",
+    "image/stcvx.py": "8fa1377151df0e78f2ade125654d1c2555b634772b274a273d34be5b70362094",
+    "image/test_cifar100.py": "cec9c0455fb78b709f381dced22b7910f92b0c9276bf8302ab6dc595bb2eb049",
+    "image/trace.py": "d3dedae3f620d1296753c2b2794af32978b5bc3b033086a73b91fa8fc8ef4681",
+    "image/trace_multigpu.py": "3b9df97cf7ed9ccba78e796a5593fa0021fb698791d2ac0552ddfc0fe5525c16",
+    "image/turbo_hpo.py": "a0354705a046d4fe4476d42584889cae3bdcc9c2cf08311e768d5b9da2b868de",
+    "pyproject.toml": "a9613ecf8fad8d69b9e5150524fda11b8852eabee9140e9d8ae21c7030c88f54",
+    "uv.lock": "c7435dcd49775c94e5952e197d14b06a4feb0ad3614bee227b7b9494208a16ea"
+  },
+  "fixed_fixture_mode": true,
+  "synthetic_arrays_reconstructed": "exact",
+  "phase_count": 4,
+  "epoch_rows": 4,
+  "optimizer_updates": 8,
+  "checkpoint_file_hashes": 4,
+  "distinct_initial_weight_hashes": 4,
+  "shortlists": {
+    "rms": [
+      "c000001"
+    ],
+    "ce": [
+      "c000001"
+    ],
+    "random": [
+      "c000000"
+    ]
+  },
+  "unique_final_fits": 2,
+  "cached_final_references": 1,
+  "physical_phase_seconds": 3.920815040997695,
+  "logical_phase_seconds": {
+    "ce": 3.0536548740055878,
+    "random": 3.0488623330020346,
+    "rms": 3.0536548740055878
+  },
+  "official_test_evaluations": 0,
+  "scope": "Independent source/hash/raw-arithmetic/seed/order/rank/cost audit. Author owns2selected-model reloads and100-output verification. No model inference/training repeated; synthetic engineering result only."
+}

@@ -1,0 +1,378 @@
+{
+  "status": "exploratory_audit_not_benchmark",
+  "randomness": "none; deterministic stdlib calculations",
+  "python": "3.13.7",
+  "source_sha256": {
+    "paper/main.tex": "1fae6f27c2e527920a2bb015b4bdc498cb25c1dd928ca9d027a8c9c2d8e3ac0e",
+    "paper/appendix/proofs.tex": "4c2445d97cc4dc28b984cd49191ac4adcc3c37f5bcefa6739b6d38d92115713e",
+    "image/src/util.py": "4dd1476a09accaa483e25a472fd0af849a68c13f286ceec6e288c62b0e4dd02d",
+    "image/stcvx.py": "8fa1377151df0e78f2ade125654d1c2555b634772b274a273d34be5b70362094",
+    "image/parsers/parse.py": "ca7f5475a9fc668e0216a15f59ef3707e61235f4418590b9d98a94b2f9863d44"
+  },
+  "counterexample_setup": "One sample, hidden activation h=1, two-class affine softmax output, categorical cross-entropy. A fully connected penultimate layer can realize h=1. Exact final-weight Hessian = (diag(p)-p p^T) tensor (h h^T).",
+  "small_weight_counterexamples": [
+    {
+      "weights": [
+        0.01,
+        -0.01
+      ],
+      "hidden": 1.0,
+      "probabilities": [
+        0.5049998333399998,
+        0.49500016666000024
+      ],
+      "cross_entropy_label_0": 0.6831971797266342,
+      "exact_hessian": [
+        [
+          0.24997500166657222,
+          -0.24997500166657222
+        ],
+        [
+          -0.24997500166657222,
+          0.24997500166657222
+        ]
+      ],
+      "exact_hessian_frobenius": 0.49995000333314443,
+      "claimed_lower_bound": 50.002499770854236,
+      "bound_over_actual": 100.0150003750171,
+      "claimed_bound_holds": false,
+      "finite_difference_step": 1e-05,
+      "finite_difference_max_abs_error": 1.6684154058310696e-12
+    },
+    {
+      "weights": [
+        0.1,
+        -0.1
+      ],
+      "hidden": 1.0,
+      "probabilities": [
+        0.549833997312478,
+        0.4501660026875221
+      ],
+      "cross_entropy_label_0": 0.5981388693815918,
+      "exact_hessian": [
+        [
+          0.24751657271185998,
+          -0.24751657271185998
+        ],
+        [
+          -0.24751657271185998,
+          0.24751657271185998
+        ]
+      ],
+      "exact_hessian_frobenius": 0.49503314542371996,
+      "claimed_lower_bound": 5.024772903208064,
+      "bound_over_actual": 10.150376696306157,
+      "claimed_bound_holds": false,
+      "finite_difference_step": 1e-05,
+      "finite_difference_max_abs_error": 1.8107737531636303e-12
+    },
+    {
+      "weights": [
+        0.5,
+        -0.5
+      ],
+      "hidden": 1.0,
+      "probabilities": [
+        0.7310585786300049,
+        0.2689414213699951
+      ],
+      "cross_entropy_label_0": 0.3132616875182228,
+      "exact_hessian": [
+        [
+          0.19661193324148185,
+          -0.19661193324148185
+        ],
+        [
+          -0.19661193324148185,
+          0.19661193324148185
+        ]
+      ],
+      "exact_hessian_frobenius": 0.3932238664829637,
+      "claimed_lower_bound": 1.1016134835023002,
+      "bound_over_actual": 2.8014919169460617,
+      "claimed_bound_holds": false,
+      "finite_difference_step": 1e-05,
+      "finite_difference_max_abs_error": 1.7609524949335764e-12
+    },
+    {
+      "weights": [
+        1.0,
+        -1.0
+      ],
+      "hidden": 1.0,
+      "probabilities": [
+        0.8807970779778823,
+        0.11920292202211755
+      ],
+      "cross_entropy_label_0": 0.12692801104297263,
+      "exact_hessian": [
+        [
+          0.10499358540350649,
+          -0.10499358540350649
+        ],
+        [
+          -0.10499358540350649,
+          0.10499358540350649
+        ]
+      ],
+      "exact_hessian_frobenius": 0.20998717080701298,
+      "claimed_lower_bound": 0.628495357657074,
+      "bound_over_actual": 2.9930178841005843,
+      "claimed_bound_holds": false,
+      "finite_difference_step": 1e-05,
+      "finite_difference_max_abs_error": 7.995271111838065e-13
+    },
+    {
+      "weights": [
+        5.0,
+        -5.0
+      ],
+      "hidden": 1.0,
+      "probabilities": [
+        0.9999546021312976,
+        4.5397868702434395e-05
+      ],
+      "cross_entropy_label_0": 4.539889921682063e-05,
+      "exact_hessian": [
+        [
+          4.5395807735951673e-05,
+          -4.5395807735951673e-05
+        ],
+        [
+          -4.5395807735951673e-05,
+          4.5395807735951673e-05
+        ]
+      ],
+      "exact_hessian_frobenius": 9.079161547190335e-05,
+      "claimed_lower_bound": 0.1414149361548863,
+      "bound_over_actual": 1557.5770451914582,
+      "claimed_bound_holds": false,
+      "finite_difference_step": 1e-05,
+      "finite_difference_max_abs_error": 3.953240993836548e-12
+    }
+  ],
+  "common_logit_shift_invariance": [
+    {
+      "weights": [
+        0.5,
+        -0.5
+      ],
+      "hidden": 1.0,
+      "probabilities": [
+        0.7310585786300049,
+        0.2689414213699951
+      ],
+      "cross_entropy_label_0": 0.3132616875182228,
+      "exact_hessian": [
+        [
+          0.19661193324148185,
+          -0.19661193324148185
+        ],
+        [
+          -0.19661193324148185,
+          0.19661193324148185
+        ]
+      ],
+      "exact_hessian_frobenius": 0.3932238664829637,
+      "claimed_lower_bound": 1.1016134835023002,
+      "bound_over_actual": 2.8014919169460617,
+      "claimed_bound_holds": false,
+      "finite_difference_step": 1e-05,
+      "finite_difference_max_abs_error": 1.7609524949335764e-12
+    },
+    {
+      "weights": [
+        1.5,
+        0.5
+      ],
+      "hidden": 1.0,
+      "probabilities": [
+        0.7310585786300049,
+        0.2689414213699951
+      ],
+      "cross_entropy_label_0": 0.3132616875182228,
+      "exact_hessian": [
+        [
+          0.19661193324148185,
+          -0.19661193324148185
+        ],
+        [
+          -0.19661193324148185,
+          0.19661193324148185
+        ]
+      ],
+      "exact_hessian_frobenius": 0.3932238664829637,
+      "claimed_lower_bound": 0.49265652680829725,
+      "bound_over_actual": 1.2528652729415177,
+      "claimed_bound_holds": false,
+      "finite_difference_step": 1e-05,
+      "finite_difference_max_abs_error": 1.7609524949335764e-12
+    },
+    {
+      "weights": [
+        10.5,
+        9.5
+      ],
+      "hidden": 1.0,
+      "probabilities": [
+        0.7310585786300049,
+        0.2689414213699951
+      ],
+      "cross_entropy_label_0": 0.3132616875182228,
+      "exact_hessian": [
+        [
+          0.19661193324148185,
+          -0.19661193324148185
+        ],
+        [
+          -0.19661193324148185,
+          0.19661193324148185
+        ]
+      ],
+      "exact_hessian_frobenius": 0.3932238664829637,
+      "claimed_lower_bound": 0.055011952159364615,
+      "bound_over_actual": 0.1398998302198628,
+      "claimed_bound_holds": true,
+      "finite_difference_step": 1e-05,
+      "finite_difference_max_abs_error": 1.2863182741185142e-11
+    },
+    {
+      "weights": [
+        100.5,
+        99.5
+      ],
+      "hidden": 1.0,
+      "probabilities": [
+        0.7310585786300049,
+        0.2689414213699951
+      ],
+      "cross_entropy_label_0": 0.3132616875182228,
+      "exact_hessian": [
+        [
+          0.19661193324148185,
+          -0.19661193324148185
+        ],
+        [
+          -0.19661193324148185,
+          0.19661193324148185
+        ]
+      ],
+      "exact_hessian_frobenius": 0.3932238664829637,
+      "claimed_lower_bound": 0.005507998567959709,
+      "bound_over_actual": 0.01400728449476843,
+      "claimed_bound_holds": true,
+      "finite_difference_step": 1e-05,
+      "finite_difference_max_abs_error": 6.207687142101292e-11
+    }
+  ],
+  "batch_rms_identity": [
+    {
+      "B": 1,
+      "K": 2,
+      "D": 1,
+      "frobenius_score": 31.622776601683796,
+      "rms_score": 31.622776601683796,
+      "frobenius_over_rms": 1.0
+    },
+    {
+      "B": 28,
+      "K": 100,
+      "D": 32,
+      "frobenius_score": 9.46901078942951,
+      "rms_score": 0.3381789567653397,
+      "frobenius_over_rms": 27.999999999999993
+    },
+    {
+      "B": 64,
+      "K": 100,
+      "D": 32,
+      "frobenius_score": 21.643453232981738,
+      "rms_score": 0.3381789567653396,
+      "frobenius_over_rms": 64.00000000000001
+    },
+    {
+      "B": 64,
+      "K": 10,
+      "D": 512,
+      "frobenius_score": 218.51345277200497,
+      "rms_score": 3.4142726995625776,
+      "frobenius_over_rms": 64.0
+    }
+  ],
+  "filter_order_dependence": {
+    "high_then_low_input": [
+      0.2,
+      0.21000000000000002,
+      0.22,
+      0.23,
+      0.24000000000000002,
+      0.25,
+      0.26,
+      0.27,
+      0.28,
+      0.29000000000000004,
+      0.01,
+      0.02
+    ],
+    "low_then_high_input": [
+      0.01,
+      0.02,
+      0.2,
+      0.21000000000000002,
+      0.22,
+      0.23,
+      0.24000000000000002,
+      0.25,
+      0.26,
+      0.27,
+      0.28,
+      0.29000000000000004
+    ],
+    "high_then_low_selected": [
+      0.2,
+      0.21000000000000002,
+      0.22,
+      0.23,
+      0.24000000000000002,
+      0.25,
+      0.26,
+      0.27,
+      0.28,
+      0.29000000000000004
+    ],
+    "low_then_high_selected": [
+      0.01,
+      0.02,
+      0.2,
+      0.21000000000000002,
+      0.22,
+      0.23,
+      0.24000000000000002,
+      0.25,
+      0.26,
+      0.27
+    ],
+    "correct_lowest_10": [
+      0.01,
+      0.02,
+      0.2,
+      0.21000000000000002,
+      0.22,
+      0.23,
+      0.24000000000000002,
+      0.25,
+      0.26,
+      0.27
+    ]
+  },
+  "nonstationary_sharpness_example": {
+    "loss": "f(w)=log(1+exp(w)); center=0",
+    "epsilon": 0.1,
+    "gradient_at_center": 0.5,
+    "hessian_at_center": 0.25,
+    "actual_normalized_ball_sharpness": 0.03026876818628185,
+    "hessian_only_normalized_approximation": 0.0007382701364370516,
+    "actual_over_hessian_only": 40.999583610900544
+  }
+}

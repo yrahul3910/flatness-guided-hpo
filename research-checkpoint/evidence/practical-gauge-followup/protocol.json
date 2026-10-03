@@ -1,0 +1,31 @@
+{
+  "status": "frozen before any practical-gauge inference; exploratory reused-validation analysis",
+  "expected_trained_checkpoints": 32,
+  "expected_reconstructed_initializations": 4,
+  "initialization_policy": "Reconstruct paired block307/331 probe/final seeds. Require exact recorded whole-model hash before measuring. No optimizer updates.",
+  "scope": "All complete saved lifecycle checkpoints; no adaptive exclusions or additional shifts. Center kernel rows across10classes. Bias unchanged.",
+  "data": "MNIST cached official-training rows1500:1875 only, same375 validation examples already used for early stopping and repeated pilot diagnostics. No official test arrays accessed.",
+  "dataset_sha256": "731c5ac602752760c8e48fbffcf8c3b850d9dc2a2aedcf2cc48468fc17b673d1",
+  "metrics": "||W_common||^2/||W||^2, common/centered norms, ||W||/||W_centered|| score correction, validation-logit RMS common/centered ratio, original-vs-centered probe ranks and same saved final restored-checkpoint classification error. Positive score-vs-error rho supports minimization direction. No p-values or generalization claim.",
+  "score": "Reuse logged max probe score; multiply by float64||W||/||W_centered|| with probability/hidden numerator unchanged mathematically. Original float32 denominator must replay exactly. All logged raw components remain intact.",
+  "checks": "Every fileSHA, whole-model weightSHA, exact saved validation accuracy, orthogonal norm decomposition, prediction equivalence<=1e-5 and zero changed argmaxes.",
+  "resources": {
+    "CPU_only": true,
+    "intra_threads": 2,
+    "inter_threads": 1,
+    "hard_subprocess_seconds": 180,
+    "new_training_updates": 0,
+    "no_paid_compute": true
+  },
+  "source_sha256": {
+    "sweep-results/research-audit-20261002/practical-gauge-followup/analyze.py": "f42ff037d235d25f86f8418bf2b422d48831433f7d01568eec2ffcc997ea7831",
+    "image/src/util.py": "0265e474b930fc19c2a210e095e38f48a19a5e38021a9bb532f7ba3c47530e76",
+    "image/src/config.py": "1e87a606e1bf54127f955cbfdcebdb48ab78d40d76d6aa200cdfc2ffc68131e9",
+    "image/src/data.py": "4b57ecfbae3565ac5f5eca38f9569d960516277519afe06baf21050ceb59e2d1",
+    "pyproject.toml": "a9613ecf8fad8d69b9e5150524fda11b8852eabee9140e9d8ae21c7030c88f54",
+    "uv.lock": "c7435dcd49775c94e5952e197d14b06a4feb0ad3614bee227b7b9494208a16ea",
+    "sweep-results/research-audit-20261002/lifecycle-pilot/run-prepared-20261002-v1/events.jsonl": "85a0da7878b06bb7a2de18b563d52a63e0db545665292cf7cb15139451691ded",
+    "sweep-results/research-audit-20261002/lifecycle-pilot/run-prepared-20261002-v1/protocol.json": "cb579865478345bdb4ce0098e17b322da1c177803e78cda5250d1deb97b94435",
+    "sweep-results/research-audit-20261002/lifecycle-pilot/run-prepared-20261002-v1/run_pilot.py": "36168984699eba72876ce55b6362b3c6928e57a92401d91805b32721117f6c39"
+  }
+}

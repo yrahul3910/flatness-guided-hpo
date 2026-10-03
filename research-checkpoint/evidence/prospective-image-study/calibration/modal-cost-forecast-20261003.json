@@ -1,0 +1,913 @@
+{
+  "decision": "stop_after_calibration",
+  "launch_authorized": false,
+  "calibration_peak_memory_gate": true,
+  "slopes_seconds_per_batch_per_forward_mac": {
+    "training": 4.6905139232666924e-09,
+    "inference": 1.380108717512386e-09
+  },
+  "probe_score_seconds_per_forward_mac": 1.1140454641089264e-07,
+  "prefixes": [
+    {
+      "repetitions_per_dataset": 2,
+      "candidates": 32,
+      "backend_seconds_with_2x_margin": 2173400.3968152776,
+      "paid_startup_idle_shutdown_seconds": 15616,
+      "scientific_worker_usd": 494.10478108914447,
+      "other_usd": 4.0,
+      "total_usd": 498.10478108914447,
+      "gate_pass": false
+    },
+    {
+      "repetitions_per_dataset": 4,
+      "candidates": 64,
+      "backend_seconds_with_2x_margin": 4531852.962504429,
+      "paid_startup_idle_shutdown_seconds": 15616,
+      "scientific_worker_usd": 1026.4546942164998,
+      "other_usd": 4.0,
+      "total_usd": 1030.4546942164998,
+      "gate_pass": false
+    }
+  ],
+  "candidates": [
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 67769.94301515684,
+        "inference": 25097.494944700244,
+        "probe_score": 25.7438117677602,
+        "two_phase_build_warmup_checkpoint_hash": 430.9570352837732,
+        "epoch_weight_copy_check_and_restore": 350.4781663543347,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 47607.44049896826,
+        "inference": 17630.640429869458,
+        "probe_score": 18.084668990737917,
+        "two_phase_build_warmup_checkpoint_hash": 103.1002689142349,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 3935.5690044599496,
+        "inference": 1457.4739006621542,
+        "probe_score": 1.4950071247247287,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 21373.833038879053,
+        "inference": 7915.451050654725,
+        "probe_score": 8.119291680463322,
+        "two_phase_build_warmup_checkpoint_hash": 111.92595854820591,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 45299.234403033646,
+        "inference": 16775.833885158492,
+        "probe_score": 17.207849258992717,
+        "two_phase_build_warmup_checkpoint_hash": 276.66221112735633,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 8623.035750516134,
+        "inference": 3193.4008872952163,
+        "probe_score": 3.2756381273377464,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 180984.76989344956,
+        "inference": 67024.76268059874,
+        "probe_score": 68.75080074844263,
+        "two_phase_build_warmup_checkpoint_hash": 1102.9319847496565,
+        "epoch_weight_copy_check_and_restore": 902.8164747254339,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2000,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 8695.817076652755,
+        "inference": 3220.3542663820767,
+        "probe_score": 3.3032856164296303,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 20773.62493997257,
+        "inference": 7693.173753996758,
+        "probe_score": 7.891290244542417,
+        "two_phase_build_warmup_checkpoint_hash": 89.20883399213854,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 15590.471413430569,
+        "inference": 5773.677239134709,
+        "probe_score": 5.922362386349338,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 14224.577205063475,
+        "inference": 5267.8405589736885,
+        "probe_score": 5.40349927638609,
+        "two_phase_build_warmup_checkpoint_hash": 32.02462465141078,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 17386.710741707175,
+        "inference": 6438.885227443206,
+        "probe_score": 6.604700973334114,
+        "two_phase_build_warmup_checkpoint_hash": 31.797275175456335,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 4484.420887887888,
+        "inference": 1660.7322591152686,
+        "probe_score": 1.703499842096343,
+        "two_phase_build_warmup_checkpoint_hash": 96.41233525615154,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 32841.40063365004,
+        "inference": 12162.277990931252,
+        "probe_score": 12.47548394593158,
+        "two_phase_build_warmup_checkpoint_hash": 105.34653090889414,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 9621.96745800387,
+        "inference": 3563.3389802513693,
+        "probe_score": 3.655102956467972,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2001,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 7125.172526664331,
+        "inference": 2638.691631009353,
+        "probe_score": 2.7066438627259686,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 11467.694287278164,
+        "inference": 4246.873858783714,
+        "probe_score": 4.3562403922323085,
+        "two_phase_build_warmup_checkpoint_hash": 35.45683208076377,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 15468.42312510505,
+        "inference": 5728.478642780955,
+        "probe_score": 5.875999824696795,
+        "two_phase_build_warmup_checkpoint_hash": 54.97761822694362,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 10419.713810252777,
+        "inference": 3858.771352656377,
+        "probe_score": 3.958143375523954,
+        "two_phase_build_warmup_checkpoint_hash": 48.63449943758175,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 61745.085528690746,
+        "inference": 22866.28707316191,
+        "probe_score": 23.455145285858702,
+        "two_phase_build_warmup_checkpoint_hash": 133.94099379947332,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 61368.06739659364,
+        "inference": 22726.664546664415,
+        "probe_score": 23.311927165938346,
+        "two_phase_build_warmup_checkpoint_hash": 130.93112569871408,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 25088.044425568612,
+        "inference": 9290.948761788128,
+        "probe_score": 9.53021154479348,
+        "two_phase_build_warmup_checkpoint_hash": 72.59214687351835,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 7345.889643426216,
+        "inference": 2720.430621418439,
+        "probe_score": 2.7904878155911774,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2002,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 28925.870160741848,
+        "inference": 10712.225034155786,
+        "probe_score": 10.988088871054014,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 118529.60570823977,
+        "inference": 43895.50953871311,
+        "probe_score": 45.02591742739564,
+        "two_phase_build_warmup_checkpoint_hash": 112.21115271048856,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 6793.530841014905,
+        "inference": 2515.873532620561,
+        "probe_score": 2.5806629226535818,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 4250.918385610102,
+        "inference": 1574.2584093559303,
+        "probe_score": 1.6147990966258048,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 194159.2140219444,
+        "inference": 71903.70355325354,
+        "probe_score": 73.7553852987497,
+        "two_phase_build_warmup_checkpoint_hash": 1174.8004875515653,
+        "epoch_weight_copy_check_and_restore": 961.7369439024556,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 4069.457176812627,
+        "inference": 1507.05720528475,
+        "probe_score": 1.545867310724972,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 2169.632646973944,
+        "inference": 803.4881241837081,
+        "probe_score": 0.8241797467114966,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 13112.35541534818,
+        "inference": 4855.9473286883685,
+        "probe_score": 4.980998870977337,
+        "two_phase_build_warmup_checkpoint_hash": 62.99639327951174,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "block": 2003,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 19394.29546045091,
+        "inference": 7182.361539920842,
+        "probe_score": 7.367323469498994,
+        "two_phase_build_warmup_checkpoint_hash": 53.77158745164087,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 4786.700411920377,
+        "inference": 1772.6765590329337,
+        "probe_score": 1.8183269589820712,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 17529.726639970417,
+        "inference": 6491.848836736351,
+        "probe_score": 6.659028514436851,
+        "two_phase_build_warmup_checkpoint_hash": 35.47067428472313,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 57597.30422855253,
+        "inference": 21330.223804100886,
+        "probe_score": 21.87952494011468,
+        "two_phase_build_warmup_checkpoint_hash": 123.24164337444553,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 21842.25746874651,
+        "inference": 8088.92441122614,
+        "probe_score": 8.297232369409027,
+        "two_phase_build_warmup_checkpoint_hash": 32.54434706561617,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 8341.078056558394,
+        "inference": 3088.9824462594756,
+        "probe_score": 3.1685306770910144,
+        "two_phase_build_warmup_checkpoint_hash": 31.020618967030405,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 4237.254364095356,
+        "inference": 1569.1981614697263,
+        "probe_score": 1.6096085359994283,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 43297.41771260275,
+        "inference": 16034.493668049714,
+        "probe_score": 16.447417867446646,
+        "two_phase_build_warmup_checkpoint_hash": 93.42133962356064,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2000,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 947.8476462838718,
+        "inference": 351.0199426556275,
+        "probe_score": 0.36005949400000503,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 7399.023073241539,
+        "inference": 2740.107722015771,
+        "probe_score": 2.8106716456917176,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 19842.261396566893,
+        "inference": 7348.258430442859,
+        "probe_score": 7.537492577287075,
+        "two_phase_build_warmup_checkpoint_hash": 74.6475939690285,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 6645.819694974125,
+        "inference": 2461.171114762467,
+        "probe_score": 2.5245517947628073,
+        "two_phase_build_warmup_checkpoint_hash": 62.501852138352376,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 11335.432002100919,
+        "inference": 4197.892675003347,
+        "probe_score": 4.305997833037367,
+        "two_phase_build_warmup_checkpoint_hash": 98.88409520443487,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 19798.75425113945,
+        "inference": 7332.146267530468,
+        "probe_score": 7.520965490017927,
+        "two_phase_build_warmup_checkpoint_hash": 126.89991547986881,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 11271.865209703852,
+        "inference": 4174.351748453071,
+        "probe_score": 4.281850674793713,
+        "two_phase_build_warmup_checkpoint_hash": 39.14425493873352,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 16227.22384872425,
+        "inference": 6009.4881357476015,
+        "probe_score": 6.1642459427985035,
+        "two_phase_build_warmup_checkpoint_hash": 53.49971555480181,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2001,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 24674.13765846526,
+        "inference": 9137.66512994812,
+        "probe_score": 9.372980515407374,
+        "two_phase_build_warmup_checkpoint_hash": 56.42970417510626,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 58654.388969913074,
+        "inference": 21721.697926286328,
+        "probe_score": 22.281080399561816,
+        "two_phase_build_warmup_checkpoint_hash": 124.6577385167721,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 4100.535552670299,
+        "inference": 1518.5665757560068,
+        "probe_score": 1.5576730733172273,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 19440.223840459956,
+        "inference": 7199.370367637245,
+        "probe_score": 7.384770312703311,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 5989.2709688947225,
+        "inference": 2218.028984186351,
+        "probe_score": 2.2751482086218138,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 24753.838976267016,
+        "inference": 9167.181215274739,
+        "probe_score": 9.40325670617637,
+        "two_phase_build_warmup_checkpoint_hash": 153.57138134768505,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 2207.0773213172374,
+        "inference": 817.3551496410938,
+        "probe_score": 0.8384038791972395,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 27469.26294415757,
+        "inference": 10172.794268418505,
+        "probe_score": 10.434766552413135,
+        "two_phase_build_warmup_checkpoint_hash": 35.08336398962483,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2002,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 2690.6825635492487,
+        "inference": 996.4504768930868,
+        "probe_score": 1.0221113130833583,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000000",
+      "seconds_before_margin": {
+        "training": 48104.863436033906,
+        "inference": 17814.85291541915,
+        "probe_score": 18.27362536123273,
+        "two_phase_build_warmup_checkpoint_hash": 64.9059088281137,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000001",
+      "seconds_before_margin": {
+        "training": 1800.7979123774217,
+        "inference": 666.8961857059708,
+        "probe_score": 0.6840702592541877,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000002",
+      "seconds_before_margin": {
+        "training": 10137.277500156815,
+        "inference": 3754.17566392682,
+        "probe_score": 3.8508541130574794,
+        "two_phase_build_warmup_checkpoint_hash": 34.44299726836183,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000003",
+      "seconds_before_margin": {
+        "training": 8711.409639665631,
+        "inference": 3226.1287182110104,
+        "probe_score": 3.3092087733532045,
+        "two_phase_build_warmup_checkpoint_hash": 49.33006317056916,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000004",
+      "seconds_before_margin": {
+        "training": 26325.00202707185,
+        "inference": 9749.03586898243,
+        "probe_score": 10.000095423118085,
+        "two_phase_build_warmup_checkpoint_hash": 61.72544350186527,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000005",
+      "seconds_before_margin": {
+        "training": 2025.36741982049,
+        "inference": 750.0618462780286,
+        "probe_score": 0.7693776222410503,
+        "two_phase_build_warmup_checkpoint_hash": 30.79910493000001,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000006",
+      "seconds_before_margin": {
+        "training": 10979.942211593661,
+        "inference": 4066.2428192826033,
+        "probe_score": 4.170957698059939,
+        "two_phase_build_warmup_checkpoint_hash": 32.51383217901668,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    },
+    {
+      "dataset": "cifar100",
+      "block": 2003,
+      "candidate_id": "c000007",
+      "seconds_before_margin": {
+        "training": 12326.148638961273,
+        "inference": 4564.788450312944,
+        "probe_score": 4.682341998013531,
+        "two_phase_build_warmup_checkpoint_hash": 83.49751246574087,
+        "epoch_weight_copy_check_and_restore": 325.65523499999966,
+        "data_io_validation_array_hash_proxy": 3.422204390253443
+      }
+    }
+  ],
+  "limitations": "Measured extrema and overhead proxies are planning assumptions, not runtime or memory guarantees. Unprofiled candidate memory feasibility and a provider hard spending cap still require launch review.",
+  "inputs_sha256": {
+    "plan": "dc4d2a1bd1107b6080f89656c782b9e35086d4015c2009c0871f9c2dbb79fc38",
+    "protocol": "6acf284ed91dbb1fa038fbb5810b829bf7432c8a180af82083afd47c886df641",
+    "pricing": "0186185e2fe5b2459ef65c616e7622634e048fa9b0c15c083dc6b7295d9a986b",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/completion.json": "4ed143f378ce10bf0ce391509dd7f68848222341f5813e7e5c7daf1d960c82b3",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/runtime.json": "27df365ab3503ac14231f4920d292599b283d20644bd0e5b68441600cd18e1e7",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/launch-eligibility.json": "ebd2186b891a0499cef4f11e3f658e3add6c387dab637d8705d5ad6e8162860d"
+  },
+  "timing_sha256": {
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-00-cifar10-c000005/timing.json": "20834fe87124313aec7534468dabef3017052ab4ebfca229795cc37c90297c30",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-01-cifar10-c000001/timing.json": "f4fa45921342de83ed64fe4310be52ed0c297bfdefe711bbc5a336f00dc1fe55",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-02-cifar10-c000003/timing.json": "82b86b7291795765f65660cf80ae54918e4cf7c0a984201e7c04ebe7b97409e6",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-03-cifar100-c000007/timing.json": "bfc306e94ef6d90d611aa42040de00cab25d0be626688352f3d89c2c484fa0ec",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-04-cifar100-c000003/timing.json": "ca60a3b520dea129d960683a82dae1fcfa2f8c471abdae9f39ddef3c58e19502",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-05-cifar100-c000000/timing.json": "71faff69ba6eebc2123bcc5172bb5b7594f793a25dbe6ced17b8d38b6ee71833",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-06-cifar10-c000003/timing.json": "8ebd31d1b846199964e21d14266f806b17327445aec88c100c93286bb8a3d08f",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-07-cifar100-c000004/timing.json": "4355512f6158e1d25b0a60d209b30345914f151ba8d75d22ee189ea89ff3e006",
+    ".cloudexp/research-audit-20261002/prospective-image-study/modal-calibration/run-20261003T014500Z/evidence/results/case-08-cifar100-c000002/timing.json": "c155add91a3e40de8c107b87a553b26975db3c85d50393c204504e925a03cd49"
+  },
+  "calculator_sha256": "fc02abbedaac2672b3941f46e05d92caa4b9f7209d892166c9f2f40ac765133f",
+  "pricing": {
+    "frozen_utc": "2026-10-03T01:37:12.063914+00:00",
+    "provider": "Modal",
+    "gpu_name_contains": "T4",
+    "worker_usd_per_hour": 0.812592,
+    "gpu_memory_limit_bytes": 15032385536,
+    "paid_startup_idle_shutdown_seconds": 15616,
+    "other_usd": {
+      "storage": 1.0,
+      "network": 0.5,
+      "finalization": 0.5,
+      "contingency": 2.0
+    },
+    "quote_sources": [
+      "https://modal.com/pricing",
+      "https://modal.com/docs/guide/resources",
+      "https://modal.com/docs/guide/timeouts"
+    ],
+    "assumptions": [
+      "Single T4, CPU request/limit2 physical cores and memory request8GiB/limit16GiB, no region surcharge. Uses16GiB upper billing rate, no free credits.",
+      "Paid startup/idle/shutdown allowance assumes up to128 separate phase invocations times122seconds, even for smaller prefix. The actual scientific executor remains to be specified and reviewed.",
+      "GPU peak-memory gate14GiB is below the nominal16GiB T4 capacity. It is a conservative planning threshold, not proof of every candidate feasibility.",
+      "Storage/network/finalization/contingency entries are reserved allowances, not incurred charges. Storage quoted$0.09/GiB-month and network$0.04/GiB. Expected scientificcheckpointtensorbytes<6GiB; forecast keeps broader headroom.",
+      "This cost gate never authorizes a scientific launch. Scientific provider bounds, durable output retention, cohort assignment and settings hashes must be frozen separately before training."
+    ]
+  }
+}

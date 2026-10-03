@@ -564,6 +564,7 @@ dependencies = [
     { name = "bohb-hpo" },
     { name = "gpy" },
     { name = "hebo" },
+    { name = "hyperopt" },
     { name = "keras" },
     { name = "lightning" },
     { name = "openml" },
@@ -583,6 +584,7 @@ requires-dist = [
     { name = "bohb-hpo", specifier = ">=0.5.2" },
     { name = "gpy", specifier = ">=1.13.2" },
     { name = "hebo" },
+    { name = "hyperopt", specifier = ">=0.2.7" },
     { name = "keras", specifier = ">=3.0.0" },
     { name = "lightning", specifier = ">=2.5.0.post0" },
     { name = "openml", specifier = ">=0.15.1" },
@@ -875,6 +877,25 @@ dependencies = [
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/46/21/62d5e593b2b38cc1d2f148e89ad072fe973a3584492eab2d0c47c7b8c8e8/HEBO-0.3.6-py3-none-any.whl", hash = "sha256:f3d46a106205eac5340822e5ad1aeb389109ea302dfe35f17d24e69c7c1d0665", size = 114720, upload-time = "2024-11-04T08:24:58.203Z" },
+]
+
+[[package]]
+name = "hyperopt"
+version = "0.2.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cloudpickle" },
+    { name = "future" },
+    { name = "networkx" },
+    { name = "numpy" },
+    { name = "py4j" },
+    { name = "scipy" },
+    { name = "six" },
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/58/75/0c4712e3f3a21c910778b8f9f4622601a823cefcae24181467674a0352f9/hyperopt-0.2.7.tar.gz", hash = "sha256:1bf89ae58050bbd32c7307199046117feee245c2fd9ab6255c7308522b7ca149", size = 1308240, upload-time = "2021-11-17T10:05:51.386Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b6/cd/5b3334d39276067f54618ce0d0b48ed69d91352fbf137468c7095170d0e5/hyperopt-0.2.7-py2.py3-none-any.whl", hash = "sha256:f3046d91fe4167dbf104365016596856b2524a609d22f047a066fc1ac796427c", size = 1583421, upload-time = "2021-11-17T10:05:44.265Z" },
 ]
 
 [[package]]
@@ -1785,6 +1806,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/54/aa/b2dba856f64c36b2a06c67be1472de98cca07a2322d0f0cbf03279a40e5b/protobuf-4.25.9-cp37-abi3-manylinux2014_aarch64.whl", hash = "sha256:999146ef02e7fa6a692477badd1528bcd7268df211852a3df2d834ba2b480791", size = 294191, upload-time = "2026-03-25T23:09:26.613Z" },
     { url = "https://files.pythonhosted.org/packages/a8/5c/53f18822017b8bda6bd8bb4e02048e911fdc79a3dafdc83ab994fe922a84/protobuf-4.25.9-cp37-abi3-manylinux2014_x86_64.whl", hash = "sha256:438c636de8fb706a0de94a12a268ef1ae8f5ba5ae655a7671fcda5968ba3c9be", size = 295178, upload-time = "2026-03-25T23:09:27.839Z" },
     { url = "https://files.pythonhosted.org/packages/16/28/d5065b212685875d3924bcdb3201cbf467cb4d58a18aa19a8dfd99ea80a9/protobuf-4.25.9-py3-none-any.whl", hash = "sha256:d49b615e7c935194ac161f0965699ac84df6112c378e05ec53da65d2e4cbb6d4", size = 156822, upload-time = "2026-03-25T23:09:34.957Z" },
+]
+
+[[package]]
+name = "py4j"
+version = "0.10.9.9"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/38/31/0b210511177070c8d5d3059556194352e5753602fa64b85b7ab81ec1a009/py4j-0.10.9.9.tar.gz", hash = "sha256:f694cad19efa5bd1dee4f3e5270eb406613c974394035e5bfc4ec1aba870b879", size = 761089, upload-time = "2025-01-15T03:53:18.624Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bd/db/ea0203e495be491c85af87b66e37acfd3bf756fd985f87e46fc5e3bf022c/py4j-0.10.9.9-py2.py3-none-any.whl", hash = "sha256:c7c26e4158defb37b0bb124933163641a2ff6e3a3913f7811b0ddbe07ed61533", size = 203008, upload-time = "2025-01-15T03:53:15.648Z" },
 ]
 
 [[package]]

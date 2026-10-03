@@ -1,0 +1,1380 @@
+{
+  "results": [
+    {
+      "checkpoint": "block307-config0-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 1.621340274810791,
+          "reloaded": 1.621340274810791,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.445333331823349,
+          "reloaded": 0.445333331823349,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 1.6213402811644877,
+          "reloaded": 1.6213402811644877,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.44533333333333336,
+          "reloaded": 0.44533333333333336,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 1.9722553491592407,
+          "reloaded": 1.9722553491592407,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config0-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.17456889152526855,
+          "reloaded": 0.17456889152526855,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9546666741371155,
+          "reloaded": 0.9546666741371155,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.17456889075495696,
+          "reloaded": 0.17456889075495696,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9546666666666667,
+          "reloaded": 0.9546666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.17456889152526855,
+          "reloaded": 0.17456889152526855,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config1-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 1.6213375329971313,
+          "reloaded": 1.6213375329971313,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.445333331823349,
+          "reloaded": 0.445333331823349,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 1.6213375354063926,
+          "reloaded": 1.6213375354063926,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.44533333333333336,
+          "reloaded": 0.44533333333333336,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 1.9722496271133423,
+          "reloaded": 1.9722496271133423,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config1-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.17383180558681488,
+          "reloaded": 0.17383180558681488,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9546666741371155,
+          "reloaded": 0.9546666741371155,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.1738318067101282,
+          "reloaded": 0.1738318067101282,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9546666666666667,
+          "reloaded": 0.9546666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 2400,
+          "reloaded": 2400,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.17383180558681488,
+          "reloaded": 0.17383180558681488,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config2-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.7722893953323364,
+          "reloaded": 0.7722893953323364,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.781333327293396,
+          "reloaded": 0.781333327293396,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.7722893797870929,
+          "reloaded": 0.7722893797870929,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.7813333333333333,
+          "reloaded": 0.7813333333333333,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 3.0684902667999268,
+          "reloaded": 3.0684902667999268,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config2-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.15957127511501312,
+          "reloaded": 0.15957127511501312,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9626666903495789,
+          "reloaded": 0.9626666903495789,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.15957126723764647,
+          "reloaded": 0.15957126723764647,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9626666666666667,
+          "reloaded": 0.9626666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 1224,
+          "reloaded": 1224,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.15957127511501312,
+          "reloaded": 0.15957127511501312,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config3-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.7722988128662109,
+          "reloaded": 0.7722988128662109,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.781333327293396,
+          "reloaded": 0.781333327293396,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.7722987646565204,
+          "reloaded": 0.7722987646565204,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.7813333333333333,
+          "reloaded": 0.7813333333333333,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 3.068425178527832,
+          "reloaded": 3.068425178527832,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config3-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.15946580469608307,
+          "reloaded": 0.15946580469608307,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9599999785423279,
+          "reloaded": 0.9599999785423279,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.1594658191600443,
+          "reloaded": 0.1594658191600443,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.96,
+          "reloaded": 0.96,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 1224,
+          "reloaded": 1224,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.15946580469608307,
+          "reloaded": 0.15946580469608307,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config4-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.3912634253501892,
+          "reloaded": 0.3912634253501892,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.8986666798591614,
+          "reloaded": 0.8986666798591614,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.39126341309203283,
+          "reloaded": 0.39126341309203283,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8986666666666666,
+          "reloaded": 0.8986666666666666,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 4.969856262207031,
+          "reloaded": 4.969856262207031,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config4-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.14032156765460968,
+          "reloaded": 0.14032156765460968,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9679999947547913,
+          "reloaded": 0.9679999947547913,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.14032159107173564,
+          "reloaded": 0.14032159107173564,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.968,
+          "reloaded": 0.968,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 984,
+          "reloaded": 984,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.14032156765460968,
+          "reloaded": 0.14032156765460968,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config5-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.39127641916275024,
+          "reloaded": 0.39127641916275024,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.8986666798591614,
+          "reloaded": 0.8986666798591614,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.3912763854015136,
+          "reloaded": 0.3912763854015136,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8986666666666666,
+          "reloaded": 0.8986666666666666,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 4.9699931144714355,
+          "reloaded": 4.9699931144714355,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config5-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.13837681710720062,
+          "reloaded": 0.13837681710720062,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9706666469573975,
+          "reloaded": 0.9706666469573975,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.13837682170993032,
+          "reloaded": 0.13837682170993032,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9706666666666667,
+          "reloaded": 0.9706666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 984,
+          "reloaded": 984,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.13837681710720062,
+          "reloaded": 0.13837681710720062,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config6-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.37099242210388184,
+          "reloaded": 0.37099242210388184,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.890666663646698,
+          "reloaded": 0.890666663646698,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.37099242365217183,
+          "reloaded": 0.37099242365217183,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8906666666666667,
+          "reloaded": 0.8906666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 5.119656085968018,
+          "reloaded": 5.119656085968018,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config6-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.14447084069252014,
+          "reloaded": 0.14447084069252014,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9599999785423279,
+          "reloaded": 0.9599999785423279,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.14447085680746574,
+          "reloaded": 0.14447085680746574,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.96,
+          "reloaded": 0.96,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 768,
+          "reloaded": 768,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.14447084069252014,
+          "reloaded": 0.14447084069252014,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config7-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.37096354365348816,
+          "reloaded": 0.37096354365348816,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.890666663646698,
+          "reloaded": 0.890666663646698,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.3709635335065344,
+          "reloaded": 0.3709635335065344,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8906666666666667,
+          "reloaded": 0.8906666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 5.11907958984375,
+          "reloaded": 5.11907958984375,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block307-config7-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.1481098085641861,
+          "reloaded": 0.1481098085641861,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9520000219345093,
+          "reloaded": 0.9520000219345093,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.14810979921434994,
+          "reloaded": 0.14810979921434994,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.952,
+          "reloaded": 0.952,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 768,
+          "reloaded": 768,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.1481098085641861,
+          "reloaded": 0.1481098085641861,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config0-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 1.5662648677825928,
+          "reloaded": 1.5662648677825928,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.5093333125114441,
+          "reloaded": 0.5093333125114441,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 1.5662647457460657,
+          "reloaded": 1.5662647457460657,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.5093333333333333,
+          "reloaded": 0.5093333333333333,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 1.8799912929534912,
+          "reloaded": 1.8799912929534912,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config0-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.184160515666008,
+          "reloaded": 0.184160515666008,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9493333101272583,
+          "reloaded": 0.9493333101272583,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.18416052172476513,
+          "reloaded": 0.18416052172476513,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9493333333333334,
+          "reloaded": 0.9493333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 1824,
+          "reloaded": 1824,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.184160515666008,
+          "reloaded": 0.184160515666008,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config1-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 1.5662667751312256,
+          "reloaded": 1.5662667751312256,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.5093333125114441,
+          "reloaded": 0.5093333125114441,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 1.566266756194799,
+          "reloaded": 1.566266756194799,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.5093333333333333,
+          "reloaded": 0.5093333333333333,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 1.8799751996994019,
+          "reloaded": 1.8799751996994019,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config1-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.18416039645671844,
+          "reloaded": 0.18416039645671844,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9466666579246521,
+          "reloaded": 0.9466666579246521,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.18416038677278243,
+          "reloaded": 0.18416038677278243,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9466666666666667,
+          "reloaded": 0.9466666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 1824,
+          "reloaded": 1824,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.18416039645671844,
+          "reloaded": 0.18416039645671844,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config2-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.8051526546478271,
+          "reloaded": 0.8051526546478271,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.7360000014305115,
+          "reloaded": 0.7360000014305115,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.8051527314318692,
+          "reloaded": 0.8051527314318692,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.736,
+          "reloaded": 0.736,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 3.24967622756958,
+          "reloaded": 3.24967622756958,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config2-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.17220552265644073,
+          "reloaded": 0.17220552265644073,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9599999785423279,
+          "reloaded": 0.9599999785423279,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.1722054996340396,
+          "reloaded": 0.1722054996340396,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.96,
+          "reloaded": 0.96,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 1008,
+          "reloaded": 1008,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.17220552265644073,
+          "reloaded": 0.17220552265644073,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config3-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.8051594495773315,
+          "reloaded": 0.8051594495773315,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.7360000014305115,
+          "reloaded": 0.7360000014305115,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.8051594648743736,
+          "reloaded": 0.8051594648743736,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.736,
+          "reloaded": 0.736,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 3.2496111392974854,
+          "reloaded": 3.2496111392974854,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config3-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.17205241322517395,
+          "reloaded": 0.17205241322517395,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9573333263397217,
+          "reloaded": 0.9573333263397217,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.17205243070383117,
+          "reloaded": 0.17205243070383117,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9573333333333334,
+          "reloaded": 0.9573333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 1008,
+          "reloaded": 1008,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.17205241322517395,
+          "reloaded": 0.17205241322517395,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config4-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.4605265259742737,
+          "reloaded": 0.4605265259742737,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.8213333487510681,
+          "reloaded": 0.8213333487510681,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.460526514430338,
+          "reloaded": 0.460526514430338,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8213333333333334,
+          "reloaded": 0.8213333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 5.2134833335876465,
+          "reloaded": 5.2134833335876465,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config4-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.1609443724155426,
+          "reloaded": 0.1609443724155426,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9626666903495789,
+          "reloaded": 0.9626666903495789,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.16094436067995196,
+          "reloaded": 0.16094436067995196,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9626666666666667,
+          "reloaded": 0.9626666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 840,
+          "reloaded": 840,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.1609443724155426,
+          "reloaded": 0.1609443724155426,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config5-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.46058201789855957,
+          "reloaded": 0.46058201789855957,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.8213333487510681,
+          "reloaded": 0.8213333487510681,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.46058203750220206,
+          "reloaded": 0.46058203750220206,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8213333333333334,
+          "reloaded": 0.8213333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 5.2142558097839355,
+          "reloaded": 5.2142558097839355,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config5-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.16336461901664734,
+          "reloaded": 0.16336461901664734,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9599999785423279,
+          "reloaded": 0.9599999785423279,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.16336463078089639,
+          "reloaded": 0.16336463078089639,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.96,
+          "reloaded": 0.96,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 840,
+          "reloaded": 840,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.16336461901664734,
+          "reloaded": 0.16336461901664734,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config6-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.46649327874183655,
+          "reloaded": 0.46649327874183655,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.8346666693687439,
+          "reloaded": 0.8346666693687439,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.46649330462214583,
+          "reloaded": 0.46649330462214583,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8346666666666667,
+          "reloaded": 0.8346666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 4.491623878479004,
+          "reloaded": 4.491623878479004,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config6-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.16311702132225037,
+          "reloaded": 0.16311702132225037,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9413333535194397,
+          "reloaded": 0.9413333535194397,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.16311702606772877,
+          "reloaded": 0.16311702606772877,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.9413333333333334,
+          "reloaded": 0.9413333333333334,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 744,
+          "reloaded": 744,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.16311702132225037,
+          "reloaded": 0.16311702132225037,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config7-probe-current-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.4673168957233429,
+          "reloaded": 0.4673168957233429,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.8346666693687439,
+          "reloaded": 0.8346666693687439,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.4673168912498976,
+          "reloaded": 0.4673168912498976,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.8346666666666667,
+          "reloaded": 0.8346666666666667,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 24,
+          "reloaded": 24,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "original_rms_ratio_max": {
+          "logged": 4.491687297821045,
+          "reloaded": 4.491687297821045,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    },
+    {
+      "checkpoint": "block331-config7-final-restored-complete.keras",
+      "metrics": {
+        "keras_validation_ce": {
+          "logged": 0.15834875404834747,
+          "reloaded": 0.15834875404834747,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "keras_validation_accuracy": {
+          "logged": 0.9440000057220459,
+          "reloaded": 0.9440000057220459,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "stable_validation_ce": {
+          "logged": 0.15834873365707477,
+          "reloaded": 0.15834873365707477,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "validation_accuracy": {
+          "logged": 0.944,
+          "reloaded": 0.944,
+          "absolute_difference": 0.0,
+          "passed": true
+        },
+        "optimizer_steps": {
+          "logged": 744,
+          "reloaded": 744,
+          "absolute_difference": 0,
+          "passed": true
+        },
+        "restored_monitor_matches_best": {
+          "logged": 0.15834875404834747,
+          "reloaded": 0.15834875404834747,
+          "absolute_difference": 0.0,
+          "passed": true
+        }
+      },
+      "hashes_match": true,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+Maintained audit replay scripts
+
+The executed practical-gauge and endpoint scripts, protocols, retained arrays, reports, and results remain byte-identical. original-sha256.json inventories 69 preserved files. verification.json records the original-to-maintained source hashes. The maintained sibling scripts live in each audit's maintained/ directory; their default outputs are fresh timestamped directories under that audit's replays/ directory. mkdir(exist_ok=False) prevents replacement of an existing run. Each replay also records the script and original-source hash; gauge replays record the original protocol hash.
+
+The practical-gauge copy checks that load_model returned a keras.Model before weight access or measurement and passes original and centered arrays explicitly to spearmanr. It still requires the frozen dataset and production-source hashes before inference. No gauge initialization, checkpoint loading, or inference was rerun for this cleanup. This is a maintained reproduction script, not a replacement for the executed source in the original protocol.
+
+The endpoint copy fixes the four prematurely wrapped docstrings and the dense statement group. Both scripts are inside maintained packages, so the standalone INP001 suppression is unnecessary and removed. Only saved event JSON files were replayed. The replay's 50 comparisons and 112 candidate endpoint rows match the original JSON byte for byte, including source paths and hashes. There were no training updates, checkpoint reloads, dataset reads, or new holdout outcomes.
+
+Ruff, Ruff formatting, in-memory Python compilation, and all bundled no-sloppy rules pass on all four maintained Python files. The no-sloppy overlay retains its full rule set and targets Python 3.12, matching the project minimum and actual execution interpreter. Its default Python 3.14 setting incorrectly recommended removing a quoted annotation imported only under TYPE_CHECKING, which would break Python 3.12 import. no-sloppy-python312.toml records the target override; no rule was suppressed.
+
+The actual project basedpyright configuration is not green. Identical invocations on original and maintained scripts show 28 errors/142 warnings and 22 errors/144 warnings respectively. All six documented Keras/Spearman errors are gone. All 22 retained errors are inherited missing generic arguments in dict, Mapping, and ndarray annotations; the warnings concern dynamic record/array types. Resolving those would require a separate record-schema typing pass, which is beyond this bounded cleanup. Neither type configuration nor annotations were weakened to hide them.
+
+To replay saved endpoint metrics from the repository root:
+  <ORIGINAL_CHECKOUT>/.venv/bin/python sweep-results/research-audit-20261002/endpoint-metric-followup/maintained/analyze.py
+
+To reproduce gauge diagnostics requires the dataset cache used by the original protocol, unchanged frozen production sources, KERAS_HOME pointing to that cache, and PYTHONPATH including the repository root. It performs checkpoint inference and reconstructed initializations, so it was deliberately not executed in this cleanup. Source differences are saved as the two .patch files in this directory. Original and maintained typecheck JSON, Ruff/format/compile logs, and no-sloppy results are retained here.

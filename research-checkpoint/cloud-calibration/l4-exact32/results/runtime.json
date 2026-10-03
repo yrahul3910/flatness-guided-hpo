@@ -1,0 +1,13 @@
+{
+  "tensorflow": "2.16.2",
+  "keras": "3.13.2",
+  "gpu": {
+    "compute_capability": [
+      8,
+      9
+    ],
+    "device_name": "NVIDIA L4"
+  },
+  "protocol_sha256": "113b8af3c5e1596a39ea7395d3a08de94fb8458b65c157b66c388e9cf5ea51a9",
+  "tensor_float_32_execution_enabled": false
+}

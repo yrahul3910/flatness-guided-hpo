@@ -1,0 +1,166 @@
+% Author-review draft. This file is deliberately not included by the manuscript.
+% Evidence: sweep-results/research-audit-20261002/normalization-audit/.
+% Uses the existing amsmath, amsthm, norm, and hyperref definitions in main.tex.
+\section{Scope of head curvature and score comparability}%
+\label{sec:curvature-audit-draft}
+
+\paragraph{Status and proposed scope.}
+This draft separates the original activation-to-weight score from two new curvature quantities. The identities below do not prove the original score's lower-bound claim, full-network Hessian ordering, or an advantage in hyper-parameter selection. They address the comparability and final-layer concerns in reviewer 6ZG2's final comment of August 13, 2024. The local manuscript and the reviewed revision have not been established to be identical; the counterexample below concerns the formula in the local Theorem~\ref{th:ff}.
+
+\subsection{Exact curvature of a frozen-feature softmax head}
+
+Fix $B\geq 1$ examples, activations $h_i\in\mathbb{R}^D$ with $D\geq 1$, an output kernel $W\in\mathbb{R}^{D\times K}$ with $K\geq 2$, and an output bias $b\in\mathbb{R}^K$. We use the kernel orientation of the image implementation:
+\begin{equation}
+    z_i=W^T h_i+b,\qquad p_i=\operatorname{softmax}(z_i),\qquad
+    L(W)=\frac{1}{B}\sum_{i=1}^B -\log p_{i,y_i}.
+\end{equation}
+All derivatives in this subsection hold $h_i$ and $b$ fixed. $L$ contains no regularizer. Define
+\begin{equation}
+    C_i=\operatorname{diag}(p_i)-p_i p_i^T,\qquad
+    H_W=\nabla^2_{\operatorname{vec}(W)}L,
+\end{equation}
+where $\operatorname{vec}$ stacks the columns of $W$.
+
+\begin{lemma}[Exact final-kernel Hessian]%
+\label{lemma:audit-head-hessian}
+At every finite $W$, without a stationarity assumption,
+\begin{align}
+    H_W&=\frac{1}{B}\sum_i C_i\otimes(h_i h_i^T),
+    \label{eq:audit-head-hessian}\\
+    \operatorname{tr}(H_W)&=\frac{1}{B}\sum_i(1-\norm{p_i}_2^2)\norm{h_i}_2^2,
+    \label{eq:audit-head-trace}\\
+    \norm{H_W}_F^2&=\frac{1}{B^2}\sum_{i,l}\operatorname{tr}(C_i C_l){(h_i^T h_l)}^2.
+    \label{eq:audit-head-frobenius}
+\end{align}
+\end{lemma}
+\begin{proof}
+For one example, $\nabla_{z_i}(-\log p_{i,y_i})=p_i-e_{y_i}$ and $\nabla^2_{z_i}(-\log p_{i,y_i})=C_i$. The affine map from $\operatorname{vec}(W)$ to $z_i$ has Jacobian $I_K\otimes h_i^T$, giving~\eqref{eq:audit-head-hessian}. Taking its trace gives~\eqref{eq:audit-head-trace}. Expanding $\operatorname{tr}(H_W^2)$ and using $\operatorname{tr}(h_i h_i^T h_l h_l^T)={(h_i^T h_l)}^2$ gives~\eqref{eq:audit-head-frobenius}.
+\end{proof}
+
+These identities omit bias derivatives, earlier-layer derivatives, and mixed blocks. Where the full loss is twice differentiable, partition its Hessian as
+\begin{equation}
+    H_{\mathrm{full}}=
+    \begin{pmatrix}H_W&A\\A^T&G\end{pmatrix},\qquad
+    \norm{H_{\mathrm{full}}}_F^2=\norm{H_W}_F^2+2\norm{A}_F^2+\norm{G}_F^2.
+\end{equation}
+The other blocks can differ across models. Thus even exact ordering of $\norm{H_W}_F$ does not establish ordering of full-network norms. Ordering lower bounds on either norm is still insufficient. Although $H_W$ is positive semidefinite, its common-logit null directions also preclude positive strong convexity in all unconstrained kernel coordinates.
+
+\subsection{An output gauge and a false bound after centering}
+
+Let $\mathbf{1}\in\mathbb{R}^K$ be the all-ones vector and define
+\begin{equation}
+    P=I_K-\frac{\mathbf{1}\mathbf{1}^T}{K},\qquad W_c=WP,\qquad z_{c,i}=Pz_i.
+\end{equation}
+For any $v\in\mathbb{R}^D$, replacing $W$ by $W+v\mathbf{1}^T$ adds $(v^T h_i)\mathbf{1}$ to each logit vector. It preserves $p_i$, the loss, and $H_W$, while the denominator $\norm{W+v\mathbf{1}^T}_F$ can grow without bound. An activation-to-weight ratio can therefore approach zero with all these quantities unchanged.
+
+Class-centering removes this particular ambiguity. It selects the unique minimum-Frobenius-norm representative because, with $\bar w=W\mathbf{1}/K$,
+\begin{equation}
+    \norm{W+v\mathbf{1}^T}_F^2
+    =\norm{W_c}_F^2+K\norm{\bar w+v}_2^2.
+\end{equation}
+It does not establish a Hessian bound. For one example with $h=1$, $b=0$, and the already centered kernel $W=(\epsilon,-\epsilon)$, set $q={(1+\exp(-2\epsilon))}^{-1}$. Then
+\begin{equation}
+    \norm{H_W}_F=2q(1-q),\qquad
+    \frac{\norm{p}_2\norm{h}_2}{\norm{W_c}_F}
+    =\frac{\sqrt{q^2+{(1-q)}^2}}{\sqrt{2}\,|\epsilon|}.
+\end{equation}
+The first expression is at most $1/2$; the second diverges as $\epsilon\to 0$. At $\epsilon=0.1$, the values are approximately $0.495033$ and $5.024773$. This contradicts the stated lower bound even after class-centering. It is an analytical counterexample, independent of training outcomes.
+
+The one-example witness is not stationary, but the bound also fails at a global empirical minimum. Take five identical inputs $x=1$ with labels $(1,1,1,2,2)$, a ReLU hidden unit with kernel 1 and bias 0, and output kernel $W=(t,-t)$, where $t=\log(3/2)/2$, with output biases zero. Then $h_i=1$ and $p_i=(0.6,0.4)$ match the empirical label frequencies. Every mean parameter gradient vanishes, and this prediction globally minimizes mean cross-entropy among deterministic models on these identical inputs. Nevertheless, $\norm{H_W}_F=0.48$, while the per-example ratio $\norm{p_i}_2\norm{h_i}_2/\norm{W}_F$ is approximately $2.515145896$. The batch-RMS ratio has the same value; the unnormalized batched Frobenius ratio is five times larger. The written assumptions permit duplicate inputs with conflicting labels; this witness assumes neither separability nor arbitrarily small minimum loss. The \href{run:../sweep-results/research-audit-20261002/theory-assumptions-review/review.md}{independent assumptions review} retains the construction and analytic/autodiff checks.
+
+Adjacent-layer scaling creates another dependence. In a positively homogeneous hidden layer, $h'_i=h_i/s$ and $W'=sW$ with $s>0$ preserve logits. The centered activation-to-weight ratio scales by $s^{-2}$, as does the raw $\norm{H_W}_F$. This explains a parameter-coordinate dependence; it does not repair the contradicted inequality.
+
+\subsection{C1: a local relative-head trace}
+
+Define $r_j=\norm{W_c[j,:]}_2$ and $D_r=\operatorname{diag}(r_1,\ldots,r_D)$ at the current model. Introduce the local perturbation $W(U)=W+D_r U$, keeping $r$ fixed while differentiating at $U=0$. A zero $r_j$ makes this map singular; invertibility is not required. Define the separate quantity
+\begin{equation}
+    T_{\mathrm{rel}}=\frac{1}{B}\sum_i(1-\norm{p_i}_2^2)
+    \sum_j h_{ij}^2 r_j^2.
+    \label{eq:audit-c1}
+\end{equation}
+
+\begin{lemma}[Local relative-coordinate identity]%
+\label{lemma:audit-relative-head}
+The Hessian of $L(W(U))$ at zero satisfies
+\begin{equation}
+    H_{\mathrm{rel}}=(I_K\otimes D_r)H_W(I_K\otimes D_r),\qquad
+    \operatorname{tr}(H_{\mathrm{rel}})=T_{\mathrm{rel}}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+The map $U\mapsto W(U)$ is affine with constant Jacobian $I_K\otimes D_r$. The Hessian chain rule and Lemma~\ref{lemma:audit-head-hessian} replace each $h_i$ by $D_r h_i$. Taking the trace gives~\eqref{eq:audit-c1}. No gradient-zero condition is used.
+\end{proof}
+
+Common-logit kernel shifts leave $W_c$ and $T_{\mathrm{rel}}$ unchanged. Under positive per-neuron scaling $h'_{ij}=h_{ij}/s_j$, $W'[j,:]=s_j W[j,:]$, we have $r'_j=s_j r_j$. Hence $D_{r'}h'_i=D_r h_i$, so $H_{\mathrm{rel}}$ and its trace are unchanged. Hidden permutations preserve the trace by a coordinate permutation. Scaling and permutation preserve logits; common-logit shifts preserve probabilities. Positive scaling is realizable across a ReLU layer when its incoming weights and bias are scaled together.
+
+\paragraph{Duplication failure.}
+Duplicate every hidden feature $m$ times and give each copy $1/m$ of its outgoing row. Logits remain fixed, but every copy has row scale $r_j/m$. Therefore
+\begin{equation}
+    T'_{\mathrm{rel}}=\frac{1}{B}\sum_i(1-\norm{p_i}_2^2)
+    \sum_j\sum_{a=1}^m h_{ij}^2{\left(\frac{r_j}{m}\right)}^2
+    =\frac{T_{\mathrm{rel}}}{m}.
+\end{equation}
+For unequal splits $\alpha_a W[j,:]$ with $\sum_a\alpha_a=1$, a feature's contribution changes by $\sum_a\alpha_a^2$. A single width adjustment cannot correct every such split. Thus C1 retains representation dependence despite its stated invariances. It is a new local head metric, not a repaired bound for the original ratio. It supplies no universal positive lower or finite upper bound on raw $\norm{H_W}_F$ without further scale restrictions, since global scaling leaves C1 fixed while varying that norm by $s^{-2}$.
+
+\subsection{C2: inverse-temperature curvature of predictions}
+
+For the current centered logits, define
+\begin{equation}
+    T_{\mathrm{temp}}=\frac{1}{B}\sum_i z_{c,i}^T C_i z_{c,i}
+    =\frac{1}{B}\sum_i\operatorname{Var}_{k\sim p_i}(\log p_{ik}).
+    \label{eq:audit-c2}
+\end{equation}
+This includes the centered output bias. It uses the entire probability vector, not only the predicted class.
+
+\begin{lemma}[Inverse-temperature path identity]%
+\label{lemma:audit-temperature}
+Holding $z_{c,i}$ fixed, let $\alpha$ denote a logit-scale (inverse-temperature) coordinate and define
+\begin{equation}
+    F(\alpha)=\frac{1}{B}\sum_i
+    \left[\log\sum_k\exp(\alpha z_{c,ik})-\alpha z_{c,i,y_i}\right].
+\end{equation}
+Then $F''(1)=T_{\mathrm{temp}}$. This quantity is invariant under every exact representation change preserving all $p_i$.
+\end{lemma}
+\begin{proof}
+Twice differentiating the log-sum-exp gives $z_{c,i}^T C_i z_{c,i}$ at $\alpha=1$. The label-dependent term is linear. Also $P\log p_i=Pz_i=z_{c,i}$, so the quantity is determined by probabilities alone. Subtracting a constant does not change a variance, proving the second equality in~\eqref{eq:audit-c2}.
+\end{proof}
+
+This is curvature along an artificial one-dimensional logit-scale path, not the original weight-space Hessian. For ordinary temperature $T=1/\alpha$, the second derivative of $F(1/T)$ at $T=1$ is $F''(1)+2F'(1)$, which differs from C2 unless $F'(1)=0$. C2's invariance includes feature duplication and cancellation when probabilities remain fixed. It establishes neither comparability across datasets with different class distributions nor usefulness for selecting a trained model.
+
+\paragraph{No loss-ordering implication.}
+Fix the true label to be class one. The binary predictions $(0.99,0.01)$ and $(0.01,0.99)$ have equal $T_{\mathrm{temp}}=0.0099{(\log 99)}^2$, but losses $-\log 0.99$ and $-\log 0.01$ and different correctness. A realization with $h=1$, $b=0$, and centered logits as the kernel also gives equal C1 and equal raw head trace for this pair. The class swap is not a symmetry of the supervised task with its labels fixed; it is a counterexample to determining loss or correctness from these scores.
+
+More strongly, uniform binary predictions have $T_{\mathrm{temp}}=0$ and loss $\log 2$, while the correctly labeled $(0.99,0.01)$ prediction has positive curvature and smaller loss. For binary logit gap $g$, $T_{\mathrm{temp}}=g^2\exp(g)/{(1+\exp(g))}^2$ also tends to zero as $|g|\to\infty$, including confidently wrong predictions. Minimization alone has no guaranteed favorable direction.
+
+\subsection{An empirical hypothesis that remains to be tested}
+
+The original score can be studied as an empirical early-selection heuristic under a specified architecture, parameterization, training schedule, and screening rule. C1 and C2 must retain separate names and results. Their identities and invariance properties do not transfer a performance claim to the original score or establish a generalization theorem.
+
+The local theorem's norm ratio, the reviewed activation/weight expression, and the image implementation's maximum of batch RMS ratios require separate definitions. In particular, batch size, partial batches, numerator factors, and aggregation affect the measured score. Report the implemented formula and all components without silently changing historical results.
+
+At early epochs, discarding the linear term requires a stationarity or negligible-gradient justification:
+\begin{equation}
+    L(\theta+\delta)-L(\theta)={\nabla L(\theta)}^T\delta
+    +\tfrac{1}{2}\delta^T H(\theta)\delta+o(\norm{\delta}_2^2)
+\end{equation}
+at points where the loss is twice differentiable. A small curvature quantity is not evidence of stationarity or a minimum. Record gradient and loss behavior where that interpretation is proposed.
+
+For reviewer 6ZG2's epoch-wise request, form vectors over the same complete candidate runs at each epoch and compare their correlation with the declared final validation endpoint. Same-epoch validation loss is the primary competing predictor. Preserve initialization and task strata, all failures, every candidate through the endpoint, and the specified selection direction; a negative score-to-loss correlation does not support minimizing both. Test-set outcomes must not determine screening or metric choice.
+
+\paragraph{Endpoint dependence in a bounded pilot.}
+The pilot following the \href{run:../sweep-results/research-audit-20261002/long-endpoint-pilot/run-prepared-20261002-v1/protocol.json}{frozen 100-epoch MNIST protocol} completed all 16 candidates and 1,600 epoch records without failures or exclusions. Seeds 71 and 89 each covered eight configurations, crossing four learning rates with two weight decays in one fixed architecture. The panel used 1,500 training and 375 validation examples from the official training partition, with no official-test evaluation. Every candidate trained for 100 epochs without early stopping; all 32 saved epoch-1 and epoch-100 checkpoints passed the separate \href{run:../sweep-results/research-audit-20261002/long-endpoint-pilot/run-prepared-20261002-v1/checkpoint-verification/summary.json}{reload verification}.
+
+For the prespecified primary target, validation cross-entropy at epoch 100, the original epoch-1 score had Spearman correlations $0.952381$ and $0.761905$ across configurations for seeds 71 and 89, respectively. Epoch-1 validation loss had correlations $-0.738095$ and $-0.738095$. With both predictors minimized, this target favors the original score's declared selection direction in this panel.
+
+For the separately prespecified secondary target, each candidate's minimum validation cross-entropy across all 100 epochs, the original epoch-1 score had correlations $-0.761905$ and $-0.619048$ for the same two seeds. Epoch-1 validation loss had correlations $0.690476$ and $0.738095$. This target favors early validation loss and opposes minimizing the original score. It reuses validation measurements to select a checkpoint, so it is neither an unbiased test outcome nor an exact reproduction of an early-stopping policy. Both targets retain their prespecified roles; the \href{run:../sweep-results/research-audit-20261002/long-endpoint-pilot/run-prepared-20261002-v1/interpretation.txt}{complete interpretation} reports both conclusions and identifies the complete epoch-wise records and selection regrets. C1 and C2 remain separately named controls, with no reversal of selection directions.
+
+Learning rate is strongly associated with both the epoch-100 target ($\rho=0.975900$ in each seed) and the original epoch-1 score ($\rho=0.975900$ and $0.780720$). Larger learning rates reach their best observed validation loss earlier. Two configurations per learning rate do not support within-learning-rate correlation inference. These associations limit an interpretation as selection information independent of learning rate; a schedule ending at zero also does not establish stationarity. Relative to the earlier five-epoch exploratory pilot, this fresh panel changes the endpoint, cosine-schedule horizon, initialization seeds, and stable-logit loss definition together. Differences cannot be attributed to duration alone. The diagnostic follows the same model through a cosine schedule and does not reproduce production FGHPO's separate constant-learning-rate probe, fresh cosine-schedule training, and selection by validation accuracy after restoring the checkpoint chosen by validation-loss early stopping. Two seeds, eight configurations, one architecture, and this small fixed subset do not establish general HPO efficacy or repair the contradicted curvature bound.
+
+\paragraph{Separate probe-and-retrain diagnostic.}
+The subsequent \href{run:../sweep-results/research-audit-20261002/lifecycle-pilot/run-prepared-20261002-v1/interpretation.txt}{lifecycle panel} completed all 32 phases, comprising 16 constant-rate one-epoch probes and 16 fresh cosine-scheduled fits with validation-loss early stopping and restoration. It retained 832 epoch records from 314.17 seconds of local CPU work; all 32 checkpoint measurements replayed exactly, and independent verification confirmed source/checkpoint hashes, callback decisions, and statistics. In initialization blocks 307 and 331, the original probe score's correlations with the primary restored-validation-error target were $-0.2169$ and $-0.3593$, versus $+0.1084$ and $+0.3713$ for the same-probe validation-cross-entropy baseline. Top-one selection was mixed: original-score selection made 17 versus 18 errors in block 307, but 20 versus 14 in block 331, each out of 375 validation examples. For the secondary restored-cross-entropy target, the original-score correlations were $-0.7619$ and $-0.7857$, versus $+0.7381$ and $+0.7857$ for the validation baseline. Both scores were minimized without changing their direction. The \href{run:../sweep-results/research-audit-20261002/lifecycle-pilot/run-prepared-20261002-v1/analysis.json}{complete analysis} preserves both targets, all candidates, ties, regrets, and learning-rate associations. The mixed primary selection result does not establish general dominance of either rule. These two initialization blocks and eight configurations use one fixed architecture and reuse the 1,500 training and 375 validation examples inspected in earlier pilots. Fixed probe membership and paired shuffling are declared controls. Eligibility was recorded without filtering candidates; this unthresholded metric diagnostic is neither the production 100-eligible-probe/ten-finalist procedure nor a matched-cost HPO comparison or independent held-out-data confirmation. No official-test evaluation occurred, and the result does not repair the curvature theorem.
+
+\paragraph{Components of the reviewer-named trajectories.}
+A separate \href{run:../sweep-results/research-audit-20261002/named-trajectory-audit/mechanism-pilot/component-summary.json}{mechanism panel} completed 12 runs and 360 epochs on vehicle, blood-transfusion-service-center (BTSC), and segment, pairing learning rates 1.0 and 0.001 across seeds 211 and 223. All 24 saved checkpoint measurements replayed exactly. It measures the historical maximum-batch Frobenius hidden/weight ratio without a probability factor. Every low-rate ratio increased between epochs 1 and 30 because hidden-norm growth exceeded output-kernel-norm growth. At rate 1.0, both vehicle ratios increased and both BTSC ratios decreased; segment's seed-211 ratio decreased from 113.909 to 98.735, while seed 223 had exactly zero hidden activations and ratio throughout epochs 3--30. Every high-rate output-kernel norm increased between the endpoints, excluding endpoint denominator shrinkage as the explanation for vehicle's increases in this panel. Degenerate activations did not uniformly imply worse validation loss: both high-rate BTSC runs had lower endpoint cross-entropy than their paired low-rate runs, with accuracy $114/135$, equal to the validation slice's majority-class rate. This is a descriptive comparison, not a separately trained baseline. Historical whole-fold one-hot encoding, row normalization, and ratio measurement include internal validation rows; no external test rows were used. Fresh seeds, float32 preprocessing, current TF/Keras, and fixed 30-epoch training without early stopping prevent an exact 2024 replay. The panel establishes neither unbiased validation performance, HPO efficacy, nor full-network flatness. The historical plot vertices have been recovered, but their original epoch-wise numerator, denominator, confidence, gradient, and checkpoint histories remain unavailable; these new mechanisms do not identify a unique cause of the historical curves.
+
+\paragraph{Reproducible analytical evidence.}
+The \href{run:../sweep-results/research-audit-20261002/normalization-audit/normalization_derivation.txt}{derivation}, \href{run:../sweep-results/research-audit-20261002/normalization-audit/normalization_protocol.json}{frozen comparability protocol}, and \href{run:../sweep-results/research-audit-20261002/normalization-audit/normalization_identity_results.json}{deterministic identity checks} retain the formulas and negative cases. The original ratio and both candidates remain distinct. These files support the mathematical audit; they do not supply evidence of improved validation prediction or HPO performance.

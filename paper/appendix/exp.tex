@@ -1,0 +1,43 @@
+%\section{Additional details on experimental setup}
+
+Table \ref{tab:hpo_space} shows the hyper-parameter space for our experiments on the image and OpenML datasets. For our Bayesmark experiments, we use the default hyper-parameter space.
+
+\begin{table}[t]
+    \centering
+    \small
+    \caption{Hyper-parameters used in this study. For Bayesmark, we use the default hyper-parameter set, whose size is 134M.}
+    \label{tab:hpo_space}
+    \begin{tabular}{lr}
+        \toprule
+        \multicolumn{2}{c}{OpenML} \\
+        \midrule
+        \textbf{Hyper-parameter} & \textbf{Range} \\
+        \midrule
+        Network depth & [1, 4] \\
+        Network width & [16, 32, 64, \ldots, 1024] \\
+        Batch size & [4, 8, 16, \ldots, 256] \\
+        Initial learning rate & $[10^{-5}, 10^{-4}, \ldots, 1.0]$ \\
+        \midrule
+        \multicolumn{2}{c}{MNIST} \\
+        \midrule
+        \textbf{Hyper-parameter} & \textbf{Range} \\
+        \midrule
+        Number of filters & [2, 6] \\
+        Kernel size & [2, 6] \\
+        Padding & Valid, same \\
+        Number of conv blocks & [1, 3] \\
+        \midrule
+        \multicolumn{2}{c}{SVHN} \\
+        \midrule
+        \textbf{Hyper-parameter} & \textbf{Range} \\
+        \midrule
+        Number of filters & [2, 6] \\
+        Kernel size & [2, 6] \\
+        Padding & Valid, same \\
+        Number of conv blocks & [1, 3] \\
+        Dropout rate & [0.2, 0.5] \\
+        Final dropout rate & [0.2, 0.5] \\
+        Number of units & [32, 64, 128, \ldots, 512] \\
+        \bottomrule
+    \end{tabular}
+\end{table}

@@ -1,0 +1,46 @@
+{
+  "status": "prospective_explicit_eligibility_parameters_no_execution",
+  "frozen_utc": "2026-10-03T02:12:20.992135+00:00",
+  "base_rule_sha256": "4e4c81d5806f52e06bb95e06189051540db41bde45d62753b371dcb8f915f025",
+  "inherit_prior_gpu_peak_limit_from_pricing_sha256": "0186185e2fe5b2459ef65c616e7622634e048fa9b0c15c083dc6b7295d9a986b",
+  "gpu_family": "T4",
+  "gpu_peak_limit_bytes": 15032385536,
+  "gpu_peak_limit_gib": 14,
+  "every_case_requires": {
+    "status": "complete",
+    "optimizer_updates": 18,
+    "error": null,
+    "memory_error": null,
+    "optimizer_counter_error": null,
+    "gpu_peak_bytes": "finite integer strictly greater than0 and at most15032385536",
+    "all_required_timing_seconds": "finite and nonnegative; nonzero training and inference slopes",
+    "case_identity": "exact dataset/repetition/candidate/config/calibration seeds and input/source hashes from frozen exact32 protocol"
+  },
+  "whole_cohort_requires": {
+    "complete_cases": 32,
+    "no_refill_or_replacement": true,
+    "no_partial_or_subset_gate": true,
+    "single_observed_remote_attempt": true,
+    "runtime_finished": true,
+    "modal_app_stopped": true,
+    "artifact_retrieval_and_hashes_verified": true,
+    "unknown_lost_or_automatic_extra_attempt_is_ineligible": true
+  },
+  "launch_eligibility_record": "Parent independently verifies the evidence; record single_attempt/runtime_finished/modal_app_stopped as literal true and verified_evidence_sha256/calibration_source_sha256/payload_sha256 as authenticated SHA256 strings. Cost output must bind the eligibility-file hash. Calibration source must match the frozen exact32 protocol.",
+  "planned_controls_seconds": {
+    "cooperative": 600,
+    "subprocess": 600,
+    "function": 720,
+    "global": 840,
+    "controller": 870,
+    "overall": 900
+  },
+  "cost_gates_usd": {
+    "proposed_followup_reservation": 1,
+    "prior_plus_calibration_holds": 5,
+    "scientific_allocation": 42,
+    "other_allocation": 3,
+    "cumulative_cap": 50
+  },
+  "planning_limits": "The reservation and timeout controls do not establish an all-in billing hard maximum. Memory gate covers all32 short calibration cases at batch64 but is not a mathematical guarantee for100-epoch training. No remote execution or scientific launch is authorized by this document."
+}

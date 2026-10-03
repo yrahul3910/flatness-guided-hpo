@@ -1,0 +1,21 @@
+\section{Motivation for feedforward}
+We will now motivate the use of neural networks in this work by introducing the Universal Approximation Theorem by \citet{hornik1991approximation}. Note that there are other universal approximation theorems: notably, \citet{cybenko1989approximation} establishes the fact that a one-layer neural network with sigmoidal activation functions can, to any arbitrary precision $\epsilon$, approximate an arbitrary function $f$. \citet{dasgupta1992power} further establishes a set of activation functions that have the same approximating power as the sigmoid activation. However, in practice, the sigmoid activation function is known to perform sub-optimally. The seminal work of \citet{nair2010rectified} introduced the ReLU (Rectified Linear Unit) activation function, $f(x) = \max(0, x)$. Indeed, there are universal approximation theorems that apply to this function. \citet{leshno1993multilayer} proves a universal approximation theorem for non-polynomial activation functions. While this is certainly applicable, we instead use the theorem provided by \citet{hornik1991approximation}, for some unbounded and non-constant activation function $\psi$.
+
+\begin{theorem}
+\label{th:relu_uat}
+    If $\psi$ is unbounded and nonconstant, then $\mathfrak{R}(\psi)$ is dense in $L^p(\mu)$ for all finite measures $\mu$ on $\mathbb{R}^k$.
+\end{theorem}
+
+Here, $\mathfrak{R}(\psi)$ denotes the set of functions representable by neural networks with activation function $\psi$.
+
+However, the universal approximation theorems themselves are insufficient. Specifically, they do not say anything about the \textit{architecture} necessary to produce an optimal decision boundary. It is here that \citet{montufar2014number} provides a useful result:
+
+\begin{theorem}
+    The maximal number of linear regions of the functions computed by a neural network with $n_0$ input units and $L$ hidden layers, with $n_i \geq n_0$ rectifiers at the i-th layer, is lower bounded by
+         
+    \[
+        \left( \prod\limits_{i=1}^{L-1} \left\lfloor \frac{n_i}{n_0} \right\rfloor ^{n_0} \right) \sum\limits_{j=0}^{n_0} {n_L \choose j}
+    \]
+\end{theorem}
+
+We are interested in the product: note that if $n_i < n_0$ for any $i$, then this lower bound collapses. Intuitively, in such a case, the neural network is not \textit{forced} to try producing a complex decision boundary (which is preferable with real-world, noisy datasets). \citet{montufar2014number} gives us a hint that perhaps we should set the number of units per layer to be at least the number of inputs. This gives us a ballpark of what the hyper-parameter space of the number of units per layer should be.

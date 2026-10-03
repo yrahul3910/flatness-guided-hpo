@@ -1,0 +1,374 @@
+{
+  "schema": "prospective-four-arm-cifar-design-v1",
+  "status": "PROSPECTIVE DESIGN FROZEN; executable launch and cohort gates remain pending calibration",
+  "prepared_utc": "2026-10-03T00:52:50.787276+00:00",
+  "supersedes_design_only": {
+    "path": "sweep-results/research-audit-20261002/matched-cifar-protocol/protocol_draft.json",
+    "sha256": "3f5e23558befa40d74eec8b264307c0b750a32fe936b597387b64998841de7af"
+  },
+  "claim": "Prospective controlled screening-score comparison on CIFAR-10 and CIFAR-100 under a common fixed candidate prior and probe/fresh-retrain/select lifecycle. Classification error is the endpoint. This does not establish the original theorem, full-network flatness, unchanged production FGHPO, equal actual compute, or historically untouched benchmark estimates.",
+  "freeze_levels": {
+    "design": "Freeze arms, directions, prior, cohort prefixes, budget-selection rule, data roles, checkpoint policy, eligibility, failure handling and analysis before timing calibration. Manifests are fixed before calibration, irrespective of any prior KMNIST outcomes.",
+    "launch": "After outcome-blind calibration: record selected prefix and calculations; freeze exact source/environment/data/manifests/seeds/provider/machine/all-in rates/alerts/storage retention/dollar and runtime limits. The runner rejects source or data hash changes. This design file alone is not executable authorization.",
+    "no_adaptation": "Do not read any CIFAR official-test or optional external-test predictions during calibration/search. Do not inspect or reuse KMNIST holdout outcomes to choose ranges, seeds, directions, eligibility, checkpoint policy, score normalization, cohort or reporting. Never rerun or replace an unfavorable/failed block."
+  },
+  "arms": [
+    {
+      "id": "original_rms",
+      "rank": "Original float32 max-batch RMS(probability)*RMS(hidden)/RMS(output kernel), ascending; candidate ID on exact ties."
+    },
+    {
+      "id": "head_trace",
+      "rank": "Sample mean of paired per-example (1-sum(p**2))*sum(h**2), ascending; candidate ID on exact ties. Weight the tail by its example count. Inference mode, same probe checkpoint and sample as original RMS."
+    },
+    {
+      "id": "probe_validation_ce",
+      "rank": "Actual compiled Keras categorical CE on the complete tuning split at the same one-epoch probe checkpoint, ascending; candidate ID on exact ties."
+    },
+    {
+      "id": "random_shortlist",
+      "rank": "One independently seeded shuffle of sorted common-eligible candidate IDs; first K without replacement. Scores do not affect ordering."
+    }
+  ],
+  "scientific_scope": {
+    "datasets": [
+      "cifar10",
+      "cifar100"
+    ],
+    "proposal_attempts_per_block_N": 8,
+    "finalist_attempts_per_arm_K": 2,
+    "frozen_possible_repetition_ids": [
+      2000,
+      2001,
+      2002,
+      2003
+    ],
+    "cohort_choice": "Use IDs 2000..2003 for BOTH datasets if the conservative four-block cost/memory gate passes. Otherwise use IDs 2000..2001 for BOTH datasets if the two-block gate passes. Otherwise perform no scientific training. Never choose different datasets/IDs/counts using outcomes or favorable candidate scores.",
+    "four_blocks_per_task_maximum": {
+      "paired_task_blocks": 8,
+      "probes": 64,
+      "union_final_fits": 64,
+      "logical_final_slots_all_arms": 64,
+      "epochs": 6464,
+      "optimizer_updates": 4001536,
+      "distinct_incumbent_test_passes": 32
+    },
+    "two_blocks_per_task_maximum": {
+      "paired_task_blocks": 4,
+      "probes": 32,
+      "union_final_fits": 32,
+      "logical_final_slots_all_arms": 32,
+      "epochs": 3232,
+      "optimizer_updates": 2000768,
+      "distinct_incumbent_test_passes": 16
+    },
+    "classification": "Small prospective exploratory comparison; neither size is the earlier 20-block publication proposal. Counts are engineering/budget defaults, not chosen using KMNIST effect sizes. The 20-block N100/K10 proposal is deferred and is not authorized or costed by this design."
+  },
+  "data": {
+    "sources": "Official CIFAR-10 and CIFAR-100 training order through pinned Keras loader; CIFAR-100 fine labels.",
+    "splits": {
+      "fit_official_train_rows": [
+        0,
+        40000
+      ],
+      "validation_official_train_rows": [
+        40000,
+        50000
+      ],
+      "intervals": "half-open",
+      "official_test_rows": [
+        0,
+        10000
+      ]
+    },
+    "split_randomization": "None; preserves current last-20-percent rule. Search repetitions vary algorithm/training randomness, not dataset identity.",
+    "preprocessing": {
+      "dtype": "float32",
+      "layout": "channels_last",
+      "shape": [
+        32,
+        32,
+        3
+      ],
+      "scale": "divide by 255 before channel normalization",
+      "cifar10_mean": [
+        0.4914,
+        0.4822,
+        0.4465
+      ],
+      "cifar10_std": [
+        0.247,
+        0.2435,
+        0.2616
+      ],
+      "cifar100_mean": [
+        0.5071,
+        0.4867,
+        0.4408
+      ],
+      "cifar100_std": [
+        0.2675,
+        0.2565,
+        0.2761
+      ],
+      "labels": "one-hot 10 or 100 with fixed label map"
+    },
+    "isolation": "Proposal, probe, validation, stopping and selection functions accept fit/validation arrays only. Test arrays are unavailable to those APIs. Separate finalizer evaluates sealed incumbents; test results cannot trigger another search or checkpoint choice.",
+    "hashes_required_before_execution": [
+      "cached raw archives/files and loader source/version",
+      "exact fit/validation row IDs and label maps",
+      "preprocessed fit/validation array shape/dtype/content",
+      "probe subset membership/order and epoch permutations"
+    ],
+    "historical_access": "Recovered CIFAR-10 and CIFAR-100 history used official-test accuracy during per-candidate HPO and used official training rows in fits/probes/tuning. Holding training rows aside now cannot erase that history. This rerun seals the full official tests against NEW calibration, training, stopping and selection; do not call them globally untouched. Data provenance and every finalization boundary must be explicit.",
+    "test_storage": "Mechanically prepare all official-test rows on the local provenance host into separate evaluation-only NPZs, with archive/member/row/preprocessing hashes, without model use, quality outcomes, class-count inspection or sample plots. Bind their file hashes before scientific training in the assigned suite. Upload only training/calibration archives to the training worker. The finalizer opens evaluation arrays only after the complete assigned suite and every checkpoint decision are sealed.",
+    "optional_external_cifar10_test": {
+      "status": "EXCLUDED FROM THIS LAUNCH. Future separately frozen option only; project-use, source/hash and image-data license scope remain unresolved.",
+      "dataset": "CIFAR-10.1 v6, all 2000 examples, same CIFAR-10 class map and preprocessing; no fitted test normalization.",
+      "use": "No CIFAR-10.1 data download, upload or evaluation is included here. A future separately frozen addition could evaluate identical sealed CIFAR-10 incumbents once, without retraining or choosing checkpoints from that external result; report separately from original tests and do not treat it as another training task.",
+      "provenance": "Publisher recommends v6; v4 and v6 overlap by more than90percent, so do not treat them as independent replications. The new collection can differ in distribution, so it measures transfer to this collection rather than restoring an interchangeable old-test estimate.",
+      "primary_sources": [
+        "https://github.com/modestyachts/CIFAR-10.1",
+        "https://arxiv.org/abs/1806.00451"
+      ]
+    }
+  },
+  "search_space": {
+    "field_order": [
+      "n_filters",
+      "kernel_size",
+      "padding",
+      "n_blocks",
+      "n_units",
+      "learning_rate",
+      "weight_decay"
+    ],
+    "n_filters": {
+      "type": "integer",
+      "low": 32,
+      "high": 128,
+      "law": "discrete uniform inclusive"
+    },
+    "kernel_size": {
+      "type": "integer",
+      "low": 2,
+      "high": 6,
+      "law": "discrete uniform inclusive"
+    },
+    "padding": {
+      "type": "categorical",
+      "values": [
+        "valid",
+        "same"
+      ],
+      "law": "uniform"
+    },
+    "n_blocks": {
+      "type": "integer",
+      "low": 2,
+      "high": 5,
+      "law": "discrete uniform inclusive conditional on sampled kernel/padding",
+      "valid_padding_max_by_kernel": {
+        "2": 4,
+        "3": 3,
+        "4": 3,
+        "5": 2,
+        "6": 2
+      },
+      "same_padding_max": 5
+    },
+    "n_units": {
+      "type": "categorical",
+      "values": [
+        32,
+        64,
+        128,
+        256,
+        512
+      ],
+      "law": "uniform"
+    },
+    "learning_rate": {
+      "type": "float",
+      "low": 0.0001,
+      "high": 0.01,
+      "law": "log-uniform via unit coordinate u: 10**(-4+2*u)"
+    },
+    "weight_decay": {
+      "type": "float",
+      "low": 1e-05,
+      "high": 0.001,
+      "law": "log-uniform via unit coordinate u: 10**(-5+2*u)"
+    },
+    "geometry": "One convolution then 2x2 pooling per CIFAR block. For valid padding subtract kernel-1 then floor-divide by2 each block; require positive size. Conditional depth matches current CIFAR random sampler, not uniform over all globally valid architectures. No hidden padding fallback, repair, retry, or resampling; explicit malformed/invalid proposals remain failed records.",
+    "manifest": "Generate N explicit typed configurations once per dataset/repetition before any training; candidate IDs c000000 onward in occurrence order. Retain duplicate configurations with distinct occurrence IDs and phase seeds. Save canonical JSON, source, RNG version and SHA256; all arms consume this exact immutable list. No proposal depends on probe or final outcomes."
+  },
+  "seed_contract": {
+    "namespace": "matched-cifar-v1",
+    "algorithm": "SHA256 of UTF-8 compact JSON array [namespace,dataset,integer repetition_id,candidate_id,phase,role]; first4 digest bytes big-endian masked with0x7fffffff. Retain keys and derived integer; full digest is reproducible from those keys and may be added by evidence integration. Pure helper checks distinct-role collisions within each manifest. Final approved cohort also requires a suite-wide cross-block collision preflight before training; collisions require retained pre-execution protocol revision, never silent seed remapping.",
+    "shared_candidate_id": "shared",
+    "shared_phase_role_pairs": [
+      [
+        "proposal",
+        "rng"
+      ],
+      [
+        "probe",
+        "subset"
+      ],
+      [
+        "probe",
+        "shuffle"
+      ],
+      [
+        "final",
+        "shuffle"
+      ],
+      [
+        "selection",
+        "random"
+      ]
+    ],
+    "candidate_phase_role_pairs": [
+      [
+        "probe",
+        "init"
+      ],
+      [
+        "probe",
+        "augmentation"
+      ],
+      [
+        "final",
+        "init"
+      ],
+      [
+        "final",
+        "augmentation"
+      ]
+    ],
+    "rng": "Pinned Python random.Random (Mersenne Twister) for seven unit-coordinate proposal draws and random-shortlist shuffle, as in contract/shared_contract.py. NumPy Generator(PCG64) for subset/epoch permutation streams. Record Python/NumPy versions, actual coordinates and full permutation hashes; equal laws do not imply bitwise replay of the older sampler.",
+    "shuffle": "A shared frozen stream yields each epoch permutation in fit-row identity order; per-epoch array hashes retained. Probe subset order is separately frozen, and remains the score batch order. Final permutation prefixes remain paired even when early stopping differs.",
+    "initialization": "Probe/final init seeds independent by phase; same candidate has identical phase seeds across all arms, regardless of score/rank/method/worker/order. Different candidate IDs may have different weights, even when architectures match.",
+    "augmentation": "Use the tested candidate/phase augmentation root plus separate translation and flip layer seeds: first4 SHA256 bytes of compact JSON [matched-cifar-augmentation-v1,root_seed,layer_name], big-endian masked0x7fffffff. Retain actual generator state; a .keras file alone does not promise augmentation continuation.",
+    "optimizer_isolation": "Proposal/optimizer RNG state is separate from training resets. Test rank/permutation invariance of seeds and any shared saved final fit.",
+    "cohort_preflight": "Check all planned study roles including augmentation child seeds before calibration/launch: 552 roles for all eight possible task-blocks (64 candidate occurrences), plus all distinct calibration and final-analysis roles. Do not remap a collision silently.",
+    "calibration": "Use a separate calibration namespace or separately frozen repetition IDs and candidate/phase seeds; keep the already frozen scientific configurations unchanged. Calibration state/checkpoints never initialize or replace a scientific run."
+  },
+  "probe": {
+    "subset": "One shared random permutation of fit rows per dataset/repetition; first1500 in that order. Same members/order for all candidates. This paired control differs from current candidate-specific subset sampling.",
+    "training": "Fresh model/optimizer, one epoch, batch64 (23 full batches plus28), constant configured LR, Adam configured WD and clipnorm1.0; augmentation active. Record explicit training permutation separately from subset score order.",
+    "model": "Current CIFAR model: reflect translation4/32 then horizontal flip; each block Conv2D(filters*2**block,kernel,padding,He-uniform), BatchNorm,ReLU,MaxPool2; flatten; dense n_units/ReLU/He-uniform; dense classes/softmax/He-uniform. Exact defaults/package versions/source frozen before launch.",
+    "score": "UNCHANGED get_convexity definition: float32 RMS(p_batch)*RMS(h_batch)/RMS(final Dense kernel), excluding bias; inference mode; maximum over finite batch ratios in frozen subset order. Include28-example tail. Return positive maximum; if none positive return+inf. Preserve all raw batch components and nonfinite flags. No new normalization, inversion, sign change or tuning.",
+    "validation_ce": "Inference on the complete same10000 validation rows using actual compiled Keras categorical CE, sample weighted across batches. From exactly the same post-epoch probe checkpoint as RMS. No extra training, best-epoch selection, official-test access or fresh-model score. Save accuracy descriptively.",
+    "save": "Keep every completed probe checkpoint and explicit model/BN/optimizer/RNG metadata; raw original batch components and nonfinite flags, per-example trace/norm terms, Keras tuning CE/accuracy, initial/source/data/order/weight/file hashes, parameter count, elapsed/cost fields and failures. Record strict q>0.1 flag but do not apply it. Source review must distinguish combined inference/scoring timings from individually timed score costs; do not promise a decomposition not logged.",
+    "head_trace": "Compute the paired per-example expression in float64 from documented probabilities/activations at the inference-mode probe checkpoint; freeze precision and probability reconstruction/tolerance policy in source review. Save enough raw components to independently reproduce the sample mean, including the28-example tail. No clipping or hidden substitute score."
+  },
+  "geometry": {
+    "loss": "Unregularized sample-mean categorical cross-entropy of the current inference-mode affine softmax head.",
+    "perturbed_parameters": "Output kernel entries only, with penultimate features and output bias fixed; ordinary Euclidean/Frobenius coordinates.",
+    "convention": "Fixed per-coordinate isotropic local covariance sigma**2 I within each task; no perturbation noise, sigma, radius, feature normalization or per-dimension correction is fitted in this study.",
+    "variable_architecture_limit": "The retained prior varies head width and feature coordinates. Raw trace therefore compares the declared per-coordinate sensitivity; total perturbation energy grows with head dimension. For compensating h->c*h,W->W/c, predictions stay fixed while trace scales by c**2. Feature duplication and width changes are not invariant. Record head dimension, parameter count and feature/probability norm summaries; do not retrofit another normalization after outcomes.",
+    "claim_limit": "Exact head-kernel trace and local prediction/loss sensitivity do not imply full-network flatness, classification correctness or endpoint accuracy ordering. Zero trace can describe a confident wrong or degenerate predictor. No task pooling of raw traces across10 and100 classes."
+  },
+  "population_and_threshold": {
+    "common_pool": "All N attempts retained. Eligible exactly when the probe completes and original RMS is finite and strictly positive, trace is finite and nonnegative, and same-probe tuning CE is finite and nonnegative. All four arms use this identical pool.",
+    "threshold": "Record strict original RMS>0.1 for every finite probe, but do not apply it. Zero trace remains eligible. The KMNIST result that all16 scores passed0.1 is not grounds to assume CIFAR will do so.",
+    "no_refill": "N counts attempts. Duplicate occurrences retain IDs/seeds. Failed, score-invalid and resource-failed attempts remain costed records. No replacements, resampling, reduced K or seed substitution. Fewer than K eligible probes makes the paired study incomplete before final evaluation.",
+    "scope": "This isolates ranking within a common score-computable pool. It does not estimate the value of the original threshold or the production policy that collects100 q>0.1 probes and retrains10. Controls inherit score computability; standalone random need not."
+  },
+  "final_fit_and_selection": {
+    "training": "Cold-start fresh weights and Adam state, independent probe/final phase seeds, same40k fit rows, batch64, max100epochs, CosineDecay(initial LR,62500 optimizer steps,alpha0), configured WD/clipnorm1.0. Do not warm-start from the probe.",
+    "stopping": "Actual installed Keras EarlyStopping(monitor=val_loss,mode=auto,min_delta=0,patience=25,baseline=None,restore_best_weights=True,start_from_epoch=0), observing actual compiled sample-weighted Keras validation CE each epoch. Log callback best/wait/stop decisions. No guarantee of convergence from duration or schedule.",
+    "checkpoint_objective": "Restore best monitored validation-CE weights within actual stopping horizon, with installed strict-improvement/tie behavior. Not epoch100 weights, best validation accuracy checkpoint, or retrospective best across100 when training already stopped.",
+    "candidate_objective": "Preserve tested CIFAR policy: highest restored-checkpoint tuning accuracy; exact accuracy ties use ascending stable candidate ID only. CE does NOT break candidate ties. This differs explicitly from the exploratory KMNIST tie rule.",
+    "shortlists": "Exactly K=2 fixed slots per arm. A final failure consumes its slot. Any missing or incomplete selected final makes the prospective paired comparison incomplete; no fallback to a remaining successful finalist and no held-out finalization of a partial successful subset.",
+    "shared_union": "Train each candidate in the union of all FOUR shortlists once per task-block, at most min(N,4*K)=8 unique final fits. Reuse identical phase outcome/checkpoint for every selecting arm. Full logical cost is charged to every arm that selected the fit; physical execution counts it once.",
+    "save": "Retain actual backend fields: per-epoch train_ce,train_accuracy,validation_ce,validation_accuracy,optimizer_steps,learning_rate,shuffle_sha256,best_epoch,callback_wait,callback_stop,augmentation_state,elapsed_seconds. Phase metadata include parameter_count, initialization/source/data hashes, settings and seeds; result retains restored tuning metrics, epoch/step/best/stop counts, checkpoint/file/weight hashes and generator state. Record-only audit checks those fields. Only selected checkpoints are loaded by the separately costed test finalizer; this design promises no additional all-model reload or inference.",
+    "evaluation_gate": "No official-test model evaluation until all assigned task-blocks have terminal records, every selected finalist completed, and every arm incumbent/checkpoint/hash is durably locked in one suite manifest. Verify source/input/checkpoint hashes before finalization. Evaluate each distinct selected checkpoint once on its declared official test set; save predictions and labels. Any partial evaluation caused by an interruption is retained and makes that holdout spent; no adaptive restart."
+  },
+  "outcomes_and_analysis": {
+    "primary_metric": "Top1 classification error count/rate on each named test set; accuracy is its complement. For CIFAR official tests denominator10000. Labels and per-example predictions retained. CE selects checkpoints on tuning data; loss is not substituted for downstream classification quality.",
+    "primary_contrast": "Within each dataset and paired repetition, corrected-trace error minus original-RMS error; negative favors trace. This assesses the proposed quantity while preserving the original baseline.",
+    "report_all": "Report all four arms, every frozen block, shortlisted IDs, incumbents and all six pairwise error differences separately by dataset, alongside per-arm mean/median. CIFAR-10.1 is excluded from this launch. Do not pool candidates, epochs, test examples or both datasets as independent search repetitions.",
+    "uncertainty": "With only2 or4 paired blocks/task, report per-block values and descriptive summaries. No superiority p-values, effect-based power assertion, or confident broad efficacy claim. These blocks vary search/training randomness on fixed datasets, not independent task populations.",
+    "secondary": "Tuning metrics and CE-best/stop epoch support protocol interpretation. Report rejection/failure/completion, actual epochs/updates/examples, model/head size, logical cost and actual physical/billed cost. No full-pool endpoint rank correlation, oracle regret, or selected-only substitute: final outcomes cover only shortlist union.",
+    "failure_reporting": "Retain every assigned block in the accounting denominator. An incomplete gate yields no complete-study held-out claim. If interruption has already produced partial evaluation, show its scope and missingness without replacing failures or presenting complete-case superiority. Do not fabricate endpoint metrics for failures.",
+    "kmnist": "The spent KMNIST pilot remains a separate exploratory finding and engineering validation. It is not pooled into this prospective study or consulted to tune its design."
+  },
+  "cost_accounting": {
+    "primary_budget": "Matched N attempted probes and K finalist slots per arm. This matches opportunities, not compute across different architectures/early-stop horizons. Report actual candidate size, epochs/updates/examples and synchronized device-seconds.",
+    "logical_arm_cost": "Charge N attempted common probes, their training/tuning/score inference and failure costs, plus ranking, each arm K final fits, validation, saving and its final test inference. Report epoch/update/example counts and measured seconds separately. Shared full computation is charged logically to each consuming arm; physical execution is counted once. Random and CE deployment can omit score computations, and random can omit probe training: matched-ablation cost is not a deployment-runtime comparison.",
+    "physical_cost": "Separate actual union execution ledger includes each shared probe/final fit once; additionally include preparation, data I/O, model compilation, checkpoint I/O, scoring, optimizer overhead, verification, retries, infrastructure idle time and billed startup/shutdown. Do not divide shared cost by arms and call it deployable HPO runtime.",
+    "timing": "Same fixed device type, memory, precision, backend versions and concurrency for arms; monotonic synchronized phase timings with explicit boundaries. Report serial reconstructed logical totals separately from physical end-to-end elapsed wall time and any parallel makespan; never add parallel durations and label wall time. Training batch size64 fixed; OOM is recorded, not silently changed batch size/range.",
+    "deployment_claim": "A random shortlist without probes and method-specific scoring overhead need separate operational timing if an efficiency claim is desired. Primary controlled-ablation timings cannot establish original screening faster than that control.",
+    "resource_gate": "Use the staged budget and outcome-blind calibration gate below. No runtime extrapolation from KMNIST CPU results, no assumed shortlist overlap, no assumed early-stop saving and no unpriced persistent storage."
+  },
+  "stages_and_budget": {
+    "cumulative_authorized_usd": 50,
+    "prior_unreconciled_reserve_usd": 2,
+    "remaining_conservative_usd": 48,
+    "allocation_caps_usd": {
+      "calibration": 1,
+      "scientific_training_and_search": 42,
+      "storage_network_finalization_verification_and_contingency": 5
+    },
+    "stage0_local": "Freeze full candidate manifests and seed maps, shape/type/domain/geometry checks and the repaired four-arm runner with synthetic correctness fixtures. Audit raw/input row provenance. No real-test outcomes or paid resources.",
+    "stage1_calibration": "One fixed-hardware bounded profiling plan, initially at most1200wallseconds and never above1USD all-in. Profile the frozen candidate geometries and both class counts with explicit batch64, augmentation, model initialization/compilation, optimizer steps, full fit-set and tuning-set inference, score extraction and checkpoint I/O. Use a separate calibration seed namespace and discard all model state. Read only timing, memory, completion and byte-count outputs to select study size; do not inspect calibration task-quality metrics, shortlist comparisons or scientific test outcomes. Freeze exact profiling steps and any scaling formula before running them.",
+    "calibration_coverage": "The forecast must cover every candidate in each proposed prefix, directly or by an explicitly conservative profiled architecture/work bound. A few convenient small models are insufficient. Memory gate requires every planned candidate to be runnable at batch64; no shrinking batches, silently dropping shapes or drawing replacements. The initial six minimum/median/maximum-MAC representatives do not cover all memory/parameter extrema: also cover CIFAR10/2000/c000003, CIFAR100/2002/c000004 and CIFAR100/2003/c000002, or supply an explicit conservative bound before relying on extrapolation. MACs are not runtime or peak-memory guarantees.",
+    "forecast": "For each proposed prefix, charge all N probes and assume all N candidates could enter the union and train100epochs on40000fit rows (625batches/epoch). Existing backend performs EACH EPOCH a separate full-fit inference pass (625batches for finals,24for probes) and a full10000-row tuning pass (157batches), plus a post-phase tuning pass after final restoration or probe completion. Probe score extraction adds24batches. Add initialization/compilation, augmentation, backward/optimizer work, scoring, checkpoint/data/source I/O and paid idle/startup/shutdown. Double the measured/scaled compute-time estimate as a planning margin; this is not a mathematical runtime guarantee. Add independently quoted storage/network/finalization costs. Assume no early-stop or shortlist-overlap saving.",
+    "cohort_rule": "Choose4blocks/task iff complete coverage, memory feasibility and conservative forecast fit the42USD study allocation and the whole cumulative cap. Else choose2blocks/task iff the same gate passes. Else stop after calibration with a concrete unmet-resource estimate. Size choice is made before scientific fits or endpoint outcomes and remains fixed.",
+    "execution_bound": "One billable worker unless a revised total-rate plan is frozen before launch. The launch record must identify provider/machine/region, current all-in rate, data uploaded, storage retention, exact task/phase/job/time/dollar caps, verified provider-alert access and provider-enforced shutdown. Cap cumulative billed walltime from the verified rate and remaining allocation. Record partial phases on limit; do not automatically rerun. Budget alerts alone are not a hard cap.",
+    "preservation": "Original stopped VMs/disks are evidence. No deletion or unreviewed boot of disks with unknown automation; resource owner must resolve preservation before start. Any new storage retention and continuing charges must fit the quoted cap. This design authorizes no cloud mutation.",
+    "publication_scope": "The funded2-or4-block study is an exploratory staged result. The earlier20-block N100/K10 proposal and full optimizer benchmark require their own measured plan; they are not silently included in the remaining48USD.",
+    "reserve_breakdown": {
+      "earlier_failed_L4_attempt": 1,
+      "new_bounded_L4_retry_failed_STOCKOUT": 1
+    },
+    "current_cloud_status": "Both authorized L4 attempts failed regional capacity; no calibration or scientific cloud training observed. Both reserves remain until billing is reconciled. Current quoted g2-standard-4 Netherlands compute rate is0.742916046USD/hour; storage/network/other charges remain separately quoted. No automatic zone/provider/hardware fallback.",
+    "calibration_coverage_addendum": {
+      "path": "sweep-results/research-audit-20261002/prospective-image-study/protocol/calibration-coverage.json",
+      "sha256": "71d36fa69152c28fbd3a83818cef8bfdd00546db85c84dc2ad03afccb23db65d",
+      "representative_count": 9,
+      "scientific_candidate_plan_unchanged": true
+    }
+  },
+  "launch_prerequisites": [
+    "Final merged four-arm CIFAR source and focused tests pass; exact trace, raw RMS, ID-only candidate ties and strict suite finalizer gate verified.",
+    "Complete data and candidate/seed manifests including augmentation children, source/environment hashes and sealed evaluation boundary frozen.",
+    "Outcome-blind profiling result, chosen common prefix and conservative all-candidate cost forecast saved before scientific training.",
+    "Provider alert access, machine/rate/cap/upload/storage/preservation/shutdown plan verified against cumulative50USD; report plan before any remote setup.",
+    "No main-manuscript claim rewrite or submission is part of this protocol; any eventual claim reflects actual classified endpoints and stated limitations."
+  ],
+  "candidate_design_artifacts": {
+    "plan": "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/plan.json",
+    "sha256": "dc4d2a1bd1107b6080f89656c782b9e35086d4015c2009c0871f9c2dbb79fc38",
+    "verification": "sweep-results/research-audit-20261002/prospective-image-study/design-review/candidate-plan-verification.json",
+    "candidate_count": 64,
+    "seed_roles": 552,
+    "seed_collisions": 0
+  },
+  "runner_method_ids": {
+    "original_rms": "rms",
+    "head_trace": "trace",
+    "probe_validation_ce": "ce",
+    "random_shortlist": "random"
+  },
+  "design_frozen_utc": "2026-10-03T01:04:50.492650+00:00",
+  "candidate_plan": {
+    "path": "sweep-results/research-audit-20261002/prospective-image-study/candidate-plan/plan.json",
+    "sha256": "dc4d2a1bd1107b6080f89656c782b9e35086d4015c2009c0871f9c2dbb79fc38"
+  },
+  "calibration_coverage": {
+    "path": "sweep-results/research-audit-20261002/prospective-image-study/protocol/calibration-coverage.json",
+    "sha256": "71d36fa69152c28fbd3a83818cef8bfdd00546db85c84dc2ad03afccb23db65d"
+  },
+  "stage_status": {
+    "kmnist": "separate completed exploratory; holdout spent",
+    "new_scientific_training_started": false,
+    "new_model_test_evaluations": 0,
+    "gpu_calibration": "pending; no models run",
+    "cloud_recovery": "ExistingL4failedSTOCKOUT andstopped; directuserauthorizedretiredP100->T4migration; boundedfirstT4recoverybeingprepared",
+    "budget": "Prior1USD+failedL4retry1USD+T4firstpass1USD reservations; cumulativecap50unchanged. No observedrunningfromfirsttwoattempts; costsunreconciled."
+  }
+}

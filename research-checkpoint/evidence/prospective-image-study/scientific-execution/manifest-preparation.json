@@ -1,0 +1,38 @@
+{
+  "scope": "CIFAR10 and CIFAR100; repetitions2000 and2001; exact existing candidates and seeds; no outcomes consulted",
+  "canonical_recipe": "SHA256 UTF-8 JSON sorted keys, compact separators, allow_nan=False, no newline",
+  "manifests": [
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2000,
+      "path": "sweep-results/research-audit-20261002/prospective-image-study/scientific-execution/manifests/cifar10-2000.json",
+      "file_sha256": "93ac7e6551a7cf9671f3eebe8bb6248afb15bb5eec6fa31f8c47e8fc110c309b",
+      "canonical_sha256": "42b0260225f933ab9ca2b156f42120b6cd9cd053da36a6b9cd4d2cdaacb1a29d",
+      "candidate_count": 8
+    },
+    {
+      "dataset": "cifar10",
+      "repetition_id": 2001,
+      "path": "sweep-results/research-audit-20261002/prospective-image-study/scientific-execution/manifests/cifar10-2001.json",
+      "file_sha256": "dfba4dbbf1d7798c35256b7a90b927b1336416350b2553e1fa7d92bdbc3c5dd2",
+      "canonical_sha256": "f621f73bf91c3a72fd71a2cc9c052957da5d9e80b91ced05947b32a9a81edadf",
+      "candidate_count": 8
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2000,
+      "path": "sweep-results/research-audit-20261002/prospective-image-study/scientific-execution/manifests/cifar100-2000.json",
+      "file_sha256": "1496638323a59e43971aabefdcf9f34bf75a2e4a2202b78e51939f01b129be41",
+      "canonical_sha256": "72e0ad2f52a14344b107f1ed89af77722ab2a003db657893961cc2d541c9e940",
+      "candidate_count": 8
+    },
+    {
+      "dataset": "cifar100",
+      "repetition_id": 2001,
+      "path": "sweep-results/research-audit-20261002/prospective-image-study/scientific-execution/manifests/cifar100-2001.json",
+      "file_sha256": "ee500ef2f4788fdfcd1a03a12f857f549372dc9c2b3ff7d9bef813735535fa11",
+      "canonical_sha256": "3ef5d8ef9c5417c6269813ea283c5b8c0fcfec55b530847724267e08133f05a5",
+      "candidate_count": 8
+    }
+  ]
+}

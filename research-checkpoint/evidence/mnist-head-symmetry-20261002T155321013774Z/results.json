@@ -1,0 +1,1130 @@
+{
+  "evidence_status": "smoke-only exploratory diagnostic; no training or HPO outcome claims",
+  "started_at_utc": "20261002T155321013774Z",
+  "elapsed_seconds": 14.381335291982396,
+  "data_policy": "Only cached official-training x_train/y_train indices 0:128 accessed. These indices are in this checkpoint's training subset 0:409. Official test arrays never accessed.",
+  "all_transforms_prespecified": {
+    "common_shifts": [
+      -100.0,
+      -10.0,
+      -1.0,
+      -0.1,
+      0.0,
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "relu_positive_rescales": [
+      0.1,
+      0.5,
+      1.0,
+      2.0,
+      10.0
+    ]
+  },
+  "training_performed": false,
+  "checkpoint_mutated": false,
+  "numeric_policy": "One CPU inference of original checkpoint in its saved float32 dtype; frozen hidden activations and affine-head transformations evaluated with NumPy float64. Original and transformed heads all use the same implementation and examples.",
+  "curvature_scope": "Hessian with respect to final affine kernel weights only, mean categorical cross-entropy on 128 examples; excludes biases, all earlier layers, regularizers, optimizer, and training-mode stochastic behavior.",
+  "proxy_definition": "maximum of RMS(p_batch)*RMS(h_batch)/RMS(W) over two fixed consecutive 64-example batches",
+  "checkpoint": "<RESEARCH_WORKTREE>/sweep-results/cached-mnist-smoke-mnist-seed31-20261002T154204096257Z/incumbent.keras",
+  "checkpoint_sha256": "993a76a352a2dcc6b3ebbe1284176c00669b5d3b04c7fd9dd33ba5072c8f5459",
+  "checkpoint_metadata_sha256": "1e61df6d2ad452fb8fca02c5300d133123138c31064588452648d80bfa6ad9fe",
+  "checkpoint_events_sha256": "39dce2ff410c45b1921646fbf754e3ae1024e3ba961b5bd6f1008f4f70cf5142",
+  "incumbent_training_event": {
+    "event": "trial",
+    "trial": 2,
+    "seed": 33,
+    "config": {
+      "n_filters": 32,
+      "kernel_size": 2,
+      "padding": "same",
+      "n_blocks": 2,
+      "n_units": 32,
+      "learning_rate": 0.003,
+      "weight_decay": 0.0001
+    },
+    "epochs": 1,
+    "selection_eligible": true,
+    "validation_accuracy": 0.3300970873786408,
+    "incumbent": true,
+    "seconds": 0.5115362079814076
+  },
+  "model_architecture": {
+    "name": "sequential",
+    "trainable": true,
+    "dtype": {
+      "module": "keras",
+      "class_name": "DTypePolicy",
+      "config": {
+        "name": "float32"
+      },
+      "registered_name": null
+    },
+    "layers": [
+      {
+        "module": "keras.layers",
+        "class_name": "InputLayer",
+        "config": {
+          "batch_shape": [
+            null,
+            28,
+            28,
+            1
+          ],
+          "dtype": "float32",
+          "sparse": false,
+          "ragged": false,
+          "name": "input_layer",
+          "optional": false
+        },
+        "registered_name": null
+      },
+      {
+        "module": "keras.layers",
+        "class_name": "Conv2D",
+        "config": {
+          "name": "conv2d",
+          "trainable": true,
+          "dtype": {
+            "module": "keras",
+            "class_name": "DTypePolicy",
+            "config": {
+              "name": "float32"
+            },
+            "registered_name": null
+          },
+          "filters": 32,
+          "kernel_size": [
+            2,
+            2
+          ],
+          "strides": [
+            1,
+            1
+          ],
+          "padding": "same",
+          "data_format": "channels_last",
+          "dilation_rate": [
+            1,
+            1
+          ],
+          "groups": 1,
+          "activation": "relu",
+          "use_bias": true,
+          "kernel_initializer": {
+            "module": "keras.initializers",
+            "class_name": "HeUniform",
+            "config": {
+              "seed": null
+            },
+            "registered_name": null
+          },
+          "bias_initializer": {
+            "module": "keras.initializers",
+            "class_name": "Zeros",
+            "config": {},
+            "registered_name": null
+          },
+          "kernel_regularizer": null,
+          "bias_regularizer": null,
+          "activity_regularizer": null,
+          "kernel_constraint": null,
+          "bias_constraint": null
+        },
+        "registered_name": null,
+        "build_config": {
+          "input_shape": [
+            null,
+            28,
+            28,
+            1
+          ]
+        }
+      },
+      {
+        "module": "keras.layers",
+        "class_name": "MaxPooling2D",
+        "config": {
+          "name": "max_pooling2d",
+          "trainable": true,
+          "dtype": {
+            "module": "keras",
+            "class_name": "DTypePolicy",
+            "config": {
+              "name": "float32"
+            },
+            "registered_name": null
+          },
+          "pool_size": [
+            2,
+            2
+          ],
+          "padding": "valid",
+          "strides": [
+            2,
+            2
+          ],
+          "data_format": "channels_last"
+        },
+        "registered_name": null
+      },
+      {
+        "module": "keras.layers",
+        "class_name": "Conv2D",
+        "config": {
+          "name": "conv2d_1",
+          "trainable": true,
+          "dtype": {
+            "module": "keras",
+            "class_name": "DTypePolicy",
+            "config": {
+              "name": "float32"
+            },
+            "registered_name": null
+          },
+          "filters": 32,
+          "kernel_size": [
+            2,
+            2
+          ],
+          "strides": [
+            1,
+            1
+          ],
+          "padding": "same",
+          "data_format": "channels_last",
+          "dilation_rate": [
+            1,
+            1
+          ],
+          "groups": 1,
+          "activation": "relu",
+          "use_bias": true,
+          "kernel_initializer": {
+            "module": "keras.initializers",
+            "class_name": "HeUniform",
+            "config": {
+              "seed": null
+            },
+            "registered_name": null
+          },
+          "bias_initializer": {
+            "module": "keras.initializers",
+            "class_name": "Zeros",
+            "config": {},
+            "registered_name": null
+          },
+          "kernel_regularizer": null,
+          "bias_regularizer": null,
+          "activity_regularizer": null,
+          "kernel_constraint": null,
+          "bias_constraint": null
+        },
+        "registered_name": null,
+        "build_config": {
+          "input_shape": [
+            null,
+            14,
+            14,
+            32
+          ]
+        }
+      },
+      {
+        "module": "keras.layers",
+        "class_name": "MaxPooling2D",
+        "config": {
+          "name": "max_pooling2d_1",
+          "trainable": true,
+          "dtype": {
+            "module": "keras",
+            "class_name": "DTypePolicy",
+            "config": {
+              "name": "float32"
+            },
+            "registered_name": null
+          },
+          "pool_size": [
+            2,
+            2
+          ],
+          "padding": "valid",
+          "strides": [
+            2,
+            2
+          ],
+          "data_format": "channels_last"
+        },
+        "registered_name": null
+      },
+      {
+        "module": "keras.layers",
+        "class_name": "Flatten",
+        "config": {
+          "name": "flatten",
+          "trainable": true,
+          "dtype": {
+            "module": "keras",
+            "class_name": "DTypePolicy",
+            "config": {
+              "name": "float32"
+            },
+            "registered_name": null
+          },
+          "data_format": "channels_last"
+        },
+        "registered_name": null,
+        "build_config": {
+          "input_shape": [
+            null,
+            7,
+            7,
+            32
+          ]
+        }
+      },
+      {
+        "module": "keras.layers",
+        "class_name": "Dense",
+        "config": {
+          "name": "dense",
+          "trainable": true,
+          "dtype": {
+            "module": "keras",
+            "class_name": "DTypePolicy",
+            "config": {
+              "name": "float32"
+            },
+            "registered_name": null
+          },
+          "units": 128,
+          "activation": "relu",
+          "use_bias": true,
+          "kernel_initializer": {
+            "module": "keras.initializers",
+            "class_name": "HeUniform",
+            "config": {
+              "seed": null
+            },
+            "registered_name": null
+          },
+          "bias_initializer": {
+            "module": "keras.initializers",
+            "class_name": "Zeros",
+            "config": {},
+            "registered_name": null
+          },
+          "kernel_regularizer": null,
+          "bias_regularizer": null,
+          "kernel_constraint": null,
+          "bias_constraint": null,
+          "quantization_config": null
+        },
+        "registered_name": null,
+        "build_config": {
+          "input_shape": [
+            null,
+            1568
+          ]
+        }
+      },
+      {
+        "module": "keras.layers",
+        "class_name": "Dense",
+        "config": {
+          "name": "dense_1",
+          "trainable": true,
+          "dtype": {
+            "module": "keras",
+            "class_name": "DTypePolicy",
+            "config": {
+              "name": "float32"
+            },
+            "registered_name": null
+          },
+          "units": 10,
+          "activation": "softmax",
+          "use_bias": true,
+          "kernel_initializer": {
+            "module": "keras.initializers",
+            "class_name": "GlorotUniform",
+            "config": {
+              "seed": null
+            },
+            "registered_name": null
+          },
+          "bias_initializer": {
+            "module": "keras.initializers",
+            "class_name": "Zeros",
+            "config": {},
+            "registered_name": null
+          },
+          "kernel_regularizer": null,
+          "bias_regularizer": null,
+          "kernel_constraint": null,
+          "bias_constraint": null,
+          "quantization_config": null
+        },
+        "registered_name": null,
+        "build_config": {
+          "input_shape": [
+            null,
+            128
+          ]
+        }
+      }
+    ],
+    "build_input_shape": [
+      null,
+      28,
+      28,
+      1
+    ]
+  },
+  "dataset": "/tmp/fghpo-preprocessing-keras/datasets/mnist.npz",
+  "dataset_sha256": "731c5ac602752760c8e48fbffcf8c3b850d9dc2a2aedcf2cc48468fc17b673d1",
+  "data_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127
+  ],
+  "processed_input_sha256": "f129e40eef3302c1325a2afb60d39eb6159c9364dd28b2daf3b45e7bf4f4ded0",
+  "labels_sha256": "f20bdfbc5b2935125155668560f12a6b159ce3ee9835d2d6cd7f02ff75379f26",
+  "hidden_sha256": "d872b6dec7bf562127c1fde1bd57677d8f9032466f4fdf20192cd814af59ee47",
+  "preprocessing": {
+    "dtype": "float32",
+    "shape": [
+      -1,
+      28,
+      28,
+      1
+    ],
+    "divide": 255,
+    "mean": 0.1307,
+    "std": 0.3081
+  },
+  "artifact_sha256": {
+    "head_arrays.npz": "639e9e18f78341b508170abc0d5083223dde8f2b4468f9012b8053e2a0578218",
+    "source_script": "679da1d29d002ae9b5a0bc7909e204ef39832ed53378c983d57e6a8e309708e6"
+  },
+  "environment": {
+    "python_executable": "<ORIGINAL_CHECKOUT>/.venv/bin/python",
+    "python": "3.12.0",
+    "numpy": "1.26.4",
+    "keras": "3.13.2",
+    "tensorflow": "2.16.2",
+    "visible_gpus": [],
+    "threads": 2
+  },
+  "tiny_explicit_hessian_check": {
+    "seed": 314159,
+    "B": 4,
+    "K": 3,
+    "D": 3,
+    "frobenius_explicit": 0.9339121453163796,
+    "frobenius_pairwise": 0.9339121453163793,
+    "absolute_error": 2.220446049250313e-16,
+    "passed": true
+  },
+  "float64_head_vs_original_float32_model_max_abs_prediction_difference": 1.9639172593732823e-07,
+  "baseline": {
+    "mean_cross_entropy": 2.1472994752988566,
+    "accuracy": 0.40625,
+    "proxy_max_over_batches": 1.7327412564256985,
+    "batches": [
+      {
+        "start": 0,
+        "stop": 64,
+        "output_rms": 0.16271167764070932,
+        "hidden_rms": 1.1675427447940938,
+        "weight_rms": 0.11917150578762331,
+        "rms_ratio": 1.5941129338521405,
+        "raw_frobenius_ratio": 102.02322776653702
+      },
+      {
+        "start": 64,
+        "stop": 128,
+        "output_rms": 0.17387608453290565,
+        "hidden_rms": 1.1875893411293743,
+        "weight_rms": 0.11917150578762331,
+        "rms_ratio": 1.7327412564256985,
+        "raw_frobenius_ratio": 110.89544041124476
+      }
+    ],
+    "exact_head_hessian_frobenius": 50.16395213625161,
+    "exact_head_hessian_trace": 125.00332647121436,
+    "head_rank_upper_bound": 1152,
+    "trace_based_frobenius_lower": 3.6829458257779812,
+    "trace_based_frobenius_upper": 125.00332647121436,
+    "activation_energy_trace_upper": 159.75501143532065
+  },
+  "common_shift_results": [
+    {
+      "mean_cross_entropy": 2.1472994752988477,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 0.0020648453990295126,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764071004,
+          "hidden_rms": 1.1675427447940938,
+          "weight_rms": 100.00428350018228,
+          "rms_ratio": 0.0018996470158434775,
+          "raw_frobenius_ratio": 0.12157740901398251
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453291037,
+          "hidden_rms": 1.1875893411293743,
+          "weight_rms": 100.00428350018228,
+          "rms_ratio": 0.0020648453990295126,
+          "raw_frobenius_ratio": 0.13215010553788878
+        }
+      ],
+      "exact_head_hessian_frobenius": 50.16395213624997,
+      "exact_head_hessian_trace": 125.00332647121263,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 3.68294582577793,
+      "trace_based_frobenius_upper": 125.00332647121263,
+      "activation_energy_trace_upper": 159.75501143532065,
+      "shift": -100.0,
+      "transformation": "W_new = W + shift * ones(D,K); hidden and bias fixed",
+      "prediction_max_abs_delta": 7.16093850883226e-13,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 8.881784197001252e-15,
+      "head_hessian_frobenius_relative_change": -3.275157922644212e-14,
+      "proxy_relative_factor": 0.0011916640129460985
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988726,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 0.02063918096817559,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070849,
+          "hidden_rms": 1.1675427447940938,
+          "weight_rms": 10.00492146403436,
+          "rms_ratio": 0.018987939026367966,
+          "raw_frobenius_ratio": 1.2152280976875494
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453290618,
+          "hidden_rms": 1.1875893411293743,
+          "weight_rms": 10.00492146403436,
+          "rms_ratio": 0.02063918096817559,
+          "raw_frobenius_ratio": 1.3209075819632372
+        }
+      ],
+      "exact_head_hessian_frobenius": 50.16395213625173,
+      "exact_head_hessian_trace": 125.00332647121456,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 3.682945825777987,
+      "trace_based_frobenius_upper": 125.00332647121456,
+      "activation_energy_trace_upper": 159.75501143532065,
+      "shift": -10.0,
+      "transformation": "W_new = W + shift * ones(D,K); hidden and bias fixed",
+      "prediction_max_abs_delta": 7.993605777301127e-14,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 1.5987211554602254e-14,
+      "head_hessian_frobenius_relative_change": 2.4424906541753444e-15,
+      "proxy_relative_factor": 0.011911288480976164
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988566,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 0.20419613267613534,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070937,
+          "hidden_rms": 1.1675427447940938,
+          "weight_rms": 1.0112502228242346,
+          "rms_ratio": 0.18785937885098966,
+          "raw_frobenius_ratio": 12.02300024646333
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453290568,
+          "hidden_rms": 1.1875893411293743,
+          "weight_rms": 1.0112502228242346,
+          "rms_ratio": 0.20419613267613534,
+          "raw_frobenius_ratio": 13.068552491272655
+        }
+      ],
+      "exact_head_hessian_frobenius": 50.16395213625159,
+      "exact_head_hessian_trace": 125.00332647121434,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 3.6829458257779804,
+      "trace_based_frobenius_upper": 125.00332647121434,
+      "activation_energy_trace_upper": 159.75501143532065,
+      "shift": -1.0,
+      "transformation": "W_new = W + shift * ones(D,K); hidden and bias fixed",
+      "prediction_max_abs_delta": 7.993605777301127e-15,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 0.0,
+      "head_hessian_frobenius_relative_change": -4.440892098500626e-16,
+      "proxy_relative_factor": 0.11784571523237777
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988566,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 1.304821597107874,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070932,
+          "hidden_rms": 1.1675427447940938,
+          "weight_rms": 0.1582541131494755,
+          "rms_ratio": 1.2004290753773383,
+          "raw_frobenius_ratio": 76.82746082414965
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453290565,
+          "hidden_rms": 1.1875893411293743,
+          "weight_rms": 0.1582541131494755,
+          "rms_ratio": 1.304821597107874,
+          "raw_frobenius_ratio": 83.50858221490391
+        }
+      ],
+      "exact_head_hessian_frobenius": 50.16395213625161,
+      "exact_head_hessian_trace": 125.00332647121436,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 3.6829458257779812,
+      "trace_based_frobenius_upper": 125.00332647121436,
+      "activation_energy_trace_upper": 159.75501143532065,
+      "shift": -0.1,
+      "transformation": "W_new = W + shift * ones(D,K); hidden and bias fixed",
+      "prediction_max_abs_delta": 5.551115123125783e-16,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 0.0,
+      "head_hessian_frobenius_relative_change": 0.0,
+      "proxy_relative_factor": 0.7530389158041184
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988566,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 1.7327412564256985,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070932,
+          "hidden_rms": 1.1675427447940938,
+          "weight_rms": 0.11917150578762331,
+          "rms_ratio": 1.5941129338521405,
+          "raw_frobenius_ratio": 102.02322776653702
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453290565,
+          "hidden_rms": 1.1875893411293743,
+          "weight_rms": 0.11917150578762331,
+          "rms_ratio": 1.7327412564256985,
+          "raw_frobenius_ratio": 110.89544041124476
+        }
+      ],
+      "exact_head_hessian_frobenius": 50.16395213625161,
+      "exact_head_hessian_trace": 125.00332647121436,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 3.6829458257779812,
+      "trace_based_frobenius_upper": 125.00332647121436,
+      "activation_energy_trace_upper": 159.75501143532065,
+      "shift": 0.0,
+      "transformation": "W_new = W + shift * ones(D,K); hidden and bias fixed",
+      "prediction_max_abs_delta": 0.0,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 0.0,
+      "head_hessian_frobenius_relative_change": 0.0,
+      "proxy_relative_factor": 1.0
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988566,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 1.351064056534505,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070932,
+          "hidden_rms": 1.1675427447940938,
+          "weight_rms": 0.15283759764747704,
+          "rms_ratio": 1.242971897274005,
+          "raw_frobenius_ratio": 79.55020142553632
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453290565,
+          "hidden_rms": 1.1875893411293743,
+          "weight_rms": 0.15283759764747704,
+          "rms_ratio": 1.351064056534505,
+          "raw_frobenius_ratio": 86.46809961820827
+        }
+      ],
+      "exact_head_hessian_frobenius": 50.16395213625161,
+      "exact_head_hessian_trace": 125.0033264712144,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 3.682945825777982,
+      "trace_based_frobenius_upper": 125.0033264712144,
+      "activation_energy_trace_upper": 159.75501143532065,
+      "shift": 0.1,
+      "transformation": "W_new = W + shift * ones(D,K); hidden and bias fixed",
+      "prediction_max_abs_delta": 1.2212453270876722e-15,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 0.0,
+      "head_hessian_frobenius_relative_change": 0.0,
+      "proxy_relative_factor": 0.7797263737584699
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988566,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 0.20589953295051816,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070946,
+          "hidden_rms": 1.1675427447940938,
+          "weight_rms": 1.0028841819578744,
+          "rms_ratio": 0.18942649823413546,
+          "raw_frobenius_ratio": 12.123295886984662
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453290565,
+          "hidden_rms": 1.1875893411293743,
+          "weight_rms": 1.0028841819578744,
+          "rms_ratio": 0.20589953295051816,
+          "raw_frobenius_ratio": 13.177570108833155
+        }
+      ],
+      "exact_head_hessian_frobenius": 50.16395213625159,
+      "exact_head_hessian_trace": 125.00332647121434,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 3.6829458257779804,
+      "trace_based_frobenius_upper": 125.00332647121434,
+      "activation_energy_trace_upper": 159.75501143532065,
+      "shift": 1.0,
+      "transformation": "W_new = W + shift * ones(D,K); hidden and bias fixed",
+      "prediction_max_abs_delta": 6.661338147750939e-15,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 0.0,
+      "head_hessian_frobenius_relative_change": -4.440892098500626e-16,
+      "proxy_relative_factor": 0.11882878195862205
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988726,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 0.020656574679554715,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070862,
+          "hidden_rms": 1.1675427447940938,
+          "weight_rms": 9.996496896117558,
+          "rms_ratio": 0.019003941150270993,
+          "raw_frobenius_ratio": 1.2162522336173434
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.173876084532906,
+          "hidden_rms": 1.1875893411293743,
+          "weight_rms": 9.996496896117558,
+          "rms_ratio": 0.020656574679554715,
+          "raw_frobenius_ratio": 1.322020779491501
+        }
+      ],
+      "exact_head_hessian_frobenius": 50.16395213625174,
+      "exact_head_hessian_trace": 125.00332647121456,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 3.682945825777987,
+      "trace_based_frobenius_upper": 125.00332647121456,
+      "activation_energy_trace_upper": 159.75501143532065,
+      "shift": 10.0,
+      "transformation": "W_new = W + shift * ones(D,K); hidden and bias fixed",
+      "prediction_max_abs_delta": 7.993605777301127e-14,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 1.5987211554602254e-14,
+      "head_hessian_frobenius_relative_change": 2.4424906541753444e-15,
+      "proxy_relative_factor": 0.01192132674336221
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988477,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 0.0020650193727510435,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764071004,
+          "hidden_rms": 1.1675427447940938,
+          "weight_rms": 99.99585834078707,
+          "rms_ratio": 0.001899807070761438,
+          "raw_frobenius_ratio": 0.121587652528732
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453291026,
+          "hidden_rms": 1.1875893411293743,
+          "weight_rms": 99.99585834078707,
+          "rms_ratio": 0.0020650193727510435,
+          "raw_frobenius_ratio": 0.13216123985606673
+        }
+      ],
+      "exact_head_hessian_frobenius": 50.163952136249996,
+      "exact_head_hessian_trace": 125.00332647121266,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 3.682945825777931,
+      "trace_based_frobenius_upper": 125.00332647121266,
+      "activation_energy_trace_upper": 159.75501143532065,
+      "shift": 100.0,
+      "transformation": "W_new = W + shift * ones(D,K); hidden and bias fixed",
+      "prediction_max_abs_delta": 7.16093850883226e-13,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 8.881784197001252e-15,
+      "head_hessian_frobenius_relative_change": -3.219646771412954e-14,
+      "proxy_relative_factor": 0.0011917644166970253
+    }
+  ],
+  "relu_rescale_results": [
+    {
+      "mean_cross_entropy": 2.147299475298857,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 173.27412564256983,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070932,
+          "hidden_rms": 11.675427447940939,
+          "weight_rms": 0.011917150578762331,
+          "rms_ratio": 159.41129338521407,
+          "raw_frobenius_ratio": 10202.322776653706
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453290565,
+          "hidden_rms": 11.875893411293742,
+          "weight_rms": 0.011917150578762331,
+          "rms_ratio": 173.27412564256983,
+          "raw_frobenius_ratio": 11089.544041124476
+        }
+      ],
+      "exact_head_hessian_frobenius": 5016.395213625161,
+      "exact_head_hessian_trace": 12500.332647121435,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 368.29458257779805,
+      "trace_based_frobenius_upper": 12500.332647121435,
+      "activation_energy_trace_upper": 15975.501143532061,
+      "scale": 0.1,
+      "transformation": "W_head_new = scale*W_head; hidden_new = hidden/scale, realizable by dividing penultimate ReLU kernel and bias by scale",
+      "prediction_max_abs_delta": 2.7755575615628914e-16,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 4.440892098500626e-16,
+      "head_hessian_frobenius_relative_change": 99.0,
+      "proxy_relative_factor": 99.99999999999999,
+      "expected_proxy_and_head_curvature_factor": 99.99999999999999
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988566,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 6.930965025702794,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070932,
+          "hidden_rms": 2.3350854895881876,
+          "weight_rms": 0.059585752893811655,
+          "rms_ratio": 6.376451735408562,
+          "raw_frobenius_ratio": 408.0929110661481
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453290565,
+          "hidden_rms": 2.3751786822587486,
+          "weight_rms": 0.059585752893811655,
+          "rms_ratio": 6.930965025702794,
+          "raw_frobenius_ratio": 443.58176164497905
+        }
+      ],
+      "exact_head_hessian_frobenius": 200.65580854500644,
+      "exact_head_hessian_trace": 500.01330588485746,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 14.731783303111925,
+      "trace_based_frobenius_upper": 500.01330588485746,
+      "activation_energy_trace_upper": 639.0200457412826,
+      "scale": 0.5,
+      "transformation": "W_head_new = scale*W_head; hidden_new = hidden/scale, realizable by dividing penultimate ReLU kernel and bias by scale",
+      "prediction_max_abs_delta": 0.0,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 0.0,
+      "head_hessian_frobenius_relative_change": 3.0,
+      "proxy_relative_factor": 4.0,
+      "expected_proxy_and_head_curvature_factor": 4.0
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988566,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 1.7327412564256985,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070932,
+          "hidden_rms": 1.1675427447940938,
+          "weight_rms": 0.11917150578762331,
+          "rms_ratio": 1.5941129338521405,
+          "raw_frobenius_ratio": 102.02322776653702
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453290565,
+          "hidden_rms": 1.1875893411293743,
+          "weight_rms": 0.11917150578762331,
+          "rms_ratio": 1.7327412564256985,
+          "raw_frobenius_ratio": 110.89544041124476
+        }
+      ],
+      "exact_head_hessian_frobenius": 50.16395213625161,
+      "exact_head_hessian_trace": 125.00332647121436,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 3.6829458257779812,
+      "trace_based_frobenius_upper": 125.00332647121436,
+      "activation_energy_trace_upper": 159.75501143532065,
+      "scale": 1.0,
+      "transformation": "W_head_new = scale*W_head; hidden_new = hidden/scale, realizable by dividing penultimate ReLU kernel and bias by scale",
+      "prediction_max_abs_delta": 0.0,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 0.0,
+      "head_hessian_frobenius_relative_change": 0.0,
+      "proxy_relative_factor": 1.0,
+      "expected_proxy_and_head_curvature_factor": 1.0
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988566,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 0.43318531410642463,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070932,
+          "hidden_rms": 0.5837713723970469,
+          "weight_rms": 0.23834301157524662,
+          "rms_ratio": 0.3985282334630351,
+          "raw_frobenius_ratio": 25.505806941634255
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453290565,
+          "hidden_rms": 0.5937946705646872,
+          "weight_rms": 0.23834301157524662,
+          "rms_ratio": 0.43318531410642463,
+          "raw_frobenius_ratio": 27.72386010281119
+        }
+      ],
+      "exact_head_hessian_frobenius": 12.540988034062902,
+      "exact_head_hessian_trace": 31.25083161780359,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 0.9207364564444953,
+      "trace_based_frobenius_upper": 31.25083161780359,
+      "activation_energy_trace_upper": 39.93875285883016,
+      "scale": 2.0,
+      "transformation": "W_head_new = scale*W_head; hidden_new = hidden/scale, realizable by dividing penultimate ReLU kernel and bias by scale",
+      "prediction_max_abs_delta": 0.0,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 0.0,
+      "head_hessian_frobenius_relative_change": -0.75,
+      "proxy_relative_factor": 0.25,
+      "expected_proxy_and_head_curvature_factor": 0.25
+    },
+    {
+      "mean_cross_entropy": 2.1472994752988566,
+      "accuracy": 0.40625,
+      "proxy_max_over_batches": 0.017327412564256985,
+      "batches": [
+        {
+          "start": 0,
+          "stop": 64,
+          "output_rms": 0.16271167764070932,
+          "hidden_rms": 0.11675427447940938,
+          "weight_rms": 1.191715057876233,
+          "rms_ratio": 0.015941129338521407,
+          "raw_frobenius_ratio": 1.020232277665369
+        },
+        {
+          "start": 64,
+          "stop": 128,
+          "output_rms": 0.17387608453290565,
+          "hidden_rms": 0.11875893411293743,
+          "weight_rms": 1.191715057876233,
+          "rms_ratio": 0.017327412564256985,
+          "raw_frobenius_ratio": 1.1089544041124464
+        }
+      ],
+      "exact_head_hessian_frobenius": 0.5016395213625161,
+      "exact_head_hessian_trace": 1.2500332647121437,
+      "head_rank_upper_bound": 1152,
+      "trace_based_frobenius_lower": 0.036829458257779814,
+      "trace_based_frobenius_upper": 1.2500332647121437,
+      "activation_energy_trace_upper": 1.5975501143532065,
+      "scale": 10.0,
+      "transformation": "W_head_new = scale*W_head; hidden_new = hidden/scale, realizable by dividing penultimate ReLU kernel and bias by scale",
+      "prediction_max_abs_delta": 2.220446049250313e-16,
+      "prediction_argmax_changes": 0,
+      "loss_abs_delta": 0.0,
+      "head_hessian_frobenius_relative_change": -0.99,
+      "proxy_relative_factor": 0.01,
+      "expected_proxy_and_head_curvature_factor": 0.01
+    }
+  ],
+  "assertions": "all passed"
+}

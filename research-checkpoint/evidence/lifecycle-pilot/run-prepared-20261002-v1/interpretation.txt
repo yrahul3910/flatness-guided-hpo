@@ -1,0 +1,41 @@
+This exploratory lifecycle comparison does not show a consistent selection advantage for the original RMS score. The primary top-one accuracy result is mixed: original-score selection makes one fewer validation error than probe-CE selection in block 307, but six more errors in block 331. Original-score rank correlations are negative against both restored targets in both blocks. Restored CE favors the probe-validation-CE baseline in both blocks. These statements retain the declared primary target; they do not substitute the secondary CE target or claim general baseline dominance.
+
+All 32 phases completed in 314.1653 seconds on local CPU: 16 separate one-epoch probes and 16 fresh final fits, with 816 final-training epochs. There were no failed phases, undefined scores, exclusions or replacement candidates. All eight candidates in each block happened to satisfy the recorded legacy eligibility rule, but eligibility was not used to filter this metric-only comparison. All 832 epoch records, 32 checkpoints, paired initialization/shuffle hashes and explicit measurement-order arrays are retained. No official test arrays were accessed and no paid resources were used.
+
+PRIMARY TARGET: RESTORED VALIDATION ERROR
+Each target is error at the checkpoint restored by actual Keras EarlyStopping(monitor="val_loss", patience=25, restore_best_weights=True), with at most 100 training epochs. Probe and final models use separate phase-keyed seeds; the original score and validation-CE baseline come from the same constant-LR one-epoch probe model. Both scores are minimized; ties select the lower configuration ID.
+
+Block  Original selected errors  Probe-CE selected errors  Oracle errors  Original regret  Probe-CE regret
+307           17 / 375                 18 / 375             11 / 375          1.6000 pp        1.8667 pp
+331           20 / 375                 14 / 375             14 / 375          1.6000 pp        0.0000 pp
+
+Primary Spearman rho across all eight candidates:
+Block  Original score  Probe validation CE
+307       -0.216883           +0.108442
+331       -0.359288           +0.371264
+
+The original score selected configuration 1 in both blocks (LR=0.0001, WD=0.001). The validation-CE baseline selected configuration 7 in block 307 (LR=0.003, WD=0.001) and configuration 4 in block 331 (LR=0.001, WD=0.00001). Accuracy is discrete on 375 examples. One-example differences should remain visible rather than be described as broad efficacy evidence.
+
+SECONDARY TARGET: RESTORED KERAS VALIDATION CE
+Block  Original selected CE  Probe-CE selected CE  Oracle CE  Original regret  Probe-CE regret
+307          0.173832              0.148110         0.138377       0.035455          0.009733
+331          0.184160              0.160944         0.158349       0.025812          0.002596
+
+Secondary Spearman rho across all eight candidates:
+Block  Original score  Probe validation CE
+307       -0.761905           +0.738095
+331       -0.785714           +0.785714
+
+Final fits stopped after 31 to 100 epochs and restored checkpoints from epochs 6 to 81. Fourteen final fits stopped through patience, and two reached the maximum epoch count. Actual sample-weighted Keras validation CE drove the installed callback. Stable float64 reconstructed-logit CE was logged separately and never substituted into the stopping rule.
+
+LEARNING-RATE ASSOCIATIONS
+LR versus original probe score has rho=+0.975900 and +0.780720 for blocks 307 and 331; LR versus probe validation CE has the corresponding negative correlations. LR versus restored validation error is -0.148159 and +0.220896; LR versus restored CE is -0.780720 and -0.927105. The prespecified four-LR-mean sensitivity gives original/baseline rho=-0.4/+0.4 for primary error in both blocks and -0.8/+0.8 for secondary CE in both blocks. These associations do not identify a curvature mechanism. Four LR means are descriptive, and two WD observations per LR do not support within-LR correlation inference.
+
+VERIFICATION AND SCOPE
+All 32 checkpoint reloads passed in 13.29 seconds. Original RMS scores, actual Keras validation CE and accuracy, stable float64 CE, prediction accuracy, optimizer step counts and file/weight/order hashes matched exactly. For every final checkpoint, reloaded Keras CE also exactly matched the callback's recorded best monitored CE. Numerical tolerances were fixed before reloads at rtol=1e-5 and atol=1e-6; accuracy, steps and hashes required exact matches. See checkpoint-verification/results.json and summary.json.
+
+The frozen protocol SHA256 is cb579865478345bdb4ce0098e17b322da1c177803e78cda5250d1deb97b94435; the executed source SHA256 is 36168984699eba72876ce55b6362b3c6928e57a92401d91805b32721117f6c39. Both remain unchanged. The exact command and environment, imported clone source path, installed Keras callback/trainer source hashes and all failures/warnings are retained. TensorFlow retracing warnings are in execution.log; there were no numerical or execution failures.
+
+The fresh seed blocks reuse the MNIST training and validation examples inspected in earlier pilots. This is prospective exploratory development, not independent held-out-data confirmation or confirmatory evidence. Manual paired shuffling and a fixed full-1500 probe membership are declared controls, not a literal replay of production RNG. The unthresholded eight-candidate/top-one comparison is not the production 100-eligible-probe/ten-finalist HPO algorithm, and its oracle compute is not a matched deployed-method budget. The earlier favorable epoch-100 result remains preserved. No metric sign, formula or range was changed after this run began, and no result repairs the original invalid lower-bound theorem or gauge-comparability problem.
+
+candidate-outcomes.png/.pdf displays all eight restored candidates in each block, both declared targets and both fixed selections. analysis.json retains every correlation, regret, target vector, tie count and LR sensitivity. The independent raw/statistical audit passed all 32 phases, 832 epoch rows, nine frozen source hashes, 32 checkpoint file hashes, paired seed/order/shuffle checks, callback wait/best/stop history, all eight correlation/regret rows and eight LR-sensitivity rows. Its durable evidence is lifecycle-pilot/independent-verification/verification-20261002T215425676460Z.json and the accompanying .txt report; that verifier performed no model loading or training.

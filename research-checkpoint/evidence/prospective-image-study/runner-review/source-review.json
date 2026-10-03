@@ -1,0 +1,22 @@
+{
+  "review_kind": "read_only_source_and_prior_evidence",
+  "source_sha256": {
+    "image/matched_hpo.py": "34543ebf279db38e2a3aae55124084c7135e8b8283543971d1f9187ee59902ff",
+    "image/src/matched_training.py": "1dd1a156c03f8b6d04bf1f5f37034eeea8245adb8e309b038bd3853376e2d236",
+    "image/src/matched_contract.py": "fbb58579d82a09eda23150fb63ff9fcc95a4fee0a431faccc40b09848b4519d5",
+    "image/src/util.py": "0265e474b930fc19c2a210e095e38f48a19a5e38021a9bb532f7ba3c47530e76",
+    "image/src/config.py": "1e87a606e1bf54127f955cbfdcebdb48ab78d40d76d6aa200cdfc2ffc68131e9",
+    "tests/test_matched_hpo.py": "a55afa69fe609d6b5137b7039a9167db07b46ac4c65e49f23755c37dfa1f41ee",
+    "tests/test_matched_training.py": "ea96ca23f2efac0ec8ed668e8a6d49aba89e8c7b6f358fcbb7e310004ac6f38a",
+    "tests/test_matched_contract.py": "3b1609b9992e55592a15c78065a00b95fddcd6fb694dcd75e0db6ed5c149f2c9",
+    "sweep-results/research-audit-20261002/matched-cifar-protocol/protocol_draft.json": "3f5e23558befa40d74eec8b264307c0b750a32fe936b597387b64998841de7af",
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/run_pilot.py": "34e07bb29bfda0a32666a5c7b5973a9e2cd971ec1f2b301a7a91a86cbdfbb432",
+    "sweep-results/research-audit-20261002/four-arm-pilot-preparation/protocol.json": "2fc73082c79a4d0dad9d92da0bc41c7025d9359a068c98c2aa70920cc71dfdb4",
+    "sweep-results/research-audit-20261002/matched-runner-integration/independent-review/review.md": "f68f0d5d11af758cc7faf3df9b5c8e23cded7c4d2e8024533381c5bc1503e6b7"
+  },
+  "production_edited": false,
+  "datasets_loaded": false,
+  "models_executed": false,
+  "cloud_actions": false,
+  "tests_rerun": false
+}
